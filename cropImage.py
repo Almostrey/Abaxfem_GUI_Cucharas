@@ -35,7 +35,6 @@ class Limit(qtw.QPushButton):
     def mouseMoveEvent(self, e):
         if e.buttons() != qtc.Qt.LeftButton: return
         else: pass
-        self.hide()
         mimeData = qtc.QMimeData()
         drag = qtg.QDrag(self)
         drag.setMimeData(mimeData)
