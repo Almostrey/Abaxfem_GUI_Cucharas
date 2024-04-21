@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>510</width>
-    <height>771</height>
+    <height>811</height>
    </rect>
   </property>
   <property name="focusPolicy">
@@ -1058,7 +1058,7 @@ border:0px;</string>
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>705</y>
+      <y>750</y>
       <width>350</width>
       <height>51</height>
      </rect>
@@ -1079,6 +1079,9 @@ border:0px;
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QPushButton" name="pb_aceptar">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
@@ -1107,6 +1110,9 @@ QPushButton:hover{
 }
 QPushButton:pressed{
 	background-color: rgba(255, 135, 29, 255);
+}
+QPushButton:disabled{
+	background-color: rgba(0, 0, 0, 100);
 }</string>
        </property>
        <property name="text">
@@ -1150,6 +1156,71 @@ border-radius:15px;
      </item>
     </layout>
    </widget>
+   <widget class="QFrame" name="frame_2">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>710</y>
+      <width>350</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QFrame{
+border-radius:15px;
+	background-color: rgba(0, 0, 0, 0);
+border:0px;
+}</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="pb_recortar">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Bell MT</family>
+         <pointsize>15</pointsize>
+         <italic>false</italic>
+         <bold>true</bold>
+         <underline>false</underline>
+         <strikeout>false</strikeout>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+	border-radius:15px;
+	color: rgb(0, 0, 0);
+	background-color: rgba(240, 120, 14, 210);
+border:0px;
+}
+QPushButton:hover{
+	background-color: rgba(255, 135, 29, 230);
+}
+QPushButton:pressed{
+	background-color: rgba(255, 135, 29, 255);
+}
+QPushButton:disabled{
+	background-color: rgba(0, 0, 0, 100);
+}</string>
+       </property>
+       <property name="text">
+        <string>Recortar Imagen</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
    <zorder>label</zorder>
    <zorder>label_4</zorder>
    <zorder>pb_exit</zorder>
@@ -1184,6 +1255,7 @@ border-radius:15px;
    <zorder>txtUltimaColada</zorder>
    <zorder>label_17</zorder>
    <zorder>frame</zorder>
+   <zorder>frame_2</zorder>
   </widget>
  </widget>
  <resources>

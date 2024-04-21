@@ -25,7 +25,7 @@ class Ui_PopUpAddColada(object):
     def setupUi(self, PopUpAddColada):
         if not PopUpAddColada.objectName():
             PopUpAddColada.setObjectName(u"PopUpAddColada")
-        PopUpAddColada.resize(510, 771)
+        PopUpAddColada.resize(510, 811)
         PopUpAddColada.setFocusPolicy(Qt.NoFocus)
         icon = QIcon()
         icon.addFile(u":/Images/ResourcesFolder/Imagenes/Logo_Lineas.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -480,7 +480,7 @@ class Ui_PopUpAddColada(object):
         self.label_17.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.frame = QFrame(self.centralwidget)
         self.frame.setObjectName(u"frame")
-        self.frame.setGeometry(QRect(80, 705, 350, 51))
+        self.frame.setGeometry(QRect(80, 750, 350, 51))
         self.frame.setStyleSheet(u"QFrame{\n"
 "border-radius:15px;\n"
 "	background-color: rgba(0, 0, 0, 0);\n"
@@ -492,6 +492,7 @@ class Ui_PopUpAddColada(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.pb_aceptar = QPushButton(self.frame)
         self.pb_aceptar.setObjectName(u"pb_aceptar")
+        self.pb_aceptar.setEnabled(True)
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -516,6 +517,9 @@ class Ui_PopUpAddColada(object):
 "}\n"
 "QPushButton:pressed{\n"
 "	background-color: rgba(255, 135, 29, 255);\n"
+"}\n"
+"QPushButton:disabled{\n"
+"	background-color: rgba(0, 0, 0, 100);\n"
 "}")
 
         self.horizontalLayout.addWidget(self.pb_aceptar)
@@ -542,6 +546,41 @@ class Ui_PopUpAddColada(object):
         self.progressBar.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout.addWidget(self.progressBar)
+
+        self.frame_2 = QFrame(self.centralwidget)
+        self.frame_2.setObjectName(u"frame_2")
+        self.frame_2.setGeometry(QRect(80, 710, 350, 51))
+        self.frame_2.setStyleSheet(u"QFrame{\n"
+"border-radius:15px;\n"
+"	background-color: rgba(0, 0, 0, 0);\n"
+"border:0px;\n"
+"}")
+        self.frame_2.setFrameShape(QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_2 = QHBoxLayout(self.frame_2)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.pb_recortar = QPushButton(self.frame_2)
+        self.pb_recortar.setObjectName(u"pb_recortar")
+        sizePolicy.setHeightForWidth(self.pb_recortar.sizePolicy().hasHeightForWidth())
+        self.pb_recortar.setSizePolicy(sizePolicy)
+        self.pb_recortar.setFont(font9)
+        self.pb_recortar.setStyleSheet(u"QPushButton{\n"
+"	border-radius:15px;\n"
+"	color: rgb(0, 0, 0);\n"
+"	background-color: rgba(240, 120, 14, 210);\n"
+"border:0px;\n"
+"}\n"
+"QPushButton:hover{\n"
+"	background-color: rgba(255, 135, 29, 230);\n"
+"}\n"
+"QPushButton:pressed{\n"
+"	background-color: rgba(255, 135, 29, 255);\n"
+"}\n"
+"QPushButton:disabled{\n"
+"	background-color: rgba(0, 0, 0, 100);\n"
+"}")
+
+        self.horizontalLayout_2.addWidget(self.pb_recortar)
 
         PopUpAddColada.setCentralWidget(self.centralwidget)
         self.label.raise_()
@@ -578,6 +617,7 @@ class Ui_PopUpAddColada(object):
         self.txtUltimaColada.raise_()
         self.label_17.raise_()
         self.frame.raise_()
+        self.frame_2.raise_()
 
         self.retranslateUi(PopUpAddColada)
 
@@ -618,5 +658,6 @@ class Ui_PopUpAddColada(object):
         self.txtUltimaColada.setText("")
         self.label_17.setText(QCoreApplication.translate("PopUpAddColada", u"\u00daltima Colada:", None))
         self.pb_aceptar.setText(QCoreApplication.translate("PopUpAddColada", u"A\u00f1adir Colada", None))
+        self.pb_recortar.setText(QCoreApplication.translate("PopUpAddColada", u"Recortar Imagen", None))
     # retranslateUi
 

@@ -79,6 +79,7 @@ class cropWindow(qtw.QMainWindow, Ui_cropWindow):
         self.pbBottomRightMiddle.pressed.connect(self.pbBottomRightMiddleAction)
         self.pushButton.clicked.connect(self.cropImage)
     def cropImage(self):
+        global coordenadas
         """print("-----------------------------------------------------")
         print("1. [" + str(int((self.pbTopLeft.pos().x() + int(self.pbTopLeft.width()/2))/2)) + ", " + str(int((self.pbTopLeft.pos().y() + int(self.pbTopLeft.height()/2))/2)) +"]")
         print("2. [" + str(int((self.pbTopLeftMiddle.pos().x() + int(self.pbTopLeftMiddle.width()/2))/2)) + ", " + str(int((self.pbTopLeftMiddle.pos().y() + int(self.pbTopLeftMiddle.height()/2))/2)) +"]")
@@ -98,7 +99,8 @@ class cropWindow(qtw.QMainWindow, Ui_cropWindow):
                        [int((self.pbBottomMiddle.pos().x() + int(self.pbBottomMiddle.width()/2))/2) , int((self.pbBottomMiddle.pos().y() + int(self.pbBottomMiddle.height()/2))/2)], 
                        [int((self.pbBottomLeftMiddle.pos().x() + int(self.pbBottomLeftMiddle.width()/2))/2) , int((self.pbBottomLeftMiddle.pos().y() + int(self.pbBottomLeftMiddle.height()/2))/2)], 
                        [int((self.pbBottomLeft.pos().x() + int(self.pbBottomLeft.width()/2))/2) , int((self.pbBottomLeft.pos().y() + int(self.pbBottomLeft.height()/2))/2)]]
-        print(coordenadas)
+        #print(coordenadas)
+        self.close()
     def pbTopLeftAction(self): self.select = "TopLeft"
     def pbTopRightAction(self): self.select = "TopRight"
     def pbTopLeftMiddleAction(self): self.select = "TopLeftMiddle"
@@ -749,12 +751,15 @@ class cropWindow(qtw.QMainWindow, Ui_cropWindow):
         ]
         painter.drawPolygon(points)
 
-def main():
+def main(path):
+    global coordenadas
     app = qtw.QApplication(argv)
-    ex = cropWindow("Archivos Fuente/Fotografias y archivos de termografias/13F.jpg")
+    ex = cropWindow(path)
     #ex = cropWindow("13F.jpg")
     ex.show()
     app.exec()
+    Position_Matrix = coordenadas
+    return Position_Matrix
 
 if __name__ == '__main__':
-    main()
+    main("Archivos Fuente/Fotografias y archivos de termografias/13F.jpg")
