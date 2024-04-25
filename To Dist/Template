@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            @page{
+                size: a4 portrait;
+                margin: 50;
+                margin-bottom: 20;
+                margin-top: 20;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="text-align: center;">
+            <img src="ResourcesFolder/Imagenes/Logo_Letras.png" style="zoom: 20%; ">
+        </div>
+        <h1 style="text-align: center;">Reporte de Termograf&iacute;as</h1>
+        <h2>Datos Generales:</h2>
+        <p>Fecha y hora de generaci&oacute;n: {{date}}, {{time}}.</p>
+        <p>Generado por: {{Username}} &ndash; {{function}}.</p>
+        <p>Tipo de generaci&oacute;n: {{tipoGeneracion}}</p>
+        <hr />
+        <h2>Datos Informativos:</h2>
+        <table style="border-collapse: collapse; width: 100%;padding-top: 1;padding-bottom: 0;margin: 0; border : 1px solid black;">
+        <tbody>
+            <tr>
+            <td style="width: 16.6667%; text-align: center;">No. de Cuchara</td>
+            <td style="width: 16.6667%; text-align: center;">No. de Campa&ntilde;a</td>
+            <td style="width: 16.6667%; text-align: center;">Cantidad de coladas realizadas</td>
+            <td style="width: 16.6667%; text-align: center;">Cambio de Linea de Escoria (Colada)</td>
+            <td style="width: 16.6667%; text-align: center;">Inicio de Campa&ntilde;a</td>
+            <td style="width: 16.6667%; text-align: center;">Fin de Campa&ntilde;a</td>
+            </tr>
+            <tr>
+            <td style="width: 16.6667%; text-align: center;">{{nameCuchara}}</td>
+            <td style="width: 16.6667%; text-align: center;">{{nameCampana}}</td>
+            <td style="width: 16.6667%; text-align: center;">{{ultimaColada}}</td>
+            <td style="width: 16.6667%; text-align: center;">{{coladaEscoria}}</td>
+            <td style="width: 16.6667%; text-align: center;">{{dateInicio}}</td>
+            <td style="width: 16.6667%; text-align: center;">{{dateFin}}</td>
+            </tr>
+        </tbody>
+        </table>
+        <hr />
+        <h2>Reporte de las temperaturas presentadas en las termograf&iacute;as:</h2>
+
+
+        <table style="border-collapse: collapse; width: 100%;padding-top: 1;padding-bottom: 0;margin: 0; border : 1px solid black;">
+        <tbody>
+            <tr>
+            <td style="width: 100%; text-align: center;"><strong>Vista Frontal</strong></td>
+            </tr>
+        </tbody>
+        </table>
+        <table style="border-collapse: collapse; width: 100%;padding-top: 1;padding-bottom: 0; margin: 0; padding-left: 1; border : 1px solid black;">
+        <tbody>
+            <tr>
+            <td style="width: 33.3333%;">
+                <p>Temperatura m&aacute;xima: {{HTmaxCucharaF}} &ordm;C</p>
+                Colada No.: {{colMaxTempF}}</td>
+            <td style="width: 33.3333%;">
+                <p>Temperatura m&iacute;nima: {{HTminCucharaF}} &ordm;C</p>
+                Colada No.: {{colMinTempF}}</td>
+            <td style="width: 33.3333%;">
+                <p>Temperatura media: {{HTmeanCucharaF}} &ordm;C</p>
+            </td>
+            </tr>
+        </tbody>
+        </table>
+        <div style="text-align: center; zoom:48%;"><img src={{pathImgFrontal}}></div>
+        
+        
+
+        <table style="border-collapse: collapse; width: 100%;padding-top: 1;padding-bottom: 0;margin: 0; border : 1px solid black;">
+            <tbody>
+                <tr>
+                <td style="width: 100%; text-align: center;"><strong>Vista Trasera</strong></td>
+                </tr>
+            </tbody>
+            </table>
+            <table style="border-collapse: collapse; width: 100%;padding-top: 1;padding-bottom: 0; margin: 0; padding-left: 1; border : 1px solid black;">
+            <tbody>
+                <tr>
+                <td style="width: 33.3333%;">
+                    <p>Temperatura m&aacute;xima: {{HTmaxCucharaT}} &ordm;C</p>
+                    Colada No.: {{colMaxTempT}}</td>
+                <td style="width: 33.3333%;">
+                    <p>Temperatura m&iacute;nima: {{HTminCucharaT}} &ordm;C</p>
+                    Colada No.: {{colMinTempT}}</td>
+                <td style="width: 33.3333%;">
+                    <p>Temperatura media: {{HTmeanCucharaT}} &ordm;C</p>
+                </td>
+                </tr>
+            </tbody>
+            </table>
+            <div style="text-align: center; zoom:48%;"><img src={{pathImgTrasera}}></div>
+        <p>&nbsp;</p>
+
+        <hr />
+        
+    </body>
+</html>

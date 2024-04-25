@@ -39,7 +39,7 @@ border:1px solid gray;
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>20</pointsize>
       <italic>false</italic>
       <bold>true</bold>
@@ -62,15 +62,15 @@ border:0;
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>25</x>
       <y>80</y>
-      <width>281</width>
+      <width>291</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>11</pointsize>
      </font>
     </property>
@@ -97,7 +97,7 @@ border:0;
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>15</pointsize>
       <italic>false</italic>
       <bold>true</bold>

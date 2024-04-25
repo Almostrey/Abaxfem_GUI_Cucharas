@@ -1,7 +1,8 @@
-from sys import argv
+from sys import argv, exit
 from os.path import isfile, isdir
 from os import getcwd
 from PySide6 import QtCore as qtc
+from PySide6.QtCore import QProcess
 from PySide6 import QtWidgets as qtw
 from PySide6 import QtGui as qtg
 from PySide6.QtGui import QDragMoveEvent, QPaintEvent
@@ -35,21 +36,55 @@ from subprocess import Popen
 from PySide6 import QtSvg
 import pandas as pd
 import V1
+import main_MP_sup
+import main_MP_Inf
+import main_MP_Med
 from numpy import array, reshape
+import PySide6.QtConcurrent
+from PySide6.QtCore import QRunnable
+from multiprocessing import freeze_support
 
-umbralMinimo = 200
-umbralMaximo = 400
+
+
+
+# Librerias
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import multiprocessing
+from read_times_estudi_de_vida import read_times_estudi_de_vida
+from Matriz_tasaDesgaste import Matriz_tasaDesgaste
+from Aproximacion2 import Aproximacion2
+from determinacion_tasa_desgaste import determinacion_tasa_desgaste
+from read_temps_medidas import read_temps_medidas
+from processEF_if_first_time import processEF_if_first_time
+from processEF_if_not_first_time import processEF_if_not_first_time
+from read_historia import read_historia
+import time 
+import os
+import math
+import main_MP_Inf
+import main_MP_Med
+
+
+
+
+umbralMinimo = 0
+umbralMaximo = 100
 ApiKey = "AbaxfemGuiCucharas2023"
 D_Anillo= 0.1464
 D_Inf= 0.1464
 Middle = 1/2
+num_process=3
+os.environ["OMP_NUM_THREADS"]="1"
 global Position_MatrixT, Position_MatrixF
 
 class Limit(qtw.QPushButton):
     def __init__(self, x, y, parent):
         super().__init__("+", parent)
         font = qtg.QFont()
-        font.setFamilies([u"Rockwell"])
+        #font.setFamilies([u"Rockwell"])
+        font.setFamilies([u"Arial"])
         font.setPointSize(18)
         font.setBold(False)
         self.setFont(font)
@@ -974,7 +1009,7 @@ class PopUpAddCampana(qtw.QMainWindow, Ui_PopUpAddCampana):
             self.spinBox.setMinimum(1)
             self.spinBox.setValue(1)
 
-class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada):
+class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
     def __init__(self):
         super(PopUpAddColada, self).__init__()
         self.setupUi(self)
@@ -1160,7 +1195,43 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada):
                 '''
                 sleep(0.2)
                 self.progressBar.setValue(75)
-                dataManager.add_Colada(nameCuchara, nameCampana, numColada, float(infoF[8]), float(infoT[8]), self.numpy2float(reshape(infoF[9], 3)), self.numpy2float(reshape(infoT[9], 3)), self.numpy2float(reshape(infoF[4], 72)), self.numpy2float(reshape(infoT[4], 72)))
+                if int(dataManager.getNameColadas(nameCuchara, str(nameCampana))[-1]) == 0:
+                    # Nuevo
+                    Historia = 0
+                    Nuevo1Viejo2 = 1
+                    HistoriaF = 0
+                    HistoriaT = 0
+                    pathDirectory = dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/"
+                    qtw.QApplication.processEvents()
+                    [RiesgoF, RiesgoT, observacionF, observacionT] = main_MP_sup.getRiesgo(numColada, numColada, self.numpy2float(reshape(infoF[9], 3)), self.numpy2float(reshape(infoT[9], 3)), Nuevo1Viejo2, pathDirectory)
+
+                    '''print("a")
+                    self.p = QProcess()
+                    self.p.readyReadStandardOutput
+                    print("b")
+                    self.p.start('python3', ['numColada', 'numColada', 'self.numpy2float(reshape(infoF[9], 3))', 'self.numpy2float(reshape(infoT[9], 3))', 'Nuevo1Viejo2', 'pathDirectory', 'main_MP_sup_getRiesgo'])
+                    print("c")
+                    self.p.finished.connect(test)
+                    [RiesgoF, RiesgoT, observacionF, observacionT] = self.p
+                    return 0'''
+                else:
+                    # Viejo
+                    [HistoriaPreviaF, HistoriaPreviaT] = dataManager.getHistoriaEF(nameCuchara, nameCampana)
+                    Nuevo1Viejo2 = 2
+                    HistoriaF = 0
+                    HistoriaT = 0
+                    pathDirectory = dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/"
+                    qtw.QApplication.processEvents()
+                    [RiesgoF, RiesgoT, observacionF, observacionT] = main_MP_sup.getRiesgo(numColada, numColada, self.numpy2float(reshape(infoF[9], 3)), self.numpy2float(reshape(infoT[9], 3)), Nuevo1Viejo2, pathDirectory)
+
+                sleep(0.2)
+                self.progressBar.setValue(85)
+                
+                dataManager.add_Colada(nameCuchara, nameCampana, numColada, float(infoF[8]), float(infoT[8]), self.numpy2float(reshape(infoF[9], 3)), 
+                                       self.numpy2float(reshape(infoT[9], 3)), self.numpy2float(reshape(infoF[5], 72)), self.numpy2float(reshape(infoT[5], 72)), 
+                                       str(HistoriaF), str(HistoriaT), str(RiesgoF), str(RiesgoT), 
+                                       #str(observacionF), "2")
+                                       str(observacionF), str(observacionT))
                 sleep(0.2)
                 self.progressBar.setValue(100)
                 sleep(1)
@@ -1795,6 +1866,7 @@ class saveUserWindow(qtw.QMainWindow, Ui_saveUserWindow):
         self.w.show()
 
 if __name__ == "__main__":
+    freeze_support()
     app = qtw.QApplication(argv)
 
     if dataManager.getWorkingDirectory() == getcwd():
@@ -1819,4 +1891,4 @@ if __name__ == "__main__":
         window = PopUpApiKey()
     
     window.show()
-    app.exec()
+    exit(app.exec())

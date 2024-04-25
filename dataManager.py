@@ -122,7 +122,13 @@ def addCampana(nameCuchara:str, nameCampana:int):
                     HTmaxZonasF float,
                     HTmaxZonasT float,
                     HTmaxRefF float,
-                    HTmaxRefT float
+                    HTmaxRefT float,
+                    HistoriaF float,
+                    HistoriaT text,
+                    RiesgoF text,
+                    RiesgoT text,
+                    observacionF text,
+                    observacionT text
                 )"""
             )
             conn.commit()
@@ -134,7 +140,7 @@ def addCampana(nameCuchara:str, nameCampana:int):
         print("111")
         return False
 
-def add_Colada(nameCuchara:str, nameCampana:int, nameColada:int, HTmaxCucharaF:float, HTmaxCucharaT:float, HTmaxZonasF:float, HTmaxZonasT:float, HTmaxRefF:float, HTmaxRefT:float):
+def add_Colada(nameCuchara:str, nameCampana:int, nameColada:int, HTmaxCucharaF:float, HTmaxCucharaT:float, HTmaxZonasF:float, HTmaxZonasT:float, HTmaxRefF:float, HTmaxRefT:float, HistoriaF:float, HistoriaT:str, RiesgoF:str, RiesgoT:str, observacionF:str, observacionT:str):
     if isDuplicated("CUCHARAS", "Name", nameCuchara):
         nameTable = "CUCHARA_"+nameCuchara
         if isDuplicated(nameTable, "Campanas", nameCampana):
@@ -145,7 +151,7 @@ def add_Colada(nameCuchara:str, nameCampana:int, nameColada:int, HTmaxCucharaF:f
                 date = datetime.strftime(datetime.now(), '%d/%m/%Y')
                 conn = sql.connect(nameDB)
                 cursor = conn.cursor()
-                instruccion = f"INSERT INTO {nameTable} VALUES ('{nameColada}', '{date}', '{HTmaxCucharaF}', '{HTmaxCucharaT}', '{HTmaxZonasF}', '{HTmaxZonasT}', '{HTmaxRefF}', '{HTmaxRefT}')"
+                instruccion = f"INSERT INTO {nameTable} VALUES ('{nameColada}', '{date}', '{HTmaxCucharaF}', '{HTmaxCucharaT}', '{HTmaxZonasF}', '{HTmaxZonasT}', '{HTmaxRefF}', '{HTmaxRefT}', '{HistoriaF}', '{HistoriaT}', '{RiesgoF}', '{RiesgoT}', '{observacionF}', '{observacionT}')"
                 conn.execute(instruccion)
                 conn.commit()
                 conn.commit()
@@ -404,8 +410,8 @@ def getZonas(nameCuchara:str, nameCampana:str)->float:
         cursor.execute(instruccion)
         data = cursor.fetchall()
         conn.commit()
-        maxZonasF = fixList(data[-1][4])
-        maxZonasT = fixList(data[-1][5])
+        maxZonasF = fixList(data[-1][-4])
+        maxZonasT = fixList(data[-1][-3])
         return [maxZonasF, maxZonasT]
     except:
         return False
@@ -618,12 +624,28 @@ def getCreationDateCampana(nameCuchara:str, nameCampana:str):
 def sendEmail(observations:str):
     print(observations)
 
+def getHistoriaEF(nameCuchara:str, nameCampana:str):
+    try:
+        nameTable = "CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)
+        conn = sql.connect(nameDB)
+        cursor = conn.cursor()
+        instruccion = f"SELECT * FROM {nameTable} ORDER BY Colada"
+        cursor.execute(instruccion)
+        data = cursor.fetchall()
+        conn.commit()
+        HistoriaF = data[-1][8]
+        HistoriaT = data[-1][9]
+        return [HistoriaF, HistoriaT]
+    except:
+        return False
+
 if __name__ == "__main__":
     #resetDatabase()
+    print(getHistoriaEF("1", "2")[1])
     #print(addCuchara("3"))
     #print(addCampana("3", 10))
     #print(searchDB("CUCHARA_2_CAMPANA_20", "Colada", "20"))
-    #print(deleteColada("Cucha45", 1, 13))
+    #print(deleteColada("1", "1", 1))
     #print(deleteCampana("2", 22))
     #print(deleteCuchara("Cucha4"))
     #print(CucharaIsWithSomething("2"))
@@ -634,7 +656,7 @@ if __name__ == "__main__":
     #print(countCampanas("2"))
     #print(type(getNameCampanas(getNameCucharas()[0])[2]))
     #print(getEscoria('1'))
-    #print(add_Colada("2", 22, 111, [356.086], [300.227], [330.503, 356.086, 355.247],[287.276, 300.227, 300.169], [322.488, 332.979, 340.779, 345.269, 347.476, 347.21, 344.496, 340.94, 336.027, 329.821, 326.385, 322.736, 320.924, 316.446, 313.703, 305.862, 296.521, 289.512, 311.721, 325.74, 337.013, 344.216, 349.966, 351.656, 355.247, 354.63, 348.47, 345.841, 341.114, 334.877, 330.503, 323.288, 317.59, 310.298, 303.924, 302.065, 300.616, 312.762, 329.015, 338.831, 347.542, 351.88, 353.776, 356.086, 353.421, 348.735, 344.363, 334.471, 328.742, 322.004, 316.041, 311.214, 309.507, 305.777, 289.585, 306.403, 317.199, 326.687, 332.64, 333.712, 332.898, 332.327, 330.271, 327.921, 329.985, 325.588, 320.758, 314.614, 311.116, 304.31, 297.447, 290.01], [274.001, 282.185, 285.841, 287.837, 289.354, 290.544, 291.057, 290.25, 289.589, 288.677, 286.773, 285.204, 284.907, 283.585, 282.692, 279.957, 255.507, 287.276, 265.751, 278.32, 284.848, 290.25, 293.762, 296.366, 298.539, 299.275, 299.275, 296.308, 292.711, 288.692, 284.477, 282.199, 278.501, 278.666, 255.191, 280.675, 255.491, 271.506, 284.358, 292.346, 296.628, 299.275, 300.169, 300.227, 299.376, 294.141, 288.986, 284.239, 280.69, 278.05, 278.951, 279.567, 259.783, 283.168, 259.438, 267.262, 275.863, 279.327, 284.625, 286.522, 286.566, 284.477, 285.841, 284.328, 275.47, 274.44, 272.481, 270.009, 265.566, 258.404, 259.047, 284.254]))
+    #print(add_Colada("1", 1, 1, [356.086], [300.227], [330.503, 356.086, 355.247],[287.276, 300.227, 300.169], [322.488, 332.979, 340.779, 345.269, 347.476, 347.21, 344.496, 340.94, 336.027, 329.821, 326.385, 322.736, 320.924, 316.446, 313.703, 305.862, 296.521, 289.512, 311.721, 325.74, 337.013, 344.216, 349.966, 351.656, 355.247, 354.63, 348.47, 345.841, 341.114, 334.877, 330.503, 323.288, 317.59, 310.298, 303.924, 302.065, 300.616, 312.762, 329.015, 338.831, 347.542, 351.88, 353.776, 356.086, 353.421, 348.735, 344.363, 334.471, 328.742, 322.004, 316.041, 311.214, 309.507, 305.777, 289.585, 306.403, 317.199, 326.687, 332.64, 333.712, 332.898, 332.327, 330.271, 327.921, 329.985, 325.588, 320.758, 314.614, 311.116, 304.31, 297.447, 290.01], [274.001, 282.185, 285.841, 287.837, 289.354, 290.544, 291.057, 290.25, 289.589, 288.677, 286.773, 285.204, 284.907, 283.585, 282.692, 279.957, 255.507, 287.276, 265.751, 278.32, 284.848, 290.25, 293.762, 296.366, 298.539, 299.275, 299.275, 296.308, 292.711, 288.692, 284.477, 282.199, 278.501, 278.666, 255.191, 280.675, 255.491, 271.506, 284.358, 292.346, 296.628, 299.275, 300.169, 300.227, 299.376, 294.141, 288.986, 284.239, 280.69, 278.05, 278.951, 279.567, 259.783, 283.168, 259.438, 267.262, 275.863, 279.327, 284.625, 286.522, 286.566, 284.477, 285.841, 284.328, 275.47, 274.44, 272.481, 270.009, 265.566, 258.404, 259.047, 284.254], "1", "2", "3", "4", "5", "[[Hola], [Bebe], [Bebe]]"))
     #print(getHistoricosCampanaFT("2", 1))
     #print(fixList("[12.12, 24.24, 26.26]"))
     #print(modifyEscoria("2", "22", 50))
@@ -648,9 +670,9 @@ if __name__ == "__main__":
     #print(changeWorkingDirectory(getcwd()))
     #print(updatePlot("Cucha45", "1"))
     #print(dataIsCorrupted())
-    #print(getZonasHistory("Cucha45", "1"))
+    #print(getZonasHistory("1", "1"))
     #print(getZonas("Cucha45", "100"))
-    #print(int(getNameColadas("Cucha45", "101")[-1]))
+    #print(int(getNameColadas("1", "3")[-1]))
     #print(deleteColada("Cucha45", "101", 200))
     pass
     '''conn = sql.connect(nameDB)

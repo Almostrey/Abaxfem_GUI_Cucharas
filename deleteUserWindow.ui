@@ -31,15 +31,15 @@ border:1px solid gray;
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>41</x>
+      <x>25</x>
       <y>80</y>
-      <width>260</width>
+      <width>290</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>11</pointsize>
      </font>
     </property>
@@ -65,7 +65,7 @@ background-color: rgba(0, 0, 0, 0);</string>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>15</pointsize>
       <italic>false</italic>
       <bold>true</bold>
@@ -131,7 +131,7 @@ QPushButton:pressed{
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>20</pointsize>
       <italic>false</italic>
       <bold>true</bold>

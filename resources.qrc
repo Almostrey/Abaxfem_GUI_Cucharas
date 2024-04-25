@@ -4,6 +4,9 @@
     <file>ResourcesFolder/Imagenes/Logo_Letras.png</file>
     <file>ResourcesFolder/Imagenes/Cuchara.png</file>
     <file>ResourcesFolder/Imagenes/Logo_Lineas.png</file>
+    <file>ResourcesFolder/Imagenes/ZonasRefracInf.png</file>
+    <file>ResourcesFolder/Imagenes/ZonasRefracMed.png</file>
+    <file>ResourcesFolder/Imagenes/ZonasRefracSup.png</file>
   </qresource>
   <qresource prefix="Icons">
     <file>ResourcesFolder/featherIcons/activity.svg</file>

@@ -40,7 +40,7 @@
    <string>Iniciar Sesión - Abaxfem</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="resources.qrc">
     <normaloff>:/Images/ResourcesFolder/Imagenes/Logo_Lineas.png</normaloff>:/Images/ResourcesFolder/Imagenes/Logo_Lineas.png</iconset>
   </property>
   <property name="windowOpacity">
@@ -119,8 +119,8 @@ border:0px;
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
-      <pointsize>25</pointsize>
+      <family>Arial</family>
+      <pointsize>23</pointsize>
       <italic>false</italic>
       <bold>true</bold>
       <kerning>true</kerning>
@@ -150,8 +150,8 @@ border:0px;
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
-      <pointsize>18</pointsize>
+      <family>Arial</family>
+      <pointsize>16</pointsize>
       <bold>false</bold>
      </font>
     </property>
@@ -254,8 +254,8 @@ border:0px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
-      <pointsize>18</pointsize>
+      <family>Arial</family>
+      <pointsize>16</pointsize>
       <bold>false</bold>
      </font>
     </property>
@@ -338,8 +338,8 @@ border:0px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
-      <pointsize>18</pointsize>
+      <family>Arial</family>
+      <pointsize>16</pointsize>
       <italic>false</italic>
       <bold>true</bold>
       <underline>false</underline>
@@ -367,15 +367,15 @@ QPushButton:pressed{
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>350</x>
       <y>350</y>
-      <width>241</width>
+      <width>251</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>11</pointsize>
      </font>
     </property>
@@ -393,15 +393,15 @@ border:0px;</string>
    <widget class="QLabel" name="lbl_webpage">
     <property name="geometry">
      <rect>
-      <x>487</x>
+      <x>459</x>
       <y>370</y>
-      <width>113</width>
+      <width>141</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>11</pointsize>
       <underline>true</underline>
      </font>

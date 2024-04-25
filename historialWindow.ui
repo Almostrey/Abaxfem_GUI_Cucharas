@@ -62,7 +62,7 @@
     </property>
     <property name="font">
      <font>
-      <family>Rockwell</family>
+      <family>Arial</family>
       <pointsize>10</pointsize>
       <fontweight>Medium</fontweight>
      </font>
@@ -112,7 +112,7 @@ background-color: rgb(237, 245, 255);
      </property>
      <property name="font">
       <font>
-       <family>Rockwell</family>
+       <family>Arial</family>
        <pointsize>12</pointsize>
        <stylestrategy>PreferDefault</stylestrategy>
        <fontweight>Medium</fontweight>
@@ -145,7 +145,7 @@ background-color: rgb(237, 245, 255);
      </property>
      <property name="font">
       <font>
-       <family>Rockwell</family>
+       <family>Arial</family>
        <pointsize>12</pointsize>
        <bold>false</bold>
       </font>
@@ -168,7 +168,7 @@ background-color: rgb(237, 245, 255);
      </property>
      <property name="font">
       <font>
-       <family>Rockwell</family>
+       <family>Arial</family>
        <pointsize>12</pointsize>
        <bold>false</bold>
       </font>
@@ -200,7 +200,7 @@ background-color: rgb(237, 245, 255);
      </property>
      <property name="font">
       <font>
-       <family>Rockwell</family>
+       <family>Arial</family>
        <pointsize>12</pointsize>
       </font>
      </property>
@@ -215,7 +215,7 @@ background-color: rgb(237, 245, 255);
      </property>
      <property name="font">
       <font>
-       <family>Rockwell</family>
+       <family>Arial</family>
        <pointsize>12</pointsize>
       </font>
      </property>

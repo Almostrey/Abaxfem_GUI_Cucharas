@@ -120,7 +120,7 @@ class Ui_AdministratorWindow(object):
         self.labelUsername.setObjectName(u"labelUsername")
         self.labelUsername.setMinimumSize(QSize(0, 0))
         font = QFont()
-        font.setFamilies([u"Rockwell"])
+        font.setFamilies([u"Arial"])
         font.setPointSize(11)
         self.labelUsername.setFont(font)
         self.labelUsername.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
@@ -150,7 +150,7 @@ class Ui_AdministratorWindow(object):
         self.pbVerArchivos.setObjectName(u"pbVerArchivos")
         self.pbVerArchivos.setMinimumSize(QSize(0, 40))
         font1 = QFont()
-        font1.setFamilies([u"Rockwell"])
+        font1.setFamilies([u"Arial"])
         font1.setPointSize(12)
         font1.setBold(False)
         self.pbVerArchivos.setFont(font1)
@@ -208,7 +208,7 @@ class Ui_AdministratorWindow(object):
         self.pbReporte.setObjectName(u"pbReporte")
         self.pbReporte.setMinimumSize(QSize(0, 40))
         font2 = QFont()
-        font2.setFamilies([u"Rockwell"])
+        font2.setFamilies([u"Arial"])
         font2.setPointSize(12)
         self.pbReporte.setFont(font2)
         self.pbReporte.setStyleSheet(u"QPushButton{\n"
@@ -267,7 +267,7 @@ class Ui_AdministratorWindow(object):
         brush = QBrush(QColor(0, 0, 0, 255))
         brush.setStyle(Qt.SolidPattern)
         font3 = QFont()
-        font3.setFamilies([u"Rockwell"])
+        font3.setFamilies([u"Arial"])
         font3.setPointSize(16)
         font3.setBold(True)
         __qtreewidgetitem = QTreeWidgetItem()
@@ -286,7 +286,7 @@ class Ui_AdministratorWindow(object):
         self.treeMenu.setMinimumSize(QSize(98, 0))
         self.treeMenu.setMaximumSize(QSize(300, 16777215))
         font4 = QFont()
-        font4.setFamilies([u"Rockwell"])
+        font4.setFamilies([u"Arial"])
         font4.setPointSize(16)
         font4.setItalic(False)
         font4.setUnderline(False)
@@ -337,8 +337,8 @@ class Ui_AdministratorWindow(object):
         self.pbAddCuchara.setSizePolicy(sizePolicy2)
         self.pbAddCuchara.setMinimumSize(QSize(98, 40))
         font5 = QFont()
-        font5.setFamilies([u"Bell MT"])
-        font5.setPointSize(12)
+        font5.setFamilies([u"Arial"])
+        font5.setPointSize(11)
         font5.setBold(True)
         self.pbAddCuchara.setFont(font5)
         self.pbAddCuchara.setStyleSheet(u"QPushButton{\n"
@@ -858,7 +858,11 @@ class Ui_AdministratorWindow(object):
         self.label_23.setObjectName(u"label_23")
         self.label_23.setMinimumSize(QSize(98, 20))
         self.label_23.setMaximumSize(QSize(140, 40))
-        self.label_23.setFont(font5)
+        font6 = QFont()
+        font6.setFamilies([u"Arial"])
+        font6.setPointSize(12)
+        font6.setBold(True)
+        self.label_23.setFont(font6)
         self.label_23.setStyleSheet(u"border-radius:0px;\n"
 "border-top: 1px solid;\n"
 "border-bottom: 1px solid;\n"
@@ -891,6 +895,7 @@ class Ui_AdministratorWindow(object):
         self.frame_41 = QFrame(self.frame_28)
         self.frame_41.setObjectName(u"frame_41")
         self.frame_41.setMinimumSize(QSize(96, 0))
+        self.frame_41.setStyleSheet(u"border-image: url(:/Images/ResourcesFolder/Imagenes/ZonasRefracSup.png);")
         self.frame_41.setFrameShape(QFrame.StyledPanel)
         self.frame_41.setFrameShadow(QFrame.Raised)
 
@@ -939,7 +944,7 @@ class Ui_AdministratorWindow(object):
         self.label_24.setObjectName(u"label_24")
         self.label_24.setMinimumSize(QSize(98, 20))
         self.label_24.setMaximumSize(QSize(140, 40))
-        self.label_24.setFont(font5)
+        self.label_24.setFont(font6)
         self.label_24.setStyleSheet(u"border-radius:0px;\n"
 "border-top: 1px solid;\n"
 "border-bottom: 1px solid;\n"
@@ -972,6 +977,7 @@ class Ui_AdministratorWindow(object):
         self.frame_44 = QFrame(self.frame_29)
         self.frame_44.setObjectName(u"frame_44")
         self.frame_44.setMinimumSize(QSize(96, 0))
+        self.frame_44.setStyleSheet(u"border-image: url(:/Images/ResourcesFolder/Imagenes/ZonasRefracMed.png);")
         self.frame_44.setFrameShape(QFrame.StyledPanel)
         self.frame_44.setFrameShadow(QFrame.Raised)
 
@@ -1022,7 +1028,7 @@ class Ui_AdministratorWindow(object):
         self.label_25.setObjectName(u"label_25")
         self.label_25.setMinimumSize(QSize(98, 20))
         self.label_25.setMaximumSize(QSize(140, 40))
-        self.label_25.setFont(font5)
+        self.label_25.setFont(font6)
         self.label_25.setStyleSheet(u"border-radius:0px;\n"
 "border-top: 1px solid;\n"
 "border-bottom: 1px solid;\n"
@@ -1055,6 +1061,7 @@ class Ui_AdministratorWindow(object):
         self.frame_47 = QFrame(self.frame_30)
         self.frame_47.setObjectName(u"frame_47")
         self.frame_47.setMinimumSize(QSize(96, 0))
+        self.frame_47.setStyleSheet(u"border-image: url(:/Images/ResourcesFolder/Imagenes/ZonasRefracInf.png);")
         self.frame_47.setFrameShape(QFrame.StyledPanel)
         self.frame_47.setFrameShadow(QFrame.Raised)
 
@@ -1135,11 +1142,11 @@ class Ui_AdministratorWindow(object):
         sizePolicy.setHeightForWidth(self.label_4.sizePolicy().hasHeightForWidth())
         self.label_4.setSizePolicy(sizePolicy)
         self.label_4.setMinimumSize(QSize(194, 30))
-        font6 = QFont()
-        font6.setFamilies([u"Bell MT"])
-        font6.setPointSize(18)
-        font6.setBold(True)
-        self.label_4.setFont(font6)
+        font7 = QFont()
+        font7.setFamilies([u"Arial"])
+        font7.setPointSize(18)
+        font7.setBold(True)
+        self.label_4.setFont(font7)
         self.label_4.setStyleSheet(u"QLabel{\n"
 "border-radius:0px;\n"
 "border : 0px;\n"
@@ -1161,10 +1168,10 @@ class Ui_AdministratorWindow(object):
         self.pbHistorialZonasF.setSizePolicy(sizePolicy5)
         self.pbHistorialZonasF.setMinimumSize(QSize(98, 0))
         self.pbHistorialZonasF.setMaximumSize(QSize(16777215, 16777215))
-        font7 = QFont()
-        font7.setFamilies([u"Bell MT"])
-        font7.setPointSize(14)
-        self.pbHistorialZonasF.setFont(font7)
+        font8 = QFont()
+        font8.setFamilies([u"Arial"])
+        font8.setPointSize(14)
+        self.pbHistorialZonasF.setFont(font8)
         self.pbHistorialZonasF.setStyleSheet(u"QPushButton:enabled{\n"
 "	background-color: rgb(214, 214, 214);\n"
 "border: 1px solid gray;\n"
@@ -1200,7 +1207,7 @@ class Ui_AdministratorWindow(object):
         self.pbHistorialZonasT.setObjectName(u"pbHistorialZonasT")
         sizePolicy5.setHeightForWidth(self.pbHistorialZonasT.sizePolicy().hasHeightForWidth())
         self.pbHistorialZonasT.setSizePolicy(sizePolicy5)
-        self.pbHistorialZonasT.setFont(font7)
+        self.pbHistorialZonasT.setFont(font8)
         self.pbHistorialZonasT.setStyleSheet(u"QPushButton:enabled{\n"
 "	background-color: rgb(214, 214, 214);\n"
 "border: 1px solid gray;\n"
@@ -1222,7 +1229,7 @@ class Ui_AdministratorWindow(object):
         self.label_5.setObjectName(u"label_5")
         sizePolicy.setHeightForWidth(self.label_5.sizePolicy().hasHeightForWidth())
         self.label_5.setSizePolicy(sizePolicy)
-        self.label_5.setFont(font6)
+        self.label_5.setFont(font7)
         self.label_5.setStyleSheet(u"QLabel{\n"
 "border-radius:0px;\n"
 "border : 0px;\n"
@@ -1391,7 +1398,7 @@ class Ui_AdministratorWindow(object):
         self.label_30.setObjectName(u"label_30")
         self.label_30.setMinimumSize(QSize(98, 20))
         self.label_30.setMaximumSize(QSize(140, 40))
-        self.label_30.setFont(font5)
+        self.label_30.setFont(font6)
         self.label_30.setStyleSheet(u"border-radius:0px;\n"
 "border-top: 1px solid;\n"
 "border-bottom: 1px solid;\n"
@@ -1424,6 +1431,7 @@ class Ui_AdministratorWindow(object):
         self.frame_85 = QFrame(self.frame_82)
         self.frame_85.setObjectName(u"frame_85")
         self.frame_85.setMinimumSize(QSize(96, 0))
+        self.frame_85.setStyleSheet(u"border-image: url(:/Images/ResourcesFolder/Imagenes/ZonasRefracSup.png);")
         self.frame_85.setFrameShape(QFrame.StyledPanel)
         self.frame_85.setFrameShadow(QFrame.Raised)
 
@@ -1472,7 +1480,7 @@ class Ui_AdministratorWindow(object):
         self.label_29.setObjectName(u"label_29")
         self.label_29.setMinimumSize(QSize(98, 20))
         self.label_29.setMaximumSize(QSize(140, 40))
-        self.label_29.setFont(font5)
+        self.label_29.setFont(font6)
         self.label_29.setStyleSheet(u"border-radius:0px;\n"
 "border-top: 1px solid;\n"
 "border-bottom: 1px solid;\n"
@@ -1505,6 +1513,7 @@ class Ui_AdministratorWindow(object):
         self.frame_73 = QFrame(self.frame_32)
         self.frame_73.setObjectName(u"frame_73")
         self.frame_73.setMinimumSize(QSize(96, 0))
+        self.frame_73.setStyleSheet(u"border-image: url(:/Images/ResourcesFolder/Imagenes/ZonasRefracMed.png);")
         self.frame_73.setFrameShape(QFrame.StyledPanel)
         self.frame_73.setFrameShadow(QFrame.Raised)
 
@@ -1555,7 +1564,7 @@ class Ui_AdministratorWindow(object):
         self.label_31.setObjectName(u"label_31")
         self.label_31.setMinimumSize(QSize(98, 20))
         self.label_31.setMaximumSize(QSize(140, 40))
-        self.label_31.setFont(font5)
+        self.label_31.setFont(font6)
         self.label_31.setStyleSheet(u"border-radius:0px;\n"
 "border-top: 1px solid;\n"
 "border-bottom: 1px solid;\n"
@@ -1588,6 +1597,7 @@ class Ui_AdministratorWindow(object):
         self.frame_89 = QFrame(self.frame_86)
         self.frame_89.setObjectName(u"frame_89")
         self.frame_89.setMinimumSize(QSize(96, 0))
+        self.frame_89.setStyleSheet(u"border-image: url(:/Images/ResourcesFolder/Imagenes/ZonasRefracInf.png);")
         self.frame_89.setFrameShape(QFrame.StyledPanel)
         self.frame_89.setFrameShadow(QFrame.Raised)
 
@@ -1710,9 +1720,6 @@ class Ui_AdministratorWindow(object):
         self.labelColadas.setSizePolicy(sizePolicy6)
         self.labelColadas.setMinimumSize(QSize(96, 0))
         self.labelColadas.setMaximumSize(QSize(16777215, 35))
-        font8 = QFont()
-        font8.setFamilies([u"Rockwell"])
-        font8.setPointSize(14)
         self.labelColadas.setFont(font8)
         self.labelColadas.setStyleSheet(u"QLabel{\n"
 "border-radius:0px;\n"
@@ -1744,7 +1751,7 @@ class Ui_AdministratorWindow(object):
         self.pbAddColada.setMinimumSize(QSize(98, 35))
         self.pbAddColada.setMaximumSize(QSize(16777215, 35))
         font9 = QFont()
-        font9.setFamilies([u"Rockwell"])
+        font9.setFamilies([u"Arial"])
         font9.setPointSize(14)
         font9.setBold(False)
         self.pbAddColada.setFont(font9)

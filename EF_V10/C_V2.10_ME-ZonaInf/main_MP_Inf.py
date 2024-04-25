@@ -8,8 +8,8 @@ from Matriz_tasaDesgaste import Matriz_tasaDesgaste
 from Aproximacion2 import Aproximacion2
 from determinacion_tasa_desgaste import determinacion_tasa_desgaste
 from read_temps_medidas import read_temps_medidas
-from processEF_if_first_time import processEF_if_first_time
-from processEF_if_not_first_time import processEF_if_not_first_time
+from processEF_if_first_time_Inf import processEF_if_first_time
+from processEF_if_not_first_time_Inf import processEF_if_not_first_time
 from read_historia import read_historia
 import time 
 import os

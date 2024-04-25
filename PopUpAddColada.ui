@@ -42,7 +42,7 @@ border:1px solid gray;
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>20</pointsize>
       <italic>false</italic>
       <bold>true</bold>
@@ -65,15 +65,15 @@ border:0px;
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>80</x>
+      <x>55</x>
       <y>80</y>
-      <width>350</width>
+      <width>400</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>16</pointsize>
      </font>
     </property>
@@ -147,7 +147,7 @@ border:0px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>18</pointsize>
      </font>
     </property>
@@ -215,8 +215,8 @@ QComboBox::down-arrow:on { /* shift the arrow when popup is open */
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
-      <pointsize>16</pointsize>
+      <family>Arial</family>
+      <pointsize>15</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -241,8 +241,8 @@ border:0px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
-      <pointsize>16</pointsize>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -270,7 +270,7 @@ background-color: rgba(0, 0, 0, 0);</string>
     </property>
     <property name="font">
      <font>
-      <family>Rockwell</family>
+      <family>Arial</family>
       <pointsize>18</pointsize>
       <italic>false</italic>
      </font>
@@ -304,8 +304,8 @@ background-color: rgba(0, 0, 0, 0);</string>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
-      <pointsize>16</pointsize>
+      <family>Arial</family>
+      <pointsize>15</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -333,8 +333,8 @@ border:0px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
-      <pointsize>14</pointsize>
+      <family>Arial</family>
+      <pointsize>13</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -365,8 +365,8 @@ border-bottom-left-radius:10px;
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
-      <pointsize>14</pointsize>
+      <family>Arial</family>
+      <pointsize>13</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -420,8 +420,8 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
      </property>
      <property name="font">
       <font>
-       <family>Rockwell</family>
-       <pointsize>18</pointsize>
+       <family>Arial</family>
+       <pointsize>16</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -491,7 +491,7 @@ border:0px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>16</pointsize>
       <bold>true</bold>
      </font>
@@ -518,7 +518,7 @@ border:0px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>16</pointsize>
      </font>
     </property>
@@ -544,7 +544,7 @@ border:0px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>16</pointsize>
      </font>
     </property>
@@ -573,7 +573,7 @@ border:0px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Rockwell</family>
+      <family>Arial</family>
       <pointsize>12</pointsize>
       <italic>false</italic>
      </font>
@@ -652,7 +652,7 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
     </property>
     <property name="font">
      <font>
-      <family>Rockwell</family>
+      <family>Arial</family>
       <pointsize>12</pointsize>
       <italic>false</italic>
      </font>
@@ -728,7 +728,7 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>16</pointsize>
      </font>
     </property>
@@ -754,7 +754,7 @@ border:0px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>16</pointsize>
      </font>
     </property>
@@ -780,7 +780,7 @@ border:0px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>16</pointsize>
       <bold>true</bold>
      </font>
@@ -810,7 +810,7 @@ border:0px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Rockwell</family>
+      <family>Arial</family>
       <pointsize>12</pointsize>
       <italic>false</italic>
      </font>
@@ -847,7 +847,7 @@ border:0px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Rockwell</family>
+      <family>Arial</family>
       <pointsize>12</pointsize>
       <italic>false</italic>
      </font>
@@ -884,8 +884,8 @@ border:0px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Rockwell</family>
-      <pointsize>18</pointsize>
+      <family>Arial</family>
+      <pointsize>16</pointsize>
       <italic>false</italic>
      </font>
     </property>
@@ -918,9 +918,9 @@ border:0px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
-      <pointsize>12</pointsize>
-      <bold>true</bold>
+      <family>Arial</family>
+      <pointsize>13</pointsize>
+      <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">
@@ -929,7 +929,7 @@ color: rgb(243, 144, 57);
 border:0px;</string>
     </property>
     <property name="text">
-     <string>Importante! Los archivos deben estar guardados en la misma carpeta</string>
+     <string>Importante! Los archivos deben estar guardados en la misma</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -946,9 +946,9 @@ border:0px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
-      <pointsize>12</pointsize>
-      <bold>true</bold>
+      <family>Arial</family>
+      <pointsize>13</pointsize>
+      <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">
@@ -957,7 +957,7 @@ color: rgb(243, 144, 57);
 border:0px;</string>
     </property>
     <property name="text">
-     <string>de la siguiente manera: (151F. jpg/xlsx) (151T. jpg/xlsx)</string>
+     <string>carpeta de la siguiente manera: (151F. jpg/xlsx) (151T. jpg/xlsx)</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -974,9 +974,9 @@ border:0px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
-      <pointsize>12</pointsize>
-      <bold>true</bold>
+      <family>Arial</family>
+      <pointsize>13</pointsize>
+      <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">
@@ -1005,7 +1005,7 @@ color: rgb(243, 144, 57);</string>
     </property>
     <property name="font">
      <font>
-      <family>Rockwell</family>
+      <family>Arial</family>
       <pointsize>18</pointsize>
       <italic>false</italic>
      </font>
@@ -1039,8 +1039,8 @@ color: rgb(243, 144, 57);</string>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
-      <pointsize>16</pointsize>
+      <family>Arial</family>
+      <pointsize>15</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1090,8 +1090,8 @@ border:0px;
        </property>
        <property name="font">
         <font>
-         <family>Bell MT</family>
-         <pointsize>15</pointsize>
+         <family>Arial</family>
+         <pointsize>13</pointsize>
          <italic>false</italic>
          <bold>true</bold>
          <underline>false</underline>
@@ -1130,7 +1130,7 @@ QPushButton:disabled{
        </property>
        <property name="font">
         <font>
-         <family>Bell MT</family>
+         <family>Arial</family>
          <pointsize>15</pointsize>
          <bold>true</bold>
         </font>
@@ -1189,8 +1189,8 @@ border:0px;
        </property>
        <property name="font">
         <font>
-         <family>Bell MT</family>
-         <pointsize>15</pointsize>
+         <family>Arial</family>
+         <pointsize>13</pointsize>
          <italic>false</italic>
          <bold>true</bold>
          <underline>false</underline>
