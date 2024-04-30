@@ -199,6 +199,12 @@ def deleteColada(nameCuchara:str, nameCampana:int, nameColada:int):
                     modifyEscoria(nameCuchara, nameCampana, 0)
                 remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/"+str(nameColada)+"F.jpg")
                 remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/"+str(nameColada)+"T.jpg")
+                remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaSupF.xlsx")
+                remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaMedF.xlsx")
+                remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaInfF.xlsx")
+                remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaSupT.xlsx")
+                remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaMedT.xlsx")
+                remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaInfT.xlsx")
                 updatePlot(nameCuchara, str(nameCampana))
                 return True
             else:
@@ -444,6 +450,51 @@ def getMaxHistory(nameCuchara:str, nameCampana:str):
     except:
         return False
 
+def getZonasEF(nameCuchara:str, nameCampana:str):
+    try:
+        nameTable = "CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)
+        conn = sql.connect(nameDB)
+        cursor = conn.cursor()
+        instruccion = f"SELECT * FROM {nameTable} ORDER BY Colada"
+        cursor.execute(instruccion)
+        data = cursor.fetchall()
+        conn.commit()
+        ColZona = []
+        zonasF = []
+        zonasT = []
+        for i in range(len(data)):
+            zonasF.append(data[i][4])
+            zonasT.append(data[i][5])
+            ColZona.append(data[i][0])
+        for i in range(len(zonasF)):
+            zonasF[i] = fixList(zonasF[i])
+            zonasT[i] = fixList(zonasT[i])
+        return [zonasF, zonasT]
+    except:
+        return False
+
+def getRiesgoEF(nameCuchara:str, nameCampana:str):
+    try:
+        nameTable = "CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)
+        conn = sql.connect(nameDB)
+        cursor = conn.cursor()
+        instruccion = f"SELECT * FROM {nameTable} ORDER BY Colada"
+        cursor.execute(instruccion)
+        data = cursor.fetchall()
+        conn.commit()
+        ColZona = []
+        zonasF = []
+        zonasT = []
+        for i in range(len(data)):
+            zonasF.append(data[i][-4])
+            zonasT.append(data[i][-3])
+        for i in range(len(zonasF)):
+            zonasF[i] = fixList(zonasF[i])
+            zonasT[i] = fixList(zonasT[i])
+        return [zonasF[-1], zonasT[-1]]
+    except:
+        return False
+
 def getZonasHistory(nameCuchara:str, nameCampana:str):
     try:
         nameTable = "CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)
@@ -641,7 +692,7 @@ def getHistoriaEF(nameCuchara:str, nameCampana:str):
 
 if __name__ == "__main__":
     #resetDatabase()
-    print(getHistoriaEF("1", "2")[1])
+    #print(getHistoriaEF("1", "2")[1])
     #print(addCuchara("3"))
     #print(addCampana("3", 10))
     #print(searchDB("CUCHARA_2_CAMPANA_20", "Colada", "20"))
@@ -674,6 +725,8 @@ if __name__ == "__main__":
     #print(getZonas("Cucha45", "100"))
     #print(int(getNameColadas("1", "3")[-1]))
     #print(deleteColada("Cucha45", "101", 200))
+    #print(getZonasEF('1', '9'))
+    print(getRiesgoEF('1', '9'))
     pass
     '''conn = sql.connect(nameDB)
     cursor = conn.cursor()

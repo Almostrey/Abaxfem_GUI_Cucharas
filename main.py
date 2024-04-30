@@ -1,6 +1,7 @@
 from sys import argv, exit
 from os.path import isfile, isdir
 from os import getcwd
+import os
 from PySide6 import QtCore as qtc
 from PySide6.QtCore import QProcess
 from PySide6 import QtWidgets as qtw
@@ -43,34 +44,14 @@ from numpy import array, reshape
 import PySide6.QtConcurrent
 from PySide6.QtCore import QRunnable
 from multiprocessing import freeze_support
-
-
-
-
-# Librerias
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import multiprocessing
-from read_times_estudi_de_vida import read_times_estudi_de_vida
-from Matriz_tasaDesgaste import Matriz_tasaDesgaste
-from Aproximacion2 import Aproximacion2
-from determinacion_tasa_desgaste import determinacion_tasa_desgaste
-from read_temps_medidas import read_temps_medidas
-from processEF_if_first_time import processEF_if_first_time
-from processEF_if_not_first_time import processEF_if_not_first_time
 from read_historia import read_historia
-import time 
-import os
-import math
-import main_MP_Inf
-import main_MP_Med
+
 
 
 
 
 umbralMinimo = 0
-umbralMaximo = 100
+umbralMaximo = 500
 ApiKey = "AbaxfemGuiCucharas2023"
 D_Anillo= 0.1464
 D_Inf= 0.1464
@@ -1204,25 +1185,25 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
                     pathDirectory = dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/"
                     qtw.QApplication.processEvents()
                     [RiesgoF, RiesgoT, observacionF, observacionT] = main_MP_sup.getRiesgo(numColada, numColada, self.numpy2float(reshape(infoF[9], 3)), self.numpy2float(reshape(infoT[9], 3)), Nuevo1Viejo2, pathDirectory)
-
-                    '''print("a")
-                    self.p = QProcess()
-                    self.p.readyReadStandardOutput
-                    print("b")
-                    self.p.start('python3', ['numColada', 'numColada', 'self.numpy2float(reshape(infoF[9], 3))', 'self.numpy2float(reshape(infoT[9], 3))', 'Nuevo1Viejo2', 'pathDirectory', 'main_MP_sup_getRiesgo'])
-                    print("c")
-                    self.p.finished.connect(test)
-                    [RiesgoF, RiesgoT, observacionF, observacionT] = self.p
-                    return 0'''
                 else:
+                    
                     # Viejo
-                    [HistoriaPreviaF, HistoriaPreviaT] = dataManager.getHistoriaEF(nameCuchara, nameCampana)
+                    #[HistoriaPreviaF, HistoriaPreviaT] = dataManager.getHistoriaEF(nameCuchara, nameCampana)
                     Nuevo1Viejo2 = 2
                     HistoriaF = 0
                     HistoriaT = 0
                     pathDirectory = dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/"
                     qtw.QApplication.processEvents()
-                    [RiesgoF, RiesgoT, observacionF, observacionT] = main_MP_sup.getRiesgo(numColada, numColada, self.numpy2float(reshape(infoF[9], 3)), self.numpy2float(reshape(infoT[9], 3)), Nuevo1Viejo2, pathDirectory)
+                    zonasSup = dataManager.getZonasEF(str(nameCuchara), str(nameCampana))[0]
+                    zonasSup.append(self.numpy2float(reshape(infoF[9], 3)))
+                    zonasInf = dataManager.getZonasEF(str(nameCuchara), str(nameCampana))[1]
+                    zonasInf.append(self.numpy2float(reshape(infoT[9], 3)))
+                    print(zonasSup)
+                    print(zonasInf)
+                    coladasHistoria = dataManager.getNameColadas(str(nameCuchara), str(nameCampana))
+                    coladasHistoria.append(numColada)
+                    print(coladasHistoria)
+                    [RiesgoF, RiesgoT, observacionF, observacionT] = main_MP_sup.getRiesgo(numColada, coladasHistoria, zonasSup, zonasInf, Nuevo1Viejo2, pathDirectory)
 
                 sleep(0.2)
                 self.progressBar.setValue(85)
@@ -1230,7 +1211,6 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
                 dataManager.add_Colada(nameCuchara, nameCampana, numColada, float(infoF[8]), float(infoT[8]), self.numpy2float(reshape(infoF[9], 3)), 
                                        self.numpy2float(reshape(infoT[9], 3)), self.numpy2float(reshape(infoF[5], 72)), self.numpy2float(reshape(infoT[5], 72)), 
                                        str(HistoriaF), str(HistoriaT), str(RiesgoF), str(RiesgoT), 
-                                       #str(observacionF), "2")
                                        str(observacionF), str(observacionT))
                 sleep(0.2)
                 self.progressBar.setValue(100)
@@ -1559,7 +1539,7 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
             campana = self.treeMenu.currentItem().text(0)
             cuchara = self.treeMenu.currentItem().parent().text(0)
             coladas = dataManager.getNameColadas(cuchara[8:], campana[8:])
-            print("Coladas: "+str(coladas)[1:-1])
+            #print("Coladas: "+str(coladas)[1:-1])
             self.labelColadas.setText("Coladas: "+str(coladas)[1:-1])
             self.loadZonas()
             self.updateImage()
@@ -1575,14 +1555,15 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
         nameCampana = self.treeMenu.currentItem().text(0)
         nameCuchara = self.treeMenu.currentItem().parent().text(0)
         [maxZonasF, maxZonasT] = dataManager.getZonas(nameCuchara[8:], nameCampana[8:])
-        [percentageZonasF, percentageZonasT] = self.getPercentage(maxZonasF, maxZonasT, umbralMinimo, umbralMaximo)
-        self.txtZona1F.setText(str(percentageZonasF[0])[0:5]+" %")
-        self.txtZona2F.setText(str(percentageZonasF[1])[0:5]+" %")
-        self.txtZona3F.setText(str(percentageZonasF[2])[0:5]+" %")
-        self.txtZona1T.setText(str(percentageZonasT[0])[0:5]+" %")
-        self.txtZona2T.setText(str(percentageZonasT[1])[0:5]+" %")
-        self.txtZona3T.setText(str(percentageZonasT[2])[0:5]+" %")
-        self.setZonesColor(percentageZonasF, percentageZonasT, umbralMinimo)
+        #[percentageZonasF, percentageZonasT] = self.getPercentage(maxZonasF, maxZonasT, umbralMinimo, umbralMaximo)
+        [RiesgoF, RiesgoT] = dataManager.getRiesgoEF(str(nameCuchara[8:]), str(nameCampana[8:]))
+        self.txtZona1F.setText(str(RiesgoF[0])[0:5]+" %")
+        self.txtZona2F.setText(str(RiesgoF[1])[0:5]+" %")
+        self.txtZona3F.setText(str(RiesgoF[2])[0:5]+" %")
+        self.txtZona1T.setText(str(RiesgoT[0])[0:5]+" %")
+        self.txtZona2T.setText(str(RiesgoT[1])[0:5]+" %")
+        self.txtZona3T.setText(str(RiesgoT[2])[0:5]+" %")
+        self.setZonesColor(RiesgoF, RiesgoT, umbralMinimo)
     def setZonesColor(self, percentageZonasF, percentageZonasT, umbral):
         # Siendo 0% Riesgo : rgb(154, 171, 188)
         # Siendo 100% Riesgo : rgb(255, 0, 0)
@@ -1882,8 +1863,8 @@ if __name__ == "__main__":
         else:
             pass
         if isfile("ResourcesFolder/Start_Video/LogoVideo.mp4"):
-            #window = Video_Logo_Window()
-            window = LoginWindow()
+            window = Video_Logo_Window()
+            #window = LoginWindow()
         else:
             window = LoginWindow()
     else:
