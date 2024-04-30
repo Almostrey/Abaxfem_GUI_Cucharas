@@ -25,7 +25,7 @@ class Ui_PopUpAddColada(object):
     def setupUi(self, PopUpAddColada):
         if not PopUpAddColada.objectName():
             PopUpAddColada.setObjectName(u"PopUpAddColada")
-        PopUpAddColada.resize(510, 771)
+        PopUpAddColada.resize(510, 811)
         PopUpAddColada.setFocusPolicy(Qt.NoFocus)
         icon = QIcon()
         icon.addFile(u":/Images/ResourcesFolder/Imagenes/Logo_Lineas.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -42,7 +42,7 @@ class Ui_PopUpAddColada(object):
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(115, 20, 280, 41))
         font = QFont()
-        font.setFamilies([u"Bell MT"])
+        font.setFamilies([u"Arial"])
         font.setPointSize(20)
         font.setBold(True)
         font.setItalic(False)
@@ -55,9 +55,9 @@ class Ui_PopUpAddColada(object):
         self.label.setAlignment(Qt.AlignCenter)
         self.label_4 = QLabel(self.centralwidget)
         self.label_4.setObjectName(u"label_4")
-        self.label_4.setGeometry(QRect(80, 80, 350, 20))
+        self.label_4.setGeometry(QRect(55, 80, 400, 20))
         font1 = QFont()
-        font1.setFamilies([u"Bell MT"])
+        font1.setFamilies([u"Arial"])
         font1.setPointSize(16)
         self.label_4.setFont(font1)
         self.label_4.setStyleSheet(u"border:0px;\n"
@@ -91,7 +91,7 @@ class Ui_PopUpAddColada(object):
         self.cbCuchara.setObjectName(u"cbCuchara")
         self.cbCuchara.setGeometry(QRect(145, 120, 220, 35))
         font2 = QFont()
-        font2.setFamilies([u"Bell MT"])
+        font2.setFamilies([u"Arial"])
         font2.setPointSize(18)
         self.cbCuchara.setFont(font2)
         self.cbCuchara.setStyleSheet(u"QComboBox {\n"
@@ -148,14 +148,20 @@ class Ui_PopUpAddColada(object):
         self.label_5 = QLabel(self.centralwidget)
         self.label_5.setObjectName(u"label_5")
         self.label_5.setGeometry(QRect(20, 170, 101, 30))
-        self.label_5.setFont(font1)
+        font3 = QFont()
+        font3.setFamilies([u"Arial"])
+        font3.setPointSize(15)
+        self.label_5.setFont(font3)
         self.label_5.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
 "border:0px;")
         self.label_5.setAlignment(Qt.AlignCenter)
         self.label_6 = QLabel(self.centralwidget)
         self.label_6.setObjectName(u"label_6")
         self.label_6.setGeometry(QRect(70, 660, 241, 40))
-        self.label_6.setFont(font1)
+        font4 = QFont()
+        font4.setFamilies([u"Arial"])
+        font4.setPointSize(14)
+        self.label_6.setFont(font4)
         self.label_6.setStyleSheet(u"border:0px;\n"
 "background-color: rgba(0, 0, 0, 0);")
         self.label_6.setAlignment(Qt.AlignCenter)
@@ -163,11 +169,11 @@ class Ui_PopUpAddColada(object):
         self.txtCampana.setObjectName(u"txtCampana")
         self.txtCampana.setEnabled(False)
         self.txtCampana.setGeometry(QRect(120, 170, 100, 30))
-        font3 = QFont()
-        font3.setFamilies([u"Rockwell"])
-        font3.setPointSize(18)
-        font3.setItalic(False)
-        self.txtCampana.setFont(font3)
+        font5 = QFont()
+        font5.setFamilies([u"Arial"])
+        font5.setPointSize(18)
+        font5.setItalic(False)
+        self.txtCampana.setFont(font5)
         self.txtCampana.setStyleSheet(u" border: 1px solid gray;\n"
 "    border-radius: 10px;\n"
 "\n"
@@ -181,7 +187,7 @@ class Ui_PopUpAddColada(object):
         self.label_7 = QLabel(self.centralwidget)
         self.label_7.setObjectName(u"label_7")
         self.label_7.setGeometry(QRect(105, 210, 300, 30))
-        self.label_7.setFont(font1)
+        self.label_7.setFont(font3)
         self.label_7.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
 "border:0px;")
         self.label_7.setAlignment(Qt.AlignCenter)
@@ -189,10 +195,10 @@ class Ui_PopUpAddColada(object):
         self.pbSiEscoria.setObjectName(u"pbSiEscoria")
         self.pbSiEscoria.setEnabled(True)
         self.pbSiEscoria.setGeometry(QRect(104, 250, 40, 40))
-        font4 = QFont()
-        font4.setFamilies([u"Bell MT"])
-        font4.setPointSize(14)
-        self.pbSiEscoria.setFont(font4)
+        font6 = QFont()
+        font6.setFamilies([u"Arial"])
+        font6.setPointSize(13)
+        self.pbSiEscoria.setFont(font6)
         self.pbSiEscoria.setStyleSheet(u"QPushButton:enabled{\n"
 "background-color: rgb(215, 215, 215);\n"
 "border-top-left-radius:10px;\n"
@@ -207,7 +213,7 @@ class Ui_PopUpAddColada(object):
         self.pbNoEscoria = QPushButton(self.centralwidget)
         self.pbNoEscoria.setObjectName(u"pbNoEscoria")
         self.pbNoEscoria.setGeometry(QRect(144, 250, 40, 40))
-        self.pbNoEscoria.setFont(font4)
+        self.pbNoEscoria.setFont(font6)
         self.pbNoEscoria.setStyleSheet(u"QPushButton:enabled{\n"
 "background-color: rgb(215, 215, 215);\n"
 "border-top-right-radius:10px;\n"
@@ -233,10 +239,7 @@ class Ui_PopUpAddColada(object):
         self.sbEscoria = QSpinBox(self.frame_3)
         self.sbEscoria.setObjectName(u"sbEscoria")
         self.sbEscoria.setGeometry(QRect(29, 1, 181, 38))
-        font5 = QFont()
-        font5.setFamilies([u"Rockwell"])
-        font5.setPointSize(18)
-        self.sbEscoria.setFont(font5)
+        self.sbEscoria.setFont(font1)
         self.sbEscoria.setStyleSheet(u"QSpinBox{\n"
 " border: 0px solid gray;\n"
 "}\n"
@@ -270,11 +273,11 @@ class Ui_PopUpAddColada(object):
         self.label_8 = QLabel(self.centralwidget)
         self.label_8.setObjectName(u"label_8")
         self.label_8.setGeometry(QRect(135, 400, 240, 30))
-        font6 = QFont()
-        font6.setFamilies([u"Bell MT"])
-        font6.setPointSize(16)
-        font6.setBold(True)
-        self.label_8.setFont(font6)
+        font7 = QFont()
+        font7.setFamilies([u"Arial"])
+        font7.setPointSize(16)
+        font7.setBold(True)
+        self.label_8.setFont(font7)
         self.label_8.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
 "border:0px;")
         self.label_8.setAlignment(Qt.AlignCenter)
@@ -296,11 +299,11 @@ class Ui_PopUpAddColada(object):
         self.txtPathTermografiaF.setObjectName(u"txtPathTermografiaF")
         self.txtPathTermografiaF.setEnabled(False)
         self.txtPathTermografiaF.setGeometry(QRect(160, 440, 281, 31))
-        font7 = QFont()
-        font7.setFamilies([u"Rockwell"])
-        font7.setPointSize(12)
-        font7.setItalic(False)
-        self.txtPathTermografiaF.setFont(font7)
+        font8 = QFont()
+        font8.setFamilies([u"Arial"])
+        font8.setPointSize(12)
+        font8.setItalic(False)
+        self.txtPathTermografiaF.setFont(font8)
         self.txtPathTermografiaF.setStyleSheet(u" border: 1px solid gray;\n"
 "    border-radius: 10px;\n"
 "    padding: 1px 18px 1px 3px;\n"
@@ -333,7 +336,7 @@ class Ui_PopUpAddColada(object):
         self.txtPathExcelF.setObjectName(u"txtPathExcelF")
         self.txtPathExcelF.setEnabled(False)
         self.txtPathExcelF.setGeometry(QRect(160, 480, 281, 31))
-        self.txtPathExcelF.setFont(font7)
+        self.txtPathExcelF.setFont(font8)
         self.txtPathExcelF.setStyleSheet(u" border: 1px solid gray;\n"
 "    border-radius: 10px;\n"
 "    padding: 1px 18px 1px 3px;\n"
@@ -379,7 +382,7 @@ class Ui_PopUpAddColada(object):
         self.label_13 = QLabel(self.centralwidget)
         self.label_13.setObjectName(u"label_13")
         self.label_13.setGeometry(QRect(135, 530, 240, 30))
-        self.label_13.setFont(font6)
+        self.label_13.setFont(font7)
         self.label_13.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
 "border:0px;")
         self.label_13.setAlignment(Qt.AlignCenter)
@@ -387,7 +390,7 @@ class Ui_PopUpAddColada(object):
         self.txtPathExcelT.setObjectName(u"txtPathExcelT")
         self.txtPathExcelT.setEnabled(False)
         self.txtPathExcelT.setGeometry(QRect(160, 610, 281, 31))
-        self.txtPathExcelT.setFont(font7)
+        self.txtPathExcelT.setFont(font8)
         self.txtPathExcelT.setStyleSheet(u" border: 1px solid gray;\n"
 "    border-radius: 10px;\n"
 "    padding: 1px 18px 1px 3px;\n"
@@ -402,7 +405,7 @@ class Ui_PopUpAddColada(object):
         self.txtPathTermografiaT.setObjectName(u"txtPathTermografiaT")
         self.txtPathTermografiaT.setEnabled(False)
         self.txtPathTermografiaT.setGeometry(QRect(160, 570, 281, 31))
-        self.txtPathTermografiaT.setFont(font7)
+        self.txtPathTermografiaT.setFont(font8)
         self.txtPathTermografiaT.setStyleSheet(u" border: 1px solid gray;\n"
 "    border-radius: 10px;\n"
 "    padding: 1px 18px 1px 3px;\n"
@@ -417,7 +420,11 @@ class Ui_PopUpAddColada(object):
         self.txtNewColada.setObjectName(u"txtNewColada")
         self.txtNewColada.setEnabled(False)
         self.txtNewColada.setGeometry(QRect(314, 660, 140, 40))
-        self.txtNewColada.setFont(font3)
+        font9 = QFont()
+        font9.setFamilies([u"Arial"])
+        font9.setPointSize(16)
+        font9.setItalic(False)
+        self.txtNewColada.setFont(font9)
         self.txtNewColada.setStyleSheet(u" border: 1px solid gray;\n"
 "    border-radius: 10px;\n"
 "\n"
@@ -431,11 +438,11 @@ class Ui_PopUpAddColada(object):
         self.label_14 = QLabel(self.centralwidget)
         self.label_14.setObjectName(u"label_14")
         self.label_14.setGeometry(QRect(9, 310, 491, 30))
-        font8 = QFont()
-        font8.setFamilies([u"Bell MT"])
-        font8.setPointSize(12)
-        font8.setBold(True)
-        self.label_14.setFont(font8)
+        font10 = QFont()
+        font10.setFamilies([u"Arial"])
+        font10.setPointSize(13)
+        font10.setBold(False)
+        self.label_14.setFont(font10)
         self.label_14.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
 "color: rgb(243, 144, 57);\n"
 "border:0px;")
@@ -443,7 +450,7 @@ class Ui_PopUpAddColada(object):
         self.label_15 = QLabel(self.centralwidget)
         self.label_15.setObjectName(u"label_15")
         self.label_15.setGeometry(QRect(10, 340, 491, 30))
-        self.label_15.setFont(font8)
+        self.label_15.setFont(font10)
         self.label_15.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
 "color: rgb(243, 144, 57);\n"
 "border:0px;")
@@ -451,7 +458,7 @@ class Ui_PopUpAddColada(object):
         self.label_16 = QLabel(self.centralwidget)
         self.label_16.setObjectName(u"label_16")
         self.label_16.setGeometry(QRect(10, 370, 491, 30))
-        self.label_16.setFont(font8)
+        self.label_16.setFont(font10)
         self.label_16.setStyleSheet(u"border:0px;\n"
 "background-color: rgba(0, 0, 0, 0);\n"
 "color: rgb(243, 144, 57);")
@@ -460,7 +467,7 @@ class Ui_PopUpAddColada(object):
         self.txtUltimaColada.setObjectName(u"txtUltimaColada")
         self.txtUltimaColada.setEnabled(False)
         self.txtUltimaColada.setGeometry(QRect(380, 170, 100, 30))
-        self.txtUltimaColada.setFont(font3)
+        self.txtUltimaColada.setFont(font5)
         self.txtUltimaColada.setStyleSheet(u" border: 1px solid gray;\n"
 "    border-radius: 10px;\n"
 "\n"
@@ -474,13 +481,13 @@ class Ui_PopUpAddColada(object):
         self.label_17 = QLabel(self.centralwidget)
         self.label_17.setObjectName(u"label_17")
         self.label_17.setGeometry(QRect(241, 170, 131, 30))
-        self.label_17.setFont(font1)
+        self.label_17.setFont(font3)
         self.label_17.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
 "border:0px;")
         self.label_17.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.frame = QFrame(self.centralwidget)
         self.frame.setObjectName(u"frame")
-        self.frame.setGeometry(QRect(80, 705, 350, 51))
+        self.frame.setGeometry(QRect(80, 750, 350, 51))
         self.frame.setStyleSheet(u"QFrame{\n"
 "border-radius:15px;\n"
 "	background-color: rgba(0, 0, 0, 0);\n"
@@ -492,19 +499,20 @@ class Ui_PopUpAddColada(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.pb_aceptar = QPushButton(self.frame)
         self.pb_aceptar.setObjectName(u"pb_aceptar")
+        self.pb_aceptar.setEnabled(True)
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.pb_aceptar.sizePolicy().hasHeightForWidth())
         self.pb_aceptar.setSizePolicy(sizePolicy)
-        font9 = QFont()
-        font9.setFamilies([u"Bell MT"])
-        font9.setPointSize(15)
-        font9.setBold(True)
-        font9.setItalic(False)
-        font9.setUnderline(False)
-        font9.setStrikeOut(False)
-        self.pb_aceptar.setFont(font9)
+        font11 = QFont()
+        font11.setFamilies([u"Arial"])
+        font11.setPointSize(13)
+        font11.setBold(True)
+        font11.setItalic(False)
+        font11.setUnderline(False)
+        font11.setStrikeOut(False)
+        self.pb_aceptar.setFont(font11)
         self.pb_aceptar.setStyleSheet(u"QPushButton{\n"
 "	border-radius:15px;\n"
 "	color: rgb(0, 0, 0);\n"
@@ -516,6 +524,9 @@ class Ui_PopUpAddColada(object):
 "}\n"
 "QPushButton:pressed{\n"
 "	background-color: rgba(255, 135, 29, 255);\n"
+"}\n"
+"QPushButton:disabled{\n"
+"	background-color: rgba(0, 0, 0, 100);\n"
 "}")
 
         self.horizontalLayout.addWidget(self.pb_aceptar)
@@ -524,11 +535,11 @@ class Ui_PopUpAddColada(object):
         self.progressBar.setObjectName(u"progressBar")
         sizePolicy.setHeightForWidth(self.progressBar.sizePolicy().hasHeightForWidth())
         self.progressBar.setSizePolicy(sizePolicy)
-        font10 = QFont()
-        font10.setFamilies([u"Bell MT"])
-        font10.setPointSize(15)
-        font10.setBold(True)
-        self.progressBar.setFont(font10)
+        font12 = QFont()
+        font12.setFamilies([u"Arial"])
+        font12.setPointSize(15)
+        font12.setBold(True)
+        self.progressBar.setFont(font12)
         self.progressBar.setStyleSheet(u"QProgressBar{\n"
 "border-radius:15px;\n"
 "	color: rgb(0, 0, 0);\n"
@@ -542,6 +553,41 @@ class Ui_PopUpAddColada(object):
         self.progressBar.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout.addWidget(self.progressBar)
+
+        self.frame_2 = QFrame(self.centralwidget)
+        self.frame_2.setObjectName(u"frame_2")
+        self.frame_2.setGeometry(QRect(80, 710, 350, 51))
+        self.frame_2.setStyleSheet(u"QFrame{\n"
+"border-radius:15px;\n"
+"	background-color: rgba(0, 0, 0, 0);\n"
+"border:0px;\n"
+"}")
+        self.frame_2.setFrameShape(QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_2 = QHBoxLayout(self.frame_2)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.pb_recortar = QPushButton(self.frame_2)
+        self.pb_recortar.setObjectName(u"pb_recortar")
+        sizePolicy.setHeightForWidth(self.pb_recortar.sizePolicy().hasHeightForWidth())
+        self.pb_recortar.setSizePolicy(sizePolicy)
+        self.pb_recortar.setFont(font11)
+        self.pb_recortar.setStyleSheet(u"QPushButton{\n"
+"	border-radius:15px;\n"
+"	color: rgb(0, 0, 0);\n"
+"	background-color: rgba(240, 120, 14, 210);\n"
+"border:0px;\n"
+"}\n"
+"QPushButton:hover{\n"
+"	background-color: rgba(255, 135, 29, 230);\n"
+"}\n"
+"QPushButton:pressed{\n"
+"	background-color: rgba(255, 135, 29, 255);\n"
+"}\n"
+"QPushButton:disabled{\n"
+"	background-color: rgba(0, 0, 0, 100);\n"
+"}")
+
+        self.horizontalLayout_2.addWidget(self.pb_recortar)
 
         PopUpAddColada.setCentralWidget(self.centralwidget)
         self.label.raise_()
@@ -578,6 +624,7 @@ class Ui_PopUpAddColada(object):
         self.txtUltimaColada.raise_()
         self.label_17.raise_()
         self.frame.raise_()
+        self.frame_2.raise_()
 
         self.retranslateUi(PopUpAddColada)
 
@@ -612,11 +659,12 @@ class Ui_PopUpAddColada(object):
         self.txtPathExcelT.setText(QCoreApplication.translate("PopUpAddColada", u"C: ... /Usuario/Documentos/", None))
         self.txtPathTermografiaT.setText(QCoreApplication.translate("PopUpAddColada", u"C: ... /Usuario/Documentos/", None))
         self.txtNewColada.setText(QCoreApplication.translate("PopUpAddColada", u"22", None))
-        self.label_14.setText(QCoreApplication.translate("PopUpAddColada", u"Importante! Los archivos deben estar guardados en la misma carpeta", None))
-        self.label_15.setText(QCoreApplication.translate("PopUpAddColada", u"de la siguiente manera: (151F. jpg/xlsx) (151T. jpg/xlsx)", None))
+        self.label_14.setText(QCoreApplication.translate("PopUpAddColada", u"Importante! Los archivos deben estar guardados en la misma", None))
+        self.label_15.setText(QCoreApplication.translate("PopUpAddColada", u"carpeta de la siguiente manera: (151F. jpg/xlsx) (151T. jpg/xlsx)", None))
         self.label_16.setText(QCoreApplication.translate("PopUpAddColada", u"Donde 151 es el n\u00famero de la colada", None))
         self.txtUltimaColada.setText("")
         self.label_17.setText(QCoreApplication.translate("PopUpAddColada", u"\u00daltima Colada:", None))
         self.pb_aceptar.setText(QCoreApplication.translate("PopUpAddColada", u"A\u00f1adir Colada", None))
+        self.pb_recortar.setText(QCoreApplication.translate("PopUpAddColada", u"Recortar Imagen", None))
     # retranslateUi
 

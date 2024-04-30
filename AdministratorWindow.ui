@@ -257,7 +257,7 @@ border:0px;
                </property>
                <property name="font">
                 <font>
-                 <family>Rockwell</family>
+                 <family>Arial</family>
                  <pointsize>11</pointsize>
                 </font>
                </property>
@@ -336,7 +336,7 @@ border:0px;
                </property>
                <property name="font">
                 <font>
-                 <family>Rockwell</family>
+                 <family>Arial</family>
                  <pointsize>12</pointsize>
                  <bold>false</bold>
                 </font>
@@ -369,7 +369,7 @@ QPushButton:pressed{
                </property>
                <property name="font">
                 <font>
-                 <family>Rockwell</family>
+                 <family>Arial</family>
                  <pointsize>12</pointsize>
                  <bold>false</bold>
                 </font>
@@ -402,7 +402,7 @@ QPushButton:pressed{
                </property>
                <property name="font">
                 <font>
-                 <family>Rockwell</family>
+                 <family>Arial</family>
                  <pointsize>12</pointsize>
                  <bold>false</bold>
                 </font>
@@ -435,7 +435,7 @@ QPushButton:pressed{
                </property>
                <property name="font">
                 <font>
-                 <family>Rockwell</family>
+                 <family>Arial</family>
                  <pointsize>12</pointsize>
                 </font>
                </property>
@@ -544,7 +544,7 @@ QPushButton:pressed{
             </property>
             <property name="font">
              <font>
-              <family>Rockwell</family>
+              <family>Arial</family>
               <pointsize>16</pointsize>
               <italic>false</italic>
               <underline>false</underline>
@@ -581,7 +581,7 @@ background-color: rgb(255, 255, 255)</string>
              </property>
              <property name="font">
               <font>
-               <family>Rockwell</family>
+               <family>Arial</family>
                <pointsize>16</pointsize>
                <bold>true</bold>
               </font>
@@ -673,8 +673,8 @@ background-color:rgba(255, 255, 255, 0);</string>
                </property>
                <property name="font">
                 <font>
-                 <family>Bell MT</family>
-                 <pointsize>12</pointsize>
+                 <family>Arial</family>
+                 <pointsize>11</pointsize>
                  <bold>true</bold>
                 </font>
                </property>
@@ -707,8 +707,8 @@ QPushButton:pressed{
                </property>
                <property name="font">
                 <font>
-                 <family>Bell MT</family>
-                 <pointsize>12</pointsize>
+                 <family>Arial</family>
+                 <pointsize>11</pointsize>
                  <bold>true</bold>
                 </font>
                </property>
@@ -741,8 +741,8 @@ QPushButton:pressed{
                </property>
                <property name="font">
                 <font>
-                 <family>Bell MT</family>
-                 <pointsize>12</pointsize>
+                 <family>Arial</family>
+                 <pointsize>11</pointsize>
                  <bold>true</bold>
                 </font>
                </property>
@@ -775,8 +775,8 @@ QPushButton:pressed{
                </property>
                <property name="font">
                 <font>
-                 <family>Bell MT</family>
-                 <pointsize>12</pointsize>
+                 <family>Arial</family>
+                 <pointsize>11</pointsize>
                  <bold>true</bold>
                 </font>
                </property>
@@ -973,7 +973,7 @@ border:0px;
                     <widget class="QLabel" name="nameHistory0">
                      <property name="font">
                       <font>
-                       <family>Rockwell</family>
+                       <family>Arial</family>
                        <pointsize>12</pointsize>
                       </font>
                      </property>
@@ -995,7 +995,7 @@ border-top:1px solid;</string>
                     <widget class="QLabel" name="dateHistory0">
                      <property name="font">
                       <font>
-                       <family>Rockwell</family>
+                       <family>Arial</family>
                        <pointsize>12</pointsize>
                       </font>
                      </property>
@@ -1061,7 +1061,7 @@ border:0px;</string>
                     <widget class="QLabel" name="nameHistory1">
                      <property name="font">
                       <font>
-                       <family>Rockwell</family>
+                       <family>Arial</family>
                        <pointsize>12</pointsize>
                       </font>
                      </property>
@@ -1083,7 +1083,7 @@ border-top:1px solid;</string>
                     <widget class="QLabel" name="dateHistory1">
                      <property name="font">
                       <font>
-                       <family>Rockwell</family>
+                       <family>Arial</family>
                        <pointsize>12</pointsize>
                       </font>
                      </property>
@@ -1150,7 +1150,7 @@ border:0px;
                     <widget class="QLabel" name="nameHistory2">
                      <property name="font">
                       <font>
-                       <family>Rockwell</family>
+                       <family>Arial</family>
                        <pointsize>12</pointsize>
                       </font>
                      </property>
@@ -1172,7 +1172,7 @@ border-top:1px solid;</string>
                     <widget class="QLabel" name="dateHistory2">
                      <property name="font">
                       <font>
-                       <family>Rockwell</family>
+                       <family>Arial</family>
                        <pointsize>12</pointsize>
                       </font>
                      </property>
@@ -1238,7 +1238,7 @@ border:0px;</string>
                     <widget class="QLabel" name="nameHistory3">
                      <property name="font">
                       <font>
-                       <family>Rockwell</family>
+                       <family>Arial</family>
                        <pointsize>12</pointsize>
                       </font>
                      </property>
@@ -1260,7 +1260,7 @@ border-top:1px solid;</string>
                     <widget class="QLabel" name="dateHistory3">
                      <property name="font">
                       <font>
-                       <family>Rockwell</family>
+                       <family>Arial</family>
                        <pointsize>12</pointsize>
                       </font>
                      </property>
@@ -1326,7 +1326,7 @@ border:0px;</string>
                     <widget class="QLabel" name="nameHistory4">
                      <property name="font">
                       <font>
-                       <family>Rockwell</family>
+                       <family>Arial</family>
                        <pointsize>12</pointsize>
                       </font>
                      </property>
@@ -1348,7 +1348,7 @@ border-top:1px solid;</string>
                     <widget class="QLabel" name="dateHistory4">
                      <property name="font">
                       <font>
-                       <family>Rockwell</family>
+                       <family>Arial</family>
                        <pointsize>12</pointsize>
                       </font>
                      </property>
@@ -1772,7 +1772,7 @@ border:1px solid rgb(167, 167, 164);
                            </property>
                            <property name="font">
                             <font>
-                             <family>Bell MT</family>
+                             <family>Arial</family>
                              <pointsize>12</pointsize>
                              <bold>true</bold>
                             </font>
@@ -1805,7 +1805,7 @@ background-color:rgba(0, 0, 0, 0);</string>
                            </property>
                            <property name="font">
                             <font>
-                             <family>Rockwell</family>
+                             <family>Arial</family>
                              <pointsize>11</pointsize>
                             </font>
                            </property>
@@ -1850,6 +1850,9 @@ background-color:rgba(0, 0, 0, 0);</string>
                           <width>96</width>
                           <height>0</height>
                          </size>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">border-image: url(:/Images/ResourcesFolder/Imagenes/ZonasRefracSup.png);</string>
                         </property>
                         <property name="frameShape">
                          <enum>QFrame::StyledPanel</enum>
@@ -1968,7 +1971,7 @@ border:1px solid rgb(167, 167, 164);</string>
                            </property>
                            <property name="font">
                             <font>
-                             <family>Bell MT</family>
+                             <family>Arial</family>
                              <pointsize>12</pointsize>
                              <bold>true</bold>
                             </font>
@@ -2001,7 +2004,7 @@ background-color:rgba(0, 0, 0, 0);</string>
                            </property>
                            <property name="font">
                             <font>
-                             <family>Rockwell</family>
+                             <family>Arial</family>
                              <pointsize>11</pointsize>
                             </font>
                            </property>
@@ -2046,6 +2049,9 @@ background-color:rgba(0, 0, 0, 0);</string>
                           <width>96</width>
                           <height>0</height>
                          </size>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">border-image: url(:/Images/ResourcesFolder/Imagenes/ZonasRefracMed.png);</string>
                         </property>
                         <property name="frameShape">
                          <enum>QFrame::StyledPanel</enum>
@@ -2166,7 +2172,7 @@ border:1px solid rgb(167, 167, 164);
                            </property>
                            <property name="font">
                             <font>
-                             <family>Bell MT</family>
+                             <family>Arial</family>
                              <pointsize>12</pointsize>
                              <bold>true</bold>
                             </font>
@@ -2199,7 +2205,7 @@ background-color:rgba(0, 0, 0, 0);</string>
                            </property>
                            <property name="font">
                             <font>
-                             <family>Rockwell</family>
+                             <family>Arial</family>
                              <pointsize>11</pointsize>
                             </font>
                            </property>
@@ -2244,6 +2250,9 @@ background-color:rgba(0, 0, 0, 0);</string>
                           <width>96</width>
                           <height>0</height>
                          </size>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">border-image: url(:/Images/ResourcesFolder/Imagenes/ZonasRefracInf.png);</string>
                         </property>
                         <property name="frameShape">
                          <enum>QFrame::StyledPanel</enum>
@@ -2408,7 +2417,7 @@ background-color:rgba(255, 255, 255, 0);</string>
                      </property>
                      <property name="font">
                       <font>
-                       <family>Bell MT</family>
+                       <family>Arial</family>
                        <pointsize>18</pointsize>
                        <bold>true</bold>
                       </font>
@@ -2455,7 +2464,7 @@ padding: 0 0 0 98;
                      </property>
                      <property name="font">
                       <font>
-                       <family>Bell MT</family>
+                       <family>Arial</family>
                        <pointsize>14</pointsize>
                       </font>
                      </property>
@@ -2527,7 +2536,7 @@ background-color:rgba(255, 255, 255, 0);</string>
                      </property>
                      <property name="font">
                       <font>
-                       <family>Bell MT</family>
+                       <family>Arial</family>
                        <pointsize>14</pointsize>
                       </font>
                      </property>
@@ -2562,7 +2571,7 @@ QPushButton:pressed{
                      </property>
                      <property name="font">
                       <font>
-                       <family>Bell MT</family>
+                       <family>Arial</family>
                        <pointsize>18</pointsize>
                        <bold>true</bold>
                       </font>
@@ -2968,7 +2977,7 @@ border:1px solid rgb(167, 167, 164);</string>
                            </property>
                            <property name="font">
                             <font>
-                             <family>Bell MT</family>
+                             <family>Arial</family>
                              <pointsize>12</pointsize>
                              <bold>true</bold>
                             </font>
@@ -3001,7 +3010,7 @@ background-color:rgba(0, 0, 0, 0);</string>
                            </property>
                            <property name="font">
                             <font>
-                             <family>Rockwell</family>
+                             <family>Arial</family>
                              <pointsize>11</pointsize>
                             </font>
                            </property>
@@ -3046,6 +3055,9 @@ background-color:rgba(0, 0, 0, 0);</string>
                           <width>96</width>
                           <height>0</height>
                          </size>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">border-image: url(:/Images/ResourcesFolder/Imagenes/ZonasRefracSup.png);</string>
                         </property>
                         <property name="frameShape">
                          <enum>QFrame::StyledPanel</enum>
@@ -3164,7 +3176,7 @@ border:1px solid rgb(167, 167, 164);</string>
                            </property>
                            <property name="font">
                             <font>
-                             <family>Bell MT</family>
+                             <family>Arial</family>
                              <pointsize>12</pointsize>
                              <bold>true</bold>
                             </font>
@@ -3197,7 +3209,7 @@ background-color:rgba(0, 0, 0, 0);</string>
                            </property>
                            <property name="font">
                             <font>
-                             <family>Rockwell</family>
+                             <family>Arial</family>
                              <pointsize>11</pointsize>
                             </font>
                            </property>
@@ -3242,6 +3254,9 @@ background-color:rgba(0, 0, 0, 0);</string>
                           <width>96</width>
                           <height>0</height>
                          </size>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">border-image: url(:/Images/ResourcesFolder/Imagenes/ZonasRefracMed.png);</string>
                         </property>
                         <property name="frameShape">
                          <enum>QFrame::StyledPanel</enum>
@@ -3362,7 +3377,7 @@ border:1px solid rgb(167, 167, 164);
                            </property>
                            <property name="font">
                             <font>
-                             <family>Bell MT</family>
+                             <family>Arial</family>
                              <pointsize>12</pointsize>
                              <bold>true</bold>
                             </font>
@@ -3395,7 +3410,7 @@ background-color:rgba(0, 0, 0, 0);</string>
                            </property>
                            <property name="font">
                             <font>
-                             <family>Rockwell</family>
+                             <family>Arial</family>
                              <pointsize>11</pointsize>
                             </font>
                            </property>
@@ -3440,6 +3455,9 @@ background-color:rgba(0, 0, 0, 0);</string>
                           <width>96</width>
                           <height>0</height>
                          </size>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">border-image: url(:/Images/ResourcesFolder/Imagenes/ZonasRefracInf.png);</string>
                         </property>
                         <property name="frameShape">
                          <enum>QFrame::StyledPanel</enum>
@@ -3696,7 +3714,7 @@ background-color:rgba(255, 255, 255, 0);
                      </property>
                      <property name="font">
                       <font>
-                       <family>Rockwell</family>
+                       <family>Arial</family>
                        <pointsize>14</pointsize>
                       </font>
                      </property>
@@ -3760,7 +3778,7 @@ border-bottom:1px solid;
                      </property>
                      <property name="font">
                       <font>
-                       <family>Rockwell</family>
+                       <family>Arial</family>
                        <pointsize>14</pointsize>
                        <bold>false</bold>
                       </font>
@@ -3805,7 +3823,7 @@ QPushButton:pressed{
                      </property>
                      <property name="font">
                       <font>
-                       <family>Rockwell</family>
+                       <family>Arial</family>
                        <pointsize>14</pointsize>
                        <bold>false</bold>
                       </font>

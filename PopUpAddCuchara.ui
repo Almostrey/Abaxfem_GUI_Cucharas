@@ -39,7 +39,7 @@ border:1px solid gray;
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>20</pointsize>
       <italic>false</italic>
       <bold>true</bold>
@@ -70,7 +70,7 @@ border:0px;
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>11</pointsize>
      </font>
     </property>
@@ -125,8 +125,8 @@ QPushButton:pressed{
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
-      <pointsize>15</pointsize>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
       <italic>false</italic>
       <bold>true</bold>
       <underline>false</underline>
@@ -184,8 +184,8 @@ border:0px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
-      <pointsize>18</pointsize>
+      <family>Arial</family>
+      <pointsize>16</pointsize>
       <bold>false</bold>
      </font>
     </property>
@@ -244,7 +244,7 @@ border:0px;</string>
     </property>
     <property name="font">
      <font>
-      <family>Bell MT</family>
+      <family>Arial</family>
       <pointsize>11</pointsize>
      </font>
     </property>

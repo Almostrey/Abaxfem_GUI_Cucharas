@@ -64,19 +64,19 @@ def createPDF(nameCuchara:str, nameCampana:str, tipoGeneracion:str):
            'dateInicio' : dateInicio,
            'dateFin' : dateFin,
            'tipoGeneracion': tipoGeneracion,
-            # Fronta;
-           'HTmaxCucharaF' : HTmaxCucharaF,
+            # Frontal;
+           'HTmaxCucharaF' : str(int(float(HTmaxCucharaF))),
            'colMaxTempF' : colMaxTempF,
-           'HTminCucharaF' : HTminCucharaF,
+           'HTminCucharaF' : str(int(float(HTminCucharaF))),
            'colMinTempF' : colMinTempF,
-           'HTmeanCucharaF' : HTmeanCucharaF,
+           'HTmeanCucharaF' : str(int(float(HTmeanCucharaF))),
            'pathImgFrontal' : pathImgFrontal,
             # Trasera
-           'HTmaxCucharaT' : HTmaxCucharaT,
+           'HTmaxCucharaT' : str(int(float(HTmaxCucharaT))),
            'colMaxTempT' : colMaxTempT,
-           'HTminCucharaT' : HTminCucharaT,
+           'HTminCucharaT' : str(int(float(HTminCucharaT))),
            'colMinTempT' : colMinTempT,
-           'HTmeanCucharaT' : HTmeanCucharaT,
+           'HTmeanCucharaT' : str(int(float(HTmeanCucharaT))),
            'pathImgTrasera' : pathImgTrasera
            }
     result_file = open("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+nameCampana+"/Reporte Cuchara "+nameCuchara+" - Campana "+str(nameCampana)+".pdf", "w+b")
