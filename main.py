@@ -1168,12 +1168,6 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
                 PositionMatrixT = pd.DataFrame(PositionMatrixT)
                 infoF = V1.V1(self.txtPathTermografiaF.text(), self.txtPathExcelF.text(), PositionMatrixF)
                 infoT = V1.V1(self.txtPathTermografiaT.text(), self.txtPathExcelT.text(), PositionMatrixT)
-                #[datosF, datosT] = mallador2.getValues(numColada, escoria, numEscoria, cantidadColadas,[colF], [colT], [HTmaxCucharaF], [HTmaxCucharaT], [HTmaxZonasF], [HTmaxZonasT], [HTmaxRefF], [HTmaxRefT], commonPath)
-                '''
-                [Image_file,Imagen_Retorno, Imagen_zonal, Matrix_Temp_AV,mean_temp_refrac,max_temp_refrac_AV,
-                min_temp_refrac_AV,std_temp_refrac_AV, Max_temp_general_AV,Max_temp_Zone_Matrix_AV,
-                Min_temp_general_AV,Min_temp_Zone_Matrix_AV]
-                '''
                 sleep(0.2)
                 self.progressBar.setValue(75)
                 if int(dataManager.getNameColadas(nameCuchara, str(nameCampana))[-1]) == 0:
@@ -1186,7 +1180,6 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
                     qtw.QApplication.processEvents()
                     [RiesgoF, RiesgoT, observacionF, observacionT] = main_MP_sup.getRiesgo(numColada, numColada, self.numpy2float(reshape(infoF[9], 3)), self.numpy2float(reshape(infoT[9], 3)), Nuevo1Viejo2, pathDirectory)
                 else:
-                    
                     # Viejo
                     #[HistoriaPreviaF, HistoriaPreviaT] = dataManager.getHistoriaEF(nameCuchara, nameCampana)
                     Nuevo1Viejo2 = 2
