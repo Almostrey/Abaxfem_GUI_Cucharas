@@ -3,6 +3,8 @@ from datetime import datetime
 from os import mkdir, path, remove, getcwd
 from shutil import rmtree, copyfile
 from matplotlib.pyplot import show, plot, savefig, title, xlabel, ylabel, figure, vlines, grid, ylim, legend
+import read_historia
+import pandas as pd
 
 nameDB = "data.db"
 
@@ -199,12 +201,21 @@ def deleteColada(nameCuchara:str, nameCampana:int, nameColada:int):
                     modifyEscoria(nameCuchara, nameCampana, 0)
                 remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/"+str(nameColada)+"F.jpg")
                 remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/"+str(nameColada)+"T.jpg")
-                remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaSupF.xlsx")
-                remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaMedF.xlsx")
-                remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaInfF.xlsx")
-                remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaSupT.xlsx")
-                remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaMedT.xlsx")
-                remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaInfT.xlsx")
+                if getNameColadas(nameCuchara, nameCampana)[-1] == 0:
+                    remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaSupF.xlsx")
+                    remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaMedF.xlsx")
+                    remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaInfF.xlsx")
+                    remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaSupT.xlsx")
+                    remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaMedT.xlsx")
+                    remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaInfT.xlsx")
+                else:
+                    colada = getNameColadas(nameCuchara, nameCampana)[-1]
+                    deleteExcelStillColada(colada, "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaSupF.xlsx")
+                    deleteExcelStillColada(colada, "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaMedF.xlsx")
+                    deleteExcelStillColada(colada, "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaInfF.xlsx")
+                    deleteExcelStillColada(colada, "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaSupT.xlsx")
+                    deleteExcelStillColada(colada, "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaMedT.xlsx")
+                    deleteExcelStillColada(colada, "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaInfT.xlsx")
                 updatePlot(nameCuchara, str(nameCampana))
                 return True
             else:
@@ -213,6 +224,16 @@ def deleteColada(nameCuchara:str, nameCampana:int, nameColada:int):
             return False
     else:
         return False
+
+def deleteExcelStillColada(colada:int, path:str):
+    historia = read_historia.read_historia(path)
+    remainingHistoria = []
+    for i in range (len(historia)):
+        remainingHistoria.append(historia[i])
+        if historia[i][0]+1 == colada:
+            break
+    Historia_Excel=pd.DataFrame(remainingHistoria)
+    Historia_Excel.to_excel(path,index=False,header=False)
 
 def deleteCampana(nameCuchara:str, nameCampana:int):
     if isDuplicated("CUCHARAS", "Name", nameCuchara):
@@ -691,12 +712,15 @@ def getHistoriaEF(nameCuchara:str, nameCampana:str):
         return False
 
 if __name__ == "__main__":
+    #path = "Historial/CUCHARA_1/CUCHARA_1_CAMPANA_9/HistoriaSupF.xlsx"
+    #colada = 1
+    #deleteExcelStillColada(colada, path)
     #resetDatabase()
     #print(getHistoriaEF("1", "2")[1])
     #print(addCuchara("3"))
     #print(addCampana("3", 10))
     #print(searchDB("CUCHARA_2_CAMPANA_20", "Colada", "20"))
-    #print(deleteColada("1", "1", 1))
+    print(deleteColada("3", "1", 15))
     #print(deleteCampana("2", 22))
     #print(deleteCuchara("Cucha4"))
     #print(CucharaIsWithSomething("2"))
@@ -726,7 +750,7 @@ if __name__ == "__main__":
     #print(int(getNameColadas("1", "3")[-1]))
     #print(deleteColada("Cucha45", "101", 200))
     #print(getZonasEF('1', '9'))
-    print(getRiesgoEF('1', '9'))
+    #print(getRiesgoEF('1', '9'))
     pass
     '''conn = sql.connect(nameDB)
     cursor = conn.cursor()

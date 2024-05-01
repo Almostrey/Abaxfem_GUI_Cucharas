@@ -264,33 +264,68 @@ def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viej
             tempZonaMedT.append(tempZonasTodasT[i][1])
             tempZonaInfT.append(tempZonasTodasT[i][2])
         # Frontal
-        [Riesgo, numObs] = EF_sup(cantColadas, np.column_stack((coladas,tempZonaSupF)), haveHistory(cantColadas, path+"HistoriaSupF.xlsx"), path+"HistoriaSupF.xlsx", t)
+        coladasVerdaderas = HistoriaPrevia(coladas, path+"HistoriaSupF.xlsx")
+        tempZonaSupF = fixTempZonas(coladasVerdaderas, tempZonaSupF)
+        [Riesgo, numObs] = EF_sup(cantColadas, np.column_stack((coladasVerdaderas,tempZonaSupF)), haveHistory(coladasVerdaderas[-2], path+"HistoriaSupF.xlsx"), path+"HistoriaSupF.xlsx", t)
         RiesgoF.append(Riesgo)
         numObservacionesF.append(numObs)
         observacionF.append(returnObs(numObs))
-        [Riesgo, numObs] = main_MP_Med.EF_med(cantColadas, np.column_stack((coladas,tempZonaMedF)), haveHistory(cantColadas, path+"HistoriaMedF.xlsx"), path+"HistoriaMedF.xlsx", t)
+        coladasVerdaderas = HistoriaPrevia(coladas, path+"HistoriaMedF.xlsx")
+        tempZonaMedF = fixTempZonas(coladasVerdaderas, tempZonaMedF)
+        [Riesgo, numObs] = main_MP_Med.EF_med(cantColadas, np.column_stack((coladasVerdaderas,tempZonaMedF)), haveHistory(coladasVerdaderas[-2], path+"HistoriaMedF.xlsx"), path+"HistoriaMedF.xlsx", t)
         RiesgoF.append(Riesgo)
         numObservacionesF.append(numObs)
         observacionF.append(returnObs(numObs))
-        [Riesgo, numObs] = main_MP_Inf.EF_inf(cantColadas, np.column_stack((coladas,tempZonaInfF)), haveHistory(cantColadas, path+"HistoriaInfF.xlsx"), path+"HistoriaInfF.xlsx", t)
+        coladasVerdaderas = HistoriaPrevia(coladas, path+"HistoriaInfF.xlsx")
+        tempZonaInfF = fixTempZonas(coladasVerdaderas, tempZonaInfF)
+        [Riesgo, numObs] = main_MP_Inf.EF_inf(cantColadas, np.column_stack((coladasVerdaderas,tempZonaInfF)), haveHistory(coladasVerdaderas[-2], path+"HistoriaInfF.xlsx"), path+"HistoriaInfF.xlsx", t)
         RiesgoF.append(Riesgo)
         numObservacionesF.append(numObs)
         observacionF.append(returnObs(numObs))
         #### Trasera
-        [Riesgo, numObs] = EF_sup(cantColadas, np.column_stack((coladas,tempZonaSupT)), haveHistory(cantColadas, path+"HistoriaSupT.xlsx"), path+"HistoriaSupT.xlsx", t)
+        coladasVerdaderas = HistoriaPrevia(coladas, path+"HistoriaSupT.xlsx")
+        tempZonaSupT = fixTempZonas(coladasVerdaderas, tempZonaSupT)
+        [Riesgo, numObs] = EF_sup(cantColadas, np.column_stack((coladasVerdaderas,tempZonaSupT)), haveHistory(coladasVerdaderas[-2], path+"HistoriaSupT.xlsx"), path+"HistoriaSupT.xlsx", t)
         RiesgoT.append(Riesgo)
         numObservacionesT.append(numObs)
         observacionT.append(returnObs(numObs))
-        [Riesgo, numObs] = main_MP_Med.EF_med(cantColadas, np.column_stack((coladas,tempZonaMedT)), haveHistory(cantColadas, path+"HistoriaMedT.xlsx"), path+"HistoriaMedT.xlsx", t)
+        coladasVerdaderas = HistoriaPrevia(coladas, path+"HistoriaMedT.xlsx")
+        tempZonaMedT = fixTempZonas(coladasVerdaderas, tempZonaMedT)
+        [Riesgo, numObs] = main_MP_Med.EF_med(cantColadas, np.column_stack((coladasVerdaderas,tempZonaMedT)), haveHistory(coladasVerdaderas[-2], path+"HistoriaMedT.xlsx"), path+"HistoriaMedT.xlsx", t)
         RiesgoT.append(Riesgo)
         numObservacionesT.append(numObs)
         observacionT.append(returnObs(numObs))
-        [Riesgo, numObs] = main_MP_Inf.EF_inf(cantColadas, np.column_stack((coladas,tempZonaInfT)), haveHistory(cantColadas, path+"HistoriaInfT.xlsx"), path+"HistoriaInfT.xlsx", t)
+        coladasVerdaderas = HistoriaPrevia(coladas, path+"HistoriaInfT.xlsx")
+        tempZonaInfT = fixTempZonas(coladasVerdaderas, tempZonaInfT)
+        [Riesgo, numObs] = main_MP_Inf.EF_inf(cantColadas, np.column_stack((coladasVerdaderas,tempZonaInfT)), haveHistory(coladasVerdaderas[-2], path+"HistoriaInfT.xlsx"), path+"HistoriaInfT.xlsx", t)
         RiesgoT.append(Riesgo)
         numObservacionesT.append(numObs)
         observacionT.append(returnObs(numObs))
     return [RiesgoF, RiesgoT, numObservacionesF, numObservacionesT]
     
+def fixTempZonas(coladasVerdaderas:list, tempZona:list):
+    if len(coladasVerdaderas) == len(tempZona):return tempZona
+    else:
+        lista = []
+        for i in range(len(coladasVerdaderas)-1):
+            lista.append(tempZona[i])
+        lista.append(tempZona[-1])
+        return lista
+
+def HistoriaPrevia(coladas:list, path:str):
+    try:
+        coladasVerdaderas = []
+        historia = read_historia(path)
+        lastColada = historia[-1][0]+1
+        for i in range (len(coladas)-1):
+            coladasVerdaderas.append(coladas[i])
+            if coladas[i]==lastColada:
+                coladasVerdaderas.append(coladas[-1])
+                break
+        return coladasVerdaderas
+    except:
+        return [0, coladas[-1]]
+
 def haveHistory(colada, path):
     try:
         Historia=pd.read_excel(path,header=None)
@@ -301,66 +336,8 @@ def haveHistory(colada, path):
         return 1
 
 if __name__ == "__main__":
-    ######### colada 13 y 19
-    Nuevo1Viejo2 = 2
-    cantColadas = 19
-    coladas = [13, 19]
-    tempZonasTodasF = [[296.51,300.358,292.959], [330.28267187500006, 335.6421003723144, 331.3871125183106]]
-    TempZonasTodasT = [[296.51,300.358,292.959], [325.8370326423645, 319.9554247512817, 316.9370900421143]]
-    path = "C:/Users/Diego/Downloads/Documentos_Necesarios/"
-    [RiesgoF, RiesgoT, observacionF, observacionT] = getRiesgo(cantColadas, coladas, tempZonasTodasF, TempZonasTodasT, Nuevo1Viejo2, path)
-    print("Fin Unooo*****************************")
-    
-    ######### Colada 13
-    '''Nuevo1Viejo2 = 1
-    cantColadas = 13
-    coladas = 13
-    tempZonasTodasF = [296.51,300.358,292.959]
-    TempZonasTodasT = [296.51,300.358,292.959]
-    path = "C:/Users/Diego/Downloads/Documentos_Necesarios/"
-    [RiesgoF, RiesgoT, observacionF, observacionT] = getRiesgo(cantColadas, coladas, tempZonasTodasF, TempZonasTodasT, Nuevo1Viejo2, path)
-    print("Fin doooos#####################################")
-    print(RiesgoF)
-    print(RiesgoT)
-    print(observacionF)
-    print(observacionT)
-    print("Fin doooos#####################################")'''
-    
-    '''######### Colada 157 y 200
-    Nuevo1Viejo2 = 2
-    cantColadas = 200
-    coladas = [157, 200]
-    tempZonasTodasF = [[341.280529586792, 337.98867680740364, 332.9791482925415], [330.28267187500006, 335.6421003723144, 331.3871125183106]]
-    TempZonasTodasT = [[341.280529586792, 337.98867680740364, 332.9791482925415], [325.8370326423645, 319.9554247512817, 316.9370900421143]]
-    HistoriaF = []
-    HistoriaT = []
-    [HistoriaF, HistoriaT, RiesgoF, RiesgoT, observacionF, observacionT] = getRiesgo(cantColadas, coladas, tempZonasTodasF, TempZonasTodasT, Nuevo1Viejo2, HistoriaF, HistoriaT)
-    print("Fin Treeees#####################################")
-    print(RiesgoF)
-    print(RiesgoT)
-    print(observacionF)
-    print(observacionT)
-    print(len(HistoriaF))
-    print(len(HistoriaT))
-    print("Fin Treeeees#####################################")'''
-
-
-
-
-
-
-    '''######### Colada 13 y 200
-    Nuevo1Viejo2 = 2
-    cantColadas = 200
-    coladas = [13, 200]
-    tempZonasTodasF = [[309.6307134456634, 299.93680474662784, 288.4576970062256], [330.28267187500006, 335.6421003723144, 331.3871125183106]]
-    TempZonasTodasT = [[308.6515882320404, 298.32552148437503, 269.47895961952213], [325.8370326423645, 319.9554247512817, 316.9370900421143]]
-    [HistoriaF, HistoriaT, RiesgoF, RiesgoT, observacionF, observacionT] = getRiesgo(cantColadas, coladas, tempZonasTodasF, TempZonasTodasT, Nuevo1Viejo2, HistoriaF, HistoriaT)
-    print("Fin doooos#####################################")
-    print(RiesgoF)
-    print(RiesgoT)
-    print(observacionF)
-    print(observacionT)
-    print(len(HistoriaF))
-    print(len(HistoriaT))
-    print("Fin doooos#####################################")'''
+    path = "Historial/CUCHARA_1/CUCHARA_1_CAMPANA_11/HistoriaInfT.xlsx"
+    #coladasVerdaderas = HistoriaPrevia([1, 13, 24, 46, 75, 89, 112], path)
+    coladasVerdaderas = HistoriaPrevia([46, 75], path)
+    print(coladasVerdaderas)
+    #print(haveHistory(coladasVerdaderas[-2], path))

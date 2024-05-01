@@ -1191,11 +1191,11 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
                     zonasSup.append(self.numpy2float(reshape(infoF[9], 3)))
                     zonasInf = dataManager.getZonasEF(str(nameCuchara), str(nameCampana))[1]
                     zonasInf.append(self.numpy2float(reshape(infoT[9], 3)))
-                    print(zonasSup)
-                    print(zonasInf)
+                    #print(zonasSup)
+                    #print(zonasInf)
                     coladasHistoria = dataManager.getNameColadas(str(nameCuchara), str(nameCampana))
                     coladasHistoria.append(numColada)
-                    print(coladasHistoria)
+                    #print(coladasHistoria)
                     [RiesgoF, RiesgoT, observacionF, observacionT] = main_MP_sup.getRiesgo(numColada, coladasHistoria, zonasSup, zonasInf, Nuevo1Viejo2, pathDirectory)
 
                 sleep(0.2)
