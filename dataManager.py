@@ -711,6 +711,39 @@ def getHistoriaEF(nameCuchara:str, nameCampana:str):
     except:
         return False
 
+def getColadasRiesgos(nameCuchara:str, nameCampana:str):
+    try:
+        nameTable = "CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)
+        conn = sql.connect(nameDB)
+        cursor = conn.cursor()
+        instruccion = f"SELECT * FROM {nameTable} ORDER BY Colada"
+        cursor.execute(instruccion)
+        data = cursor.fetchall()
+        conn.commit()
+        coladas = []
+        zonasF = []
+        zonasT = []
+        for i in range(len(data)):
+            coladas.append(data[i][0])
+            zonasF.append(data[i][-4])
+            zonasT.append(data[i][-3])
+        for i in range(len(zonasF)):
+            zonasF[i] = fixList(zonasF[i])
+            zonasT[i] = fixList(zonasT[i])
+        FSup = FMed = FInf = []
+        TSup = TMed = TInf = []
+        for i in range(len(zonasF)):
+            FSup.append(zonasF[i][0])
+            FMed.append(zonasF[i][1])
+            FInf.append(zonasF[i][2])
+            TSup.append(zonasT[i][0])
+            TMed.append(zonasT[i][1])
+            TInf.append(zonasT[i][2])
+        return [coladas, FSup, FMed, FInf, TSup, TMed, TInf]
+    except:
+        return False
+
+
 if __name__ == "__main__":
     #path = "Historial/CUCHARA_1/CUCHARA_1_CAMPANA_9/HistoriaSupF.xlsx"
     #colada = 1
@@ -720,7 +753,7 @@ if __name__ == "__main__":
     #print(addCuchara("3"))
     #print(addCampana("3", 10))
     #print(searchDB("CUCHARA_2_CAMPANA_20", "Colada", "20"))
-    print(deleteColada("3", "1", 15))
+    #print(deleteColada("3", "1", 15))
     #print(deleteCampana("2", 22))
     #print(deleteCuchara("Cucha4"))
     #print(CucharaIsWithSomething("2"))
@@ -751,6 +784,7 @@ if __name__ == "__main__":
     #print(deleteColada("Cucha45", "101", 200))
     #print(getZonasEF('1', '9'))
     #print(getRiesgoEF('1', '9'))
+    #print(getColadasRiesgos('3', '1'))
     pass
     '''conn = sql.connect(nameDB)
     cursor = conn.cursor()
