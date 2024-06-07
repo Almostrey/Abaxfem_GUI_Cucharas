@@ -20,11 +20,11 @@ def processEF_if_first_time(coladas, pregunta1, CLE,tasaDesgaste, t,Historia):
         
                                                                                                                                 # Paso de tiempo
         
-        if pregunta1 == 1:
-            if colada == CLE:
-                TInicial = np.ones ((NNod , 1)) * Tamb
-                TFinal = TInicial
-                Long1 [0] = 178
+        # if pregunta1 == 1:
+        #     if colada == CLE:
+        #         TInicial = np.ones ((NNod , 1)) * Tamb
+        #         TFinal = TInicial
+        #         Long1 [0] = 178
         
                                                                                              # Tiempo de calentado estandar, 10 minutos - 600 segundos
        
@@ -152,6 +152,9 @@ def processEF_if_first_time(coladas, pregunta1, CLE,tasaDesgaste, t,Historia):
         col.append (int(colada+1))                                                                                                                                                              # Guardado de coladas        
 
         
+
+    Historia2=None    
     Historia=np.delete(Historia, (0), axis=0)
     Historia=Historia.tolist()
-    return col, temp, tasaDesgaste,Historia
+ 
+    return col, temp, tasaDesgaste,Historia,Historia2

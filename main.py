@@ -968,6 +968,16 @@ class PopUpAddCampana(qtw.QMainWindow, Ui_PopUpAddCampana):
                 createPdf.createPDF(nameCuchara, str(dataManager.getNameCampanas(nameCuchara)[-1]), "auto")
             except:
                 pass
+        try:
+            lastCampana = str(dataManager.getNameCampanas(nameCuchara)[-1])
+            pathPdfFile = "Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+lastCampana+"/Reporte Cuchara "+str(nameCuchara)+" - Campana "+str(lastCampana)+".pdf"
+            pathTotal = dataManager.getWorkingDirectory()+"/"+pathPdfFile
+            if isfile(pathTotal):
+                nameFile = "Reporte Cuchara "+str(nameCuchara)+" - Campana "+str(lastCampana)+".pdf"
+                body = "Ha finalizado la Campaña #"+str(lastCampana)+" de la Cuchara "+str(nameCuchara)+". \nEl reporte de la campaña #"+str(lastCampana)+" ha sido generado y enviado a su correo electrónico. \n\n\nSi el archivo adjunto está corrupto, se puede obtener el reporte en la siguiente dirección del ordenador que tiene instalado la interfaz gráfica: "+str(pathTotal)
+                dataManager.sendEmail(body, "Interfaz Gráfica Cucharas - ABAXFEM. Fin de la Campaña #"+ str(lastCampana)+" de la Cuchara "+str(nameCuchara), pathPdfFile, nameFile)
+        except:
+            pass
         dataManager.addCampana(nameCuchara, newCampana)
         self.close()
         self.w = AdministratorWindow()
@@ -1171,6 +1181,7 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
                 sleep(0.2)
                 self.progressBar.setValue(75)
                 if int(dataManager.getNameColadas(nameCuchara, str(nameCampana))[-1]) == 0:
+                # if True:
                     # Nuevo
                     Historia = 0
                     Nuevo1Viejo2 = 1
@@ -1178,7 +1189,8 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
                     HistoriaT = 0
                     pathDirectory = dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/"
                     qtw.QApplication.processEvents()
-                    [RiesgoF, RiesgoT, observacionF, observacionT] = main_MP_sup.getRiesgo(numColada, numColada, self.numpy2float(reshape(infoF[9], 3)), self.numpy2float(reshape(infoT[9], 3)), Nuevo1Viejo2, pathDirectory)
+                    [RiesgoF, RiesgoT, observacionF, observacionT] = main_MP_sup.getRiesgo(numColada, numColada, self.numpy2float(reshape(infoF[9], 3)), self.numpy2float(reshape(infoT[9], 3)), Nuevo1Viejo2, pathDirectory, int(self.sbEscoria.text()))
+
                 else:
                     # Viejo
                     #[HistoriaPreviaF, HistoriaPreviaT] = dataManager.getHistoriaEF(nameCuchara, nameCampana)
@@ -1196,7 +1208,8 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
                     coladasHistoria = dataManager.getNameColadas(str(nameCuchara), str(nameCampana))
                     coladasHistoria.append(numColada)
                     #print(coladasHistoria)
-                    [RiesgoF, RiesgoT, observacionF, observacionT] = main_MP_sup.getRiesgo(numColada, coladasHistoria, zonasSup, zonasInf, Nuevo1Viejo2, pathDirectory)
+                    print("paso1")
+                    [RiesgoF, RiesgoT, observacionF, observacionT] = main_MP_sup.getRiesgo(numColada, coladasHistoria, zonasSup, zonasInf, Nuevo1Viejo2, pathDirectory, int(self.sbEscoria.text()))
 
                 sleep(0.2)
                 self.progressBar.setValue(85)
@@ -1844,6 +1857,12 @@ if __name__ == "__main__":
     app = qtw.QApplication(argv)
 
     if dataManager.getWorkingDirectory() == getcwd():
+        if isfile("envVar.txt"):
+            pass
+        else:
+            file = open("envVar.txt", "w")
+            file.write("cucharasreporte@outlook.com\n#\n#\n# Añadir Cualquier correo extra como los ejemplos de abajo\n# deguevarab@hotmail.com\n# diegoguevara@hotmail.com\n# etc...")
+            file.close()
         if isfile("dataL.db"):
             pass
         else:

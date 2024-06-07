@@ -12,7 +12,7 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>1200</width>
+    <width>1369</width>
     <height>0</height>
    </size>
   </property>
@@ -487,21 +487,27 @@ QPushButton:pressed{
        <item>
         <widget class="QFrame" name="frame">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
          <property name="minimumSize">
           <size>
-           <width>98</width>
-           <height>0</height>
+           <width>300</width>
+           <height>400</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>300</width>
+           <width>400</width>
            <height>16777215</height>
+          </size>
+         </property>
+         <property name="sizeIncrement">
+          <size>
+           <width>0</width>
+           <height>0</height>
           </size>
          </property>
          <property name="styleSheet">
@@ -532,13 +538,13 @@ QPushButton:pressed{
             </property>
             <property name="minimumSize">
              <size>
-              <width>98</width>
+              <width>200</width>
               <height>0</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>300</width>
+              <width>400</width>
               <height>16777215</height>
              </size>
             </property>
@@ -614,9 +620,15 @@ background-color: rgb(255, 255, 255)</string>
           </item>
           <item>
            <widget class="QFrame" name="frame_14">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
-              <width>96</width>
+              <width>200</width>
               <height>100</height>
              </size>
             </property>
@@ -807,9 +819,15 @@ QPushButton:pressed{
        </item>
        <item>
         <widget class="QFrame" name="frame_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
-           <width>96</width>
+           <width>500</width>
            <height>0</height>
           </size>
          </property>
@@ -849,15 +867,21 @@ background-color:rgba(0, 255, 255, 0)</string>
           </property>
           <item>
            <widget class="QFrame" name="frame_21">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+              <horstretch>150</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
-              <width>98</width>
+              <width>500</width>
               <height>0</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>16777215</width>
+              <width>1620</width>
               <height>16777215</height>
              </size>
             </property>
@@ -1371,9 +1395,15 @@ border-top:1px solid;</string>
              </item>
              <item>
               <widget class="QFrame" name="frame_15">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
-                 <width>96</width>
+                 <width>400</width>
                  <height>0</height>
                 </size>
                </property>
@@ -1398,15 +1428,21 @@ border-top:1px solid;</string>
                 <item row="1" column="1">
                  <widget class="QFrame" name="frame_18">
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
                   <property name="minimumSize">
                    <size>
-                    <width>96</width>
+                    <width>100</width>
                     <height>0</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>1000</width>
+                    <height>16777215</height>
                    </size>
                   </property>
                   <property name="styleSheet">
@@ -1436,7 +1472,7 @@ border-top:1px solid;</string>
                    <item>
                     <widget class="QFrame" name="frame_26">
                      <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                        <horstretch>0</horstretch>
                        <verstretch>0</verstretch>
                       </sizepolicy>
@@ -2599,21 +2635,27 @@ padding: 0 98 0 0;
                 <item row="1" column="0">
                  <widget class="QFrame" name="frame_17">
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
                   <property name="minimumSize">
                    <size>
-                    <width>96</width>
+                    <width>100</width>
                     <height>0</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>16777215</width>
+                    <width>1000</width>
                     <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="sizeIncrement">
+                   <size>
+                    <width>0</width>
+                    <height>0</height>
                    </size>
                   </property>
                   <property name="styleSheet">
@@ -2643,7 +2685,7 @@ padding: 0 98 0 0;
                    <item>
                     <widget class="QFrame" name="frame_74">
                      <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                        <horstretch>0</horstretch>
                        <verstretch>0</verstretch>
                       </sizepolicy>
@@ -2679,6 +2721,12 @@ border-radius:0px;</string>
                       </property>
                       <item>
                        <widget class="QFrame" name="frame_75">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
                         <property name="minimumSize">
                          <size>
                           <width>96</width>
@@ -2722,6 +2770,12 @@ border-radius:0px;</string>
                       </item>
                       <item>
                        <widget class="QFrame" name="frame_77">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
                         <property name="minimumSize">
                          <size>
                           <width>96</width>

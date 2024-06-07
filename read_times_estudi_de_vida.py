@@ -22,3 +22,4 @@ def read_times_estudi_de_vida():
 
     
     return t
+# t=read_times_estudi_de_vida()

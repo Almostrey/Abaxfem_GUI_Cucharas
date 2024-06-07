@@ -5,6 +5,11 @@ from shutil import rmtree, copyfile
 from matplotlib.pyplot import show, plot, savefig, title, xlabel, ylabel, figure, vlines, grid, ylim, legend
 import read_historia
 import pandas as pd
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
 
 nameDB = "data.db"
 
@@ -27,6 +32,12 @@ def resetDatabase():
             pass
         else:
             mkdir("Historial")
+        if path.isfile("envVar.txt"):
+            pass
+        else:
+            file = open("envVar.txt", "w")
+            file.write("cucharasreporte@outlook.com\n#\n#\n# Añadir Cualquier correo extra como los ejemplos de abajo\n# deguevarab@hotmail.com\n# diegoguevara@hotmail.com\n# etc...")
+            file.close()
     except:
             pass
 
@@ -609,7 +620,7 @@ def dataIsCorrupted():
     if getWorkingDirectory()==False:
         iteration += 1
         observations += str(iteration) + ". - El programa se ha instalado correctamente (Introducir licencia del proveedor)\n"
-        sendEmail(observations)
+        sendEmail(observations, "Interfaz Gráfica Cucharas - ABAXFEM. Programa Instalado Correctamente", "", "")
     else:
         if getWorkingDirectory()==getcwd():
             pass
@@ -644,12 +655,45 @@ def dataIsCorrupted():
                             iteration += 1
                             observations += str(iteration) + ". - Gráficos \'Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/AnalisisTemperaturasFrontal.png\' y/o \'Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/AnalisisTemperaturasTrasero.png\' eliminados recientemente (Se han actualizado los gráficos automáticamente)\n"
                             updatePlot(i, str(j))
+                        
+                        if path.isfile("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/HistoriaInfF.xlsx") and path.isfile("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/HistoriaInfT.xlsx") and path.isfile("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/HistoriaMedF.xlsx") and path.isfile("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/HistoriaMedT.xlsx") and path.isfile("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/HistoriaSupF.xlsx") and path.isfile("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/HistoriaSupT.xlsx"):
+                            pass
+                        else:
+                            iteration += 1
+                            observations += str(iteration) + ". - \'Excel HistoriaSupF.xlsx\', \'HistoriaSupT.xlsx\', \'HistoriaMedF.xlsx\', \'HistoriaMedT.xlsx\', \'HistoriaInfF.xlsx\' y/o \'HistoriaInfT.xlsx\' de esta ubicación: "+getWorkingDirectory()+"/"+"Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/ eliminados recientemente (El programa puede que no funcione correctamente, contactar a Abaxfem.com)\n"
+                            texto = {"Observacion": ["Este archivo fue eliminado, contactar con Abaxfem"]}
+                            dataframe = pd.DataFrame(texto)
+                            if path.isfile("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/HistoriaInfF.xlsx"):
+                                pass
+                            else:
+                                dataframe.to_excel("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/HistoriaInfF.xlsx")
+                            if path.isfile("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/HistoriaInfT.xlsx"):
+                                pass
+                            else:
+                                dataframe.to_excel("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/HistoriaInfT.xlsx")
+                            if path.isfile("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/HistoriaMedF.xlsx"):
+                                pass
+                            else:
+                                dataframe.to_excel("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/HistoriaMedF.xlsx")
+                            if path.isfile("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/HistoriaMedT.xlsx"):
+                                pass
+                            else:
+                                dataframe.to_excel("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/HistoriaMedT.xlsx")
+                            if path.isfile("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/HistoriaSupF.xlsx"):
+                                pass
+                            else:
+                                dataframe.to_excel("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/HistoriaSupF.xlsx")
+                            if path.isfile("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/HistoriaSupT.xlsx"):
+                                pass
+                            else:
+                                dataframe.to_excel("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/HistoriaSupT.xlsx")
+
                         for k in coladas:
                             if path.isfile("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/"+str(k)+"F.jpg") and path.isfile("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/"+str(k)+"T.jpg"):
                                 pass
                             else:
                                 iteration += 1
-                                observations += str(iteration) + ". - Imágenes \'Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/"+str(k)+"F.jpg\' y/o \'Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/"+str(k)+"F.jpg\' eliminadas recientemente\n"
+                                observations += str(iteration) + ". - Imágenes \'Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/"+str(k)+"F.jpg\' y/o \'Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/"+str(k)+"T.jpg\' eliminadas recientemente\n"
                                 if path.isfile("ResourcesFolder/Imagenes/Borrado.jpg"):
                                     if path.isfile("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/"+str(k)+"F.jpg"):
                                         pass
@@ -675,7 +719,7 @@ def dataIsCorrupted():
         if observations == "Observaciones:\n":
             return False
         else:
-            sendEmail(observations=observations)
+            sendEmail(observations, "El programa: 'Interfaz Gráfica Cucharas - ABAXFEM', tiene observaciones.", "", "")
             return True
     except:
         return True
@@ -693,8 +737,50 @@ def getCreationDateCampana(nameCuchara:str, nameCampana:str):
     except:
         return False
 
-def sendEmail(observations:str):
-    print(observations)
+def sendEmail(observations:str, subject, path_attach, name_attach):
+    try:
+        email_sender = "deguevarab@gmail.com"
+        password = "srcg lgli slwz pmzr"
+        
+        email_receivers = []
+        with open("envVar.txt") as archivo:
+            for linea in archivo:
+                if linea[0]=="#" or linea[0].rstrip(' ')=='':
+                    pass
+                else:
+                    email_receivers.append(linea.rstrip('\n'))
+        print(email_receivers)
+
+        date = datetime.strftime(datetime.now(), '%d/%m/%Y')
+        hour = datetime.now()
+
+        subject = subject+ " (" + str(date) + ", "+str(hour.hour)+":"+str(hour.minute)+":"+str(hour.second)+")"
+        
+        mensaje = MIMEMultipart()
+        mensaje['From'] = email_sender
+        mensaje['To'] = ", ".join(email_receivers)
+        mensaje['Subject'] = subject
+
+        if path_attach == "":
+            mensaje.attach(MIMEText(observations, 'plain'))
+        else:
+            mensaje.attach(MIMEText(observations, 'plain'))
+            archivo_adjunto = open(path_attach, 'rb')
+            adjunto_MIME = MIMEBase('application', 'octet-stream')
+            adjunto_MIME.set_payload((archivo_adjunto).read())
+            encoders.encode_base64(adjunto_MIME)
+            adjunto_MIME.add_header('Content-Disposition', "attachment; filename= %s" % name_attach)
+            mensaje.attach(adjunto_MIME)
+        sesion_smtp = smtplib.SMTP('smtp.gmail.com', 587)
+        sesion_smtp.starttls()
+        sesion_smtp.login(email_sender,password)
+        texto = mensaje.as_string()
+        sesion_smtp.sendmail(email_sender, email_receivers, texto)
+        sesion_smtp.quit()
+
+        print(observations)
+    except:
+        pass
 
 def getHistoriaEF(nameCuchara:str, nameCampana:str):
     try:
@@ -730,8 +816,12 @@ def getColadasRiesgos(nameCuchara:str, nameCampana:str):
         for i in range(len(zonasF)):
             zonasF[i] = fixList(zonasF[i])
             zonasT[i] = fixList(zonasT[i])
-        FSup = FMed = FInf = []
-        TSup = TMed = TInf = []
+        FSup = []
+        FMed = []
+        FInf = []
+        TSup = []
+        TMed = []
+        TInf = []
         for i in range(len(zonasF)):
             FSup.append(zonasF[i][0])
             FMed.append(zonasF[i][1])
@@ -785,6 +875,7 @@ if __name__ == "__main__":
     #print(getZonasEF('1', '9'))
     #print(getRiesgoEF('1', '9'))
     #print(getColadasRiesgos('3', '1'))
+    sendEmail("Prueba 1", "Fin de Cuchara", "test2.pdf", "test2.pdf")
     pass
     '''conn = sql.connect(nameDB)
     cursor = conn.cursor()

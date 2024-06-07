@@ -29,13 +29,13 @@ def propiedadesFisicas (colada,NNod,N1,TInicial,N2,N3,N4,N5,calentado,carga,desc
             Cp [0][i] = 0.561 * 10**9
    
     if calentado == 1:                                                              # Switch para calentado
-        hConvInt = 0.0316595                                                       # Coeficiente de conveccion interna para etapa de calentado
+        hConvInt =0.04708                                                     # Coeficiente de conveccion interna para etapa de calentado
     
     elif carga == 1:                                                                # Switch para carga
         hConvInt = 11.38                                                          # Coeficiente de convección interna para etapa de carga de acero líquido
              
     elif descarga == 1:                                                             # Switch para descarga
-        hConvInt = 0.0030556                                                         # Coeficiente de convección interna para etapa de descarga
+        hConvInt = 0.00302595                                                      # Coeficiente de convección interna para etapa de descarga
         
-    hConvExt = 0.0053832                                                         # Coeficiente de convección externa para todas las etapas
+    hConvExt =0.0060903                                                        # Coeficiente de convección externa para todas las etapas
     return  rho, Cp, hConvInt, hConvExt

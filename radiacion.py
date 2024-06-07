@@ -4,8 +4,8 @@ def radiacion (TInicial,Tamb,calentado,carga,descarga,TinternaCarga,Tinterna):
     
     # global hRadInt, hRadExt, hRadIntCarga
     
-    emiExt = 0.773608                                                                                                                             # Emisividad externa
-    emiInt = 0.306464                                                                                                                                # Emisividad interna
+    emiExt = 0.757977                                                                                                                             # Emisividad externa
+    emiInt = 0.467804                                                                                                                                # Emisividad interna
     
     sb = 5.67 * 10**-11                                                                                                                         # Constante de Steffan Boltzmann
     

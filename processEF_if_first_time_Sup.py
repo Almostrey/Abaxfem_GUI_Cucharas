@@ -12,7 +12,6 @@ def processEF_if_first_time(coladas, pregunta1, CLE,tasaDesgaste, t,Historia):
     Historia=np.zeros((1,NNod+3))
     col = []                                                                                                                   # Vector donde se almacenan las coladas
     temp = [] 
-    
     for colada in range (coladas):                                                                                                     # Bucle para iterar las coladas        
         if colada == 0:                                                                                                                # Inicializado de espesores solo en la primera colada
             Long1 = np.array([152. , 15. , 108. , 10. , 40.])                                                                                         # Vector de espesores de materiales     
@@ -150,8 +149,9 @@ def processEF_if_first_time(coladas, pregunta1, CLE,tasaDesgaste, t,Historia):
         Long1 [0] = Long1 [0] - tasaDesgaste
                                                                                                                                                     # Actualizacion del espesor del primer refractario a cada colada
         col.append (int(colada+1))                                                                                                                                                              # Guardado de coladas        
-
-        
+    
+    Historia2=None    
     Historia=np.delete(Historia, (0), axis=0)
     Historia=Historia.tolist()
-    return col, temp, tasaDesgaste,Historia
+ 
+    return col, temp, tasaDesgaste,Historia,Historia2
