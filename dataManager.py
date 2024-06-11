@@ -32,12 +32,6 @@ def resetDatabase():
             pass
         else:
             mkdir("Historial")
-        if path.isfile("envVar.txt"):
-            pass
-        else:
-            file = open("envVar.txt", "w")
-            file.write("cucharasreporte@outlook.com\n#\n#\n# Añadir Cualquier correo extra como los ejemplos de abajo\n# deguevarab@hotmail.com\n# diegoguevara@hotmail.com\n# etc...")
-            file.close()
     except:
             pass
 
@@ -739,8 +733,8 @@ def getCreationDateCampana(nameCuchara:str, nameCampana:str):
 
 def sendEmail(observations:str, subject, path_attach, name_attach):
     try:
-        email_sender = "deguevarab@gmail.com"
-        password = "srcg lgli slwz pmzr"
+        email_sender = "cucharasreporte@outlook.com"
+        password = "ABAXFEM2024"
         
         email_receivers = []
         with open("envVar.txt") as archivo:
@@ -771,7 +765,7 @@ def sendEmail(observations:str, subject, path_attach, name_attach):
             encoders.encode_base64(adjunto_MIME)
             adjunto_MIME.add_header('Content-Disposition', "attachment; filename= %s" % name_attach)
             mensaje.attach(adjunto_MIME)
-        sesion_smtp = smtplib.SMTP('smtp.gmail.com', 587)
+        sesion_smtp = smtplib.SMTP('smtp-mail.outlook.com', 587)
         sesion_smtp.starttls()
         sesion_smtp.login(email_sender,password)
         texto = mensaje.as_string()

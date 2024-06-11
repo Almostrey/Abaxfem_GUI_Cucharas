@@ -45,6 +45,7 @@ import PySide6.QtConcurrent
 from PySide6.QtCore import QRunnable
 from multiprocessing import freeze_support
 from read_historia import read_historia
+from  Observacion_Colada import  Observacion_Colada
 
 
 
@@ -1176,6 +1177,10 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
                 self.progressBar.setValue(50)
                 PositionMatrixF = pd.DataFrame(PositionMatrixF)
                 PositionMatrixT = pd.DataFrame(PositionMatrixT)
+                #-------------------------BOTON PARA TEXTO DE OBSERVACIONES-------------------------------------------
+                texto_Observacion=Observacion_Colada()
+                # print(texto_Observacion)
+                #-------------------------BOTON PARA TEXTO DE OBSERVACIONES-------------------------------------------
                 infoF = V1.V1(self.txtPathTermografiaF.text(), self.txtPathExcelF.text(), PositionMatrixF)
                 infoT = V1.V1(self.txtPathTermografiaT.text(), self.txtPathExcelT.text(), PositionMatrixT)
                 sleep(0.2)
@@ -1857,12 +1862,6 @@ if __name__ == "__main__":
     app = qtw.QApplication(argv)
 
     if dataManager.getWorkingDirectory() == getcwd():
-        if isfile("envVar.txt"):
-            pass
-        else:
-            file = open("envVar.txt", "w")
-            file.write("cucharasreporte@outlook.com\n#\n#\n# Añadir Cualquier correo extra como los ejemplos de abajo\n# deguevarab@hotmail.com\n# diegoguevara@hotmail.com\n# etc...")
-            file.close()
         if isfile("dataL.db"):
             pass
         else:
