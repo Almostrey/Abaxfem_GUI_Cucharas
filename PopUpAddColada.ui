@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>510</width>
-    <height>811</height>
+    <height>850</height>
    </rect>
   </property>
   <property name="focusPolicy">
@@ -1058,7 +1058,7 @@ border:0px;</string>
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>750</y>
+      <y>790</y>
       <width>350</width>
       <height>51</height>
      </rect>
@@ -1160,7 +1160,7 @@ border-radius:15px;
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>710</y>
+      <y>750</y>
       <width>350</width>
       <height>51</height>
      </rect>
@@ -1221,6 +1221,65 @@ QPushButton:disabled{
      </item>
     </layout>
    </widget>
+   <widget class="QLineEdit" name="txtObservaciones">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>711</y>
+      <width>321</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::StrongFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> border: 1px solid gray;
+    border-radius: 10px;
+    padding: 1px 1px 1px 3px;
+    min-width: 6em;
+
+
+     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);</string>
+    </property>
+    <property name="inputMask">
+     <string/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_18">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>710</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border:0px;
+background-color: rgba(0, 0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>Observaciones:</string>
+    </property>
+   </widget>
    <zorder>label</zorder>
    <zorder>label_4</zorder>
    <zorder>pb_exit</zorder>
@@ -1256,6 +1315,8 @@ QPushButton:disabled{
    <zorder>label_17</zorder>
    <zorder>frame</zorder>
    <zorder>frame_2</zorder>
+   <zorder>txtObservaciones</zorder>
+   <zorder>label_18</zorder>
   </widget>
  </widget>
  <resources>

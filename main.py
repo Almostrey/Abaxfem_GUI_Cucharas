@@ -1028,6 +1028,9 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
         self.progressBar.hide()
         self.pb_aceptar.setEnabled(0)
         self.pb_recortar.setEnabled(1)
+        regex = qtc.QRegularExpression("[0-9-a-z-A-Z_ .,/\!@$%^&*()=+:;?+-ñáéíóú]+")
+        validator = qtg.QRegularExpressionValidator(regex)
+        self.txtObservaciones.setValidator(validator)
     def recortarImg(self):
         global windowColada
         if self.txtNewColada.text() != "":
@@ -1178,7 +1181,7 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
                 PositionMatrixF = pd.DataFrame(PositionMatrixF)
                 PositionMatrixT = pd.DataFrame(PositionMatrixT)
                 #-------------------------BOTON PARA TEXTO DE OBSERVACIONES-------------------------------------------
-                texto_Observacion=Observacion_Colada()
+                # texto_Observacion=Observacion_Colada()
                 # print(texto_Observacion)
                 #-------------------------BOTON PARA TEXTO DE OBSERVACIONES-------------------------------------------
                 infoF = V1.V1(self.txtPathTermografiaF.text(), self.txtPathExcelF.text(), PositionMatrixF)
@@ -1219,10 +1222,11 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
                 sleep(0.2)
                 self.progressBar.setValue(85)
                 
+                txtObservaciones = str(self.txtObservaciones.text())
                 dataManager.add_Colada(nameCuchara, nameCampana, numColada, float(infoF[8]), float(infoT[8]), self.numpy2float(reshape(infoF[9], 3)), 
                                        self.numpy2float(reshape(infoT[9], 3)), self.numpy2float(reshape(infoF[5], 72)), self.numpy2float(reshape(infoT[5], 72)), 
                                        str(HistoriaF), str(HistoriaT), str(RiesgoF), str(RiesgoT), 
-                                       str(observacionF), str(observacionT))
+                                       str(observacionF), txtObservaciones)
                 sleep(0.2)
                 self.progressBar.setValue(100)
                 sleep(1)

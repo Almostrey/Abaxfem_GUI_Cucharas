@@ -25,7 +25,7 @@ class Ui_PopUpAddColada(object):
     def setupUi(self, PopUpAddColada):
         if not PopUpAddColada.objectName():
             PopUpAddColada.setObjectName(u"PopUpAddColada")
-        PopUpAddColada.resize(510, 811)
+        PopUpAddColada.resize(510, 850)
         PopUpAddColada.setFocusPolicy(Qt.NoFocus)
         icon = QIcon()
         icon.addFile(u":/Images/ResourcesFolder/Imagenes/Logo_Lineas.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -487,7 +487,7 @@ class Ui_PopUpAddColada(object):
         self.label_17.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.frame = QFrame(self.centralwidget)
         self.frame.setObjectName(u"frame")
-        self.frame.setGeometry(QRect(80, 750, 350, 51))
+        self.frame.setGeometry(QRect(80, 790, 350, 51))
         self.frame.setStyleSheet(u"QFrame{\n"
 "border-radius:15px;\n"
 "	background-color: rgba(0, 0, 0, 0);\n"
@@ -556,7 +556,7 @@ class Ui_PopUpAddColada(object):
 
         self.frame_2 = QFrame(self.centralwidget)
         self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setGeometry(QRect(80, 710, 350, 51))
+        self.frame_2.setGeometry(QRect(80, 750, 350, 51))
         self.frame_2.setStyleSheet(u"QFrame{\n"
 "border-radius:15px;\n"
 "	background-color: rgba(0, 0, 0, 0);\n"
@@ -589,6 +589,26 @@ class Ui_PopUpAddColada(object):
 
         self.horizontalLayout_2.addWidget(self.pb_recortar)
 
+        self.txtObservaciones = QLineEdit(self.centralwidget)
+        self.txtObservaciones.setObjectName(u"txtObservaciones")
+        self.txtObservaciones.setGeometry(QRect(170, 711, 321, 31))
+        self.txtObservaciones.setFont(font4)
+        self.txtObservaciones.setFocusPolicy(Qt.StrongFocus)
+        self.txtObservaciones.setStyleSheet(u" border: 1px solid gray;\n"
+"    border-radius: 10px;\n"
+"    padding: 1px 1px 1px 3px;\n"
+"    min-width: 6em;\n"
+"\n"
+"\n"
+"     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\n"
+"                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);")
+        self.label_18 = QLabel(self.centralwidget)
+        self.label_18.setObjectName(u"label_18")
+        self.label_18.setGeometry(QRect(20, 710, 141, 31))
+        self.label_18.setFont(font4)
+        self.label_18.setStyleSheet(u"border:0px;\n"
+"background-color: rgba(0, 0, 0, 0);")
         PopUpAddColada.setCentralWidget(self.centralwidget)
         self.label.raise_()
         self.label_4.raise_()
@@ -625,6 +645,8 @@ class Ui_PopUpAddColada(object):
         self.label_17.raise_()
         self.frame.raise_()
         self.frame_2.raise_()
+        self.txtObservaciones.raise_()
+        self.label_18.raise_()
 
         self.retranslateUi(PopUpAddColada)
 
@@ -666,5 +688,8 @@ class Ui_PopUpAddColada(object):
         self.label_17.setText(QCoreApplication.translate("PopUpAddColada", u"\u00daltima Colada:", None))
         self.pb_aceptar.setText(QCoreApplication.translate("PopUpAddColada", u"A\u00f1adir Colada", None))
         self.pb_recortar.setText(QCoreApplication.translate("PopUpAddColada", u"Recortar Imagen", None))
+        self.txtObservaciones.setInputMask("")
+        self.txtObservaciones.setText("")
+        self.label_18.setText(QCoreApplication.translate("PopUpAddColada", u"Observaciones:", None))
     # retranslateUi
 

@@ -42,6 +42,7 @@ def createPDF(nameCuchara:str, nameCampana:str, tipoGeneracion:str):
     [date, time, Username, function, ultimaColada, coladaEscoria, dateInicio, dateFin] = getGeneralInformation(nameCuchara, nameCampana)
     [HTmaxCucharaF, colMaxTempF, HTminCucharaF, colMinTempF, HTmeanCucharaF, pathImgFrontal,
      HTmaxCucharaT, colMaxTempT, HTminCucharaT, colMinTempT, HTmeanCucharaT, pathImgTrasera] = getMaxInformation(nameCuchara, nameCampana)
+    GetReporteObservaciones = dataManager.GetReporteObservaciones(nameCuchara, nameCampana)
     loader = jinja2.FileSystemLoader("./")
     env = jinja2.Environment(loader = loader)
     htmlTemplate = "Template"
@@ -77,7 +78,8 @@ def createPDF(nameCuchara:str, nameCampana:str, tipoGeneracion:str):
            'HTminCucharaT' : str(int(float(HTminCucharaT))),
            'colMinTempT' : colMinTempT,
            'HTmeanCucharaT' : str(int(float(HTmeanCucharaT))),
-           'pathImgTrasera' : pathImgTrasera
+           'pathImgTrasera' : pathImgTrasera,
+           'GetReporteObservaciones' : GetReporteObservaciones
            }
     result_file = open("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+nameCampana+"/Reporte Cuchara "+nameCuchara+" - Campana "+str(nameCampana)+".pdf", "w+b")
     output_text = template.render(context)

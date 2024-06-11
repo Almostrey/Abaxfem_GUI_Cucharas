@@ -97,6 +97,7 @@
         <p>&nbsp;</p>
 
         <hr />
-        
+        <h2>Observaciones de las coladas</h2>
+        {{GetReporteObservaciones}}
     </body>
 </html>

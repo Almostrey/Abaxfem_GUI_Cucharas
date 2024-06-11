@@ -1,6 +1,6 @@
 import sqlite3 as sql
 from datetime import datetime
-from os import mkdir, path, remove, getcwd
+from os import mkdir, path, remove, getcwd, linesep
 from shutil import rmtree, copyfile
 from matplotlib.pyplot import show, plot, savefig, title, xlabel, ylabel, figure, vlines, grid, ylim, legend
 import read_historia
@@ -827,6 +827,22 @@ def getColadasRiesgos(nameCuchara:str, nameCampana:str):
     except:
         return False
 
+def GetReporteObservaciones(nameCuchara:str, nameCampana:str):
+    try:
+        nameTable = "CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)
+        conn = sql.connect(nameDB)
+        cursor = conn.cursor()
+        instruccion = f"SELECT * FROM {nameTable} ORDER BY Colada"
+        cursor.execute(instruccion)
+        data = cursor.fetchall()
+        conn.commit()
+        obs = ""
+        for i in range(len(data)):
+            obs = obs + str(data[i][0])+". - " + str(data[i][-1]) + "<br/>"
+        return obs
+    except:
+        return False
+
 
 if __name__ == "__main__":
     #path = "Historial/CUCHARA_1/CUCHARA_1_CAMPANA_9/HistoriaSupF.xlsx"
@@ -869,7 +885,8 @@ if __name__ == "__main__":
     #print(getZonasEF('1', '9'))
     #print(getRiesgoEF('1', '9'))
     #print(getColadasRiesgos('3', '1'))
-    sendEmail("Prueba 1", "Fin de Cuchara", "test2.pdf", "test2.pdf")
+    #sendEmail("Prueba 1", "Fin de Cuchara", "test2.pdf", "test2.pdf")
+    print(GetReporteObservaciones("21", "1"))
     pass
     '''conn = sql.connect(nameDB)
     cursor = conn.cursor()
