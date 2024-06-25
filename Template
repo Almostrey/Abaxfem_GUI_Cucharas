@@ -95,7 +95,9 @@
             </table>
             <div style="text-align: center; zoom:48%;"><img src={{pathImgTrasera}}></div>
         <p>&nbsp;</p>
-
+        <hr />
+        <h2>Espesor Remanente</h2>
+            <div style="text-align: center; zoom:48%;"><img src={{pathImgRiesgos}}></div>
         <hr />
         <h2>Observaciones de las coladas</h2>
         {{GetReporteObservaciones}}

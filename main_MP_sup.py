@@ -227,8 +227,8 @@ def EF_sup(coladas_DADA_DIEGO, temp_medidas, pregunta2:bool, path, t,pregunta1,C
                 for c in range (len(tasaDesgaste_M)):
                     Historia2=np.hstack((Historia2,(np.array(results[c][Historia2_results]))))
                 Historia2=np.delete(Historia2,0,1)
-                for tD in range (int(np.shape(Historia2)[1]/19)):
-                    plt.plot(([Historia_orig[-1,0]+1],[Historia2[0,0]+1]),([Historia_orig[-1,tD*19+17]],[Historia2[0,tD*19+17]]),color=colors[tD % len(colors)],linewidth=0.5)
+                # for tD in range (int(np.shape(Historia2)[1]/19)):
+                #     plt.plot(([Historia_orig[-1,0]+1],[Historia2[0,0]+1]),([Historia_orig[-1,tD*19+17]],[Historia2[0,tD*19+17]]),color=colors[tD % len(colors)],linewidth=0.5)
 
                 if np.shape(Historia_orig)[1]!=np.shape(Historia2)[1]:
                     Fill=np.zeros((len(Historia2),(np.shape(Historia_orig)[1]-np.shape(Historia2)[1])))
@@ -291,7 +291,8 @@ def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viej
     if Nuevo1Viejo2 == 1:
         # Frontal
         [Riesgo, numObs] = EF_sup(cantColadas, np.column_stack((coladas,tempZonasTodasF[0])), haveHistory(cantColadas, path+"HistoriaSupF.xlsx"), path+f"HistoriaSupF.xlsx", t,pregunta1,CLE)
-        
+        if Riesgo>100:
+            Riesgo=100
          
         RiesgoF.append(Riesgo)
         numObservacionesF.append(numObs)

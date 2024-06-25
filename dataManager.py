@@ -587,7 +587,7 @@ def updatePlot(nameCuchara:str, nameCampana:str):
         vlines(int(escoria), 100, 500, colors='b', linestyles='dashed', label='')
     title("Análisis Frontal / Cuchara "+nameCuchara+" - Campaña "+str(nameCampana))
     xlabel("Número de Colada")
-    ylabel("Temperatura máxima alcanzada")
+    ylabel("Temperatura máxima alcanzada[ºC]")
     savefig("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisTemperaturasFrontal"+".png")
     # Trasera
     figure(2)

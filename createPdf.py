@@ -6,6 +6,7 @@ import dataManager
 import databaseLoginManage as dbLManager
 from time import sleep
 from os import getcwd
+from grafico_espesores import grafico_espesores
 
 def getMaxInformation(nameCuchara:str, nameCampana:str):
     [col, maxF, maxT, escoria] = dataManager.getMaxHistory(nameCuchara, nameCampana)
@@ -43,6 +44,9 @@ def createPDF(nameCuchara:str, nameCampana:str, tipoGeneracion:str):
     [HTmaxCucharaF, colMaxTempF, HTminCucharaF, colMinTempF, HTmeanCucharaF, pathImgFrontal,
      HTmaxCucharaT, colMaxTempT, HTminCucharaT, colMinTempT, HTmeanCucharaT, pathImgTrasera] = getMaxInformation(nameCuchara, nameCampana)
     GetReporteObservaciones = dataManager.GetReporteObservaciones(nameCuchara, nameCampana)
+    grafico_espesores(dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/")
+    pathImgRiesgos = dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/Historial_Espesores"+".png"
+
     loader = jinja2.FileSystemLoader("./")
     env = jinja2.Environment(loader = loader)
     htmlTemplate = "Template"
@@ -79,7 +83,8 @@ def createPDF(nameCuchara:str, nameCampana:str, tipoGeneracion:str):
            'colMinTempT' : colMinTempT,
            'HTmeanCucharaT' : str(int(float(HTmeanCucharaT))),
            'pathImgTrasera' : pathImgTrasera,
-           'GetReporteObservaciones' : GetReporteObservaciones
+           'GetReporteObservaciones' : GetReporteObservaciones,
+           'pathImgRiesgos' : pathImgRiesgos
            }
     result_file = open("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+nameCampana+"/Reporte Cuchara "+nameCuchara+" - Campana "+str(nameCampana)+".pdf", "w+b")
     output_text = template.render(context)

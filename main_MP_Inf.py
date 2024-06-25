@@ -223,8 +223,8 @@ def EF_inf(coladas_DADA_DIEGO, temp_medidas, pregunta2:bool, path, t, pregunta1,
                 for c in range (len(tasaDesgaste_M)):
                     Historia2=np.hstack((Historia2,(np.array(results[c][Historia2_results]))))
                 Historia2=np.delete(Historia2,0,1)
-                for tD in range (int(np.shape(Historia2)[1]/19)):
-                    plt.plot(([Historia_orig[-1,0]+1],[Historia2[0,0]+1]),([Historia_orig[-1,tD*19+17]],[Historia2[0,tD*19+17]]),color=colors[tD % len(colors)],linewidth=0.5)
+                # for tD in range (int(np.shape(Historia2)[1]/19)):
+                #     plt.plot(([Historia_orig[-1,0]+1],[Historia2[0,0]+1]),([Historia_orig[-1,tD*19+17]],[Historia2[0,tD*19+17]]),color=colors[tD % len(colors)],linewidth=0.5)
 
                 if np.shape(Historia_orig)[1]!=np.shape(Historia2)[1]:
                     Fill=np.zeros((len(Historia2),(np.shape(Historia_orig)[1]-np.shape(Historia2)[1])))

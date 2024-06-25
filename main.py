@@ -46,6 +46,8 @@ from PySide6.QtCore import QRunnable
 from multiprocessing import freeze_support
 from read_historia import read_historia
 from  Observacion_Colada import  Observacion_Colada
+from grafico_espesores import grafico_espesores
+from grafico_espesores import grafico_espesores
 
 
 
@@ -1198,7 +1200,7 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
                     pathDirectory = dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/"
                     qtw.QApplication.processEvents()
                     [RiesgoF, RiesgoT, observacionF, observacionT] = main_MP_sup.getRiesgo(numColada, numColada, self.numpy2float(reshape(infoF[9], 3)), self.numpy2float(reshape(infoT[9], 3)), Nuevo1Viejo2, pathDirectory, int(self.sbEscoria.text()))
-
+                    
                 else:
                     # Viejo
                     #[HistoriaPreviaF, HistoriaPreviaT] = dataManager.getHistoriaEF(nameCuchara, nameCampana)
@@ -1218,7 +1220,8 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
                     #print(coladasHistoria)
                     print("paso1")
                     [RiesgoF, RiesgoT, observacionF, observacionT] = main_MP_sup.getRiesgo(numColada, coladasHistoria, zonasSup, zonasInf, Nuevo1Viejo2, pathDirectory, int(self.sbEscoria.text()))
-
+                # print(pathDirectory)
+                # grafico_espesores(pathDirectory)    
                 sleep(0.2)
                 self.progressBar.setValue(85)
                 
