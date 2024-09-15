@@ -49,7 +49,7 @@ def EF_med(coladas_DADA_DIEGO, temp_medidas, pregunta2:bool, path, t, pregunta1,
     
 
         
-    if (coladas_T >= coladas and coladas<=temp_medidas[-1,0]) and coladas>=35:
+    if (coladas_T >= coladas and coladas<=temp_medidas[-1,0]) and coladas>=10:
         if not(511.632<int (t[0,0]+t[0,1])<928.37) or not(any(73.05<int (t[:,2]+t[:,3]+t[:,4])<130.95)) or not(any(10.74<int (t[:,5])<19.26)) or not(any(170.544<int (t[:,6])<309.456)) :
             print("Tiempos no son los estandar, ERROR en la aproximación del riesgo")
             observacion = 1
