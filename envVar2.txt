@@ -1,7 +1,0 @@
-cucharasreporte@outlook.com
-#
-#
-# Añadir Cualquier correo extra como los ejemplos de abajo
-# deguevarab@hotmail.com
-# diegoguevara@hotmail.com
-# etc...

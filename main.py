@@ -1,6 +1,8 @@
-from sys import argv, exit
+from sys import argv, exit, path
 from os.path import isfile, isdir
 from os import getcwd
+path.append(getcwd()+'/QT Windows')
+path.append(getcwd()+'/Operations')
 import os
 from PySide6 import QtCore as qtc
 from PySide6.QtCore import QProcess
@@ -48,7 +50,6 @@ from read_historia import read_historia
 from  Observacion_Colada import  Observacion_Colada
 from grafico_espesores import grafico_espesores
 from grafico_espesores import grafico_espesores
-
 
 
 
