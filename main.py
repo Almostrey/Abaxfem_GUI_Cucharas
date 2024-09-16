@@ -5,7 +5,7 @@ path.append(getcwd()+'/QT Windows')
 path.append(getcwd()+'/Operations')
 import os
 from PySide6 import QtCore as qtc
-from PySide6.QtCore import QProcess
+from PySide6.QtCore import QProcess, QPropertyAnimation
 from PySide6 import QtWidgets as qtw
 from PySide6 import QtGui as qtg
 from PySide6.QtGui import QDragMoveEvent, QPaintEvent
@@ -30,7 +30,6 @@ from saveUserWindow_ui import Ui_saveUserWindow
 from PopUpDeleteColada_ui import Ui_PopUpDeleteColada
 from PopUpApiKey_ui import Ui_PopUpApiKey
 from cropWindow_ui import Ui_cropWindow
-import mallador2
 import createPdf
 from time import sleep
 from threading import Timer
@@ -47,7 +46,7 @@ import PySide6.QtConcurrent
 from PySide6.QtCore import QRunnable
 from multiprocessing import freeze_support
 from read_historia import read_historia
-from  Observacion_Colada import  Observacion_Colada
+from Observacion_Colada import  Observacion_Colada
 from grafico_espesores import grafico_espesores
 from grafico_espesores import grafico_espesores
 
@@ -1339,9 +1338,12 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
         super(AdministratorWindow, self).__init__()
         self.setupUi(self)
         self.showMaximized()
+        #self.pbVerCucharas.setStyleSheet("QPushButton{icon.source: '/ResourcesFolder/featherIcons/chevrons-right.svg'}")
         #self.setWindowFlag(qtc.Qt.FramelessWindowHint)
         #self.setAttribute(qtc.Qt.WA_TranslucentBackground)
         #self.loadRefracTemps()
+        self.VerCucharas = True
+        self.pbVerCucharas.clicked.connect(self.collapseCucharas)
         self.printTree()
         self.printHistory()
         self.checkHighTemperature()
@@ -1358,6 +1360,38 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
         self.pbVerArchivos.clicked.connect(self.verArchivos)
         self.pbDeleteColada.clicked.connect(self.deleteColada)
         self.pbReporte.clicked.connect(self.generarReporte)
+    def collapseCucharas(self):
+        self.animation = QPropertyAnimation(self.frameCucharas, b"minimumWidth")
+        self.animationTree = QPropertyAnimation(self.treeMenu, b"minimumWidth")
+        self.animation.setDuration(500)
+        self.animationTree.setDuration(500)
+        if self.VerCucharas == 1:
+            self.frame_14.hide()
+            self.animation.setStartValue(self.frameCucharas.width())
+            self.animationTree.setStartValue(self.treeMenu.width())
+            self.animation.setEndValue(0)
+            self.animationTree.setEndValue(0)
+            self.animation.setEasingCurve(qtc.QEasingCurve.InOutQuart)
+            self.animationTree.setEasingCurve(qtc.QEasingCurve.InOutQuart)
+        else:
+            self.frameCucharas.show()
+            self.animation.setStartValue(0)
+            self.animationTree.setStartValue(0)
+            self.animation.setEndValue(300)
+            self.animationTree.setEndValue(280)
+            self.animation.setEasingCurve(qtc.QEasingCurve.InOutQuart)
+            self.animationTree.setEasingCurve(qtc.QEasingCurve.InOutQuart)
+        self.animation.start()
+        self.animationTree.start()
+        self.animation.stateChanged.connect(self.showButtonsCucharaCampana)
+        self.VerCucharas = not self.VerCucharas
+    def showButtonsCucharaCampana(self):
+        if self.VerCucharas == 1:
+            self.frame_14.show()
+            self.pbVerCucharas.setIcon(qtg.QIcon(getcwd()+"/ResourcesFolder/featherIcons/chevrons-left.svg"))
+        else:
+            self.frameCucharas.hide()
+            self.pbVerCucharas.setIcon(qtg.QIcon(getcwd()+"/ResourcesFolder/featherIcons/chevrons-right.svg"))
     def checkHighTemperature(self):
         pass
     def generarReporte(self):

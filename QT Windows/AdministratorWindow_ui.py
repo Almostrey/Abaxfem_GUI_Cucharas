@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'AdministratorWindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.0
+## Created by: Qt User Interface Compiler version 6.6.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -25,8 +25,8 @@ class Ui_AdministratorWindow(object):
     def setupUi(self, AdministratorWindow):
         if not AdministratorWindow.objectName():
             AdministratorWindow.setObjectName(u"AdministratorWindow")
-        AdministratorWindow.resize(1369, 792)
-        AdministratorWindow.setMinimumSize(QSize(1369, 0))
+        AdministratorWindow.resize(1366, 771)
+        AdministratorWindow.setMinimumSize(QSize(1366, 768))
         icon = QIcon()
         icon.addFile(u":/Images/ResourcesFolder/Imagenes/Logo_Lineas.png", QSize(), QIcon.Normal, QIcon.Off)
         AdministratorWindow.setWindowIcon(icon)
@@ -42,11 +42,22 @@ class Ui_AdministratorWindow(object):
         self.centralwidget.setSizePolicy(sizePolicy)
         self.centralwidget.setMinimumSize(QSize(1200, 0))
         self.centralwidget.setStyleSheet(u"background-color:rgb(255, 255, 255)")
-        self.verticalLayout = QVBoxLayout(self.centralwidget)
+        self.horizontalLayout_13 = QHBoxLayout(self.centralwidget)
+        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
+        self.frame_23 = QFrame(self.centralwidget)
+        self.frame_23.setObjectName(u"frame_23")
+        self.frame_23.setFrameShape(QFrame.StyledPanel)
+        self.frame_23.setFrameShadow(QFrame.Raised)
+        self.verticalLayout = QVBoxLayout(self.frame_23)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(0, 9, 0, 0)
-        self.frameTop = QFrame(self.centralwidget)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.frameTop = QFrame(self.frame_23)
         self.frameTop.setObjectName(u"frameTop")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.frameTop.sizePolicy().hasHeightForWidth())
+        self.frameTop.setSizePolicy(sizePolicy1)
         self.frameTop.setMaximumSize(QSize(16777215, 50))
         self.frameTop.setStyleSheet(u"")
         self.frameTop.setFrameShape(QFrame.StyledPanel)
@@ -54,36 +65,42 @@ class Ui_AdministratorWindow(object):
         self.frameTop.setLineWidth(1)
         self.horizontalLayout_3 = QHBoxLayout(self.frameTop)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.horizontalLayout_3.setContentsMargins(-1, 0, -1, 0)
-        self.frame_7 = QFrame(self.frameTop)
-        self.frame_7.setObjectName(u"frame_7")
-        self.frame_7.setMinimumSize(QSize(300, 50))
-        self.frame_7.setMaximumSize(QSize(300, 50))
-        self.frame_7.setStyleSheet(u"background-color: rgba(170, 0, 0, 0);")
-        self.frame_7.setFrameShape(QFrame.StyledPanel)
-        self.frame_7.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_12 = QVBoxLayout(self.frame_7)
-        self.verticalLayout_12.setSpacing(0)
-        self.verticalLayout_12.setObjectName(u"verticalLayout_12")
-        self.verticalLayout_12.setContentsMargins(0, 0, 0, 0)
-        self.label = QLabel(self.frame_7)
-        self.label.setObjectName(u"label")
-        self.label.setMinimumSize(QSize(300, 50))
-        self.label.setMaximumSize(QSize(300, 50))
-        self.label.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"image: url(:/Images/ResourcesFolder/Imagenes/Logo_Letras.png);\n"
-"border-color: rgb(255, 255, 255);\n"
-"padding: 0 0 3 0")
+        self.horizontalLayout_3.setContentsMargins(0, 0, -1, 0)
+        self.pbVerCucharas = QPushButton(self.frameTop)
+        self.pbVerCucharas.setObjectName(u"pbVerCucharas")
+        self.pbVerCucharas.setMinimumSize(QSize(300, 48))
+        self.pbVerCucharas.setMaximumSize(QSize(300, 48))
+        font = QFont()
+        font.setFamilies([u"Arial"])
+        font.setPointSize(12)
+        font.setBold(True)
+        self.pbVerCucharas.setFont(font)
+        self.pbVerCucharas.setStyleSheet(u"QPushButton{\n"
+" border: 1px solid gray;\n"
+"    border-radius: 10px;\n"
+"\n"
+"\n"
+"     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\n"
+"                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);\n"
+"}\n"
+"QPushButton:hover{\n"
+"	background-color: rgba(255, 140, 34, 240);\n"
+"}\n"
+"QPushButton:pressed{\n"
+"	background-color: rgba(235, 115, 9, 255);\n"
+"}")
+        icon1 = QIcon()
+        icon1.addFile(u"ResourcesFolder/featherIcons/chevrons-left.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.pbVerCucharas.setIcon(icon1)
+        self.pbVerCucharas.setIconSize(QSize(20, 20))
 
-        self.verticalLayout_12.addWidget(self.label)
-
-
-        self.horizontalLayout_3.addWidget(self.frame_7)
+        self.horizontalLayout_3.addWidget(self.pbVerCucharas)
 
         self.frame_9 = QFrame(self.frameTop)
         self.frame_9.setObjectName(u"frame_9")
-        self.frame_9.setMinimumSize(QSize(0, 0))
-        self.frame_9.setMaximumSize(QSize(16777215, 16777215))
+        self.frame_9.setMinimumSize(QSize(0, 48))
+        self.frame_9.setMaximumSize(QSize(16777215, 48))
         self.frame_9.setStyleSheet(u" border: 1px solid gray;\n"
 "    border-radius: 10px;\n"
 "\n"
@@ -98,7 +115,7 @@ class Ui_AdministratorWindow(object):
         self.horizontalLayout_5.setContentsMargins(-1, 2, 4, 2)
         self.frame_6 = QFrame(self.frame_9)
         self.frame_6.setObjectName(u"frame_6")
-        self.frame_6.setMinimumSize(QSize(400, 40))
+        self.frame_6.setMinimumSize(QSize(290, 40))
         self.frame_6.setMaximumSize(QSize(300, 16777215))
         self.frame_6.setStyleSheet(u"QFrame{\n"
 "border:0px;\n"
@@ -119,10 +136,10 @@ class Ui_AdministratorWindow(object):
         self.labelUsername = QLabel(self.frame_6)
         self.labelUsername.setObjectName(u"labelUsername")
         self.labelUsername.setMinimumSize(QSize(0, 0))
-        font = QFont()
-        font.setFamilies([u"Arial"])
-        font.setPointSize(11)
-        self.labelUsername.setFont(font)
+        font1 = QFont()
+        font1.setFamilies([u"Arial"])
+        font1.setPointSize(11)
+        self.labelUsername.setFont(font1)
         self.labelUsername.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.horizontalLayout_2.addWidget(self.labelUsername)
@@ -132,7 +149,7 @@ class Ui_AdministratorWindow(object):
 
         self.horizontalLayout_5.addWidget(self.frame_6)
 
-        self.horizontalSpacer = QSpacerItem(600, 20, QSizePolicy.Maximum, QSizePolicy.Minimum)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout_5.addItem(self.horizontalSpacer)
 
@@ -149,11 +166,11 @@ class Ui_AdministratorWindow(object):
         self.pbVerArchivos = QPushButton(self.frame_8)
         self.pbVerArchivos.setObjectName(u"pbVerArchivos")
         self.pbVerArchivos.setMinimumSize(QSize(0, 40))
-        font1 = QFont()
-        font1.setFamilies([u"Arial"])
-        font1.setPointSize(12)
-        font1.setBold(False)
-        self.pbVerArchivos.setFont(font1)
+        font2 = QFont()
+        font2.setFamilies([u"Arial"])
+        font2.setPointSize(12)
+        font2.setBold(False)
+        self.pbVerArchivos.setFont(font2)
         self.pbVerArchivos.setStyleSheet(u"QPushButton{\n"
 "	border:1px solid gray;\n"
 "	border-radius:10px;\n"
@@ -171,7 +188,7 @@ class Ui_AdministratorWindow(object):
         self.pbPerfiles = QPushButton(self.frame_8)
         self.pbPerfiles.setObjectName(u"pbPerfiles")
         self.pbPerfiles.setMinimumSize(QSize(0, 40))
-        self.pbPerfiles.setFont(font1)
+        self.pbPerfiles.setFont(font2)
         self.pbPerfiles.setStyleSheet(u"QPushButton{\n"
 "	border:1px solid gray;\n"
 "	border-radius:10px;\n"
@@ -189,7 +206,7 @@ class Ui_AdministratorWindow(object):
         self.pbHistorial = QPushButton(self.frame_8)
         self.pbHistorial.setObjectName(u"pbHistorial")
         self.pbHistorial.setMinimumSize(QSize(0, 40))
-        self.pbHistorial.setFont(font1)
+        self.pbHistorial.setFont(font2)
         self.pbHistorial.setStyleSheet(u"QPushButton{\n"
 "	border:1px solid gray;\n"
 "	border-radius:10px;\n"
@@ -207,10 +224,10 @@ class Ui_AdministratorWindow(object):
         self.pbReporte = QPushButton(self.frame_8)
         self.pbReporte.setObjectName(u"pbReporte")
         self.pbReporte.setMinimumSize(QSize(0, 40))
-        font2 = QFont()
-        font2.setFamilies([u"Arial"])
-        font2.setPointSize(12)
-        self.pbReporte.setFont(font2)
+        font3 = QFont()
+        font3.setFamilies([u"Arial"])
+        font3.setPointSize(12)
+        self.pbReporte.setFont(font3)
         self.pbReporte.setStyleSheet(u"QPushButton{\n"
 "	border:1px solid gray;\n"
 "	border-radius:10px;\n"
@@ -231,28 +248,50 @@ class Ui_AdministratorWindow(object):
 
         self.horizontalLayout_3.addWidget(self.frame_9)
 
+        self.frame_7 = QFrame(self.frameTop)
+        self.frame_7.setObjectName(u"frame_7")
+        self.frame_7.setMinimumSize(QSize(200, 50))
+        self.frame_7.setMaximumSize(QSize(200, 50))
+        self.frame_7.setStyleSheet(u"background-color: rgba(170, 0, 0, 0);")
+        self.frame_7.setFrameShape(QFrame.StyledPanel)
+        self.frame_7.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_12 = QVBoxLayout(self.frame_7)
+        self.verticalLayout_12.setSpacing(0)
+        self.verticalLayout_12.setObjectName(u"verticalLayout_12")
+        self.verticalLayout_12.setContentsMargins(0, 0, 0, 0)
+        self.label = QLabel(self.frame_7)
+        self.label.setObjectName(u"label")
+        self.label.setMinimumSize(QSize(200, 50))
+        self.label.setMaximumSize(QSize(200, 50))
+        self.label.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
+"image: url(:/Images/ResourcesFolder/Imagenes/Logo_Letras.png);\n"
+"border-color: rgb(255, 255, 255);\n"
+"padding: 0 0 3 0")
+
+        self.verticalLayout_12.addWidget(self.label)
+
+
+        self.horizontalLayout_3.addWidget(self.frame_7)
+
 
         self.verticalLayout.addWidget(self.frameTop)
 
-        self.frameBottom = QFrame(self.centralwidget)
+        self.frameBottom = QFrame(self.frame_23)
         self.frameBottom.setObjectName(u"frameBottom")
         self.frameBottom.setMinimumSize(QSize(900, 0))
         self.frameBottom.setFrameShape(QFrame.StyledPanel)
         self.frameBottom.setFrameShadow(QFrame.Raised)
         self.horizontalLayout = QHBoxLayout(self.frameBottom)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalLayout.setContentsMargins(-1, -1, 9, -1)
-        self.frame = QFrame(self.frameBottom)
-        self.frame.setObjectName(u"frame")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Preferred)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.frame.sizePolicy().hasHeightForWidth())
-        self.frame.setSizePolicy(sizePolicy1)
-        self.frame.setMinimumSize(QSize(300, 400))
-        self.frame.setMaximumSize(QSize(400, 16777215))
-        self.frame.setSizeIncrement(QSize(0, 0))
-        self.frame.setStyleSheet(u" border: 1px solid gray;\n"
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.frameCucharas = QFrame(self.frameBottom)
+        self.frameCucharas.setObjectName(u"frameCucharas")
+        sizePolicy.setHeightForWidth(self.frameCucharas.sizePolicy().hasHeightForWidth())
+        self.frameCucharas.setSizePolicy(sizePolicy)
+        self.frameCucharas.setMinimumSize(QSize(98, 400))
+        self.frameCucharas.setMaximumSize(QSize(300, 16777215))
+        self.frameCucharas.setSizeIncrement(QSize(0, 0))
+        self.frameCucharas.setStyleSheet(u" border: 1px solid gray;\n"
 "    border-radius: 10px;\n"
 "\n"
 "    min-width: 6em;\n"
@@ -261,41 +300,39 @@ class Ui_AdministratorWindow(object):
 "     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
 "                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\n"
 "                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);")
-        self.frame.setFrameShape(QFrame.StyledPanel)
-        self.frame.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_8 = QVBoxLayout(self.frame)
+        self.verticalLayout_8 = QVBoxLayout(self.frameCucharas)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
-        self.treeMenu = QTreeWidget(self.frame)
-        icon1 = QIcon()
-        icon1.addFile(u":/Icons/ResourcesFolder/featherIcons/box.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.treeMenu = QTreeWidget(self.frameCucharas)
+        icon2 = QIcon()
+        icon2.addFile(u":/Icons/ResourcesFolder/featherIcons/box.svg", QSize(), QIcon.Normal, QIcon.Off)
         brush = QBrush(QColor(0, 0, 0, 255))
         brush.setStyle(Qt.SolidPattern)
-        font3 = QFont()
-        font3.setFamilies([u"Arial"])
-        font3.setPointSize(16)
-        font3.setBold(True)
+        font4 = QFont()
+        font4.setFamilies([u"Arial"])
+        font4.setPointSize(16)
+        font4.setBold(True)
         __qtreewidgetitem = QTreeWidgetItem()
         __qtreewidgetitem.setTextAlignment(0, Qt.AlignCenter);
-        __qtreewidgetitem.setFont(0, font3);
+        __qtreewidgetitem.setFont(0, font4);
         __qtreewidgetitem.setBackground(0, QColor(255, 255, 255));
         __qtreewidgetitem.setForeground(0, brush);
-        __qtreewidgetitem.setIcon(0, icon1);
+        __qtreewidgetitem.setIcon(0, icon2);
         self.treeMenu.setHeaderItem(__qtreewidgetitem)
         self.treeMenu.setObjectName(u"treeMenu")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Preferred)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.treeMenu.sizePolicy().hasHeightForWidth())
         self.treeMenu.setSizePolicy(sizePolicy2)
-        self.treeMenu.setMinimumSize(QSize(200, 0))
+        self.treeMenu.setMinimumSize(QSize(98, 0))
         self.treeMenu.setMaximumSize(QSize(400, 16777215))
-        font4 = QFont()
-        font4.setFamilies([u"Arial"])
-        font4.setPointSize(16)
-        font4.setItalic(False)
-        font4.setUnderline(False)
-        font4.setStrikeOut(False)
-        self.treeMenu.setFont(font4)
+        font5 = QFont()
+        font5.setFamilies([u"Arial"])
+        font5.setPointSize(16)
+        font5.setItalic(False)
+        font5.setUnderline(False)
+        font5.setStrikeOut(False)
+        self.treeMenu.setFont(font5)
         self.treeMenu.setStyleSheet(u" border: 1px solid gray;\n"
 "    border-radius: 10px;\n"
 "\n"
@@ -313,14 +350,11 @@ class Ui_AdministratorWindow(object):
 
         self.verticalLayout_8.addWidget(self.treeMenu)
 
-        self.frame_14 = QFrame(self.frame)
+        self.frame_14 = QFrame(self.frameCucharas)
         self.frame_14.setObjectName(u"frame_14")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.frame_14.sizePolicy().hasHeightForWidth())
-        self.frame_14.setSizePolicy(sizePolicy3)
-        self.frame_14.setMinimumSize(QSize(200, 100))
+        sizePolicy.setHeightForWidth(self.frame_14.sizePolicy().hasHeightForWidth())
+        self.frame_14.setSizePolicy(sizePolicy)
+        self.frame_14.setMinimumSize(QSize(96, 100))
         self.frame_14.setMaximumSize(QSize(16777215, 100))
         self.frame_14.setStyleSheet(u" border: 0px solid gray;\n"
 "    border-radius: 10px;\n"
@@ -339,17 +373,14 @@ class Ui_AdministratorWindow(object):
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.pbAddCuchara = QPushButton(self.frame_14)
         self.pbAddCuchara.setObjectName(u"pbAddCuchara")
-        sizePolicy4 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
-        sizePolicy4.setHorizontalStretch(0)
-        sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.pbAddCuchara.sizePolicy().hasHeightForWidth())
-        self.pbAddCuchara.setSizePolicy(sizePolicy4)
+        sizePolicy.setHeightForWidth(self.pbAddCuchara.sizePolicy().hasHeightForWidth())
+        self.pbAddCuchara.setSizePolicy(sizePolicy)
         self.pbAddCuchara.setMinimumSize(QSize(98, 40))
-        font5 = QFont()
-        font5.setFamilies([u"Arial"])
-        font5.setPointSize(11)
-        font5.setBold(True)
-        self.pbAddCuchara.setFont(font5)
+        font6 = QFont()
+        font6.setFamilies([u"Arial"])
+        font6.setPointSize(11)
+        font6.setBold(True)
+        self.pbAddCuchara.setFont(font6)
         self.pbAddCuchara.setStyleSheet(u"QPushButton{\n"
 "	border:1px solid gray;\n"
 "	border-radius:10px;\n"
@@ -367,8 +398,10 @@ class Ui_AdministratorWindow(object):
 
         self.pbDeleteCuchara = QPushButton(self.frame_14)
         self.pbDeleteCuchara.setObjectName(u"pbDeleteCuchara")
+        sizePolicy.setHeightForWidth(self.pbDeleteCuchara.sizePolicy().hasHeightForWidth())
+        self.pbDeleteCuchara.setSizePolicy(sizePolicy)
         self.pbDeleteCuchara.setMinimumSize(QSize(98, 40))
-        self.pbDeleteCuchara.setFont(font5)
+        self.pbDeleteCuchara.setFont(font6)
         self.pbDeleteCuchara.setStyleSheet(u"QPushButton{\n"
 "	border:1px solid gray;\n"
 "	border-radius:10px;\n"
@@ -386,8 +419,10 @@ class Ui_AdministratorWindow(object):
 
         self.pbAddCampana = QPushButton(self.frame_14)
         self.pbAddCampana.setObjectName(u"pbAddCampana")
+        sizePolicy.setHeightForWidth(self.pbAddCampana.sizePolicy().hasHeightForWidth())
+        self.pbAddCampana.setSizePolicy(sizePolicy)
         self.pbAddCampana.setMinimumSize(QSize(98, 40))
-        self.pbAddCampana.setFont(font5)
+        self.pbAddCampana.setFont(font6)
         self.pbAddCampana.setStyleSheet(u"QPushButton{\n"
 "	border:1px solid gray;\n"
 "	border-radius:10px;\n"
@@ -405,8 +440,10 @@ class Ui_AdministratorWindow(object):
 
         self.pbDeleteCampana = QPushButton(self.frame_14)
         self.pbDeleteCampana.setObjectName(u"pbDeleteCampana")
+        sizePolicy.setHeightForWidth(self.pbDeleteCampana.sizePolicy().hasHeightForWidth())
+        self.pbDeleteCampana.setSizePolicy(sizePolicy)
         self.pbDeleteCampana.setMinimumSize(QSize(98, 40))
-        self.pbDeleteCampana.setFont(font5)
+        self.pbDeleteCampana.setFont(font6)
         self.pbDeleteCampana.setStyleSheet(u"QPushButton{\n"
 "	border:1px solid gray;\n"
 "	border-radius:10px;\n"
@@ -426,16 +463,16 @@ class Ui_AdministratorWindow(object):
         self.verticalLayout_8.addWidget(self.frame_14)
 
 
-        self.horizontalLayout.addWidget(self.frame)
+        self.horizontalLayout.addWidget(self.frameCucharas)
 
         self.frame_2 = QFrame(self.frameBottom)
         self.frame_2.setObjectName(u"frame_2")
-        sizePolicy5 = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Preferred)
-        sizePolicy5.setHorizontalStretch(0)
-        sizePolicy5.setVerticalStretch(0)
-        sizePolicy5.setHeightForWidth(self.frame_2.sizePolicy().hasHeightForWidth())
-        self.frame_2.setSizePolicy(sizePolicy5)
-        self.frame_2.setMinimumSize(QSize(500, 0))
+        sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.frame_2.sizePolicy().hasHeightForWidth())
+        self.frame_2.setSizePolicy(sizePolicy3)
+        self.frame_2.setMinimumSize(QSize(96, 0))
         self.frame_2.setStyleSheet(u" border: 0px solid gray;\n"
 "    border-radius: 10px;\n"
 "\n"
@@ -454,13 +491,13 @@ class Ui_AdministratorWindow(object):
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.frame_21 = QFrame(self.frame_2)
         self.frame_21.setObjectName(u"frame_21")
-        sizePolicy6 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
-        sizePolicy6.setHorizontalStretch(150)
-        sizePolicy6.setVerticalStretch(0)
-        sizePolicy6.setHeightForWidth(self.frame_21.sizePolicy().hasHeightForWidth())
-        self.frame_21.setSizePolicy(sizePolicy6)
-        self.frame_21.setMinimumSize(QSize(500, 0))
-        self.frame_21.setMaximumSize(QSize(1620, 16777215))
+        sizePolicy4 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy4.setHorizontalStretch(150)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.frame_21.sizePolicy().hasHeightForWidth())
+        self.frame_21.setSizePolicy(sizePolicy4)
+        self.frame_21.setMinimumSize(QSize(98, 0))
+        self.frame_21.setMaximumSize(QSize(16777215, 16777215))
         self.frame_21.setStyleSheet(u" border: 1px solid gray;\n"
 "    border-radius: 10px;\n"
 "\n"
@@ -515,7 +552,7 @@ class Ui_AdministratorWindow(object):
 
         self.nameHistory0 = QLabel(self.frame_3)
         self.nameHistory0.setObjectName(u"nameHistory0")
-        self.nameHistory0.setFont(font2)
+        self.nameHistory0.setFont(font3)
         self.nameHistory0.setStyleSheet(u"border:0px;\n"
 "border-radius:0px;\n"
 "border-bottom:1px solid;\n"
@@ -526,7 +563,7 @@ class Ui_AdministratorWindow(object):
 
         self.dateHistory0 = QLabel(self.frame_3)
         self.dateHistory0.setObjectName(u"dateHistory0")
-        self.dateHistory0.setFont(font2)
+        self.dateHistory0.setFont(font3)
         self.dateHistory0.setStyleSheet(u"border:0px")
         self.dateHistory0.setAlignment(Qt.AlignCenter)
 
@@ -556,7 +593,7 @@ class Ui_AdministratorWindow(object):
 
         self.nameHistory1 = QLabel(self.frame_10)
         self.nameHistory1.setObjectName(u"nameHistory1")
-        self.nameHistory1.setFont(font2)
+        self.nameHistory1.setFont(font3)
         self.nameHistory1.setStyleSheet(u"border:0px;\n"
 "border-radius:0px;\n"
 "border-bottom:1px solid;\n"
@@ -567,7 +604,7 @@ class Ui_AdministratorWindow(object):
 
         self.dateHistory1 = QLabel(self.frame_10)
         self.dateHistory1.setObjectName(u"dateHistory1")
-        self.dateHistory1.setFont(font2)
+        self.dateHistory1.setFont(font3)
         self.dateHistory1.setStyleSheet(u"border:0px;")
         self.dateHistory1.setAlignment(Qt.AlignCenter)
 
@@ -598,7 +635,7 @@ class Ui_AdministratorWindow(object):
 
         self.nameHistory2 = QLabel(self.frame_11)
         self.nameHistory2.setObjectName(u"nameHistory2")
-        self.nameHistory2.setFont(font2)
+        self.nameHistory2.setFont(font3)
         self.nameHistory2.setStyleSheet(u"border:0px;\n"
 "border-radius:0px;\n"
 "border-bottom:1px solid;\n"
@@ -609,7 +646,7 @@ class Ui_AdministratorWindow(object):
 
         self.dateHistory2 = QLabel(self.frame_11)
         self.dateHistory2.setObjectName(u"dateHistory2")
-        self.dateHistory2.setFont(font2)
+        self.dateHistory2.setFont(font3)
         self.dateHistory2.setStyleSheet(u"border:0px;")
         self.dateHistory2.setAlignment(Qt.AlignCenter)
 
@@ -639,7 +676,7 @@ class Ui_AdministratorWindow(object):
 
         self.nameHistory3 = QLabel(self.frame_12)
         self.nameHistory3.setObjectName(u"nameHistory3")
-        self.nameHistory3.setFont(font2)
+        self.nameHistory3.setFont(font3)
         self.nameHistory3.setStyleSheet(u"border:0px;\n"
 "border-radius:0px;\n"
 "border-bottom:1px solid;\n"
@@ -650,7 +687,7 @@ class Ui_AdministratorWindow(object):
 
         self.dateHistory3 = QLabel(self.frame_12)
         self.dateHistory3.setObjectName(u"dateHistory3")
-        self.dateHistory3.setFont(font2)
+        self.dateHistory3.setFont(font3)
         self.dateHistory3.setStyleSheet(u"border:0px;")
         self.dateHistory3.setAlignment(Qt.AlignCenter)
 
@@ -680,7 +717,7 @@ class Ui_AdministratorWindow(object):
 
         self.nameHistory4 = QLabel(self.frame_13)
         self.nameHistory4.setObjectName(u"nameHistory4")
-        self.nameHistory4.setFont(font2)
+        self.nameHistory4.setFont(font3)
         self.nameHistory4.setStyleSheet(u"border:0px;\n"
 "border-radius:0px;\n"
 "border-bottom:1px solid;\n"
@@ -691,7 +728,7 @@ class Ui_AdministratorWindow(object):
 
         self.dateHistory4 = QLabel(self.frame_13)
         self.dateHistory4.setObjectName(u"dateHistory4")
-        self.dateHistory4.setFont(font2)
+        self.dateHistory4.setFont(font3)
         self.dateHistory4.setStyleSheet(u"border:0px;")
         self.dateHistory4.setAlignment(Qt.AlignCenter)
 
@@ -707,7 +744,7 @@ class Ui_AdministratorWindow(object):
         self.frame_15.setObjectName(u"frame_15")
         sizePolicy.setHeightForWidth(self.frame_15.sizePolicy().hasHeightForWidth())
         self.frame_15.setSizePolicy(sizePolicy)
-        self.frame_15.setMinimumSize(QSize(400, 0))
+        self.frame_15.setMinimumSize(QSize(96, 0))
         self.frame_15.setStyleSheet(u" border: 0px solid gray;\n"
 "    border-radius: 10px;\n"
 "\n"
@@ -723,9 +760,12 @@ class Ui_AdministratorWindow(object):
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.frame_18 = QFrame(self.frame_15)
         self.frame_18.setObjectName(u"frame_18")
-        sizePolicy1.setHeightForWidth(self.frame_18.sizePolicy().hasHeightForWidth())
-        self.frame_18.setSizePolicy(sizePolicy1)
-        self.frame_18.setMinimumSize(QSize(100, 0))
+        sizePolicy5 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Preferred)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.frame_18.sizePolicy().hasHeightForWidth())
+        self.frame_18.setSizePolicy(sizePolicy5)
+        self.frame_18.setMinimumSize(QSize(96, 0))
         self.frame_18.setMaximumSize(QSize(1000, 16777215))
         self.frame_18.setStyleSheet(u"QFrame{\n"
 "	background-color: rgb(134, 154, 175);\n"
@@ -877,11 +917,7 @@ class Ui_AdministratorWindow(object):
         self.label_23.setObjectName(u"label_23")
         self.label_23.setMinimumSize(QSize(98, 20))
         self.label_23.setMaximumSize(QSize(140, 40))
-        font6 = QFont()
-        font6.setFamilies([u"Arial"])
-        font6.setPointSize(12)
-        font6.setBold(True)
-        self.label_23.setFont(font6)
+        self.label_23.setFont(font)
         self.label_23.setStyleSheet(u"border-radius:0px;\n"
 "border-top: 1px solid;\n"
 "border-bottom: 1px solid;\n"
@@ -894,7 +930,7 @@ class Ui_AdministratorWindow(object):
         self.txtZona1T.setObjectName(u"txtZona1T")
         self.txtZona1T.setMinimumSize(QSize(98, 20))
         self.txtZona1T.setMaximumSize(QSize(55, 40))
-        self.txtZona1T.setFont(font)
+        self.txtZona1T.setFont(font1)
         self.txtZona1T.setStyleSheet(u"border-radius:0px;\n"
 "border-top: 1px solid;\n"
 "border-bottom: 1px solid;\n"
@@ -963,7 +999,7 @@ class Ui_AdministratorWindow(object):
         self.label_24.setObjectName(u"label_24")
         self.label_24.setMinimumSize(QSize(98, 20))
         self.label_24.setMaximumSize(QSize(140, 40))
-        self.label_24.setFont(font6)
+        self.label_24.setFont(font)
         self.label_24.setStyleSheet(u"border-radius:0px;\n"
 "border-top: 1px solid;\n"
 "border-bottom: 1px solid;\n"
@@ -976,7 +1012,7 @@ class Ui_AdministratorWindow(object):
         self.txtZona2T.setObjectName(u"txtZona2T")
         self.txtZona2T.setMinimumSize(QSize(98, 20))
         self.txtZona2T.setMaximumSize(QSize(55, 40))
-        self.txtZona2T.setFont(font)
+        self.txtZona2T.setFont(font1)
         self.txtZona2T.setStyleSheet(u"border-radius:0px;\n"
 "border-top: 1px solid;\n"
 "border-bottom: 1px solid;\n"
@@ -1047,7 +1083,7 @@ class Ui_AdministratorWindow(object):
         self.label_25.setObjectName(u"label_25")
         self.label_25.setMinimumSize(QSize(98, 20))
         self.label_25.setMaximumSize(QSize(140, 40))
-        self.label_25.setFont(font6)
+        self.label_25.setFont(font)
         self.label_25.setStyleSheet(u"border-radius:0px;\n"
 "border-top: 1px solid;\n"
 "border-bottom: 1px solid;\n"
@@ -1060,7 +1096,7 @@ class Ui_AdministratorWindow(object):
         self.txtZona3T.setObjectName(u"txtZona3T")
         self.txtZona3T.setMinimumSize(QSize(98, 20))
         self.txtZona3T.setMaximumSize(QSize(55, 40))
-        self.txtZona3T.setFont(font)
+        self.txtZona3T.setFont(font1)
         self.txtZona3T.setStyleSheet(u"border-radius:0px;\n"
 "border-top: 1px solid;\n"
 "border-bottom: 1px solid;\n"
@@ -1142,11 +1178,11 @@ class Ui_AdministratorWindow(object):
 
         self.frame_19 = QFrame(self.frame_15)
         self.frame_19.setObjectName(u"frame_19")
-        sizePolicy7 = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
-        sizePolicy7.setHorizontalStretch(0)
-        sizePolicy7.setVerticalStretch(0)
-        sizePolicy7.setHeightForWidth(self.frame_19.sizePolicy().hasHeightForWidth())
-        self.frame_19.setSizePolicy(sizePolicy7)
+        sizePolicy6 = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
+        sizePolicy6.setHorizontalStretch(0)
+        sizePolicy6.setVerticalStretch(0)
+        sizePolicy6.setHeightForWidth(self.frame_19.sizePolicy().hasHeightForWidth())
+        self.frame_19.setSizePolicy(sizePolicy6)
         self.frame_19.setMaximumSize(QSize(16777215, 40))
         self.frame_19.setStyleSheet(u"border:0px;\n"
 "background-color:rgba(255, 255, 255, 0);")
@@ -1180,8 +1216,8 @@ class Ui_AdministratorWindow(object):
         self.pbHistorialZonasF = QPushButton(self.frame_19)
         self.pbHistorialZonasF.setObjectName(u"pbHistorialZonasF")
         self.pbHistorialZonasF.setEnabled(True)
-        sizePolicy1.setHeightForWidth(self.pbHistorialZonasF.sizePolicy().hasHeightForWidth())
-        self.pbHistorialZonasF.setSizePolicy(sizePolicy1)
+        sizePolicy5.setHeightForWidth(self.pbHistorialZonasF.sizePolicy().hasHeightForWidth())
+        self.pbHistorialZonasF.setSizePolicy(sizePolicy5)
         self.pbHistorialZonasF.setMinimumSize(QSize(98, 0))
         self.pbHistorialZonasF.setMaximumSize(QSize(16777215, 16777215))
         font8 = QFont()
@@ -1221,8 +1257,8 @@ class Ui_AdministratorWindow(object):
         self.horizontalLayout_17.setContentsMargins(0, 0, 0, 0)
         self.pbHistorialZonasT = QPushButton(self.frame_20)
         self.pbHistorialZonasT.setObjectName(u"pbHistorialZonasT")
-        sizePolicy1.setHeightForWidth(self.pbHistorialZonasT.sizePolicy().hasHeightForWidth())
-        self.pbHistorialZonasT.setSizePolicy(sizePolicy1)
+        sizePolicy5.setHeightForWidth(self.pbHistorialZonasT.sizePolicy().hasHeightForWidth())
+        self.pbHistorialZonasT.setSizePolicy(sizePolicy5)
         self.pbHistorialZonasT.setFont(font8)
         self.pbHistorialZonasT.setStyleSheet(u"QPushButton:enabled{\n"
 "	background-color: rgb(214, 214, 214);\n"
@@ -1262,9 +1298,9 @@ class Ui_AdministratorWindow(object):
 
         self.frame_17 = QFrame(self.frame_15)
         self.frame_17.setObjectName(u"frame_17")
-        sizePolicy1.setHeightForWidth(self.frame_17.sizePolicy().hasHeightForWidth())
-        self.frame_17.setSizePolicy(sizePolicy1)
-        self.frame_17.setMinimumSize(QSize(100, 0))
+        sizePolicy5.setHeightForWidth(self.frame_17.sizePolicy().hasHeightForWidth())
+        self.frame_17.setSizePolicy(sizePolicy5)
+        self.frame_17.setMinimumSize(QSize(96, 0))
         self.frame_17.setMaximumSize(QSize(1000, 16777215))
         self.frame_17.setSizeIncrement(QSize(0, 0))
         self.frame_17.setStyleSheet(u"QFrame{\n"
@@ -1291,11 +1327,11 @@ class Ui_AdministratorWindow(object):
         self.horizontalLayout_32.setContentsMargins(-1, 0, -1, 0)
         self.frame_75 = QFrame(self.frame_74)
         self.frame_75.setObjectName(u"frame_75")
-        sizePolicy8 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
-        sizePolicy8.setHorizontalStretch(0)
-        sizePolicy8.setVerticalStretch(0)
-        sizePolicy8.setHeightForWidth(self.frame_75.sizePolicy().hasHeightForWidth())
-        self.frame_75.setSizePolicy(sizePolicy8)
+        sizePolicy7 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
+        sizePolicy7.setHorizontalStretch(0)
+        sizePolicy7.setVerticalStretch(0)
+        sizePolicy7.setHeightForWidth(self.frame_75.sizePolicy().hasHeightForWidth())
+        self.frame_75.setSizePolicy(sizePolicy7)
         self.frame_75.setMinimumSize(QSize(96, 0))
         self.frame_75.setFrameShape(QFrame.StyledPanel)
         self.frame_75.setFrameShadow(QFrame.Raised)
@@ -1317,8 +1353,8 @@ class Ui_AdministratorWindow(object):
 
         self.frame_77 = QFrame(self.frame_74)
         self.frame_77.setObjectName(u"frame_77")
-        sizePolicy8.setHeightForWidth(self.frame_77.sizePolicy().hasHeightForWidth())
-        self.frame_77.setSizePolicy(sizePolicy8)
+        sizePolicy7.setHeightForWidth(self.frame_77.sizePolicy().hasHeightForWidth())
+        self.frame_77.setSizePolicy(sizePolicy7)
         self.frame_77.setMinimumSize(QSize(96, 0))
         self.frame_77.setFrameShape(QFrame.StyledPanel)
         self.frame_77.setFrameShadow(QFrame.Raised)
@@ -1422,7 +1458,7 @@ class Ui_AdministratorWindow(object):
         self.label_30.setObjectName(u"label_30")
         self.label_30.setMinimumSize(QSize(98, 20))
         self.label_30.setMaximumSize(QSize(140, 40))
-        self.label_30.setFont(font6)
+        self.label_30.setFont(font)
         self.label_30.setStyleSheet(u"border-radius:0px;\n"
 "border-top: 1px solid;\n"
 "border-bottom: 1px solid;\n"
@@ -1435,7 +1471,7 @@ class Ui_AdministratorWindow(object):
         self.txtZona1F.setObjectName(u"txtZona1F")
         self.txtZona1F.setMinimumSize(QSize(98, 20))
         self.txtZona1F.setMaximumSize(QSize(55, 40))
-        self.txtZona1F.setFont(font)
+        self.txtZona1F.setFont(font1)
         self.txtZona1F.setStyleSheet(u"border-radius:0px;\n"
 "border-top: 1px solid;\n"
 "border-bottom: 1px solid;\n"
@@ -1504,7 +1540,7 @@ class Ui_AdministratorWindow(object):
         self.label_29.setObjectName(u"label_29")
         self.label_29.setMinimumSize(QSize(98, 20))
         self.label_29.setMaximumSize(QSize(140, 40))
-        self.label_29.setFont(font6)
+        self.label_29.setFont(font)
         self.label_29.setStyleSheet(u"border-radius:0px;\n"
 "border-top: 1px solid;\n"
 "border-bottom: 1px solid;\n"
@@ -1517,7 +1553,7 @@ class Ui_AdministratorWindow(object):
         self.txtZona2F.setObjectName(u"txtZona2F")
         self.txtZona2F.setMinimumSize(QSize(98, 20))
         self.txtZona2F.setMaximumSize(QSize(55, 40))
-        self.txtZona2F.setFont(font)
+        self.txtZona2F.setFont(font1)
         self.txtZona2F.setStyleSheet(u"border-radius:0px;\n"
 "border-top: 1px solid;\n"
 "border-bottom: 1px solid;\n"
@@ -1588,7 +1624,7 @@ class Ui_AdministratorWindow(object):
         self.label_31.setObjectName(u"label_31")
         self.label_31.setMinimumSize(QSize(98, 20))
         self.label_31.setMaximumSize(QSize(140, 40))
-        self.label_31.setFont(font6)
+        self.label_31.setFont(font)
         self.label_31.setStyleSheet(u"border-radius:0px;\n"
 "border-top: 1px solid;\n"
 "border-bottom: 1px solid;\n"
@@ -1601,7 +1637,7 @@ class Ui_AdministratorWindow(object):
         self.txtZona3F.setObjectName(u"txtZona3F")
         self.txtZona3F.setMinimumSize(QSize(98, 20))
         self.txtZona3F.setMaximumSize(QSize(55, 40))
-        self.txtZona3F.setFont(font)
+        self.txtZona3F.setFont(font1)
         self.txtZona3F.setStyleSheet(u"border-radius:0px;\n"
 "border-top: 1px solid;\n"
 "border-bottom: 1px solid;\n"
@@ -1737,11 +1773,8 @@ class Ui_AdministratorWindow(object):
         self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
         self.labelColadas = QLabel(self.frame_22)
         self.labelColadas.setObjectName(u"labelColadas")
-        sizePolicy9 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
-        sizePolicy9.setHorizontalStretch(0)
-        sizePolicy9.setVerticalStretch(0)
-        sizePolicy9.setHeightForWidth(self.labelColadas.sizePolicy().hasHeightForWidth())
-        self.labelColadas.setSizePolicy(sizePolicy9)
+        sizePolicy1.setHeightForWidth(self.labelColadas.sizePolicy().hasHeightForWidth())
+        self.labelColadas.setSizePolicy(sizePolicy1)
         self.labelColadas.setMinimumSize(QSize(96, 0))
         self.labelColadas.setMaximumSize(QSize(16777215, 35))
         self.labelColadas.setFont(font8)
@@ -1767,11 +1800,11 @@ class Ui_AdministratorWindow(object):
         self.horizontalLayout_18.setContentsMargins(0, 0, 0, 0)
         self.pbAddColada = QPushButton(self.frame_33)
         self.pbAddColada.setObjectName(u"pbAddColada")
-        sizePolicy10 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
-        sizePolicy10.setHorizontalStretch(0)
-        sizePolicy10.setVerticalStretch(0)
-        sizePolicy10.setHeightForWidth(self.pbAddColada.sizePolicy().hasHeightForWidth())
-        self.pbAddColada.setSizePolicy(sizePolicy10)
+        sizePolicy8 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+        sizePolicy8.setHorizontalStretch(0)
+        sizePolicy8.setVerticalStretch(0)
+        sizePolicy8.setHeightForWidth(self.pbAddColada.sizePolicy().hasHeightForWidth())
+        self.pbAddColada.setSizePolicy(sizePolicy8)
         self.pbAddColada.setMinimumSize(QSize(98, 35))
         self.pbAddColada.setMaximumSize(QSize(16777215, 35))
         font9 = QFont()
@@ -1795,8 +1828,8 @@ class Ui_AdministratorWindow(object):
 
         self.pbDeleteColada = QPushButton(self.frame_33)
         self.pbDeleteColada.setObjectName(u"pbDeleteColada")
-        sizePolicy10.setHeightForWidth(self.pbDeleteColada.sizePolicy().hasHeightForWidth())
-        self.pbDeleteColada.setSizePolicy(sizePolicy10)
+        sizePolicy8.setHeightForWidth(self.pbDeleteColada.sizePolicy().hasHeightForWidth())
+        self.pbDeleteColada.setSizePolicy(sizePolicy8)
         self.pbDeleteColada.setMinimumSize(QSize(98, 35))
         self.pbDeleteColada.setMaximumSize(QSize(16777215, 35))
         self.pbDeleteColada.setFont(font9)
@@ -1829,6 +1862,9 @@ class Ui_AdministratorWindow(object):
 
         self.verticalLayout.addWidget(self.frameBottom)
 
+
+        self.horizontalLayout_13.addWidget(self.frame_23)
+
         AdministratorWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(AdministratorWindow)
@@ -1838,13 +1874,14 @@ class Ui_AdministratorWindow(object):
 
     def retranslateUi(self, AdministratorWindow):
         AdministratorWindow.setWindowTitle(QCoreApplication.translate("AdministratorWindow", u"Pantalla Principal - Abaxfem", None))
-        self.label.setText("")
+        self.pbVerCucharas.setText(QCoreApplication.translate("AdministratorWindow", u"Men\u00fa", None))
         self.label_3.setText("")
         self.labelUsername.setText(QCoreApplication.translate("AdministratorWindow", u"-", None))
         self.pbVerArchivos.setText(QCoreApplication.translate("AdministratorWindow", u"Ver Archivos", None))
         self.pbPerfiles.setText(QCoreApplication.translate("AdministratorWindow", u"Editar Perfiles", None))
         self.pbHistorial.setText(QCoreApplication.translate("AdministratorWindow", u"Historial", None))
         self.pbReporte.setText(QCoreApplication.translate("AdministratorWindow", u"Reporte", None))
+        self.label.setText("")
         ___qtreewidgetitem = self.treeMenu.headerItem()
         ___qtreewidgetitem.setText(0, QCoreApplication.translate("AdministratorWindow", u"Cuchara/Campa\u00f1a", None));
         self.pbAddCuchara.setText(QCoreApplication.translate("AdministratorWindow", u"A\u00f1adir Cuchara", None))
