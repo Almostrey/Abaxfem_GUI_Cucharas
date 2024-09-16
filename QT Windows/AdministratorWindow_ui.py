@@ -354,8 +354,8 @@ class Ui_AdministratorWindow(object):
         self.frame_14.setObjectName(u"frame_14")
         sizePolicy.setHeightForWidth(self.frame_14.sizePolicy().hasHeightForWidth())
         self.frame_14.setSizePolicy(sizePolicy)
-        self.frame_14.setMinimumSize(QSize(96, 100))
-        self.frame_14.setMaximumSize(QSize(16777215, 100))
+        self.frame_14.setMinimumSize(QSize(280, 100))
+        self.frame_14.setMaximumSize(QSize(280, 100))
         self.frame_14.setStyleSheet(u" border: 0px solid gray;\n"
 "    border-radius: 10px;\n"
 "\n"
@@ -373,9 +373,13 @@ class Ui_AdministratorWindow(object):
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.pbAddCuchara = QPushButton(self.frame_14)
         self.pbAddCuchara.setObjectName(u"pbAddCuchara")
-        sizePolicy.setHeightForWidth(self.pbAddCuchara.sizePolicy().hasHeightForWidth())
-        self.pbAddCuchara.setSizePolicy(sizePolicy)
-        self.pbAddCuchara.setMinimumSize(QSize(98, 40))
+        sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.pbAddCuchara.sizePolicy().hasHeightForWidth())
+        self.pbAddCuchara.setSizePolicy(sizePolicy3)
+        self.pbAddCuchara.setMinimumSize(QSize(137, 40))
+        self.pbAddCuchara.setMaximumSize(QSize(16777215, 16777215))
         font6 = QFont()
         font6.setFamilies([u"Arial"])
         font6.setPointSize(11)
@@ -398,9 +402,9 @@ class Ui_AdministratorWindow(object):
 
         self.pbDeleteCuchara = QPushButton(self.frame_14)
         self.pbDeleteCuchara.setObjectName(u"pbDeleteCuchara")
-        sizePolicy.setHeightForWidth(self.pbDeleteCuchara.sizePolicy().hasHeightForWidth())
-        self.pbDeleteCuchara.setSizePolicy(sizePolicy)
-        self.pbDeleteCuchara.setMinimumSize(QSize(98, 40))
+        sizePolicy3.setHeightForWidth(self.pbDeleteCuchara.sizePolicy().hasHeightForWidth())
+        self.pbDeleteCuchara.setSizePolicy(sizePolicy3)
+        self.pbDeleteCuchara.setMinimumSize(QSize(137, 40))
         self.pbDeleteCuchara.setFont(font6)
         self.pbDeleteCuchara.setStyleSheet(u"QPushButton{\n"
 "	border:1px solid gray;\n"
@@ -421,7 +425,7 @@ class Ui_AdministratorWindow(object):
         self.pbAddCampana.setObjectName(u"pbAddCampana")
         sizePolicy.setHeightForWidth(self.pbAddCampana.sizePolicy().hasHeightForWidth())
         self.pbAddCampana.setSizePolicy(sizePolicy)
-        self.pbAddCampana.setMinimumSize(QSize(98, 40))
+        self.pbAddCampana.setMinimumSize(QSize(137, 40))
         self.pbAddCampana.setFont(font6)
         self.pbAddCampana.setStyleSheet(u"QPushButton{\n"
 "	border:1px solid gray;\n"
@@ -442,7 +446,7 @@ class Ui_AdministratorWindow(object):
         self.pbDeleteCampana.setObjectName(u"pbDeleteCampana")
         sizePolicy.setHeightForWidth(self.pbDeleteCampana.sizePolicy().hasHeightForWidth())
         self.pbDeleteCampana.setSizePolicy(sizePolicy)
-        self.pbDeleteCampana.setMinimumSize(QSize(98, 40))
+        self.pbDeleteCampana.setMinimumSize(QSize(137, 40))
         self.pbDeleteCampana.setFont(font6)
         self.pbDeleteCampana.setStyleSheet(u"QPushButton{\n"
 "	border:1px solid gray;\n"
@@ -467,9 +471,6 @@ class Ui_AdministratorWindow(object):
 
         self.frame_2 = QFrame(self.frameBottom)
         self.frame_2.setObjectName(u"frame_2")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
         sizePolicy3.setHeightForWidth(self.frame_2.sizePolicy().hasHeightForWidth())
         self.frame_2.setSizePolicy(sizePolicy3)
         self.frame_2.setMinimumSize(QSize(96, 0))
