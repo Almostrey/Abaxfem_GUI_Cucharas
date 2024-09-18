@@ -3,7 +3,7 @@ from datetime import datetime
 from os import mkdir, path, remove, getcwd, linesep
 from shutil import rmtree, copyfile
 from matplotlib.pyplot import show, plot, savefig, title, xlabel, ylabel, figure, vlines, grid, ylim, legend
-import read_historia
+#import read_historia
 import pandas as pd
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -859,7 +859,7 @@ if __name__ == "__main__":
     #print(CucharaIsWithSomething("2"))
     #print(countCucharas())
     #print(getNameCucharas())
-    #print(getNameCampanas("Cucha4"))
+    #print(getNameCampanas("1")[-1])
     #print(getNameColadas("2","15"))
     #print(countCampanas("2"))
     #print(type(getNameCampanas(getNameCucharas()[0])[2]))
@@ -886,7 +886,8 @@ if __name__ == "__main__":
     #print(getRiesgoEF('1', '9'))
     #print(getColadasRiesgos('3', '1'))
     #sendEmail("Prueba 1", "Fin de Cuchara", "test2.pdf", "test2.pdf")
-    print(GetReporteObservaciones("21", "1"))
+    #print(GetReporteObservaciones("21", "1"))
+    print(modifyEscoria(nameCampana="11", nameCuchara="1", numEscoria=22))
     pass
     '''conn = sql.connect(nameDB)
     cursor = conn.cursor()

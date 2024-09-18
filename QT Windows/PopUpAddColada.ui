@@ -17,7 +17,7 @@
    <string>Añadir Nueva Colada - Abaxfem</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resources.qrc">
+   <iconset>
     <normaloff>:/Images/ResourcesFolder/Imagenes/Logo_Lineas.png</normaloff>:/Images/ResourcesFolder/Imagenes/Logo_Lineas.png</iconset>
   </property>
   <property name="styleSheet">
@@ -978,6 +978,9 @@ border:0px;</string>
       <pointsize>13</pointsize>
       <bold>false</bold>
      </font>
+    </property>
+    <property name="toolTip">
+     <string>Importante! Los archivos deben estar guardados en la misma carpeta de la siguiente manera: (151F. jpg/xlsx) (151T. jpg/xlsx). Donde 151 es el número de la colada.</string>
     </property>
     <property name="styleSheet">
      <string notr="true">border:0px;

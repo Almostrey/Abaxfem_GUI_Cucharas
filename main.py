@@ -1338,12 +1338,16 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
         super(AdministratorWindow, self).__init__()
         self.setupUi(self)
         self.showMaximized()
+        self.frameCucharas.setMinimumWidth(300)
         #self.pbVerCucharas.setStyleSheet("QPushButton{icon.source: '/ResourcesFolder/featherIcons/chevrons-right.svg'}")
         #self.setWindowFlag(qtc.Qt.FramelessWindowHint)
         #self.setAttribute(qtc.Qt.WA_TranslucentBackground)
         #self.loadRefracTemps()
         self.VerCucharas = True
-        self.pbVerCucharas.clicked.connect(self.collapseCucharas)
+        self.popUpAddColadaVisible = False
+        self.frameAddColada.hide()
+        self.frameAddColada.setMinimumWidth(0)
+        self.pbVerCucharas.clicked.connect(self.collapseMenuCucharas)
         self.printTree()
         self.printHistory()
         self.checkHighTemperature()
@@ -1354,17 +1358,111 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
         self.pbDeleteCuchara.clicked.connect(self.deleteCuchara)
         self.pbAddCampana.clicked.connect(self.addCampana)
         self.pbDeleteCampana.clicked.connect(self.deleteCampana)
-        self.pbAddColada.clicked.connect(self.addColada)
+        self.pbAddColada.clicked.connect(self.displayMenuColada)
+        self.pb_aceptar.clicked.connect(self.addColada)
         self.pbHistorialZonasF.clicked.connect(self.changeImageF)
         self.pbHistorialZonasT.clicked.connect(self.changeImageT)
         self.pbVerArchivos.clicked.connect(self.verArchivos)
         self.pbDeleteColada.clicked.connect(self.deleteColada)
         self.pbReporte.clicked.connect(self.generarReporte)
-    def collapseCucharas(self):
+
+        self.pb_recortar.clicked.connect(self.recortarImg)
+        self.progressBar.hide()
+        self.pb_aceptar.setEnabled(0)
+        self.pb_recortar.setEnabled(1)
+        self.pbFileDialog1.clicked.connect(self.fileDialogWindow)
+        self.pbFileDialog2.clicked.connect(self.fileDialogWindow)
+        self.pbFileDialog3.clicked.connect(self.fileDialogWindow)
+        self.pbFileDialog4.clicked.connect(self.fileDialogWindow)
+        self.pbSiEscoria.clicked.connect(self.siNoEscoria)
+        self.pbNoEscoria.clicked.connect(self.siNoEscoria)
+        regex = qtc.QRegularExpression("[0-9-a-z-A-Z_ .,/\!@$%^&*()=+:;?+-ñáéíóú]+")
+        validator = qtg.QRegularExpressionValidator(regex)
+        self.txtObservaciones.setValidator(validator)
+    def numpy2float(self, numnumpy):
+        aux = []
+        for i in numnumpy:
+            aux.append(float(i))
+        return aux
+    def setPbAceptarName(self):
+        self.pb_aceptar.setText("Añadir Colada")
+    def siNoEscoria(self):
+        if self.pbSiEscoria.isEnabled() and self.pbNoEscoria.isEnabled():
+            self.pbNoEscoria.setEnabled(False)
+            self.sbEscoria.setEnabled(False)
+        else:
+            try:
+                nameCuchara = self.cbCuchara.text()
+                if dataManager.getEscoria(nameCuchara) == 0:
+                    self.changeEnablePb()
+                else:
+                    self.pbNoEscoria.setEnabled(False)                
+                    self.pbSiEscoria.setEnabled(True)
+                    self.sbEscoria.setEnabled(True)
+            except:
+                self.pbSiEscoria.setEnabled(False)
+                self.pbNoEscoria.setEnabled(False)
+                self.sbEscoria.setEnabled(False)
+    def changeEnablePb(self):
+        if self.pbSiEscoria.isEnabled(): 
+            self.pbSiEscoria.setEnabled(False)
+            self.pbNoEscoria.setEnabled(True)
+            self.sbEscoria.setEnabled(True)
+        else:
+            self.pbSiEscoria.setEnabled(True)
+            self.pbNoEscoria.setEnabled(False)
+            self.sbEscoria.setEnabled(False)
+    def fileDialogWindow(self):
+        fileName, _ = qtw.QFileDialog.getOpenFileName(self,"QFileDialog.getOpenFileName()", "","Imagen (*.jpg);; Excel (*.xlsx);; Imagen o Excel (*.jpg *.xlsx)")
+        if ".jpg" in fileName:
+            commonPath = fileName[0:-5]
+        else:
+            commonPath = fileName[0:-6]
+        try:
+            if isfile(commonPath+"F.jpg") and isfile(commonPath+"F.xlsx") and isfile(commonPath+"T.jpg") and isfile(commonPath+"T.xlsx") and int(self.txtUltimaColada.text()) < int(commonPath.split("/")[-1]):
+                self.txtPathTermografiaF.setText(commonPath+"F.jpg")
+                self.txtPathTermografiaT.setText(commonPath+"T.jpg")
+                self.txtPathExcelF.setText(commonPath+"F.xlsx")
+                self.txtPathExcelT.setText(commonPath+"T.xlsx")
+                self.txtNewColada.setText(commonPath.split("/")[-1])
+                self.pb_aceptar.setEnabled(0)
+                self.pb_recortar.setEnabled(1)
+                self.pb_recortar.setText("Recortar Imagen")
+            else:
+                self.txtPathTermografiaF.setText("Error en el nombre")
+                self.txtPathTermografiaT.setText("Error en el nombre")
+                self.txtPathExcelF.setText("o archivos faltantes")
+                self.txtPathExcelT.setText("o archivos faltantes")
+                self.txtNewColada.setText("")
+                self.pb_aceptar.setEnabled(0)
+                self.pb_recortar.setEnabled(1)
+                self.pb_recortar.setText("Recortar Imagen")
+        except:
+            self.txtPathTermografiaF.setText("Error en el nombre")
+            self.txtPathTermografiaT.setText("Error en el nombre")
+            self.txtPathExcelF.setText("o archivos faltantes")
+            self.txtPathExcelT.setText("o archivos faltantes")
+            self.txtNewColada.setText("")
+            self.pb_aceptar.setEnabled(0)
+            self.pb_recortar.setEnabled(1)
+            self.pb_recortar.setText("Recortar Imagen")
+    def recortarImg(self):
+        global windowColada
+        if self.txtNewColada.text() != "":
+            windowColada = self.window()
+            windowColada.hide()
+            self.cropWindow = cropWindow(self.txtPathTermografiaF.text())
+            self.cropWindow.show()
+            self.pb_recortar.setEnabled(0)
+            self.pb_aceptar.setEnabled(1)
+            self.pb_recortar.setText("Recorte Realizado")
+        else:
+            pass
+    def collapseMenuCucharas(self):
         self.animation = QPropertyAnimation(self.frameCucharas, b"minimumWidth")
         self.animationTree = QPropertyAnimation(self.treeMenu, b"minimumWidth")
-        self.animation.setDuration(500)
-        self.animationTree.setDuration(500)
+        self.animation.setDuration(250)
+        self.animationTree.setDuration(250)
         if self.VerCucharas == 1:
             self.frame_14.hide()
             self.animation.setStartValue(self.frameCucharas.width())
@@ -1528,10 +1626,25 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
                 self.frame_17.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasFrontal.png');")
             except:
                 self.frame_17.setSty7leSheet("border-image: url('');")
-    def addColada(self):
-        self.close()
-        self.w = PopUpAddColada()
-        self.w.show()
+    def displayMenuColada(self):
+        #if self.VerCucharas == 1:
+        #    self.collapseMenuCucharas()
+        self.animationAddColada = QPropertyAnimation(self.frameAddColada, b"minimumWidth")
+        self.animationAddColada.setDuration(250)
+        if self.popUpAddColadaVisible == False:
+            self.frameAddColada.show()
+            self.animationAddColada.setStartValue(0)
+            self.animationAddColada.setEndValue(300)
+        else:
+            self.animationAddColada.setStartValue(300)
+            self.animationAddColada.setEndValue(0)
+        self.animationAddColada.setEasingCurve(qtc.QEasingCurve.InOutQuart)
+        self.animationAddColada.start()
+        self.animationAddColada.stateChanged.connect(self.showPopUpAddColada)
+        self.popUpAddColadaVisible = not self.popUpAddColadaVisible
+    def showPopUpAddColada(self):
+        if self.popUpAddColadaVisible == False:
+            self.frameAddColada.hide()
     def addCuchara(self):
         self.close()
         self.w = PopUpAddCuchara()
@@ -1589,11 +1702,37 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
         self.dateHistory4.setText(briefHistory[0][3])
     def onItemClicked(self):
         try:
+            self.sbEscoria.setValue(0)
+            self.pb_recortar.setEnabled(1)
+            self.pb_aceptar.setEnabled(0)
+            self.pb_recortar.setText("Recortar Imagen")
+            self.cbCuchara.setText("")
+            self.txtCampana.setText("")
+            self.txtUltimaColada.setText("")
+            self.txtPathTermografiaF.setText("C: ... /Docs/")
+            self.txtPathTermografiaT.setText("C: ... /Docs/")
+            self.txtPathExcelT.setText("C: ... /Docs/")
+            self.txtPathExcelF.setText("C: ... /Docs/")
+            self.txtNewColada.setText("")
             campana = self.treeMenu.currentItem().text(0)
             cuchara = self.treeMenu.currentItem().parent().text(0)
             coladas = dataManager.getNameColadas(cuchara[8:], campana[8:])
             #print("Coladas: "+str(coladas)[1:-1])
             self.labelColadas.setText("Coladas: "+str(coladas)[1:-1])
+            self.cbCuchara.setText(str(cuchara)[8:])
+            ultimaCampana = dataManager.getNameCampanas(str(cuchara)[8:])[-1]
+            self.txtCampana.setText(str(ultimaCampana))
+            #print(dataManager.getNameColadas(str(cuchara[8:]), str(ultimaCampana))[-1])
+            self.txtUltimaColada.setText(str(dataManager.getNameColadas(str(cuchara[8:]), str(ultimaCampana))[-1]))
+            if dataManager.getEscoria == 0:
+                self.pbNoEscoria.setEnabled(1)
+                self.pbSiEscoria.setEnabled(0)
+                self.sbEscoria.setEnabled(1)
+            else:
+                self.sbEscoria.setValue(int(dataManager.getEscoria(cuchara[8:])))
+                self.pbNoEscoria.setEnabled(0)
+                self.pbSiEscoria.setEnabled(1)
+                self.sbEscoria.setEnabled(0)
             self.loadZonas()
             self.updateImage()
         except:
@@ -1679,6 +1818,151 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
     def editUsers(self):
         self.close()
         self.w = editUsers()
+        self.w.show()
+    def addColada(self):
+        global PositionMatrixF, PositionMatrixT
+        try:
+            self.frameAddColada.setEnabled(0)
+            self.treeMenu.setEnabled(0)
+            self.frame_14.setEnabled(0)
+            self.frame_21.setEnabled(0)
+            self.frameTop.setEnabled(0)
+            self.frame_21.setEnabled(0)
+            self.frame_16.setEnabled(0)
+            self.pb_aceptar.hide()
+            self.progressBar.show()
+            sleep(0.1)
+            self.progressBar.setValue(0)
+            escoria = "2"
+            numEscoria = 0
+            numUltimaColada = int(self.txtUltimaColada.text())
+            numColada = int(self.txtNewColada.text())
+            if not self.pbSiEscoria.isEnabled(): 
+                if int(self.sbEscoria.text()) == 0:
+                    pass
+                else:
+                    numEscoria = int(self.sbEscoria.text())
+                    escoria = "1"
+            else:
+                pass
+            if numColada>=numEscoria and numUltimaColada<numColada:
+                nameCuchara = self.cbCuchara.text()
+                nameCampana = int(self.txtCampana.text())
+                fileName = self.txtPathExcelF.text()
+                if ".jpg" in fileName:
+                    commonPath = fileName[0:-5]
+                else:
+                    commonPath = fileName[0:-6]
+                cantidadColadas = len(dataManager.getNameColadas(nameCuchara, str(nameCampana)))
+                sleep(0.1)
+                self.progressBar.setValue(25)
+                [colF, colT, HTmaxCucharaF, HTmaxCucharaT, HTmaxZonasF, HTmaxZonasT, HTmaxRefF, HTmaxRefT] = dataManager.getHistoricosCampanaFT(nameCuchara, nameCampana)
+                sleep(0.1)
+                self.progressBar.setValue(50)
+                PositionMatrixF = pd.DataFrame(PositionMatrixF)
+                PositionMatrixT = pd.DataFrame(PositionMatrixT)
+                #-------------------------BOTON PARA TEXTO DE OBSERVACIONES-------------------------------------------
+                # texto_Observacion=Observacion_Colada()
+                # print(texto_Observacion)
+                #-------------------------BOTON PARA TEXTO DE OBSERVACIONES-------------------------------------------
+                infoF = V1.V1(self.txtPathTermografiaF.text(), self.txtPathExcelF.text(), PositionMatrixF)
+                infoT = V1.V1(self.txtPathTermografiaT.text(), self.txtPathExcelT.text(), PositionMatrixT)
+                sleep(0.2)
+                self.progressBar.setValue(75)
+                if int(dataManager.getNameColadas(nameCuchara, str(nameCampana))[-1]) == 0:
+                # if True:
+                    # Nuevo
+                    Historia = 0
+                    Nuevo1Viejo2 = 1
+                    HistoriaF = 0
+                    HistoriaT = 0
+                    pathDirectory = dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/"
+                    qtw.QApplication.processEvents()
+                    [RiesgoF, RiesgoT, observacionF, observacionT] = main_MP_sup.getRiesgo(numColada, numColada, self.numpy2float(reshape(infoF[9], 3)), self.numpy2float(reshape(infoT[9], 3)), Nuevo1Viejo2, pathDirectory, int(self.sbEscoria.text()))
+                    
+                else:
+                    # Viejo
+                    #[HistoriaPreviaF, HistoriaPreviaT] = dataManager.getHistoriaEF(nameCuchara, nameCampana)
+                    Nuevo1Viejo2 = 2
+                    HistoriaF = 0
+                    HistoriaT = 0
+                    pathDirectory = dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/"
+                    qtw.QApplication.processEvents()
+                    zonasSup = dataManager.getZonasEF(str(nameCuchara), str(nameCampana))[0]
+                    zonasSup.append(self.numpy2float(reshape(infoF[9], 3)))
+                    zonasInf = dataManager.getZonasEF(str(nameCuchara), str(nameCampana))[1]
+                    zonasInf.append(self.numpy2float(reshape(infoT[9], 3)))
+                    #print(zonasSup)
+                    #print(zonasInf)
+                    coladasHistoria = dataManager.getNameColadas(str(nameCuchara), str(nameCampana))
+                    coladasHistoria.append(numColada)
+                    #print(coladasHistoria)
+                    #print("paso1")
+                    [RiesgoF, RiesgoT, observacionF, observacionT] = main_MP_sup.getRiesgo(numColada, coladasHistoria, zonasSup, zonasInf, Nuevo1Viejo2, pathDirectory, int(self.sbEscoria.text()))
+                # print(pathDirectory)
+                # grafico_espesores(pathDirectory)    
+                sleep(0.2)
+                self.progressBar.setValue(85)
+                
+                txtObservaciones = str(self.txtObservaciones.text())
+                dataManager.add_Colada(nameCuchara, nameCampana, numColada, float(infoF[8]), float(infoT[8]), self.numpy2float(reshape(infoF[9], 3)), 
+                                       self.numpy2float(reshape(infoT[9], 3)), self.numpy2float(reshape(infoF[5], 72)), self.numpy2float(reshape(infoT[5], 72)), 
+                                       str(HistoriaF), str(HistoriaT), str(RiesgoF), str(RiesgoT), 
+                                       str(observacionF), txtObservaciones)
+                sleep(0.2)
+                self.progressBar.setValue(100)
+                sleep(1)
+                if dataManager.getEscoria(nameCuchara)==0:
+                    dataManager.modifyEscoria(nameCuchara, str(nameCampana), numEscoria)
+                else:
+                    pass
+                dataManager.updatePlot(str(nameCuchara), str(nameCampana))
+                copy2(commonPath+"F.jpg", "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/")
+                copy2(commonPath+"T.jpg", "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/")
+                [col, maxF, maxT, escoria] = dataManager.getMaxHistory(nameCuchara, nameCampana)
+                try:
+                    if max(maxF) >= umbralMaximo*0.9 or max(maxT) >= umbralMaximo*0.9:
+                        self.close()
+                        self.w = higherTempWindow()
+                        self.w.show()
+                    elif maxF[-2] >= maxF[-1] or maxT [-2] >= maxT[-1]:
+                        self.close()
+                        self.w = lowerTempWindow()
+                        self.w.show()
+                    else:
+                        self.exitPopUp()
+                except:
+                    self.exitPopUp()
+            else:
+                self.progressBar.hide()
+                self.pb_aceptar.show()
+                if numColada<numEscoria:
+                    self.pb_aceptar.setText("# Escoria >= # Colada")
+                    Timer(5, self.setPbAceptarName).start()
+                else:
+                    if numUltimaColada>=numColada:
+                        self.pb_aceptar.setText("# Colada >= # Ultima Colada")
+                        Timer(5, self.setPbAceptarName).start()
+                    else:
+                        pass
+        except:
+            if self.progressBar.value() == 50:
+                self.pb_aceptar.setText("Imágenes ingresadas incorrectas!")
+            else:
+                self.pb_aceptar.setText("Ingrese los datos faltantes")
+            Timer(5, self.setPbAceptarName).start()
+            self.pb_aceptar.show()
+            self.progressBar.hide()
+        finally:
+            self.frameAddColada.setEnabled(1)
+            self.treeMenu.setEnabled(1)
+            self.frame_14.setEnabled(1)
+            self.frame_21.setEnabled(1)
+            self.frame_16.setEnabled(1)
+            self.frameTop.setEnabled(1)
+    def exitPopUp(self):
+        self.close()
+        self.w = AdministratorWindow()
         self.w.show()
 
 class historialWindow(qtw.QMainWindow, Ui_historialWindow):
@@ -1919,7 +2203,8 @@ if __name__ == "__main__":
             window = Video_Logo_Window()
             #window = LoginWindow()
         else:
-            window = LoginWindow()
+            #window = LoginWindow()
+            window = AdministratorWindow()
     else:
         dataManager.dataIsCorrupted()
         window = PopUpApiKey()

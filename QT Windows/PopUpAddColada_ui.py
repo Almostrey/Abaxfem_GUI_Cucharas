@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'PopUpAddColada.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.0
+## Created by: Qt User Interface Compiler version 6.6.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -683,6 +683,9 @@ class Ui_PopUpAddColada(object):
         self.txtNewColada.setText(QCoreApplication.translate("PopUpAddColada", u"22", None))
         self.label_14.setText(QCoreApplication.translate("PopUpAddColada", u"Importante! Los archivos deben estar guardados en la misma", None))
         self.label_15.setText(QCoreApplication.translate("PopUpAddColada", u"carpeta de la siguiente manera: (151F. jpg/xlsx) (151T. jpg/xlsx)", None))
+#if QT_CONFIG(tooltip)
+        self.label_16.setToolTip(QCoreApplication.translate("PopUpAddColada", u"Importante! Los archivos deben estar guardados en la misma carpeta de la siguiente manera: (151F. jpg/xlsx) (151T. jpg/xlsx). Donde 151 es el n\u00famero de la colada.", None))
+#endif // QT_CONFIG(tooltip)
         self.label_16.setText(QCoreApplication.translate("PopUpAddColada", u"Donde 151 es el n\u00famero de la colada", None))
         self.txtUltimaColada.setText("")
         self.label_17.setText(QCoreApplication.translate("PopUpAddColada", u"\u00daltima Colada:", None))

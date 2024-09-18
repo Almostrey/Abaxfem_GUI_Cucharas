@@ -15,17 +15,18 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
-    QHeaderView, QLabel, QLayout, QMainWindow,
-    QPushButton, QSizePolicy, QSpacerItem, QTreeWidget,
-    QTreeWidgetItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractSpinBox, QApplication, QFrame, QGridLayout,
+    QHBoxLayout, QHeaderView, QLabel, QLayout,
+    QLineEdit, QMainWindow, QProgressBar, QPushButton,
+    QSizePolicy, QSpacerItem, QSpinBox, QToolButton,
+    QTreeWidget, QTreeWidgetItem, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_AdministratorWindow(object):
     def setupUi(self, AdministratorWindow):
         if not AdministratorWindow.objectName():
             AdministratorWindow.setObjectName(u"AdministratorWindow")
-        AdministratorWindow.resize(1366, 771)
+        AdministratorWindow.resize(1435, 771)
         AdministratorWindow.setMinimumSize(QSize(1366, 768))
         icon = QIcon()
         icon.addFile(u":/Images/ResourcesFolder/Imagenes/Logo_Lineas.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -354,7 +355,7 @@ class Ui_AdministratorWindow(object):
         self.frame_14.setObjectName(u"frame_14")
         sizePolicy.setHeightForWidth(self.frame_14.sizePolicy().hasHeightForWidth())
         self.frame_14.setSizePolicy(sizePolicy)
-        self.frame_14.setMinimumSize(QSize(280, 100))
+        self.frame_14.setMinimumSize(QSize(96, 100))
         self.frame_14.setMaximumSize(QSize(280, 100))
         self.frame_14.setStyleSheet(u" border: 0px solid gray;\n"
 "    border-radius: 10px;\n"
@@ -378,7 +379,7 @@ class Ui_AdministratorWindow(object):
         sizePolicy3.setVerticalStretch(0)
         sizePolicy3.setHeightForWidth(self.pbAddCuchara.sizePolicy().hasHeightForWidth())
         self.pbAddCuchara.setSizePolicy(sizePolicy3)
-        self.pbAddCuchara.setMinimumSize(QSize(137, 40))
+        self.pbAddCuchara.setMinimumSize(QSize(98, 40))
         self.pbAddCuchara.setMaximumSize(QSize(16777215, 16777215))
         font6 = QFont()
         font6.setFamilies([u"Arial"])
@@ -404,7 +405,7 @@ class Ui_AdministratorWindow(object):
         self.pbDeleteCuchara.setObjectName(u"pbDeleteCuchara")
         sizePolicy3.setHeightForWidth(self.pbDeleteCuchara.sizePolicy().hasHeightForWidth())
         self.pbDeleteCuchara.setSizePolicy(sizePolicy3)
-        self.pbDeleteCuchara.setMinimumSize(QSize(137, 40))
+        self.pbDeleteCuchara.setMinimumSize(QSize(98, 40))
         self.pbDeleteCuchara.setFont(font6)
         self.pbDeleteCuchara.setStyleSheet(u"QPushButton{\n"
 "	border:1px solid gray;\n"
@@ -425,7 +426,7 @@ class Ui_AdministratorWindow(object):
         self.pbAddCampana.setObjectName(u"pbAddCampana")
         sizePolicy.setHeightForWidth(self.pbAddCampana.sizePolicy().hasHeightForWidth())
         self.pbAddCampana.setSizePolicy(sizePolicy)
-        self.pbAddCampana.setMinimumSize(QSize(137, 40))
+        self.pbAddCampana.setMinimumSize(QSize(98, 40))
         self.pbAddCampana.setFont(font6)
         self.pbAddCampana.setStyleSheet(u"QPushButton{\n"
 "	border:1px solid gray;\n"
@@ -446,7 +447,7 @@ class Ui_AdministratorWindow(object):
         self.pbDeleteCampana.setObjectName(u"pbDeleteCampana")
         sizePolicy.setHeightForWidth(self.pbDeleteCampana.sizePolicy().hasHeightForWidth())
         self.pbDeleteCampana.setSizePolicy(sizePolicy)
-        self.pbDeleteCampana.setMinimumSize(QSize(137, 40))
+        self.pbDeleteCampana.setMinimumSize(QSize(98, 40))
         self.pbDeleteCampana.setFont(font6)
         self.pbDeleteCampana.setStyleSheet(u"QPushButton{\n"
 "	border:1px solid gray;\n"
@@ -514,7 +515,7 @@ class Ui_AdministratorWindow(object):
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.frame_4 = QFrame(self.frame_21)
         self.frame_4.setObjectName(u"frame_4")
-        self.frame_4.setMinimumSize(QSize(96, 150))
+        self.frame_4.setMinimumSize(QSize(96, 100))
         self.frame_4.setMaximumSize(QSize(16777215, 150))
         self.frame_4.setStyleSheet(u" border: 0px solid gray;\n"
 "    border-radius: 10px;\n"
@@ -532,7 +533,7 @@ class Ui_AdministratorWindow(object):
         self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
         self.frame_3 = QFrame(self.frame_4)
         self.frame_3.setObjectName(u"frame_3")
-        self.frame_3.setMinimumSize(QSize(98, 141))
+        self.frame_3.setMinimumSize(QSize(98, 91))
         self.frame_3.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "border: 1px solid;")
         self.frame_3.setFrameShape(QFrame.StyledPanel)
@@ -575,7 +576,7 @@ class Ui_AdministratorWindow(object):
 
         self.frame_10 = QFrame(self.frame_4)
         self.frame_10.setObjectName(u"frame_10")
-        self.frame_10.setMinimumSize(QSize(98, 141))
+        self.frame_10.setMinimumSize(QSize(98, 91))
         self.frame_10.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "border: 1px solid;")
         self.frame_10.setFrameShape(QFrame.StyledPanel)
@@ -616,7 +617,7 @@ class Ui_AdministratorWindow(object):
 
         self.frame_11 = QFrame(self.frame_4)
         self.frame_11.setObjectName(u"frame_11")
-        self.frame_11.setMinimumSize(QSize(98, 141))
+        self.frame_11.setMinimumSize(QSize(98, 91))
         self.frame_11.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "border: 1px solid;")
         self.frame_11.setFrameShape(QFrame.StyledPanel)
@@ -658,7 +659,7 @@ class Ui_AdministratorWindow(object):
 
         self.frame_12 = QFrame(self.frame_4)
         self.frame_12.setObjectName(u"frame_12")
-        self.frame_12.setMinimumSize(QSize(98, 141))
+        self.frame_12.setMinimumSize(QSize(98, 91))
         self.frame_12.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "border: 1px solid;")
         self.frame_12.setFrameShape(QFrame.StyledPanel)
@@ -699,7 +700,7 @@ class Ui_AdministratorWindow(object):
 
         self.frame_13 = QFrame(self.frame_4)
         self.frame_13.setObjectName(u"frame_13")
-        self.frame_13.setMinimumSize(QSize(98, 141))
+        self.frame_13.setMinimumSize(QSize(98, 91))
         self.frame_13.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "border: 1px solid;")
         self.frame_13.setFrameShape(QFrame.StyledPanel)
@@ -1721,6 +1722,8 @@ class Ui_AdministratorWindow(object):
 
         self.verticalLayout_13.addWidget(self.frame_15)
 
+        self.verticalLayout_13.setStretch(0, 1)
+        self.verticalLayout_13.setStretch(1, 2)
 
         self.verticalLayout_2.addWidget(self.frame_21)
 
@@ -1860,6 +1863,837 @@ class Ui_AdministratorWindow(object):
 
         self.horizontalLayout.addWidget(self.frame_2)
 
+        self.frameAddColada = QFrame(self.frameBottom)
+        self.frameAddColada.setObjectName(u"frameAddColada")
+        sizePolicy.setHeightForWidth(self.frameAddColada.sizePolicy().hasHeightForWidth())
+        self.frameAddColada.setSizePolicy(sizePolicy)
+        self.frameAddColada.setMinimumSize(QSize(300, 0))
+        self.frameAddColada.setMaximumSize(QSize(300, 16777215))
+        self.frameAddColada.setContextMenuPolicy(Qt.NoContextMenu)
+        self.frameAddColada.setStyleSheet(u"QFrame{\n"
+" border: 1px solid gray;\n"
+"    border-radius: 10px;\n"
+"\n"
+"\n"
+"     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\n"
+"                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);\n"
+"}")
+        self.frameAddColada.setFrameShape(QFrame.Box)
+        self.frameAddColada.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_14 = QVBoxLayout(self.frameAddColada)
+        self.verticalLayout_14.setSpacing(0)
+        self.verticalLayout_14.setObjectName(u"verticalLayout_14")
+        self.verticalLayout_14.setContentsMargins(0, 0, 0, 0)
+        self.frame = QFrame(self.frameAddColada)
+        self.frame.setObjectName(u"frame")
+        sizePolicy2.setHeightForWidth(self.frame.sizePolicy().hasHeightForWidth())
+        self.frame.setSizePolicy(sizePolicy2)
+        self.frame.setStyleSheet(u"border: 0px solid gray;")
+        self.frame.setFrameShape(QFrame.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_15 = QVBoxLayout(self.frame)
+        self.verticalLayout_15.setSpacing(0)
+        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
+        self.verticalLayout_15.setContentsMargins(0, 0, 0, 0)
+        self.label_7 = QLabel(self.frame)
+        self.label_7.setObjectName(u"label_7")
+        font10 = QFont()
+        font10.setFamilies([u"Arial"])
+        font10.setPointSize(20)
+        font10.setBold(True)
+        font10.setItalic(False)
+        font10.setKerning(True)
+        self.label_7.setFont(font10)
+        self.label_7.setStyleSheet(u" border: 0px solid gray;")
+        self.label_7.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_15.addWidget(self.label_7)
+
+
+        self.verticalLayout_14.addWidget(self.frame)
+
+        self.frame_48 = QFrame(self.frameAddColada)
+        self.frame_48.setObjectName(u"frame_48")
+        sizePolicy2.setHeightForWidth(self.frame_48.sizePolicy().hasHeightForWidth())
+        self.frame_48.setSizePolicy(sizePolicy2)
+        self.frame_48.setStyleSheet(u"border: 0px solid;")
+        self.frame_48.setFrameShape(QFrame.StyledPanel)
+        self.frame_48.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_16 = QVBoxLayout(self.frame_48)
+        self.verticalLayout_16.setSpacing(0)
+        self.verticalLayout_16.setObjectName(u"verticalLayout_16")
+        self.verticalLayout_16.setContentsMargins(0, 0, 0, 0)
+        self.frame_56 = QFrame(self.frame_48)
+        self.frame_56.setObjectName(u"frame_56")
+        sizePolicy2.setHeightForWidth(self.frame_56.sizePolicy().hasHeightForWidth())
+        self.frame_56.setSizePolicy(sizePolicy2)
+        self.frame_56.setStyleSheet(u"border-color: #DDDDDD;\n"
+"border:0px;\n"
+"background-color: #DDDDDD;")
+        self.frame_56.setFrameShape(QFrame.StyledPanel)
+        self.frame_56.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_24 = QHBoxLayout(self.frame_56)
+        self.horizontalLayout_24.setObjectName(u"horizontalLayout_24")
+        self.label_8 = QLabel(self.frame_56)
+        self.label_8.setObjectName(u"label_8")
+        sizePolicy2.setHeightForWidth(self.label_8.sizePolicy().hasHeightForWidth())
+        self.label_8.setSizePolicy(sizePolicy2)
+        font11 = QFont()
+        font11.setFamilies([u"Arial"])
+        font11.setPointSize(16)
+        self.label_8.setFont(font11)
+        self.label_8.setStyleSheet(u"border:0px;\n"
+"background-color: rgba(0, 0, 0, 0);")
+        self.label_8.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_24.addWidget(self.label_8)
+
+        self.cbCuchara = QLineEdit(self.frame_56)
+        self.cbCuchara.setObjectName(u"cbCuchara")
+        self.cbCuchara.setEnabled(False)
+        sizePolicy2.setHeightForWidth(self.cbCuchara.sizePolicy().hasHeightForWidth())
+        self.cbCuchara.setSizePolicy(sizePolicy2)
+        self.cbCuchara.setMinimumSize(QSize(98, 0))
+        self.cbCuchara.setMaximumSize(QSize(100, 16777215))
+        font12 = QFont()
+        font12.setFamilies([u"Arial"])
+        font12.setPointSize(18)
+        font12.setItalic(False)
+        self.cbCuchara.setFont(font12)
+        self.cbCuchara.setStyleSheet(u" border: 1px solid gray;\n"
+"    border-radius: 10px;\n"
+"\n"
+"    min-width: 6em;\n"
+"\n"
+"\n"
+"     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\n"
+"                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);")
+        self.cbCuchara.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_24.addWidget(self.cbCuchara)
+
+
+        self.verticalLayout_16.addWidget(self.frame_56)
+
+        self.frame_54 = QFrame(self.frame_48)
+        self.frame_54.setObjectName(u"frame_54")
+        sizePolicy2.setHeightForWidth(self.frame_54.sizePolicy().hasHeightForWidth())
+        self.frame_54.setSizePolicy(sizePolicy2)
+        self.frame_54.setStyleSheet(u"border-color: #DDDDDD;\n"
+"border:0px;\n"
+"background-color: #DDDDDD;")
+        self.frame_54.setFrameShape(QFrame.StyledPanel)
+        self.frame_54.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_25 = QHBoxLayout(self.frame_54)
+        self.horizontalLayout_25.setObjectName(u"horizontalLayout_25")
+        self.label_10 = QLabel(self.frame_54)
+        self.label_10.setObjectName(u"label_10")
+        sizePolicy2.setHeightForWidth(self.label_10.sizePolicy().hasHeightForWidth())
+        self.label_10.setSizePolicy(sizePolicy2)
+        font13 = QFont()
+        font13.setFamilies([u"Arial"])
+        font13.setPointSize(15)
+        self.label_10.setFont(font13)
+        self.label_10.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
+"border:0px;")
+        self.label_10.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_25.addWidget(self.label_10)
+
+        self.txtCampana = QLineEdit(self.frame_54)
+        self.txtCampana.setObjectName(u"txtCampana")
+        self.txtCampana.setEnabled(False)
+        sizePolicy2.setHeightForWidth(self.txtCampana.sizePolicy().hasHeightForWidth())
+        self.txtCampana.setSizePolicy(sizePolicy2)
+        self.txtCampana.setMinimumSize(QSize(98, 0))
+        self.txtCampana.setMaximumSize(QSize(100, 16777215))
+        self.txtCampana.setFont(font12)
+        self.txtCampana.setStyleSheet(u" border: 1px solid gray;\n"
+"    border-radius: 10px;\n"
+"\n"
+"    min-width: 6em;\n"
+"\n"
+"\n"
+"     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\n"
+"                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);")
+        self.txtCampana.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_25.addWidget(self.txtCampana)
+
+
+        self.verticalLayout_16.addWidget(self.frame_54)
+
+        self.frame_55 = QFrame(self.frame_48)
+        self.frame_55.setObjectName(u"frame_55")
+        sizePolicy2.setHeightForWidth(self.frame_55.sizePolicy().hasHeightForWidth())
+        self.frame_55.setSizePolicy(sizePolicy2)
+        self.frame_55.setStyleSheet(u"border-color: #DDDDDD;\n"
+"border:0px;\n"
+"background-color: #DDDDDD;")
+        self.frame_55.setFrameShape(QFrame.StyledPanel)
+        self.frame_55.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_14 = QHBoxLayout(self.frame_55)
+        self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
+        self.label_17 = QLabel(self.frame_55)
+        self.label_17.setObjectName(u"label_17")
+        sizePolicy2.setHeightForWidth(self.label_17.sizePolicy().hasHeightForWidth())
+        self.label_17.setSizePolicy(sizePolicy2)
+        self.label_17.setFont(font13)
+        self.label_17.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
+"border:0px;")
+        self.label_17.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_14.addWidget(self.label_17)
+
+        self.txtUltimaColada = QLineEdit(self.frame_55)
+        self.txtUltimaColada.setObjectName(u"txtUltimaColada")
+        self.txtUltimaColada.setEnabled(False)
+        sizePolicy2.setHeightForWidth(self.txtUltimaColada.sizePolicy().hasHeightForWidth())
+        self.txtUltimaColada.setSizePolicy(sizePolicy2)
+        self.txtUltimaColada.setMinimumSize(QSize(98, 0))
+        self.txtUltimaColada.setMaximumSize(QSize(100, 16777215))
+        self.txtUltimaColada.setFont(font12)
+        self.txtUltimaColada.setStyleSheet(u" border: 1px solid gray;\n"
+"    border-radius: 10px;\n"
+"\n"
+"    min-width: 6em;\n"
+"\n"
+"\n"
+"     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\n"
+"                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);")
+        self.txtUltimaColada.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_14.addWidget(self.txtUltimaColada)
+
+
+        self.verticalLayout_16.addWidget(self.frame_55)
+
+
+        self.verticalLayout_14.addWidget(self.frame_48)
+
+        self.frame_24 = QFrame(self.frameAddColada)
+        self.frame_24.setObjectName(u"frame_24")
+        sizePolicy2.setHeightForWidth(self.frame_24.sizePolicy().hasHeightForWidth())
+        self.frame_24.setSizePolicy(sizePolicy2)
+        self.frame_24.setStyleSheet(u"border: 0px solid gray;")
+        self.frame_24.setFrameShape(QFrame.StyledPanel)
+        self.frame_24.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_23 = QVBoxLayout(self.frame_24)
+        self.verticalLayout_23.setSpacing(0)
+        self.verticalLayout_23.setObjectName(u"verticalLayout_23")
+        self.verticalLayout_23.setContentsMargins(0, 0, 0, 0)
+        self.frame_58 = QFrame(self.frame_24)
+        self.frame_58.setObjectName(u"frame_58")
+        sizePolicy2.setHeightForWidth(self.frame_58.sizePolicy().hasHeightForWidth())
+        self.frame_58.setSizePolicy(sizePolicy2)
+        self.frame_58.setStyleSheet(u"border-color: #D3D3D3;\n"
+"border:0px;\n"
+"background-color: #D3D3D3;\n"
+"")
+        self.frame_58.setFrameShape(QFrame.StyledPanel)
+        self.frame_58.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_24 = QVBoxLayout(self.frame_58)
+        self.verticalLayout_24.setObjectName(u"verticalLayout_24")
+        self.label_11 = QLabel(self.frame_58)
+        self.label_11.setObjectName(u"label_11")
+        self.label_11.setFont(font13)
+        self.label_11.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
+"border:0px;")
+        self.label_11.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_24.addWidget(self.label_11)
+
+
+        self.verticalLayout_23.addWidget(self.frame_58)
+
+        self.frame_64 = QFrame(self.frame_24)
+        self.frame_64.setObjectName(u"frame_64")
+        sizePolicy2.setHeightForWidth(self.frame_64.sizePolicy().hasHeightForWidth())
+        self.frame_64.setSizePolicy(sizePolicy2)
+        self.frame_64.setStyleSheet(u"border-color: #D3D3D3;\n"
+"border:0px;\n"
+"background-color: #D3D3D3;\n"
+"")
+        self.frame_64.setFrameShape(QFrame.StyledPanel)
+        self.frame_64.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_16 = QHBoxLayout(self.frame_64)
+        self.horizontalLayout_16.setObjectName(u"horizontalLayout_16")
+        self.pbSiEscoria = QPushButton(self.frame_64)
+        self.pbSiEscoria.setObjectName(u"pbSiEscoria")
+        self.pbSiEscoria.setEnabled(True)
+        sizePolicy2.setHeightForWidth(self.pbSiEscoria.sizePolicy().hasHeightForWidth())
+        self.pbSiEscoria.setSizePolicy(sizePolicy2)
+        font14 = QFont()
+        font14.setFamilies([u"Arial"])
+        font14.setPointSize(13)
+        self.pbSiEscoria.setFont(font14)
+        self.pbSiEscoria.setStyleSheet(u"QPushButton:enabled{\n"
+"	background-color: rgb(154, 174, 195);\n"
+"border-radius:12px;\n"
+"}\n"
+"QPushButton:disabled{\n"
+"color:rgb(255, 255, 255);\n"
+"background-color: rgb(140, 140, 140);\n"
+"border-radius:12px;\n"
+"}")
+
+        self.horizontalLayout_16.addWidget(self.pbSiEscoria)
+
+        self.pbNoEscoria = QPushButton(self.frame_64)
+        self.pbNoEscoria.setObjectName(u"pbNoEscoria")
+        sizePolicy2.setHeightForWidth(self.pbNoEscoria.sizePolicy().hasHeightForWidth())
+        self.pbNoEscoria.setSizePolicy(sizePolicy2)
+        self.pbNoEscoria.setFont(font14)
+        self.pbNoEscoria.setStyleSheet(u"QPushButton:enabled{\n"
+"	background-color: rgb(154, 174, 195);\n"
+"border-radius:12px;\n"
+"}\n"
+"QPushButton:disabled{\n"
+"color:rgb(255, 255, 255);\n"
+"background-color: rgb(140, 140, 140);\n"
+"border-radius:12px;\n"
+"}")
+
+        self.horizontalLayout_16.addWidget(self.pbNoEscoria)
+
+        self.sbEscoria = QSpinBox(self.frame_64)
+        self.sbEscoria.setObjectName(u"sbEscoria")
+        sizePolicy2.setHeightForWidth(self.sbEscoria.sizePolicy().hasHeightForWidth())
+        self.sbEscoria.setSizePolicy(sizePolicy2)
+        self.sbEscoria.setFont(font11)
+        self.sbEscoria.setStyleSheet(u"QSpinBox{\n"
+" border: 0px solid gray;\n"
+"	background-color: rgb(255, 255, 255);\n"
+"}\n"
+"QSpinBox::up-button  {\n"
+"	image: url(:/Icons/ResourcesFolder/featherIcons/arrow-up.svg);\n"
+"}\n"
+"\n"
+"QSpinBox::up-button:pressed  {\n"
+"	background-color: rgb(180, 180, 180);\n"
+"}\n"
+"\n"
+"QSpinBox::down-button  {\n"
+"	image: url(:/Icons/ResourcesFolder/featherIcons/arrow-down.svg);\n"
+"}\n"
+"\n"
+"QSpinBox::down-button:pressed  {\n"
+"	background-color: rgb(180, 180, 180);\n"
+"}")
+        self.sbEscoria.setAlignment(Qt.AlignCenter)
+        self.sbEscoria.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.sbEscoria.setAccelerated(True)
+        self.sbEscoria.setMaximum(1000)
+        self.sbEscoria.setStepType(QAbstractSpinBox.DefaultStepType)
+
+        self.horizontalLayout_16.addWidget(self.sbEscoria)
+
+
+        self.verticalLayout_23.addWidget(self.frame_64)
+
+
+        self.verticalLayout_14.addWidget(self.frame_24)
+
+        self.frame_25 = QFrame(self.frameAddColada)
+        self.frame_25.setObjectName(u"frame_25")
+        sizePolicy2.setHeightForWidth(self.frame_25.sizePolicy().hasHeightForWidth())
+        self.frame_25.setSizePolicy(sizePolicy2)
+        self.frame_25.setStyleSheet(u"border: 0px solid gray;")
+        self.frame_25.setFrameShape(QFrame.StyledPanel)
+        self.frame_25.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_17 = QVBoxLayout(self.frame_25)
+        self.verticalLayout_17.setSpacing(0)
+        self.verticalLayout_17.setObjectName(u"verticalLayout_17")
+        self.verticalLayout_17.setContentsMargins(0, 0, 0, 0)
+        self.frame_57 = QFrame(self.frame_25)
+        self.frame_57.setObjectName(u"frame_57")
+        sizePolicy2.setHeightForWidth(self.frame_57.sizePolicy().hasHeightForWidth())
+        self.frame_57.setSizePolicy(sizePolicy2)
+        self.frame_57.setStyleSheet(u"border-color: #DDDDDD;\n"
+"border:0px;\n"
+"background-color: #DDDDDD;")
+        self.frame_57.setFrameShape(QFrame.StyledPanel)
+        self.frame_57.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_18 = QVBoxLayout(self.frame_57)
+        self.verticalLayout_18.setObjectName(u"verticalLayout_18")
+        self.label_13 = QLabel(self.frame_57)
+        self.label_13.setObjectName(u"label_13")
+        self.label_13.setFont(font4)
+        self.label_13.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
+"border:0px;")
+        self.label_13.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_18.addWidget(self.label_13)
+
+
+        self.verticalLayout_17.addWidget(self.frame_57)
+
+        self.frame_60 = QFrame(self.frame_25)
+        self.frame_60.setObjectName(u"frame_60")
+        sizePolicy.setHeightForWidth(self.frame_60.sizePolicy().hasHeightForWidth())
+        self.frame_60.setSizePolicy(sizePolicy)
+        self.frame_60.setStyleSheet(u"border-color: #DDDDDD;\n"
+"border:0px;\n"
+"background-color: #DDDDDD;")
+        self.frame_60.setFrameShape(QFrame.StyledPanel)
+        self.frame_60.setFrameShadow(QFrame.Raised)
+        self.gridLayout_3 = QGridLayout(self.frame_60)
+        self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.label_14 = QLabel(self.frame_60)
+        self.label_14.setObjectName(u"label_14")
+        sizePolicy.setHeightForWidth(self.label_14.sizePolicy().hasHeightForWidth())
+        self.label_14.setSizePolicy(sizePolicy)
+        self.label_14.setFont(font11)
+        self.label_14.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
+"border:0px;")
+        self.label_14.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_3.addWidget(self.label_14, 0, 0, 1, 1)
+
+        self.txtPathTermografiaF = QLineEdit(self.frame_60)
+        self.txtPathTermografiaF.setObjectName(u"txtPathTermografiaF")
+        self.txtPathTermografiaF.setEnabled(False)
+        sizePolicy8.setHeightForWidth(self.txtPathTermografiaF.sizePolicy().hasHeightForWidth())
+        self.txtPathTermografiaF.setSizePolicy(sizePolicy8)
+        font15 = QFont()
+        font15.setFamilies([u"Arial"])
+        font15.setPointSize(12)
+        font15.setItalic(False)
+        self.txtPathTermografiaF.setFont(font15)
+        self.txtPathTermografiaF.setStyleSheet(u" border: 1px solid gray;\n"
+"    border-radius: 10px;\n"
+"    padding: 1px 18px 1px 3px;\n"
+"    min-width: 6em;\n"
+"\n"
+"\n"
+"     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\n"
+"                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);")
+        self.txtPathTermografiaF.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_3.addWidget(self.txtPathTermografiaF, 0, 1, 1, 1)
+
+        self.pbFileDialog1 = QToolButton(self.frame_60)
+        self.pbFileDialog1.setObjectName(u"pbFileDialog1")
+        sizePolicy8.setHeightForWidth(self.pbFileDialog1.sizePolicy().hasHeightForWidth())
+        self.pbFileDialog1.setSizePolicy(sizePolicy8)
+        self.pbFileDialog1.setStyleSheet(u"border-radius:5px;\n"
+"color: rgb(0, 0, 0);\n"
+"    border: 1px solid gray;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\n"
+"                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);")
+
+        self.gridLayout_3.addWidget(self.pbFileDialog1, 0, 2, 1, 1)
+
+        self.label_16 = QLabel(self.frame_60)
+        self.label_16.setObjectName(u"label_16")
+        sizePolicy.setHeightForWidth(self.label_16.sizePolicy().hasHeightForWidth())
+        self.label_16.setSizePolicy(sizePolicy)
+        self.label_16.setFont(font11)
+        self.label_16.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
+"border:0px;")
+        self.label_16.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_3.addWidget(self.label_16, 1, 0, 1, 1)
+
+        self.txtPathExcelF = QLineEdit(self.frame_60)
+        self.txtPathExcelF.setObjectName(u"txtPathExcelF")
+        self.txtPathExcelF.setEnabled(False)
+        sizePolicy8.setHeightForWidth(self.txtPathExcelF.sizePolicy().hasHeightForWidth())
+        self.txtPathExcelF.setSizePolicy(sizePolicy8)
+        self.txtPathExcelF.setFont(font15)
+        self.txtPathExcelF.setStyleSheet(u" border: 1px solid gray;\n"
+"    border-radius: 10px;\n"
+"    padding: 1px 18px 1px 3px;\n"
+"    min-width: 6em;\n"
+"\n"
+"\n"
+"     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\n"
+"                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);")
+        self.txtPathExcelF.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_3.addWidget(self.txtPathExcelF, 1, 1, 1, 1)
+
+        self.pbFileDialog2 = QToolButton(self.frame_60)
+        self.pbFileDialog2.setObjectName(u"pbFileDialog2")
+        sizePolicy8.setHeightForWidth(self.pbFileDialog2.sizePolicy().hasHeightForWidth())
+        self.pbFileDialog2.setSizePolicy(sizePolicy8)
+        self.pbFileDialog2.setStyleSheet(u"border-radius:5px;\n"
+"color: rgb(0, 0, 0);\n"
+"    border: 1px solid gray;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\n"
+"                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);")
+
+        self.gridLayout_3.addWidget(self.pbFileDialog2, 1, 2, 1, 1)
+
+
+        self.verticalLayout_17.addWidget(self.frame_60)
+
+
+        self.verticalLayout_14.addWidget(self.frame_25)
+
+        self.frame_42 = QFrame(self.frameAddColada)
+        self.frame_42.setObjectName(u"frame_42")
+        sizePolicy2.setHeightForWidth(self.frame_42.sizePolicy().hasHeightForWidth())
+        self.frame_42.setSizePolicy(sizePolicy2)
+        self.frame_42.setStyleSheet(u"border: 0px solid gray;")
+        self.frame_42.setFrameShape(QFrame.StyledPanel)
+        self.frame_42.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_20 = QVBoxLayout(self.frame_42)
+        self.verticalLayout_20.setSpacing(0)
+        self.verticalLayout_20.setObjectName(u"verticalLayout_20")
+        self.verticalLayout_20.setContentsMargins(0, 0, 0, 0)
+        self.frame_61 = QFrame(self.frame_42)
+        self.frame_61.setObjectName(u"frame_61")
+        sizePolicy.setHeightForWidth(self.frame_61.sizePolicy().hasHeightForWidth())
+        self.frame_61.setSizePolicy(sizePolicy)
+        self.frame_61.setStyleSheet(u"border-color: #D3D3D3;\n"
+"border:0px;\n"
+"background-color: #D3D3D3;\n"
+"")
+        self.frame_61.setFrameShape(QFrame.StyledPanel)
+        self.frame_61.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_19 = QVBoxLayout(self.frame_61)
+        self.verticalLayout_19.setObjectName(u"verticalLayout_19")
+        self.label_18 = QLabel(self.frame_61)
+        self.label_18.setObjectName(u"label_18")
+        sizePolicy.setHeightForWidth(self.label_18.sizePolicy().hasHeightForWidth())
+        self.label_18.setSizePolicy(sizePolicy)
+        self.label_18.setFont(font4)
+        self.label_18.setToolTipDuration(-1)
+        self.label_18.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
+"border:0px;")
+        self.label_18.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_19.addWidget(self.label_18)
+
+
+        self.verticalLayout_20.addWidget(self.frame_61)
+
+        self.frame_62 = QFrame(self.frame_42)
+        self.frame_62.setObjectName(u"frame_62")
+        sizePolicy.setHeightForWidth(self.frame_62.sizePolicy().hasHeightForWidth())
+        self.frame_62.setSizePolicy(sizePolicy)
+        self.frame_62.setStyleSheet(u"border-color: #D3D3D3;\n"
+"border:0px;\n"
+"background-color: #D3D3D3;\n"
+"")
+        self.frame_62.setFrameShape(QFrame.StyledPanel)
+        self.frame_62.setFrameShadow(QFrame.Raised)
+        self.gridLayout_4 = QGridLayout(self.frame_62)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.label_19 = QLabel(self.frame_62)
+        self.label_19.setObjectName(u"label_19")
+        sizePolicy.setHeightForWidth(self.label_19.sizePolicy().hasHeightForWidth())
+        self.label_19.setSizePolicy(sizePolicy)
+        self.label_19.setFont(font11)
+        self.label_19.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
+"border:0px;")
+        self.label_19.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_4.addWidget(self.label_19, 0, 0, 1, 1)
+
+        self.txtPathTermografiaT = QLineEdit(self.frame_62)
+        self.txtPathTermografiaT.setObjectName(u"txtPathTermografiaT")
+        self.txtPathTermografiaT.setEnabled(False)
+        sizePolicy8.setHeightForWidth(self.txtPathTermografiaT.sizePolicy().hasHeightForWidth())
+        self.txtPathTermografiaT.setSizePolicy(sizePolicy8)
+        self.txtPathTermografiaT.setFont(font15)
+        self.txtPathTermografiaT.setStyleSheet(u" border: 1px solid gray;\n"
+"    border-radius: 10px;\n"
+"    padding: 1px 18px 1px 3px;\n"
+"    min-width: 6em;\n"
+"\n"
+"\n"
+"     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\n"
+"                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);")
+        self.txtPathTermografiaT.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_4.addWidget(self.txtPathTermografiaT, 0, 1, 1, 1)
+
+        self.pbFileDialog3 = QToolButton(self.frame_62)
+        self.pbFileDialog3.setObjectName(u"pbFileDialog3")
+        sizePolicy8.setHeightForWidth(self.pbFileDialog3.sizePolicy().hasHeightForWidth())
+        self.pbFileDialog3.setSizePolicy(sizePolicy8)
+        self.pbFileDialog3.setStyleSheet(u"border-radius:5px;\n"
+"color: rgb(0, 0, 0);\n"
+"    border: 1px solid gray;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\n"
+"                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);")
+
+        self.gridLayout_4.addWidget(self.pbFileDialog3, 0, 2, 1, 1)
+
+        self.label_20 = QLabel(self.frame_62)
+        self.label_20.setObjectName(u"label_20")
+        sizePolicy.setHeightForWidth(self.label_20.sizePolicy().hasHeightForWidth())
+        self.label_20.setSizePolicy(sizePolicy)
+        self.label_20.setFont(font11)
+        self.label_20.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
+"border:0px;")
+        self.label_20.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_4.addWidget(self.label_20, 1, 0, 1, 1)
+
+        self.txtPathExcelT = QLineEdit(self.frame_62)
+        self.txtPathExcelT.setObjectName(u"txtPathExcelT")
+        self.txtPathExcelT.setEnabled(False)
+        sizePolicy8.setHeightForWidth(self.txtPathExcelT.sizePolicy().hasHeightForWidth())
+        self.txtPathExcelT.setSizePolicy(sizePolicy8)
+        self.txtPathExcelT.setFont(font15)
+        self.txtPathExcelT.setStyleSheet(u" border: 1px solid gray;\n"
+"    border-radius: 10px;\n"
+"    padding: 1px 18px 1px 3px;\n"
+"    min-width: 6em;\n"
+"\n"
+"\n"
+"     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\n"
+"                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);")
+        self.txtPathExcelT.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_4.addWidget(self.txtPathExcelT, 1, 1, 1, 1)
+
+        self.pbFileDialog4 = QToolButton(self.frame_62)
+        self.pbFileDialog4.setObjectName(u"pbFileDialog4")
+        sizePolicy8.setHeightForWidth(self.pbFileDialog4.sizePolicy().hasHeightForWidth())
+        self.pbFileDialog4.setSizePolicy(sizePolicy8)
+        self.pbFileDialog4.setStyleSheet(u"border-radius:5px;\n"
+"color: rgb(0, 0, 0);\n"
+"    border: 1px solid gray;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\n"
+"                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);")
+
+        self.gridLayout_4.addWidget(self.pbFileDialog4, 1, 2, 1, 1)
+
+
+        self.verticalLayout_20.addWidget(self.frame_62)
+
+
+        self.verticalLayout_14.addWidget(self.frame_42)
+
+        self.frame_45 = QFrame(self.frameAddColada)
+        self.frame_45.setObjectName(u"frame_45")
+        sizePolicy2.setHeightForWidth(self.frame_45.sizePolicy().hasHeightForWidth())
+        self.frame_45.setSizePolicy(sizePolicy2)
+        self.frame_45.setStyleSheet(u"border-color: #DDDDDD;\n"
+"border:0px;\n"
+"background-color: #DDDDDD;")
+        self.frame_45.setFrameShape(QFrame.StyledPanel)
+        self.frame_45.setFrameShadow(QFrame.Raised)
+        self.gridLayout_5 = QGridLayout(self.frame_45)
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.gridLayout_5.setHorizontalSpacing(0)
+        self.gridLayout_5.setVerticalSpacing(6)
+        self.gridLayout_5.setContentsMargins(9, 0, 9, 0)
+        self.label_21 = QLabel(self.frame_45)
+        self.label_21.setObjectName(u"label_21")
+        sizePolicy2.setHeightForWidth(self.label_21.sizePolicy().hasHeightForWidth())
+        self.label_21.setSizePolicy(sizePolicy2)
+        self.label_21.setFont(font8)
+        self.label_21.setStyleSheet(u"border:0px;\n"
+"background-color: rgba(0, 0, 0, 0);")
+        self.label_21.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_5.addWidget(self.label_21, 0, 0, 1, 2)
+
+        self.txtNewColada = QLineEdit(self.frame_45)
+        self.txtNewColada.setObjectName(u"txtNewColada")
+        self.txtNewColada.setEnabled(False)
+        sizePolicy9 = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Fixed)
+        sizePolicy9.setHorizontalStretch(0)
+        sizePolicy9.setVerticalStretch(0)
+        sizePolicy9.setHeightForWidth(self.txtNewColada.sizePolicy().hasHeightForWidth())
+        self.txtNewColada.setSizePolicy(sizePolicy9)
+        self.txtNewColada.setMinimumSize(QSize(98, 0))
+        self.txtNewColada.setMaximumSize(QSize(100, 16777215))
+        font16 = QFont()
+        font16.setFamilies([u"Arial"])
+        font16.setPointSize(16)
+        font16.setItalic(False)
+        self.txtNewColada.setFont(font16)
+        self.txtNewColada.setStyleSheet(u" border: 1px solid gray;\n"
+"    border-radius: 10px;\n"
+"\n"
+"    min-width: 6em;\n"
+"\n"
+"\n"
+"     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\n"
+"                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);")
+        self.txtNewColada.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_5.addWidget(self.txtNewColada, 0, 2, 1, 1)
+
+        self.label_22 = QLabel(self.frame_45)
+        self.label_22.setObjectName(u"label_22")
+        sizePolicy2.setHeightForWidth(self.label_22.sizePolicy().hasHeightForWidth())
+        self.label_22.setSizePolicy(sizePolicy2)
+        self.label_22.setFont(font8)
+        self.label_22.setStyleSheet(u"border:0px;\n"
+"background-color: rgba(0, 0, 0, 0);")
+        self.label_22.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_5.addWidget(self.label_22, 1, 0, 1, 1)
+
+        self.txtObservaciones = QLineEdit(self.frame_45)
+        self.txtObservaciones.setObjectName(u"txtObservaciones")
+        sizePolicy9.setHeightForWidth(self.txtObservaciones.sizePolicy().hasHeightForWidth())
+        self.txtObservaciones.setSizePolicy(sizePolicy9)
+        self.txtObservaciones.setMinimumSize(QSize(102, 0))
+        self.txtObservaciones.setFont(font8)
+        self.txtObservaciones.setFocusPolicy(Qt.StrongFocus)
+        self.txtObservaciones.setStyleSheet(u" border: 1px solid gray;\n"
+"    border-radius: 10px;\n"
+"    padding: 1px 1px 1px 3px;\n"
+"    min-width: 6em;\n"
+"\n"
+"\n"
+"	background-color: rgb(255, 255, 255);")
+
+        self.gridLayout_5.addWidget(self.txtObservaciones, 1, 1, 1, 2)
+
+
+        self.verticalLayout_14.addWidget(self.frame_45)
+
+        self.frame_53 = QFrame(self.frameAddColada)
+        self.frame_53.setObjectName(u"frame_53")
+        sizePolicy2.setHeightForWidth(self.frame_53.sizePolicy().hasHeightForWidth())
+        self.frame_53.setSizePolicy(sizePolicy2)
+        self.frame_53.setStyleSheet(u"border-color: #D3D3D3;\n"
+"border:0px;\n"
+"background-color: #D3D3D3;\n"
+"")
+        self.frame_53.setFrameShape(QFrame.StyledPanel)
+        self.frame_53.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_21 = QVBoxLayout(self.frame_53)
+        self.verticalLayout_21.setSpacing(0)
+        self.verticalLayout_21.setObjectName(u"verticalLayout_21")
+        self.verticalLayout_21.setContentsMargins(0, 0, 0, 0)
+        self.frame_66 = QFrame(self.frame_53)
+        self.frame_66.setObjectName(u"frame_66")
+        sizePolicy2.setHeightForWidth(self.frame_66.sizePolicy().hasHeightForWidth())
+        self.frame_66.setSizePolicy(sizePolicy2)
+        self.frame_66.setStyleSheet(u"QFrame{\n"
+"border-radius:15px;\n"
+"	background-color: rgba(0, 0, 0, 0);\n"
+"border:0px;\n"
+"}")
+        self.frame_66.setFrameShape(QFrame.StyledPanel)
+        self.frame_66.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_27 = QHBoxLayout(self.frame_66)
+        self.horizontalLayout_27.setObjectName(u"horizontalLayout_27")
+        self.pb_recortar = QPushButton(self.frame_66)
+        self.pb_recortar.setObjectName(u"pb_recortar")
+        sizePolicy2.setHeightForWidth(self.pb_recortar.sizePolicy().hasHeightForWidth())
+        self.pb_recortar.setSizePolicy(sizePolicy2)
+        font17 = QFont()
+        font17.setFamilies([u"Arial"])
+        font17.setPointSize(13)
+        font17.setBold(True)
+        font17.setItalic(False)
+        font17.setUnderline(False)
+        font17.setStrikeOut(False)
+        self.pb_recortar.setFont(font17)
+        self.pb_recortar.setStyleSheet(u"QPushButton{\n"
+"	border-radius:9px;\n"
+"	color: rgb(0, 0, 0);\n"
+"	background-color: rgba(240, 120, 14, 210);\n"
+"\n"
+"}\n"
+"QPushButton:hover{\n"
+"	background-color: rgba(255, 135, 29, 230);\n"
+"}\n"
+"QPushButton:pressed{\n"
+"	background-color: rgba(255, 135, 29, 255);\n"
+"}\n"
+"QPushButton:disabled{\n"
+"	background-color: rgba(0, 0, 0, 100);\n"
+"}")
+
+        self.horizontalLayout_27.addWidget(self.pb_recortar)
+
+
+        self.verticalLayout_21.addWidget(self.frame_66)
+
+        self.frame_65 = QFrame(self.frame_53)
+        self.frame_65.setObjectName(u"frame_65")
+        sizePolicy2.setHeightForWidth(self.frame_65.sizePolicy().hasHeightForWidth())
+        self.frame_65.setSizePolicy(sizePolicy2)
+        self.frame_65.setStyleSheet(u"QFrame{\n"
+"border-radius:15px;\n"
+"	background-color: rgba(0, 0, 0, 0);\n"
+"border:0px;\n"
+"}")
+        self.frame_65.setFrameShape(QFrame.StyledPanel)
+        self.frame_65.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_26 = QHBoxLayout(self.frame_65)
+        self.horizontalLayout_26.setObjectName(u"horizontalLayout_26")
+        self.pb_aceptar = QPushButton(self.frame_65)
+        self.pb_aceptar.setObjectName(u"pb_aceptar")
+        self.pb_aceptar.setEnabled(True)
+        sizePolicy2.setHeightForWidth(self.pb_aceptar.sizePolicy().hasHeightForWidth())
+        self.pb_aceptar.setSizePolicy(sizePolicy2)
+        self.pb_aceptar.setFont(font17)
+        self.pb_aceptar.setStyleSheet(u"QPushButton{\n"
+"	border-radius:15px;\n"
+"	color: rgb(0, 0, 0);\n"
+"	background-color: rgba(240, 120, 14, 210);\n"
+"border:0px;\n"
+"}\n"
+"QPushButton:hover{\n"
+"	background-color: rgba(255, 135, 29, 230);\n"
+"}\n"
+"QPushButton:pressed{\n"
+"	background-color: rgba(255, 135, 29, 255);\n"
+"}\n"
+"QPushButton:disabled{\n"
+"	background-color: rgba(0, 0, 0, 100);\n"
+"}")
+
+        self.horizontalLayout_26.addWidget(self.pb_aceptar)
+
+        self.progressBar = QProgressBar(self.frame_65)
+        self.progressBar.setObjectName(u"progressBar")
+        sizePolicy2.setHeightForWidth(self.progressBar.sizePolicy().hasHeightForWidth())
+        self.progressBar.setSizePolicy(sizePolicy2)
+        font18 = QFont()
+        font18.setFamilies([u"Arial"])
+        font18.setPointSize(15)
+        font18.setBold(True)
+        self.progressBar.setFont(font18)
+        self.progressBar.setStyleSheet(u"QProgressBar{\n"
+"border-radius:15px;\n"
+"	color: rgb(0, 0, 0);\n"
+"background-color:rgba(0, 0, 0, 0)\n"
+"}\n"
+"QProgressBar::chunk{\n"
+"	background-color: rgb(243, 144, 57);\n"
+"border-radius:15px;\n"
+"}")
+        self.progressBar.setValue(24)
+        self.progressBar.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_26.addWidget(self.progressBar)
+
+
+        self.verticalLayout_21.addWidget(self.frame_65)
+
+
+        self.verticalLayout_14.addWidget(self.frame_53)
+
+
+        self.horizontalLayout.addWidget(self.frameAddColada)
+
 
         self.verticalLayout.addWidget(self.frameBottom)
 
@@ -1923,5 +2757,48 @@ class Ui_AdministratorWindow(object):
         self.labelColadas.setText(QCoreApplication.translate("AdministratorWindow", u"Coladas:", None))
         self.pbAddColada.setText(QCoreApplication.translate("AdministratorWindow", u"A\u00f1adir Colada", None))
         self.pbDeleteColada.setText(QCoreApplication.translate("AdministratorWindow", u"Eliminar Colada", None))
+        self.label_7.setText(QCoreApplication.translate("AdministratorWindow", u"A\u00f1adir Nueva Colada", None))
+        self.label_8.setText(QCoreApplication.translate("AdministratorWindow", u"Cuchara:", None))
+        self.cbCuchara.setText("")
+        self.label_10.setText(QCoreApplication.translate("AdministratorWindow", u"Campa\u00f1a:", None))
+        self.txtCampana.setText("")
+        self.label_17.setText(QCoreApplication.translate("AdministratorWindow", u"\u00daltima Colada:", None))
+        self.txtUltimaColada.setText("")
+        self.label_11.setText(QCoreApplication.translate("AdministratorWindow", u"\u00bfCambio de Linea de Escoria?", None))
+        self.pbSiEscoria.setText(QCoreApplication.translate("AdministratorWindow", u"SI", None))
+        self.pbNoEscoria.setText(QCoreApplication.translate("AdministratorWindow", u"NO", None))
+        self.label_13.setText(QCoreApplication.translate("AdministratorWindow", u"Cara Frontal", None))
+        self.label_14.setText(QCoreApplication.translate("AdministratorWindow", u"Termograf\u00eda", None))
+        self.txtPathTermografiaF.setText(QCoreApplication.translate("AdministratorWindow", u"C: ... /Docs/", None))
+#if QT_CONFIG(tooltip)
+        self.pbFileDialog1.setToolTip(QCoreApplication.translate("AdministratorWindow", u"Importante! Los archivos deben estar guardados en la misma carpeta de la siguiente manera: (151F. jpg/xlsx) (151T. jpg/xlsx). Donde 151 es el n\u00famero de la colada.", None))
+#endif // QT_CONFIG(tooltip)
+        self.pbFileDialog1.setText(QCoreApplication.translate("AdministratorWindow", u"...", None))
+        self.label_16.setText(QCoreApplication.translate("AdministratorWindow", u"Excel", None))
+        self.txtPathExcelF.setText(QCoreApplication.translate("AdministratorWindow", u"C: ... /Docs/", None))
+#if QT_CONFIG(tooltip)
+        self.pbFileDialog2.setToolTip(QCoreApplication.translate("AdministratorWindow", u"Importante! Los archivos deben estar guardados en la misma carpeta de la siguiente manera: (151F. jpg/xlsx) (151T. jpg/xlsx). Donde 151 es el n\u00famero de la colada.", None))
+#endif // QT_CONFIG(tooltip)
+        self.pbFileDialog2.setText(QCoreApplication.translate("AdministratorWindow", u"...", None))
+        self.label_18.setText(QCoreApplication.translate("AdministratorWindow", u"Cara Trasera", None))
+        self.label_19.setText(QCoreApplication.translate("AdministratorWindow", u"Termograf\u00eda", None))
+        self.txtPathTermografiaT.setText(QCoreApplication.translate("AdministratorWindow", u"C: ... /Docs/", None))
+#if QT_CONFIG(tooltip)
+        self.pbFileDialog3.setToolTip(QCoreApplication.translate("AdministratorWindow", u"Importante! Los archivos deben estar guardados en la misma carpeta de la siguiente manera: (151F. jpg/xlsx) (151T. jpg/xlsx). Donde 151 es el n\u00famero de la colada.", None))
+#endif // QT_CONFIG(tooltip)
+        self.pbFileDialog3.setText(QCoreApplication.translate("AdministratorWindow", u"...", None))
+        self.label_20.setText(QCoreApplication.translate("AdministratorWindow", u"Excel", None))
+        self.txtPathExcelT.setText(QCoreApplication.translate("AdministratorWindow", u"C: ... /Docs/", None))
+#if QT_CONFIG(tooltip)
+        self.pbFileDialog4.setToolTip(QCoreApplication.translate("AdministratorWindow", u"Importante! Los archivos deben estar guardados en la misma carpeta de la siguiente manera: (151F. jpg/xlsx) (151T. jpg/xlsx). Donde 151 es el n\u00famero de la colada.", None))
+#endif // QT_CONFIG(tooltip)
+        self.pbFileDialog4.setText(QCoreApplication.translate("AdministratorWindow", u"...", None))
+        self.label_21.setText(QCoreApplication.translate("AdministratorWindow", u"# Nueva Colada:", None))
+        self.txtNewColada.setText("")
+        self.label_22.setText(QCoreApplication.translate("AdministratorWindow", u"Obs:", None))
+        self.txtObservaciones.setInputMask("")
+        self.txtObservaciones.setText("")
+        self.pb_recortar.setText(QCoreApplication.translate("AdministratorWindow", u"Recortar Imagen", None))
+        self.pb_aceptar.setText(QCoreApplication.translate("AdministratorWindow", u"A\u00f1adir Colada", None))
     # retranslateUi
 
