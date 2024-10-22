@@ -1,8 +1,6 @@
 from sys import argv, exit, path
 from os.path import isfile, isdir
 from os import getcwd
-path.append(getcwd()+'/QT Windows')
-path.append(getcwd()+'/Operations')
 import os
 from PySide6 import QtCore as qtc
 from PySide6.QtCore import QProcess, QPropertyAnimation
@@ -49,7 +47,6 @@ from read_historia import read_historia
 from Observacion_Colada import  Observacion_Colada
 from grafico_espesores import grafico_espesores
 from grafico_espesores import grafico_espesores
-
 
 
 
@@ -153,7 +150,7 @@ class cropWindow(qtw.QMainWindow, Ui_cropWindow):
                        [int((self.pbBottomMiddle.pos().x() + int(self.pbBottomMiddle.width()/2))/2) , int((self.pbBottomMiddle.pos().y() + int(self.pbBottomMiddle.height()/2))/2)], 
                        [int((self.pbBottomLeftMiddle.pos().x() + int(self.pbBottomLeftMiddle.width()/2))/2) , int((self.pbBottomLeftMiddle.pos().y() + int(self.pbBottomLeftMiddle.height()/2))/2)], 
                        [int((self.pbBottomLeft.pos().x() + int(self.pbBottomLeft.width()/2))/2) , int((self.pbBottomLeft.pos().y() + int(self.pbBottomLeft.height()/2))/2)]]
-        #print(coordenadas)
+        print(coordenadas)
         #print(self.pathImage)
         if self.pathImage[-5] == "F":
             PositionMatrixF = coordenadas
@@ -1022,6 +1019,10 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
         self.pbFileDialog2.clicked.connect(self.fileDialogWindow)
         self.pbFileDialog3.clicked.connect(self.fileDialogWindow)
         self.pbFileDialog4.clicked.connect(self.fileDialogWindow)
+        self.pbFileDialog5.clicked.connect(self.fileDialogWindow)
+        self.pbFileDialog6.clicked.connect(self.fileDialogWindow)
+        self.pbFileDialog7.clicked.connect(self.fileDialogWindow)
+        self.pbFileDialog8.clicked.connect(self.fileDialogWindow)
         self.startupData()
         self.loadEscoria()
         self.loadFirstEscoria()
@@ -1095,11 +1096,15 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
         else:
             commonPath = fileName[0:-6]
         try:
-            if isfile(commonPath+"F.jpg") and isfile(commonPath+"F.xlsx") and isfile(commonPath+"T.jpg") and isfile(commonPath+"T.xlsx") and int(self.txtUltimaColada.text()) < int(commonPath.split("/")[-1]):
+            if isfile(commonPath+"F.jpg") and isfile(commonPath+"F.xlsx") and isfile(commonPath+"T.jpg") and isfile(commonPath+"T.xlsx") and isfile(commonPath+"D.jpg") and isfile(commonPath+"D.xlsx") and isfile(commonPath+"I.jpg") and isfile(commonPath+"I.xlsx") and int(self.txtUltimaColada.text()) < int(commonPath.split("/")[-1]):
                 self.txtPathTermografiaF.setText(commonPath+"F.jpg")
                 self.txtPathTermografiaT.setText(commonPath+"T.jpg")
+                self.txtPathTermografiaD.setText(commonPath+"D.jpg")
+                self.txtPathTermografiaI.setText(commonPath+"I.jpg")
                 self.txtPathExcelF.setText(commonPath+"F.xlsx")
                 self.txtPathExcelT.setText(commonPath+"T.xlsx")
+                self.txtPathExcelD.setText(commonPath+"D.xlsx")
+                self.txtPathExcelI.setText(commonPath+"I.xlsx")
                 self.txtNewColada.setText(commonPath.split("/")[-1])
                 self.pb_aceptar.setEnabled(0)
                 self.pb_recortar.setEnabled(1)
@@ -1107,8 +1112,12 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
             else:
                 self.txtPathTermografiaF.setText("Error en el nombre")
                 self.txtPathTermografiaT.setText("Error en el nombre")
+                self.txtPathTermografiaD.setText("Error en el nombre")
+                self.txtPathTermografiaI.setText("Error en el nombre")
                 self.txtPathExcelF.setText("o archivos faltantes")
                 self.txtPathExcelT.setText("o archivos faltantes")
+                self.txtPathExcelD.setText("o archivos faltantes")
+                self.txtPathExcelI.setText("o archivos faltantes")
                 self.txtNewColada.setText("")
                 self.pb_aceptar.setEnabled(0)
                 self.pb_recortar.setEnabled(1)
@@ -1338,7 +1347,7 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
         super(AdministratorWindow, self).__init__()
         self.setupUi(self)
         self.showMaximized()
-        self.frameCucharas.setMinimumWidth(300)
+        self.frameCucharas.setMinimumWidth(250)
         #self.pbVerCucharas.setStyleSheet("QPushButton{icon.source: '/ResourcesFolder/featherIcons/chevrons-right.svg'}")
         #self.setWindowFlag(qtc.Qt.FramelessWindowHint)
         #self.setAttribute(qtc.Qt.WA_TranslucentBackground)
@@ -1349,7 +1358,7 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
         self.frameAddColada.setMinimumWidth(0)
         self.pbVerCucharas.clicked.connect(self.collapseMenuCucharas)
         self.printTree()
-        self.printHistory()
+        #self.printHistory()
         self.checkHighTemperature()
         self.pbHistorial.clicked.connect(self.historialWindow)
         self.pbPerfiles.clicked.connect(self.editUsers)
@@ -1360,8 +1369,8 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
         self.pbDeleteCampana.clicked.connect(self.deleteCampana)
         self.pbAddColada.clicked.connect(self.displayMenuColada)
         self.pb_aceptar.clicked.connect(self.addColada)
-        self.pbHistorialZonasF.clicked.connect(self.changeImageF)
-        self.pbHistorialZonasT.clicked.connect(self.changeImageT)
+        #self.pbHistorialZonasF.clicked.connect(self.changeImageF)
+        self.pbHistorialZonas.clicked.connect(self.changeImage)
         self.pbVerArchivos.clicked.connect(self.verArchivos)
         self.pbDeleteColada.clicked.connect(self.deleteColada)
         self.pbReporte.clicked.connect(self.generarReporte)
@@ -1475,8 +1484,8 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
             self.frameCucharas.show()
             self.animation.setStartValue(0)
             self.animationTree.setStartValue(0)
-            self.animation.setEndValue(300)
-            self.animationTree.setEndValue(280)
+            self.animation.setEndValue(250)
+            self.animationTree.setEndValue(230)
             self.animation.setEasingCurve(qtc.QEasingCurve.InOutQuart)
             self.animationTree.setEasingCurve(qtc.QEasingCurve.InOutQuart)
         self.animation.start()
@@ -1607,25 +1616,51 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
             self.txtZona3T.show()
             self.frame_18.setStyleSheet("background-color: rgb(134, 154, 175);")
             self.pbHistorialZonasT.setText("Historial")
+    def changeImage(self):
+        if self.pbHistorialZonas.text() == "Historial":
+            self.frame_17.hide()
+            self.frame_18.hide()
+            self.frame_69.hide()
+            self.frame_107.hide()
+            try:
+                nameCampana = self.treeMenu.currentItem().text(0)
+                nameCuchara = self.treeMenu.currentItem().parent().text(0)
+                self.frame_12.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasFrontal.png');")
+                self.frame_19.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasTrasero.png');")
+                self.frame_129.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasFrontal.png');")
+                self.frame_130.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasTrasero.png');")
+            except:
+                self.frame_12.setStyleSheet("border-image: url('');")
+                self.frame_19.setStyleSheet("border-image: url('');")
+                self.frame_129.setStyleSheet("border-image: url('');")
+                self.frame_130.setStyleSheet("border-image: url('');")
+            self.pbHistorialZonas.setText("Zonas")
+        else:
+            self.frame_12.setStyleSheet("")
+            self.frame_19.setStyleSheet("")
+            self.frame_129.setStyleSheet("")
+            self.frame_130.setStyleSheet("")
+            self.frame_69.show()
+            self.frame_107.show()
+            self.frame_17.show()
+            self.frame_18.show()
+            self.pbHistorialZonas.setText("Historial")
     def updateImage(self):
-        if self.pbHistorialZonasT.text() == "Historial":
+        if self.pbHistorialZonas.text() == "Historial":
             pass
         else:
             try:
                 nameCampana = self.treeMenu.currentItem().text(0)
                 nameCuchara = self.treeMenu.currentItem().parent().text(0)
-                self.frame_18.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasTrasero.png');")
+                self.frame_12.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasFrontal.png');")
+                self.frame_19.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasTrasero.png');")
+                self.frame_129.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasFrontal.png');")
+                self.frame_130.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasTrasero.png');")
             except:
-                self.frame_18.setStyleSheet("border-image: url('');")
-        if self.pbHistorialZonasF.text() == "Historial":
-            pass
-        else:
-            try:
-                nameCampana = self.treeMenu.currentItem().text(0)
-                nameCuchara = self.treeMenu.currentItem().parent().text(0)
-                self.frame_17.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasFrontal.png');")
-            except:
-                self.frame_17.setSty7leSheet("border-image: url('');")
+                self.frame_12.setStyleSheet("border-image: url('');")
+                self.frame_19.setStyleSheet("border-image: url('');")
+                self.frame_129.setStyleSheet("border-image: url('');")
+                self.frame_130.setStyleSheet("border-image: url('');")
     def displayMenuColada(self):
         #if self.VerCucharas == 1:
         #    self.collapseMenuCucharas()
@@ -1635,9 +1670,11 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
             self.frameAddColada.show()
             self.animationAddColada.setStartValue(0)
             self.animationAddColada.setEndValue(300)
+            self.pbAddColada.setIcon(qtg.QIcon(getcwd()+"/ResourcesFolder/featherIcons/chevrons-right.svg"))
         else:
             self.animationAddColada.setStartValue(300)
             self.animationAddColada.setEndValue(0)
+            self.pbAddColada.setIcon(qtg.QIcon(getcwd()+"/ResourcesFolder/featherIcons/chevrons-left.svg"))
         self.animationAddColada.setEasingCurve(qtc.QEasingCurve.InOutQuart)
         self.animationAddColada.start()
         self.animationAddColada.stateChanged.connect(self.showPopUpAddColada)
@@ -1675,6 +1712,7 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
             self.printTree()
         except:
             pass
+    '''
     def printHistory(self):
         briefHistory = dbLManager.getBriefHistory(5)
         historyCount = len(briefHistory)
@@ -1700,6 +1738,7 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
         self.dateHistory3.setText(briefHistory[1][3])
         self.nameHistory4.setText(briefHistory[0][2])
         self.dateHistory4.setText(briefHistory[0][3])
+    '''
     def onItemClicked(self):
         try:
             self.sbEscoria.setValue(0)
@@ -1735,7 +1774,8 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
                 self.sbEscoria.setEnabled(0)
             self.loadZonas()
             self.updateImage()
-        except:
+        except Exception as e:
+            #print(e)
             self.txtZona1F.setText("")
             self.txtZona2F.setText("")
             self.txtZona3F.setText("")
