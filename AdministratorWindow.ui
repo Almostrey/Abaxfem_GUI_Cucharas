@@ -7256,7 +7256,7 @@ background-color: #DDDDDD;</string>
 border:0px;</string>
                      </property>
                      <property name="text">
-                      <string>Cara Derecha</string>
+                      <string>Cara A</string>
                      </property>
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
@@ -7555,7 +7555,7 @@ background-color: #D3D3D3;
 border:0px;</string>
                      </property>
                      <property name="text">
-                      <string>Cara Izquierda</string>
+                      <string>Cara C</string>
                      </property>
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>

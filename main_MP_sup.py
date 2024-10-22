@@ -275,17 +275,23 @@ def returnObs(numObs:int):
         observacion = ""
     return observacion
 
-def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viejo2, path, CLE):
+def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viejo2, path, CLE, MaxCaraA, MaxCaraC):
     if CLE == 0:
         pregunta1=2
     else:
         pregunta1=1
     RiesgoF = []
     RiesgoT = []
+    RiesgoA = []
+    RiesgoC = []
     observacionF = []
     observacionT = []
+    observacionA = []
+    observacionC = []
     numObservacionesF = []
     numObservacionesT = []
+    numObservacionesA = []
+    numObservacionesC = []
     Riesgo = 0
     t=read_times_estudi_de_vida()
     if Nuevo1Viejo2 == 1:
@@ -312,6 +318,7 @@ def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viej
         RiesgoF.append(Riesgo)
         numObservacionesF.append(numObs)
         observacionF.append(returnObs(numObs))
+        print("Entrando trasera")
         #### Trasera
         [Riesgo, numObs] = EF_sup(cantColadas, np.column_stack((coladas,tempZonasTodasT[0])), haveHistory(cantColadas, path+"HistoriaSupT.xlsx"), path+f"HistoriaSupT.xlsx", t,pregunta1, CLE)
         if Riesgo>100:
@@ -334,6 +341,25 @@ def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viej
         RiesgoT.append(Riesgo)
         numObservacionesT.append(numObs)
         observacionT.append(returnObs(numObs))
+
+        print("Hecha Frontal y trasera")
+        # Cara A
+        [Riesgo, numObs] = main_MP_Inf.EF_inf(cantColadas, np.column_stack((coladas,MaxCaraA)), haveHistory(cantColadas, path+"HistoriaCaraA.xlsx"), path+f"HistoriaCaraA.xlsx", t, pregunta1, CLE)
+        if Riesgo>100:
+            Riesgo=100
+         
+        RiesgoA.append(Riesgo)
+        numObservacionesA.append(numObs)
+        observacionA.append(returnObs(numObs))
+        print("Hecho CaraA")
+        # Cara C
+        [Riesgo, numObs] = main_MP_Inf.EF_inf(cantColadas, np.column_stack((coladas,MaxCaraC)), haveHistory(cantColadas, path+"HistoriaCaraC.xlsx"), path+f"HistoriaCaraC.xlsx", t, pregunta1, CLE)
+        if Riesgo>100:
+            Riesgo=100
+         
+        RiesgoC.append(Riesgo)
+        numObservacionesC.append(numObs)
+        observacionC.append(returnObs(numObs))
 
     
     elif Nuevo1Viejo2 == 2:
@@ -412,7 +438,7 @@ def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viej
         RiesgoT.append(Riesgo)
         numObservacionesT.append(numObs)
         observacionT.append(returnObs(numObs))
-    return [RiesgoF, RiesgoT, numObservacionesF, numObservacionesT]
+    return [RiesgoF, RiesgoT, RiesgoA, RiesgoC, numObservacionesF, numObservacionesT, numObservacionesA, numObservacionesC]
     
 def fixTempZonas(coladasVerdaderas:list, tempZona:list):
     if len(coladasVerdaderas) == len(tempZona):return tempZona

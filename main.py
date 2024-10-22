@@ -47,7 +47,7 @@ from read_historia import read_historia
 from Observacion_Colada import  Observacion_Colada
 from grafico_espesores import grafico_espesores
 from grafico_espesores import grafico_espesores
-
+import openpyxl
 
 
 umbralMinimo = 0
@@ -108,16 +108,10 @@ class cropWindow(qtw.QMainWindow, Ui_cropWindow):
         self.select = "TopLeft"
         self.setFocusPolicy(qtc.Qt.StrongFocus)
         self.setAcceptDrops(True)
-        self.pbTopLeft = Limit(100, 50, self.frameCropImage)
-        self.pbTopLeftMiddle = Limit(215, 10, self.frameCropImage)
-        self.pbTopMiddle = Limit(450, 10, self.frameCropImage)
-        self.pbTopRightMiddle = Limit(685, 10, self.frameCropImage)
-        self.pbTopRight = Limit(800, 50, self.frameCropImage)
-        self.pbBottomLeft = Limit(100, 650, self.frameCropImage)
-        self.pbBottomLeftMiddle = Limit(215, 680, self.frameCropImage)
-        self.pbBottomMiddle = Limit(450, 680, self.frameCropImage)
-        self.pbBottomRightMiddle = Limit(685, 680, self.frameCropImage)
-        self.pbBottomRight = Limit(800, 650, self.frameCropImage)
+        if self.pathImage[-5] == "F" or self.pathImage[-5] == "T":
+            self.puntosFT()
+        else:
+            self.puntosAC()
         self.pbTopLeft.pressed.connect(self.pbTopLeftAction)
         self.pbTopRight.pressed.connect(self.pbTopRightAction)
         self.pbTopLeftMiddle.pressed.connect(self.pbTopLeftMiddleAction)
@@ -129,8 +123,32 @@ class cropWindow(qtw.QMainWindow, Ui_cropWindow):
         self.pbBottomMiddle.pressed.connect(self.pbBottomMiddleAction)
         self.pbBottomRightMiddle.pressed.connect(self.pbBottomRightMiddleAction)
         self.pushButton.clicked.connect(self.cropImage)
+    def puntosFT(self):
+        self.label.setStyleSheet("border-image: url(:/Images/ResourcesFolder/Imagenes/Cuchara_Ejemplo_Recorte.JPG);")
+        self.pbTopLeft = Limit(100, 50, self.frameCropImage)
+        self.pbTopLeftMiddle = Limit(215, 10, self.frameCropImage)
+        self.pbTopMiddle = Limit(450, 10, self.frameCropImage)
+        self.pbTopRightMiddle = Limit(685, 10, self.frameCropImage)
+        self.pbTopRight = Limit(800, 50, self.frameCropImage)
+        self.pbBottomLeft = Limit(100, 650, self.frameCropImage)
+        self.pbBottomLeftMiddle = Limit(215, 680, self.frameCropImage)
+        self.pbBottomMiddle = Limit(450, 680, self.frameCropImage)
+        self.pbBottomRightMiddle = Limit(685, 680, self.frameCropImage)
+        self.pbBottomRight = Limit(800, 650, self.frameCropImage)
+    def puntosAC(self):
+        self.label.setStyleSheet("border-image: url(:/Images/ResourcesFolder/Imagenes/Cuchara_Ejemplo_Recorte_Lado.jpg);")
+        self.pbTopLeft = Limit(56, 260, self.frameCropImage)
+        self.pbTopLeftMiddle = Limit(170, 256, self.frameCropImage)
+        self.pbTopMiddle = Limit(446, 256, self.frameCropImage)
+        self.pbTopRightMiddle = Limit(728, 256, self.frameCropImage)
+        self.pbTopRight = Limit(837, 256, self.frameCropImage)
+        self.pbBottomRight = Limit(837, 570, self.frameCropImage)
+        self.pbBottomRightMiddle = Limit(723, 602, self.frameCropImage)
+        self.pbBottomMiddle = Limit(446, 610, self.frameCropImage)
+        self.pbBottomLeftMiddle = Limit(170, 610, self.frameCropImage)
+        self.pbBottomLeft = Limit(56, 602, self.frameCropImage)
     def cropImage(self):
-        global windowColada, PositionMatrixF, PositionMatrixT
+        global windowColada, PositionMatrixF, PositionMatrixT, PositionMatrixA, PositionMatrixC
         """print("-----------------------------------------------------")
         print("1. [" + str(int((self.pbTopLeft.pos().x() + int(self.pbTopLeft.width()/2))/2)) + ", " + str(int((self.pbTopLeft.pos().y() + int(self.pbTopLeft.height()/2))/2)) +"]")
         print("2. [" + str(int((self.pbTopLeftMiddle.pos().x() + int(self.pbTopLeftMiddle.width()/2))/2)) + ", " + str(int((self.pbTopLeftMiddle.pos().y() + int(self.pbTopLeftMiddle.height()/2))/2)) +"]")
@@ -160,8 +178,24 @@ class cropWindow(qtw.QMainWindow, Ui_cropWindow):
             aux = aux+"T.jpg"
             self.window = cropWindow(aux)
             self.window.show()
-        else:
+        elif self.pathImage[-5] == "T":
             PositionMatrixT = coordenadas
+            window = self.window()
+            window.close()
+            aux = self.pathImage[0:-5]
+            aux = aux+"A.jpg"
+            self.window = cropWindow(aux)
+            self.window.show()
+        elif self.pathImage[-5] == "A":
+            PositionMatrixA = coordenadas
+            window = self.window()
+            window.close()
+            aux = self.pathImage[0:-5]
+            aux = aux+"C.jpg"
+            self.window = cropWindow(aux)
+            self.window.show()
+        else:
+            PositionMatrixC = coordenadas
             self.close()
             windowColada.show()
     def pbTopLeftAction(self): self.select = "TopLeft"
@@ -1157,7 +1191,7 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
             self.pb_recortar.setEnabled(1)
             self.pb_recortar.setText("Recortar Imagen")
     def addColada(self):
-        global PositionMatrixF, PositionMatrixT
+        global PositionMatrixF, PositionMatrixT, PositionMatrixA, PositionMatrixC
         try:
             self.pb_aceptar.hide()
             self.progressBar.show()
@@ -1374,7 +1408,6 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
         self.pbVerArchivos.clicked.connect(self.verArchivos)
         self.pbDeleteColada.clicked.connect(self.deleteColada)
         self.pbReporte.clicked.connect(self.generarReporte)
-
         self.pb_recortar.clicked.connect(self.recortarImg)
         self.progressBar.hide()
         self.pb_aceptar.setEnabled(0)
@@ -1383,6 +1416,10 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
         self.pbFileDialog2.clicked.connect(self.fileDialogWindow)
         self.pbFileDialog3.clicked.connect(self.fileDialogWindow)
         self.pbFileDialog4.clicked.connect(self.fileDialogWindow)
+        self.pbFileDialog5.clicked.connect(self.fileDialogWindow)
+        self.pbFileDialog6.clicked.connect(self.fileDialogWindow)
+        self.pbFileDialog7.clicked.connect(self.fileDialogWindow)
+        self.pbFileDialog8.clicked.connect(self.fileDialogWindow)
         self.pbSiEscoria.clicked.connect(self.siNoEscoria)
         self.pbNoEscoria.clicked.connect(self.siNoEscoria)
         regex = qtc.QRegularExpression("[0-9-a-z-A-Z_ .,/\!@$%^&*()=+:;?+-ñáéíóú]+")
@@ -1428,11 +1465,15 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
         else:
             commonPath = fileName[0:-6]
         try:
-            if isfile(commonPath+"F.jpg") and isfile(commonPath+"F.xlsx") and isfile(commonPath+"T.jpg") and isfile(commonPath+"T.xlsx") and int(self.txtUltimaColada.text()) < int(commonPath.split("/")[-1]):
+            if isfile(commonPath+"F.jpg") and isfile(commonPath+"F.xlsx") and isfile(commonPath+"T.jpg") and isfile(commonPath+"T.xlsx") and isfile(commonPath+"A.jpg") and isfile(commonPath+"A.xlsx") and isfile(commonPath+"C.jpg") and isfile(commonPath+"C.xlsx") and int(self.txtUltimaColada.text()) < int(commonPath.split("/")[-1]):
                 self.txtPathTermografiaF.setText(commonPath+"F.jpg")
                 self.txtPathTermografiaT.setText(commonPath+"T.jpg")
+                self.txtPathTermografiaD.setText(commonPath+"A.jpg")
+                self.txtPathTermografiaI.setText(commonPath+"C.jpg")
                 self.txtPathExcelF.setText(commonPath+"F.xlsx")
                 self.txtPathExcelT.setText(commonPath+"T.xlsx")
+                self.txtPathExcelD.setText(commonPath+"A.xlsx")
+                self.txtPathExcelI.setText(commonPath+"C.xlsx")
                 self.txtNewColada.setText(commonPath.split("/")[-1])
                 self.pb_aceptar.setEnabled(0)
                 self.pb_recortar.setEnabled(1)
@@ -1440,8 +1481,12 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
             else:
                 self.txtPathTermografiaF.setText("Error en el nombre")
                 self.txtPathTermografiaT.setText("Error en el nombre")
+                self.txtPathTermografiaD.setText("Error en el nombre")
+                self.txtPathTermografiaI.setText("Error en el nombre")
                 self.txtPathExcelF.setText("o archivos faltantes")
                 self.txtPathExcelT.setText("o archivos faltantes")
+                self.txtPathExcelD.setText("o archivos faltantes")
+                self.txtPathExcelI.setText("o archivos faltantes")
                 self.txtNewColada.setText("")
                 self.pb_aceptar.setEnabled(0)
                 self.pb_recortar.setEnabled(1)
@@ -1449,8 +1494,12 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
         except:
             self.txtPathTermografiaF.setText("Error en el nombre")
             self.txtPathTermografiaT.setText("Error en el nombre")
+            self.txtPathTermografiaD.setText("Error en el nombre")
+            self.txtPathTermografiaI.setText("Error en el nombre")
             self.txtPathExcelF.setText("o archivos faltantes")
             self.txtPathExcelT.setText("o archivos faltantes")
+            self.txtPathExcelD.setText("o archivos faltantes")
+            self.txtPathExcelI.setText("o archivos faltantes")
             self.txtNewColada.setText("")
             self.pb_aceptar.setEnabled(0)
             self.pb_recortar.setEnabled(1)
@@ -1860,7 +1909,7 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
         self.w = editUsers()
         self.w.show()
     def addColada(self):
-        global PositionMatrixF, PositionMatrixT
+        global PositionMatrixF, PositionMatrixT, PositionMatrixA, PositionMatrixC
         try:
             self.frameAddColada.setEnabled(0)
             self.treeMenu.setEnabled(0)
@@ -1901,16 +1950,20 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
                 self.progressBar.setValue(50)
                 PositionMatrixF = pd.DataFrame(PositionMatrixF)
                 PositionMatrixT = pd.DataFrame(PositionMatrixT)
+                #PositionMatrixA = pd.DataFrame(PositionMatrixA)
+                #PositionMatrixC = pd.DataFrame(PositionMatrixC)
                 #-------------------------BOTON PARA TEXTO DE OBSERVACIONES-------------------------------------------
                 # texto_Observacion=Observacion_Colada()
                 # print(texto_Observacion)
                 #-------------------------BOTON PARA TEXTO DE OBSERVACIONES-------------------------------------------
                 infoF = V1.V1(self.txtPathTermografiaF.text(), self.txtPathExcelF.text(), PositionMatrixF)
                 infoT = V1.V1(self.txtPathTermografiaT.text(), self.txtPathExcelT.text(), PositionMatrixT)
+                MaxCaraA = getMaxAC(self.txtPathExcelD.text(), PositionMatrixA)
+                MaxCaraC = getMaxAC(self.txtPathExcelI.text(), PositionMatrixC)
                 sleep(0.2)
                 self.progressBar.setValue(75)
-                if int(dataManager.getNameColadas(nameCuchara, str(nameCampana))[-1]) == 0:
-                # if True:
+                #if int(dataManager.getNameColadas(nameCuchara, str(nameCampana))[-1]) == 0:
+                if True:
                     # Nuevo
                     Historia = 0
                     Nuevo1Viejo2 = 1
@@ -1918,8 +1971,9 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
                     HistoriaT = 0
                     pathDirectory = dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/"
                     qtw.QApplication.processEvents()
-                    [RiesgoF, RiesgoT, observacionF, observacionT] = main_MP_sup.getRiesgo(numColada, numColada, self.numpy2float(reshape(infoF[9], 3)), self.numpy2float(reshape(infoT[9], 3)), Nuevo1Viejo2, pathDirectory, int(self.sbEscoria.text()))
-                    
+                    print(MaxCaraA)
+                    [RiesgoF, RiesgoT, RiesgoA, RiesgoC, observacionF, observacionT, observacionA, observacionC] = main_MP_sup.getRiesgo(numColada, numColada, self.numpy2float(reshape(infoF[9], 3)), self.numpy2float(reshape(infoT[9], 3)), Nuevo1Viejo2, pathDirectory, int(self.sbEscoria.text()), MaxCaraA, MaxCaraC)
+                    print("2")
                 else:
                     # Viejo
                     #[HistoriaPreviaF, HistoriaPreviaT] = dataManager.getHistoriaEF(nameCuchara, nameCampana)
@@ -1948,7 +2002,7 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
                 dataManager.add_Colada(nameCuchara, nameCampana, numColada, float(infoF[8]), float(infoT[8]), self.numpy2float(reshape(infoF[9], 3)), 
                                        self.numpy2float(reshape(infoT[9], 3)), self.numpy2float(reshape(infoF[5], 72)), self.numpy2float(reshape(infoT[5], 72)), 
                                        str(HistoriaF), str(HistoriaT), str(RiesgoF), str(RiesgoT), 
-                                       str(observacionF), txtObservaciones)
+                                       str(observacionF), txtObservaciones, maxA, maxC, str(RiesgoA), str(RiesgoC), str(observacionA), str(observacionC))
                 sleep(0.2)
                 self.progressBar.setValue(100)
                 sleep(1)
@@ -1959,13 +2013,15 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
                 dataManager.updatePlot(str(nameCuchara), str(nameCampana))
                 copy2(commonPath+"F.jpg", "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/")
                 copy2(commonPath+"T.jpg", "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/")
-                [col, maxF, maxT, escoria] = dataManager.getMaxHistory(nameCuchara, nameCampana)
+                copy2(commonPath+"A.jpg", "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/")
+                copy2(commonPath+"C.jpg", "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/")
+                [col, maxF, maxT, maxA, maxC, escoria] = dataManager.getMaxHistory(nameCuchara, nameCampana)
                 try:
-                    if max(maxF) >= umbralMaximo*0.9 or max(maxT) >= umbralMaximo*0.9:
+                    if max(maxF) >= umbralMaximo*0.9 or max(maxT) >= umbralMaximo*0.9 or max(maxA) >= umbralMaximo*0.9 or max(maxC) >= umbralMaximo*0.9:
                         self.close()
                         self.w = higherTempWindow()
                         self.w.show()
-                    elif maxF[-2] >= maxF[-1] or maxT [-2] >= maxT[-1]:
+                    elif maxF[-2] >= maxF[-1] or maxT [-2] >= maxT[-1] or maxA[-2] >= maxA[-1] or maxC [-2] >= maxC[-1]:
                         self.close()
                         self.w = lowerTempWindow()
                         self.w.show()
@@ -2222,6 +2278,43 @@ class saveUserWindow(qtw.QMainWindow, Ui_saveUserWindow):
         self.close()
         self.w = AdministratorWindow()
         self.w.show()
+
+def getMaxAC(PathExcel: str, PositionMatrix):
+        rows, columns = maxMinRowsColumns(PositionMatrix)
+        temperatures = []
+        workbook = openpyxl.load_workbook(PathExcel)
+        workbook = workbook.active
+        counteri = 0
+        counterj = 0
+        for i in workbook.iter_rows(values_only=True):
+            if counteri>=rows[0]+10 and counteri<=rows[1]+10:
+                counterj = 0
+                for j in i:
+                    if counterj>=columns[0]+1 and counterj<=columns[1]+1: temperatures.append(float(j))
+                    else: pass
+                    counterj += 1
+            else: pass
+            counteri += 1
+        return max(temperatures)
+
+def maxMinRowsColumns(PositionMatrix):
+    Rows = [1000, 0]
+    Columns = [1000, 0]
+    for i, j in PositionMatrix:
+        if i<Rows[0]: Rows[0] = i
+        else: pass
+        if i>Rows[1]: Rows[1] = i
+        else: pass
+        if j<Columns[0]: Columns[0] = j
+        else: pass
+        if j>Columns[1]: Columns[1] = j
+        else: pass
+    return [Rows, Columns]
+
+'''if __name__ == "__main__":
+    PosotionMatrix = [[34, 136], [91, 134], [229, 134], [370, 134], [424, 134], [424, 291], [367, 307], [229, 311], [91, 311], [34, 307]]
+    print(getMaxAC("C:/Users/Diego/Downloads/Colada_17/Colada_17/17F.xlsx", PosotionMatrix))
+    pass'''
 
 if __name__ == "__main__":
     freeze_support()

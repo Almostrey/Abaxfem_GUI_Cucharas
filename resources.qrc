@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="Images">
+    <file>ResourcesFolder/Imagenes/Cuchara_Ejemplo_Recorte_Lado.jpg</file>
     <file>ResourcesFolder/Imagenes/Cuchara_Ejemplo_Recorte.JPG</file>
     <file>ResourcesFolder/Imagenes/Logo_Letras.png</file>
     <file>ResourcesFolder/Imagenes/Cuchara.png</file>
@@ -296,8 +297,5 @@
     <file>ResourcesFolder/featherIcons/zap-off.svg</file>
     <file>ResourcesFolder/featherIcons/zoom-in.svg</file>
     <file>ResourcesFolder/featherIcons/zoom-out.svg</file>
-  </qresource>
-  <qresource prefix="Video">
-    <file>ResourcesFolder/Start_Video/LogoVideo.mp4</file>
   </qresource>
 </RCC>

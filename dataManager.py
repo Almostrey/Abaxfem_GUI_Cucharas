@@ -135,7 +135,13 @@ def addCampana(nameCuchara:str, nameCampana:int):
                     RiesgoF text,
                     RiesgoT text,
                     observacionF text,
-                    observacionT text
+                    observacionT text,
+                    MaxA text,
+                    MaxC text,
+                    RiesgoA text,
+                    RiesgoC text,
+                    observacionA text,
+                    observacionC text
                 )"""
             )
             conn.commit()
@@ -147,7 +153,7 @@ def addCampana(nameCuchara:str, nameCampana:int):
         print("111")
         return False
 
-def add_Colada(nameCuchara:str, nameCampana:int, nameColada:int, HTmaxCucharaF:float, HTmaxCucharaT:float, HTmaxZonasF:float, HTmaxZonasT:float, HTmaxRefF:float, HTmaxRefT:float, HistoriaF:float, HistoriaT:str, RiesgoF:str, RiesgoT:str, observacionF:str, observacionT:str):
+def add_Colada(nameCuchara:str, nameCampana:int, nameColada:int, HTmaxCucharaF:float, HTmaxCucharaT:float, HTmaxZonasF:float, HTmaxZonasT:float, HTmaxRefF:float, HTmaxRefT:float, HistoriaF:float, HistoriaT:str, RiesgoF:str, RiesgoT:str, observacionF:str, observacionT:str, maxA:float, maxC:float, RiesgoA:str, RiesgoC:str, observacionA:str, observacionC:str):
     if isDuplicated("CUCHARAS", "Name", nameCuchara):
         nameTable = "CUCHARA_"+nameCuchara
         if isDuplicated(nameTable, "Campanas", nameCampana):
@@ -158,7 +164,7 @@ def add_Colada(nameCuchara:str, nameCampana:int, nameColada:int, HTmaxCucharaF:f
                 date = datetime.strftime(datetime.now(), '%d/%m/%Y')
                 conn = sql.connect(nameDB)
                 cursor = conn.cursor()
-                instruccion = f"INSERT INTO {nameTable} VALUES ('{nameColada}', '{date}', '{HTmaxCucharaF}', '{HTmaxCucharaT}', '{HTmaxZonasF}', '{HTmaxZonasT}', '{HTmaxRefF}', '{HTmaxRefT}', '{HistoriaF}', '{HistoriaT}', '{RiesgoF}', '{RiesgoT}', '{observacionF}', '{observacionT}')"
+                instruccion = f"INSERT INTO {nameTable} VALUES ('{nameColada}', '{date}', '{HTmaxCucharaF}', '{HTmaxCucharaT}', '{HTmaxZonasF}', '{HTmaxZonasT}', '{HTmaxRefF}', '{HTmaxRefT}', '{HistoriaF}', '{HistoriaT}', '{RiesgoF}', '{RiesgoT}', '{observacionF}', '{observacionT}', '{str(maxA)}', '{str(maxC)}', '{str(RiesgoA)}', '{str(RiesgoC)}', '{str(observacionA)}', '{str(observacionC)}')"
                 conn.execute(instruccion)
                 conn.commit()
                 conn.commit()
@@ -460,9 +466,13 @@ def getMaxHistory(nameCuchara:str, nameCampana:str):
         Col = []
         maxF = []
         maxT = []
+        maxA = []
+        maxC = []
         for i in range(len(data)):
             maxF.append(data[i][2])
             maxT.append(data[i][3])
+            maxA.append(data[i][14])
+            maxC.append(data[i][15])
             Col.append(data[i][0])
         nameTable = "CUCHARA_"+nameCuchara
         conn = sql.connect(nameDB)
@@ -472,7 +482,7 @@ def getMaxHistory(nameCuchara:str, nameCampana:str):
         data = cursor.fetchall()
         conn.commit()
         escoria = data[-1][-1]
-        return [Col, maxF, maxT, escoria]
+        return [Col, maxF, maxT, maxA, maxC, escoria]
     except:
         return False
 
@@ -533,9 +543,13 @@ def getZonasHistory(nameCuchara:str, nameCampana:str):
         ColZona = []
         zonasF = []
         zonasT = []
+        zonasA = []
+        zonasC = []
         for i in range(len(data)):
             zonasF.append(data[i][4])
             zonasT.append(data[i][5])
+            zonasA.append(data[i][14])
+            zonasC.append(data[i][15])
             ColZona.append(data[i][0])
         HTZonaF1 = []
         HTZonaF2 = []
@@ -552,23 +566,27 @@ def getZonasHistory(nameCuchara:str, nameCampana:str):
             HTZonaT1.append(zonasT[i][0])
             HTZonaT2.append(zonasT[i][1])
             HTZonaT3.append(zonasT[i][2])
-        return [ColZona, HTZonaF1, HTZonaF2, HTZonaF3, HTZonaT1, HTZonaT2, HTZonaT3]
+        return [ColZona, HTZonaF1, HTZonaF2, HTZonaF3, HTZonaT1, HTZonaT2, HTZonaT3, zonasA, zonasC]
     except:
         return False
     
 def updatePlot(nameCuchara:str, nameCampana:str):
-    [Col, maxF, maxT, escoria] = getMaxHistory(nameCuchara, nameCampana)
-    [ColZona, HTZonaF1, HTZonaF2, HTZonaF3, HTZonaT1, HTZonaT2, HTZonaT3] = getZonasHistory(nameCuchara, nameCampana)
+    [Col, maxF, maxT, maxA, maxC, escoria] = getMaxHistory(nameCuchara, nameCampana)
+    [ColZona, HTZonaF1, HTZonaF2, HTZonaF3, HTZonaT1, HTZonaT2, HTZonaT3, zonasA, zonasC] = getZonasHistory(nameCuchara, nameCampana)
     # Elimino Graficos
     try:
         remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisTemperaturasFrontal.png")
         remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisTemperaturasTrasero.png")
+        remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisTemperaturasCaraA.png")
+        remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisTemperaturasCaraC.png")
         remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisZona1Frontal.png")
         remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisZona2Frontal.png")
         remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisZona3Frontal.png")
         remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisZona1Trasera.png")
         remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisZona2Trasera.png")
         remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisZona3Trasera.png")
+        remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisZonaCaraA.png")
+        remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisZonaCaraC.png")
     except:
         pass
     # Frontal
@@ -607,6 +625,38 @@ def updatePlot(nameCuchara:str, nameCampana:str):
     xlabel("Número de Colada")
     ylabel("Temperatura máxima alcanzada")
     savefig("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisTemperaturasTrasero"+".png")
+    # Cara A
+    figure(3)
+    figure(3).clear()
+    grid()
+    ylim (250 , 400)
+    plot(Col, maxA)
+    plot(ColZona, zonasA)
+    legend(["Máximas Temperaturas", "Zona Cara A"])
+    if int(escoria)==0:
+        pass
+    else:
+        vlines(int(escoria), 100, 500, colors='b', linestyles='dashed', label='')
+    title("Análisis Cara A / Cuchara "+nameCuchara+" - Campaña "+str(nameCampana))
+    xlabel("Número de Colada")
+    ylabel("Temperatura máxima alcanzada[ºC]")
+    savefig("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisTemperaturasCaraA"+".png")
+    # Cara C
+    figure(4)
+    figure(4).clear()
+    grid()
+    ylim (250 , 400)
+    plot(Col, maxC)
+    plot(ColZona, zonasC)
+    legend(["Máximas Temperaturas", "Zona Cara C"])
+    if int(escoria)==0:
+        pass
+    else:
+        vlines(int(escoria), 100, 500, colors='b', linestyles='dashed', label='')
+    title("Análisis Cara C / Cuchara "+nameCuchara+" - Campaña "+str(nameCampana))
+    xlabel("Número de Colada")
+    ylabel("Temperatura máxima alcanzada[ºC]")
+    savefig("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisTemperaturasCaraC"+".png")
 
 def dataIsCorrupted():
     observations = "Observaciones:\n"
@@ -887,7 +937,8 @@ if __name__ == "__main__":
     #print(getColadasRiesgos('3', '1'))
     #sendEmail("Prueba 1", "Fin de Cuchara", "test2.pdf", "test2.pdf")
     #print(GetReporteObservaciones("21", "1"))
-    print(modifyEscoria(nameCampana="11", nameCuchara="1", numEscoria=22))
+    #print(modifyEscoria(nameCampana="11", nameCuchara="1", numEscoria=22))
+    resetDatabase()
     pass
     '''conn = sql.connect(nameDB)
     cursor = conn.cursor()
