@@ -1690,28 +1690,6 @@ class Ui_AdministratorWindow(object):
         self.horizontalLayout_21.setSpacing(0)
         self.horizontalLayout_21.setObjectName(u"horizontalLayout_21")
         self.horizontalLayout_21.setContentsMargins(0, 0, 0, 15)
-        self.label_32 = QLabel(self.colorZone1LD)
-        self.label_32.setObjectName(u"label_32")
-        self.label_32.setMinimumSize(QSize(96, 20))
-        self.label_32.setMaximumSize(QSize(30, 40))
-        self.label_32.setFont(font)
-        self.label_32.setStyleSheet(u"border:0px;\n"
-"background-color:rgba(0, 0, 0, 0);")
-        self.label_32.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
-
-        self.horizontalLayout_21.addWidget(self.label_32)
-
-        self.txtZona1LD = QLabel(self.colorZone1LD)
-        self.txtZona1LD.setObjectName(u"txtZona1LD")
-        self.txtZona1LD.setMinimumSize(QSize(96, 20))
-        self.txtZona1LD.setMaximumSize(QSize(30, 40))
-        self.txtZona1LD.setFont(font1)
-        self.txtZona1LD.setStyleSheet(u"border:0px;\n"
-"background-color:rgba(0, 0, 0, 0);")
-        self.txtZona1LD.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
-
-        self.horizontalLayout_21.addWidget(self.txtZona1LD)
-
 
         self.horizontalLayout_11.addWidget(self.colorZone1LD)
 
@@ -1719,7 +1697,8 @@ class Ui_AdministratorWindow(object):
         self.frame_41.setObjectName(u"frame_41")
         self.frame_41.setMinimumSize(QSize(96, 0))
         self.frame_41.setMaximumSize(QSize(50, 16777215))
-        self.frame_41.setStyleSheet(u"border-image: url(:/Images/ResourcesFolder/Imagenes/ZonasRefracSup.png);")
+        self.frame_41.setStyleSheet(u"background-color: rgb(209, 209, 207);\n"
+"border-radius:0px;")
         self.frame_41.setFrameShape(QFrame.StyledPanel)
         self.frame_41.setFrameShadow(QFrame.Raised)
 
@@ -1746,23 +1725,23 @@ class Ui_AdministratorWindow(object):
 
         self.horizontalLayout_12.addWidget(self.frame_46)
 
-        self.colorZone2LD = QFrame(self.frame_29)
-        self.colorZone2LD.setObjectName(u"colorZone2LD")
-        sizePolicy.setHeightForWidth(self.colorZone2LD.sizePolicy().hasHeightForWidth())
-        self.colorZone2LD.setSizePolicy(sizePolicy)
-        self.colorZone2LD.setMinimumSize(QSize(98, 0))
-        self.colorZone2LD.setStyleSheet(u"background: qlineargradient(spread:pad,x1: 0, y1: 0, x2: 1, y2: 0,\n"
+        self.colorZone2C = QFrame(self.frame_29)
+        self.colorZone2C.setObjectName(u"colorZone2C")
+        sizePolicy.setHeightForWidth(self.colorZone2C.sizePolicy().hasHeightForWidth())
+        self.colorZone2C.setSizePolicy(sizePolicy)
+        self.colorZone2C.setMinimumSize(QSize(98, 0))
+        self.colorZone2C.setStyleSheet(u"background: qlineargradient(spread:pad,x1: 0, y1: 0, x2: 1, y2: 0,\n"
 "                                 stop: 0 rgb(122, 124, 151), stop: 0.48 rgb(198, 197, 195),\n"
 "                                 stop: 0.52 rgb(198, 197, 195), stop: 1.0  rgb(122, 124, 151));\n"
 "border-radius:0px;\n"
 "border:1px solid rgb(167, 167, 164);")
-        self.colorZone2LD.setFrameShape(QFrame.StyledPanel)
-        self.colorZone2LD.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_22 = QHBoxLayout(self.colorZone2LD)
+        self.colorZone2C.setFrameShape(QFrame.StyledPanel)
+        self.colorZone2C.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_22 = QHBoxLayout(self.colorZone2C)
         self.horizontalLayout_22.setSpacing(0)
         self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
         self.horizontalLayout_22.setContentsMargins(0, 0, 0, 15)
-        self.label_24 = QLabel(self.colorZone2LD)
+        self.label_24 = QLabel(self.colorZone2C)
         self.label_24.setObjectName(u"label_24")
         self.label_24.setMinimumSize(QSize(96, 20))
         self.label_24.setMaximumSize(QSize(30, 40))
@@ -1773,19 +1752,19 @@ class Ui_AdministratorWindow(object):
 
         self.horizontalLayout_22.addWidget(self.label_24)
 
-        self.txtZona2LD = QLabel(self.colorZone2LD)
-        self.txtZona2LD.setObjectName(u"txtZona2LD")
-        self.txtZona2LD.setMinimumSize(QSize(96, 20))
-        self.txtZona2LD.setMaximumSize(QSize(30, 40))
-        self.txtZona2LD.setFont(font1)
-        self.txtZona2LD.setStyleSheet(u"border:0px;\n"
+        self.txtZona1C = QLabel(self.colorZone2C)
+        self.txtZona1C.setObjectName(u"txtZona1C")
+        self.txtZona1C.setMinimumSize(QSize(96, 20))
+        self.txtZona1C.setMaximumSize(QSize(30, 40))
+        self.txtZona1C.setFont(font1)
+        self.txtZona1C.setStyleSheet(u"border:0px;\n"
 "background-color:rgba(0, 0, 0, 0);")
-        self.txtZona2LD.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.txtZona1C.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
-        self.horizontalLayout_22.addWidget(self.txtZona2LD)
+        self.horizontalLayout_22.addWidget(self.txtZona1C)
 
 
-        self.horizontalLayout_12.addWidget(self.colorZone2LD)
+        self.horizontalLayout_12.addWidget(self.colorZone2C)
 
         self.frame_44 = QFrame(self.frame_29)
         self.frame_44.setObjectName(u"frame_44")
@@ -1799,80 +1778,6 @@ class Ui_AdministratorWindow(object):
 
 
         self.verticalLayout_10.addWidget(self.frame_29)
-
-        self.frame_30 = QFrame(self.frame_18)
-        self.frame_30.setObjectName(u"frame_30")
-        self.frame_30.setMinimumSize(QSize(96, 90))
-        self.frame_30.setMaximumSize(QSize(16777215, 150))
-        self.frame_30.setFrameShape(QFrame.StyledPanel)
-        self.frame_30.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_19 = QHBoxLayout(self.frame_30)
-        self.horizontalLayout_19.setObjectName(u"horizontalLayout_19")
-        self.horizontalLayout_19.setContentsMargins(-1, 0, -1, 0)
-        self.frame_49 = QFrame(self.frame_30)
-        self.frame_49.setObjectName(u"frame_49")
-        self.frame_49.setMinimumSize(QSize(96, 0))
-        self.frame_49.setMaximumSize(QSize(50, 16777215))
-        self.frame_49.setFrameShape(QFrame.StyledPanel)
-        self.frame_49.setFrameShadow(QFrame.Raised)
-
-        self.horizontalLayout_19.addWidget(self.frame_49)
-
-        self.colorZone3LD = QFrame(self.frame_30)
-        self.colorZone3LD.setObjectName(u"colorZone3LD")
-        sizePolicy.setHeightForWidth(self.colorZone3LD.sizePolicy().hasHeightForWidth())
-        self.colorZone3LD.setSizePolicy(sizePolicy)
-        self.colorZone3LD.setMinimumSize(QSize(98, 0))
-        self.colorZone3LD.setStyleSheet(u"background: qlineargradient(spread:pad,x1: 0, y1: 0, x2: 1, y2: 0,\n"
-"                                 stop: 0 rgb(47, 146, 178), stop: 0.48 rgb(190, 192, 194),\n"
-"                                 stop: 0.52 rgb(190, 192, 194), stop: 1.0  rgb(47, 146, 178));\n"
-"border-radius:0px;\n"
-"border:1px solid rgb(167, 167, 164);\n"
-"\n"
-"")
-        self.colorZone3LD.setFrameShape(QFrame.StyledPanel)
-        self.colorZone3LD.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_23 = QHBoxLayout(self.colorZone3LD)
-        self.horizontalLayout_23.setSpacing(0)
-        self.horizontalLayout_23.setObjectName(u"horizontalLayout_23")
-        self.horizontalLayout_23.setContentsMargins(0, 0, 0, 15)
-        self.label_25 = QLabel(self.colorZone3LD)
-        self.label_25.setObjectName(u"label_25")
-        self.label_25.setMinimumSize(QSize(96, 20))
-        self.label_25.setMaximumSize(QSize(30, 40))
-        self.label_25.setFont(font)
-        self.label_25.setStyleSheet(u"border:0px;\n"
-"background-color:rgba(0, 0, 0, 0);")
-        self.label_25.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
-
-        self.horizontalLayout_23.addWidget(self.label_25)
-
-        self.txtZona3LD = QLabel(self.colorZone3LD)
-        self.txtZona3LD.setObjectName(u"txtZona3LD")
-        self.txtZona3LD.setMinimumSize(QSize(96, 20))
-        self.txtZona3LD.setMaximumSize(QSize(30, 40))
-        self.txtZona3LD.setFont(font1)
-        self.txtZona3LD.setStyleSheet(u"border:0px;\n"
-"background-color:rgba(0, 0, 0, 0);")
-        self.txtZona3LD.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
-
-        self.horizontalLayout_23.addWidget(self.txtZona3LD)
-
-
-        self.horizontalLayout_19.addWidget(self.colorZone3LD)
-
-        self.frame_47 = QFrame(self.frame_30)
-        self.frame_47.setObjectName(u"frame_47")
-        self.frame_47.setMinimumSize(QSize(96, 0))
-        self.frame_47.setMaximumSize(QSize(50, 16777215))
-        self.frame_47.setStyleSheet(u"border-image: url(:/Images/ResourcesFolder/Imagenes/ZonasRefracInf.png);")
-        self.frame_47.setFrameShape(QFrame.StyledPanel)
-        self.frame_47.setFrameShadow(QFrame.Raised)
-
-        self.horizontalLayout_19.addWidget(self.frame_47)
-
-
-        self.verticalLayout_10.addWidget(self.frame_30)
 
         self.frame_34 = QFrame(self.frame_18)
         self.frame_34.setObjectName(u"frame_34")
@@ -2098,28 +2003,6 @@ class Ui_AdministratorWindow(object):
         self.horizontalLayout_28.setSpacing(0)
         self.horizontalLayout_28.setObjectName(u"horizontalLayout_28")
         self.horizontalLayout_28.setContentsMargins(0, 0, 0, 15)
-        self.label_30 = QLabel(self.colorZone1LI)
-        self.label_30.setObjectName(u"label_30")
-        self.label_30.setMinimumSize(QSize(96, 20))
-        self.label_30.setMaximumSize(QSize(100, 40))
-        self.label_30.setFont(font)
-        self.label_30.setStyleSheet(u"border:0px;\n"
-"background-color:rgba(0, 0, 0, 0);")
-        self.label_30.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
-
-        self.horizontalLayout_28.addWidget(self.label_30)
-
-        self.txtZona1LI = QLabel(self.colorZone1LI)
-        self.txtZona1LI.setObjectName(u"txtZona1LI")
-        self.txtZona1LI.setMinimumSize(QSize(96, 20))
-        self.txtZona1LI.setMaximumSize(QSize(100, 40))
-        self.txtZona1LI.setFont(font1)
-        self.txtZona1LI.setStyleSheet(u"border:0px;\n"
-"background-color:rgba(0, 0, 0, 0);")
-        self.txtZona1LI.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
-
-        self.horizontalLayout_28.addWidget(self.txtZona1LI)
-
 
         self.horizontalLayout_34.addWidget(self.colorZone1LI)
 
@@ -2127,7 +2010,8 @@ class Ui_AdministratorWindow(object):
         self.frame_85.setObjectName(u"frame_85")
         self.frame_85.setMinimumSize(QSize(96, 0))
         self.frame_85.setMaximumSize(QSize(50, 16777215))
-        self.frame_85.setStyleSheet(u"border-image: url(:/Images/ResourcesFolder/Imagenes/ZonasRefracSup.png);")
+        self.frame_85.setStyleSheet(u"background-color: rgb(209, 209, 207);\n"
+"border-radius:0px;")
         self.frame_85.setFrameShape(QFrame.StyledPanel)
         self.frame_85.setFrameShadow(QFrame.Raised)
 
@@ -2154,23 +2038,23 @@ class Ui_AdministratorWindow(object):
 
         self.horizontalLayout_30.addWidget(self.frame_71)
 
-        self.colorZone2LI = QFrame(self.frame_32)
-        self.colorZone2LI.setObjectName(u"colorZone2LI")
-        sizePolicy.setHeightForWidth(self.colorZone2LI.sizePolicy().hasHeightForWidth())
-        self.colorZone2LI.setSizePolicy(sizePolicy)
-        self.colorZone2LI.setMinimumSize(QSize(98, 0))
-        self.colorZone2LI.setStyleSheet(u"background: qlineargradient(spread:pad,x1: 0, y1: 0, x2: 1, y2: 0,\n"
+        self.colorZone2A = QFrame(self.frame_32)
+        self.colorZone2A.setObjectName(u"colorZone2A")
+        sizePolicy.setHeightForWidth(self.colorZone2A.sizePolicy().hasHeightForWidth())
+        self.colorZone2A.setSizePolicy(sizePolicy)
+        self.colorZone2A.setMinimumSize(QSize(98, 0))
+        self.colorZone2A.setStyleSheet(u"background: qlineargradient(spread:pad,x1: 0, y1: 0, x2: 1, y2: 0,\n"
 "                                 stop: 0 rgb(122, 124, 151), stop: 0.48 rgb(198, 197, 195),\n"
 "                                 stop: 0.52 rgb(198, 197, 195), stop: 1.0  rgb(122, 124, 151));\n"
 "border-radius:0px;\n"
 "border:1px solid rgb(167, 167, 164);")
-        self.colorZone2LI.setFrameShape(QFrame.StyledPanel)
-        self.colorZone2LI.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_31 = QHBoxLayout(self.colorZone2LI)
+        self.colorZone2A.setFrameShape(QFrame.StyledPanel)
+        self.colorZone2A.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_31 = QHBoxLayout(self.colorZone2A)
         self.horizontalLayout_31.setSpacing(0)
         self.horizontalLayout_31.setObjectName(u"horizontalLayout_31")
         self.horizontalLayout_31.setContentsMargins(0, 0, 0, 15)
-        self.label_29 = QLabel(self.colorZone2LI)
+        self.label_29 = QLabel(self.colorZone2A)
         self.label_29.setObjectName(u"label_29")
         self.label_29.setMinimumSize(QSize(96, 20))
         self.label_29.setMaximumSize(QSize(30, 40))
@@ -2181,19 +2065,19 @@ class Ui_AdministratorWindow(object):
 
         self.horizontalLayout_31.addWidget(self.label_29)
 
-        self.txtZona2LI = QLabel(self.colorZone2LI)
-        self.txtZona2LI.setObjectName(u"txtZona2LI")
-        self.txtZona2LI.setMinimumSize(QSize(96, 20))
-        self.txtZona2LI.setMaximumSize(QSize(30, 40))
-        self.txtZona2LI.setFont(font1)
-        self.txtZona2LI.setStyleSheet(u"border:0px;\n"
+        self.txtZona1A = QLabel(self.colorZone2A)
+        self.txtZona1A.setObjectName(u"txtZona1A")
+        self.txtZona1A.setMinimumSize(QSize(96, 20))
+        self.txtZona1A.setMaximumSize(QSize(30, 40))
+        self.txtZona1A.setFont(font1)
+        self.txtZona1A.setStyleSheet(u"border:0px;\n"
 "background-color:rgba(0, 0, 0, 0);")
-        self.txtZona2LI.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.txtZona1A.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
-        self.horizontalLayout_31.addWidget(self.txtZona2LI)
+        self.horizontalLayout_31.addWidget(self.txtZona1A)
 
 
-        self.horizontalLayout_30.addWidget(self.colorZone2LI)
+        self.horizontalLayout_30.addWidget(self.colorZone2A)
 
         self.frame_73 = QFrame(self.frame_32)
         self.frame_73.setObjectName(u"frame_73")
@@ -2207,80 +2091,6 @@ class Ui_AdministratorWindow(object):
 
 
         self.verticalLayout_11.addWidget(self.frame_32)
-
-        self.frame_86 = QFrame(self.frame_17)
-        self.frame_86.setObjectName(u"frame_86")
-        self.frame_86.setMinimumSize(QSize(96, 90))
-        self.frame_86.setMaximumSize(QSize(16777215, 150))
-        self.frame_86.setFrameShape(QFrame.StyledPanel)
-        self.frame_86.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_36 = QHBoxLayout(self.frame_86)
-        self.horizontalLayout_36.setObjectName(u"horizontalLayout_36")
-        self.horizontalLayout_36.setContentsMargins(-1, 0, -1, 0)
-        self.frame_87 = QFrame(self.frame_86)
-        self.frame_87.setObjectName(u"frame_87")
-        self.frame_87.setMinimumSize(QSize(96, 0))
-        self.frame_87.setMaximumSize(QSize(50, 16777215))
-        self.frame_87.setFrameShape(QFrame.StyledPanel)
-        self.frame_87.setFrameShadow(QFrame.Raised)
-
-        self.horizontalLayout_36.addWidget(self.frame_87)
-
-        self.colorZone3LI = QFrame(self.frame_86)
-        self.colorZone3LI.setObjectName(u"colorZone3LI")
-        sizePolicy.setHeightForWidth(self.colorZone3LI.sizePolicy().hasHeightForWidth())
-        self.colorZone3LI.setSizePolicy(sizePolicy)
-        self.colorZone3LI.setMinimumSize(QSize(98, 0))
-        self.colorZone3LI.setStyleSheet(u"background: qlineargradient(spread:pad,x1: 0, y1: 0, x2: 1, y2: 0,\n"
-"                                 stop: 0 rgb(47, 146, 178), stop: 0.48 rgb(190, 192, 194),\n"
-"                                 stop: 0.52 rgb(190, 192, 194), stop: 1.0  rgb(47, 146, 178));\n"
-"border-radius:0px;\n"
-"border:1px solid rgb(167, 167, 164);\n"
-"\n"
-"")
-        self.colorZone3LI.setFrameShape(QFrame.StyledPanel)
-        self.colorZone3LI.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_37 = QHBoxLayout(self.colorZone3LI)
-        self.horizontalLayout_37.setSpacing(0)
-        self.horizontalLayout_37.setObjectName(u"horizontalLayout_37")
-        self.horizontalLayout_37.setContentsMargins(0, 0, 0, 15)
-        self.label_31 = QLabel(self.colorZone3LI)
-        self.label_31.setObjectName(u"label_31")
-        self.label_31.setMinimumSize(QSize(96, 20))
-        self.label_31.setMaximumSize(QSize(30, 40))
-        self.label_31.setFont(font)
-        self.label_31.setStyleSheet(u"border:0px;\n"
-"background-color:rgba(0, 0, 0, 0);")
-        self.label_31.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
-
-        self.horizontalLayout_37.addWidget(self.label_31)
-
-        self.txtZona3LI = QLabel(self.colorZone3LI)
-        self.txtZona3LI.setObjectName(u"txtZona3LI")
-        self.txtZona3LI.setMinimumSize(QSize(96, 20))
-        self.txtZona3LI.setMaximumSize(QSize(30, 40))
-        self.txtZona3LI.setFont(font1)
-        self.txtZona3LI.setStyleSheet(u"border:0px;\n"
-"background-color:rgba(0, 0, 0, 0);")
-        self.txtZona3LI.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
-
-        self.horizontalLayout_37.addWidget(self.txtZona3LI)
-
-
-        self.horizontalLayout_36.addWidget(self.colorZone3LI)
-
-        self.frame_89 = QFrame(self.frame_86)
-        self.frame_89.setObjectName(u"frame_89")
-        self.frame_89.setMinimumSize(QSize(96, 0))
-        self.frame_89.setMaximumSize(QSize(50, 16777215))
-        self.frame_89.setStyleSheet(u"border-image: url(:/Images/ResourcesFolder/Imagenes/ZonasRefracInf.png);")
-        self.frame_89.setFrameShape(QFrame.StyledPanel)
-        self.frame_89.setFrameShadow(QFrame.Raised)
-
-        self.horizontalLayout_36.addWidget(self.frame_89)
-
-
-        self.verticalLayout_11.addWidget(self.frame_86)
 
         self.frame_78 = QFrame(self.frame_17)
         self.frame_78.setObjectName(u"frame_78")
@@ -3664,20 +3474,12 @@ class Ui_AdministratorWindow(object):
         self.txtZona2T.setText(QCoreApplication.translate("AdministratorWindow", u"-", None))
         self.label_38.setText(QCoreApplication.translate("AdministratorWindow", u"Z3:", None))
         self.txtZona3T.setText(QCoreApplication.translate("AdministratorWindow", u"-", None))
-        self.label_12.setText(QCoreApplication.translate("AdministratorWindow", u"Vista Lateral Izquierda", None))
-        self.label_5.setText(QCoreApplication.translate("AdministratorWindow", u"Vista Lateral Derecha", None))
-        self.label_32.setText(QCoreApplication.translate("AdministratorWindow", u"Z1:", None))
-        self.txtZona1LD.setText(QCoreApplication.translate("AdministratorWindow", u"-", None))
-        self.label_24.setText(QCoreApplication.translate("AdministratorWindow", u"Z2:", None))
-        self.txtZona2LD.setText(QCoreApplication.translate("AdministratorWindow", u"-", None))
-        self.label_25.setText(QCoreApplication.translate("AdministratorWindow", u"Z3:", None))
-        self.txtZona3LD.setText(QCoreApplication.translate("AdministratorWindow", u"-", None))
-        self.label_30.setText(QCoreApplication.translate("AdministratorWindow", u"Z1:", None))
-        self.txtZona1LI.setText(QCoreApplication.translate("AdministratorWindow", u"-", None))
-        self.label_29.setText(QCoreApplication.translate("AdministratorWindow", u"Z2:", None))
-        self.txtZona2LI.setText(QCoreApplication.translate("AdministratorWindow", u"-", None))
-        self.label_31.setText(QCoreApplication.translate("AdministratorWindow", u"Z3:", None))
-        self.txtZona3LI.setText(QCoreApplication.translate("AdministratorWindow", u"-", None))
+        self.label_12.setText(QCoreApplication.translate("AdministratorWindow", u"Vista Lateral Cara A", None))
+        self.label_5.setText(QCoreApplication.translate("AdministratorWindow", u"Vista Lateral Cara C", None))
+        self.label_24.setText(QCoreApplication.translate("AdministratorWindow", u"Zona: ", None))
+        self.txtZona1C.setText(QCoreApplication.translate("AdministratorWindow", u"-", None))
+        self.label_29.setText(QCoreApplication.translate("AdministratorWindow", u"Zona:", None))
+        self.txtZona1A.setText(QCoreApplication.translate("AdministratorWindow", u"-", None))
         self.labelColadas.setText(QCoreApplication.translate("AdministratorWindow", u"Coladas:", None))
         self.pbDeleteColada.setText(QCoreApplication.translate("AdministratorWindow", u"Eliminar Colada", None))
         self.pbAddColada.setText(QCoreApplication.translate("AdministratorWindow", u"A\u00f1adir Colada", None))

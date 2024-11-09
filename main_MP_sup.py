@@ -22,7 +22,7 @@ import main_MP_Med
 num_process=os.cpu_count()
 #num_process=6
 #print(num_process)
-os.environ["OMP_NUM_THREADS"]="1"
+os.environ["OMP_NUM_THREADS"]=f"{num_process}"
 
 def main (args):
     coladas, pregunta1, CLE,tasaDesgaste, t,pregunta2,Historia=args                                                                             
@@ -295,11 +295,12 @@ def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viej
     Riesgo = 0
     t=read_times_estudi_de_vida()
     if Nuevo1Viejo2 == 1:
+        #print("Entrando Frontal")
         # Frontal
         [Riesgo, numObs] = EF_sup(cantColadas, np.column_stack((coladas,tempZonasTodasF[0])), haveHistory(cantColadas, path+"HistoriaSupF.xlsx"), path+f"HistoriaSupF.xlsx", t,pregunta1,CLE)
         if Riesgo>100:
             Riesgo=100
-         
+        #print("Frontal Medio entrando")
         RiesgoF.append(Riesgo)
         numObservacionesF.append(numObs)
         observacionF.append(returnObs(numObs))
@@ -308,6 +309,7 @@ def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viej
         if Riesgo>100:
             Riesgo=100
          
+        #print("Frontal Inferior entrando")
         RiesgoF.append(Riesgo)
         numObservacionesF.append(numObs)
         observacionF.append(returnObs(numObs))
@@ -318,7 +320,7 @@ def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viej
         RiesgoF.append(Riesgo)
         numObservacionesF.append(numObs)
         observacionF.append(returnObs(numObs))
-        print("Entrando trasera")
+        #print("Entrando trasera")
         #### Trasera
         [Riesgo, numObs] = EF_sup(cantColadas, np.column_stack((coladas,tempZonasTodasT[0])), haveHistory(cantColadas, path+"HistoriaSupT.xlsx"), path+f"HistoriaSupT.xlsx", t,pregunta1, CLE)
         if Riesgo>100:
@@ -342,7 +344,7 @@ def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viej
         numObservacionesT.append(numObs)
         observacionT.append(returnObs(numObs))
 
-        print("Hecha Frontal y trasera")
+        #print("Hecha Frontal y trasera")
         # Cara A
         [Riesgo, numObs] = main_MP_Inf.EF_inf(cantColadas, np.column_stack((coladas,MaxCaraA)), haveHistory(cantColadas, path+"HistoriaCaraA.xlsx"), path+f"HistoriaCaraA.xlsx", t, pregunta1, CLE)
         if Riesgo>100:
@@ -351,7 +353,7 @@ def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viej
         RiesgoA.append(Riesgo)
         numObservacionesA.append(numObs)
         observacionA.append(returnObs(numObs))
-        print("Hecho CaraA")
+        #print("Hecho CaraA")
         # Cara C
         [Riesgo, numObs] = main_MP_Inf.EF_inf(cantColadas, np.column_stack((coladas,MaxCaraC)), haveHistory(cantColadas, path+"HistoriaCaraC.xlsx"), path+f"HistoriaCaraC.xlsx", t, pregunta1, CLE)
         if Riesgo>100:
@@ -473,6 +475,15 @@ def haveHistory(colada, path):
         return 1
 
 if __name__ == "__main__":
-    path = "Historial/CUCHARA_1/CUCHARA_1_CAMPANA_11/HistoriaInfT.xlsx"
+    a = [60.85]
+    print(str(a))
+    '''coladas = 46
+    MaxCaraC = 435
+    path = "C:/Users/Diego/Downloads/TEST_FILE/TEST_FILE/"
+    t=read_times_estudi_de_vida()
+    print(np.column_stack((coladas,MaxCaraC)))
+    print(main_MP_Inf.EF_inf(coladas, np.column_stack((coladas,MaxCaraC)), 1, path+f"HistoriaCaraA.xlsx", t, 2, 0))'''
+
+    '''path = "Historial/CUCHARA_1/CUCHARA_1_CAMPANA_11/HistoriaInfT.xlsx"
     coladasVerdaderas = HistoriaPrevia([46, 75], path)
-    print(coladasVerdaderas)
+    print(coladasVerdaderas)'''

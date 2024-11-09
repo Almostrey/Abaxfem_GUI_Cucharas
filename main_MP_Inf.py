@@ -193,7 +193,154 @@ def EF_inf(coladas_DADA_DIEGO, temp_medidas, pregunta2:bool, path, t, pregunta1,
                     #[coladas_PASADAS, FSup, FMed, FInf, TSup, TMed, TInf] = getColadasRiesgos(f"{nameCuchara}", f"{nameCampana}")
                     col_general=Seccion_Frontal_datos[:,indexs_col]
                     temp_general=Seccion_Frontal_datos[:,indexs_temp]
+                
+            elif seccion=="A":
+                if len (tasaDesgaste_M)==num_process*2:
+                    nlineas=num_process
+                    nlineas_2=num_process
+                elif len (tasaDesgaste_M)<num_process*2 and len (tasaDesgaste_M)>num_process:
+                    nlineas= math.ceil(len (tasaDesgaste_M)/2)
+                    nlineas_2=len (tasaDesgaste_M)-nlineas
+                elif len (tasaDesgaste_M)<=num_process :
+                    nlineas=len (tasaDesgaste_M)
+                    nlineas_2=None
+                if pregunta2 ==2:
+                    Historia_orig=np.copy(Historia)
+                    Historia=Historia[:,:(len(tasaDesgaste_M)*19)]                    #19=NNod+3    
+        #Aproximacion1---------------------------------------------------------------------------------------------------------------------------------------------------------
+        #Orden de las variables de los resultados de main
+                col_results=0
+                temp_results=1
+                tasaDesgaste_results=2
+                Historia_results=3  
+                Historia2_results=4
+                if nlineas_2==None:
+                    with multiprocessing.Pool (processes=nlineas) as pool:
+                        results = pool.map(main, [(coladas, pregunta1, CLE,tasaDesgaste_M[i], t,pregunta2,Historia) for i in range(nlineas)])     
+                               
+                else:
+                    with multiprocessing.Pool (processes=nlineas) as pool:
+                        results = pool.map(main, [(coladas, pregunta1, CLE,tasaDesgaste_M[:nlineas][i], t,pregunta2,Historia) for i in range(nlineas)])       
+                    with multiprocessing.Pool (processes=nlineas_2) as pool:
+                        results2 = pool.map(main, [(coladas, pregunta1, CLE,tasaDesgaste_M[nlineas:][i], t,pregunta2,Historia) for i in range(nlineas_2)])        
                     
+                for tD in range(nlineas):                                                                                                                  #Para i en el rango nlineas     
+                    col=np.array(results[tD][col_results])
+                    temp=np.array(results[tD][temp_results])                                                                                                                 
+                    col_general=np.column_stack((col_general,col))                                                                                             #se guardan las variables col de cada proceso en una matriz general de col_general                          
+                    temp_general=np.column_stack((temp_general,temp))                                                                                      #se guardan las variables temp de cada proceso en una matriz general temp_general              
+                    # plt.plot(col, temp, color=colors[tD % len(colors)],linewidth=0.5)                                                                       #se grafica la temperatura del nodo externo en funcion de del numero de coladas para cada proceso i                                              
+                col_general=np.delete(col_general,0,1)                                                                                                     #Se elimina la primera columna de col_general ya que esta se uso solo como referencia para poder hacer un stack              
+                temp_general=np.delete(temp_general,0,1)
+                
+                if nlineas_2!=None:    
+                    for tD in range(nlineas_2):                                                                                                                  #Para i en el rango nlineas     
+                        col2=np.array(results2[tD][col_results])
+                        temp2=np.array(results2[tD][temp_results])                                                                                                                 
+                        col_general2=np.column_stack((col_general2,col2))                                                                                             #se guardan las variables col de cada proceso en una matriz general de col_general                          
+                        temp_general2=np.column_stack((temp_general2,temp2))                                                                                      #se guardan las variables temp de cada proceso en una matriz general temp_general              
+                        # plt.plot(col2, temp2, color=colors[tD % len(colors)],linewidth=0.5)                                                                       #se grafica la temperatura del nodo externo en funcion de del numero de coladas para cada proceso i                                              
+                    col_general2=np.delete(col_general2,0,1)                                                                                                     #Se elimina la primera columna de col_general ya que esta se uso solo como referencia para poder hacer un stack              
+                    temp_general2=np.delete(temp_general2,0,1)
+                if pregunta2==2:
+                    for tD in range(int(np.shape(Historia_orig)[1]/19)):
+                        colH=Historia_orig[:,0]+1
+                        tempH=Historia_orig[:,tD*19+17]                                                                                                               
+                        # plt.plot(colH, tempH, color=colors[tD % len(colors)],linewidth=0.5)                                                                       #se grafica la temperatura del nodo externo en funcion de del numero de coladas para cada proceso i                                              
+                   
+                    
+                # plt.xlabel('# de Colada')                                                                                                                  #Leyenda Eje x 
+                # plt.ylabel('Temperatura [ºC]')                                                                                                             #Leyenda eje Y      
+                # plt.title('Curvas desgaste (Aproximación 1)')
+               
+                
+                # plt.plot(temp_medidas[:,0], temp_medidas[:,1],  color='black',linewidth=0.5)                                                             #Se grafica recta horizontal de la temperatura objetivo en la colada evaluada                                                  
+                
+                # plt.xticks(np.arange(1,int(math.ceil(coladas/10.)*10.+10),step=10))
+                # plt.yticks(np.arange(int(np.min(temp_general))-5,int(np.max(temp_general))+25,step=25))
+                # plt.grid()
+                                                                                                                   
+                
+                # print (" %s seconds" % (time.time() - start_time))                                                                                         #Se imprime el tiempo de procesamiento     
+                if nlineas_2!=None:
+                    results.extend(results2) 
+                    col_general=np.hstack((col_general,col_general2))
+                    temp_general=np.hstack((temp_general,temp_general2))
+                    del results2, col_general2, temp_general2   
+
+            elif seccion=="C":
+                if len (tasaDesgaste_M)==num_process*2:
+                    nlineas=num_process
+                    nlineas_2=num_process
+                elif len (tasaDesgaste_M)<num_process*2 and len (tasaDesgaste_M)>num_process:
+                    nlineas= math.ceil(len (tasaDesgaste_M)/2)
+                    nlineas_2=len (tasaDesgaste_M)-nlineas
+                elif len (tasaDesgaste_M)<=num_process :
+                    nlineas=len (tasaDesgaste_M)
+                    nlineas_2=None
+                if pregunta2 ==2:
+                    Historia_orig=np.copy(Historia)
+                    Historia=Historia[:,:(len(tasaDesgaste_M)*19)]                    #19=NNod+3    
+        #Aproximacion1---------------------------------------------------------------------------------------------------------------------------------------------------------
+        #Orden de las variables de los resultados de main
+                col_results=0
+                temp_results=1
+                tasaDesgaste_results=2
+                Historia_results=3  
+                Historia2_results=4
+                if nlineas_2==None:
+                    with multiprocessing.Pool (processes=nlineas) as pool:
+                        results = pool.map(main, [(coladas, pregunta1, CLE,tasaDesgaste_M[i], t,pregunta2,Historia) for i in range(nlineas)])     
+                               
+                else:
+                    with multiprocessing.Pool (processes=nlineas) as pool:
+                        results = pool.map(main, [(coladas, pregunta1, CLE,tasaDesgaste_M[:nlineas][i], t,pregunta2,Historia) for i in range(nlineas)])       
+                    with multiprocessing.Pool (processes=nlineas_2) as pool:
+                        results2 = pool.map(main, [(coladas, pregunta1, CLE,tasaDesgaste_M[nlineas:][i], t,pregunta2,Historia) for i in range(nlineas_2)])        
+                    
+                for tD in range(nlineas):                                                                                                                  #Para i en el rango nlineas     
+                    col=np.array(results[tD][col_results])
+                    temp=np.array(results[tD][temp_results])                                                                                                                 
+                    col_general=np.column_stack((col_general,col))                                                                                             #se guardan las variables col de cada proceso en una matriz general de col_general                          
+                    temp_general=np.column_stack((temp_general,temp))                                                                                      #se guardan las variables temp de cada proceso en una matriz general temp_general              
+                    # plt.plot(col, temp, color=colors[tD % len(colors)],linewidth=0.5)                                                                       #se grafica la temperatura del nodo externo en funcion de del numero de coladas para cada proceso i                                              
+                col_general=np.delete(col_general,0,1)                                                                                                     #Se elimina la primera columna de col_general ya que esta se uso solo como referencia para poder hacer un stack              
+                temp_general=np.delete(temp_general,0,1)
+                
+                if nlineas_2!=None:    
+                    for tD in range(nlineas_2):                                                                                                                  #Para i en el rango nlineas     
+                        col2=np.array(results2[tD][col_results])
+                        temp2=np.array(results2[tD][temp_results])                                                                                                                 
+                        col_general2=np.column_stack((col_general2,col2))                                                                                             #se guardan las variables col de cada proceso en una matriz general de col_general                          
+                        temp_general2=np.column_stack((temp_general2,temp2))                                                                                      #se guardan las variables temp de cada proceso en una matriz general temp_general              
+                        # plt.plot(col2, temp2, color=colors[tD % len(colors)],linewidth=0.5)                                                                       #se grafica la temperatura del nodo externo en funcion de del numero de coladas para cada proceso i                                              
+                    col_general2=np.delete(col_general2,0,1)                                                                                                     #Se elimina la primera columna de col_general ya que esta se uso solo como referencia para poder hacer un stack              
+                    temp_general2=np.delete(temp_general2,0,1)
+                if pregunta2==2:
+                    for tD in range(int(np.shape(Historia_orig)[1]/19)):
+                        colH=Historia_orig[:,0]+1
+                        tempH=Historia_orig[:,tD*19+17]                                                                                                               
+                        # plt.plot(colH, tempH, color=colors[tD % len(colors)],linewidth=0.5)                                                                       #se grafica la temperatura del nodo externo en funcion de del numero de coladas para cada proceso i                                              
+                   
+                    
+                # plt.xlabel('# de Colada')                                                                                                                  #Leyenda Eje x 
+                # plt.ylabel('Temperatura [ºC]')                                                                                                             #Leyenda eje Y      
+                # plt.title('Curvas desgaste (Aproximación 1)')
+               
+                
+                # plt.plot(temp_medidas[:,0], temp_medidas[:,1],  color='black',linewidth=0.5)                                                             #Se grafica recta horizontal de la temperatura objetivo en la colada evaluada                                                  
+                
+                # plt.xticks(np.arange(1,int(math.ceil(coladas/10.)*10.+10),step=10))
+                # plt.yticks(np.arange(int(np.min(temp_general))-5,int(np.max(temp_general))+25,step=25))
+                # plt.grid()
+                                                                                                                   
+                
+                # print (" %s seconds" % (time.time() - start_time))                                                                                         #Se imprime el tiempo de procesamiento     
+                if nlineas_2!=None:
+                    results.extend(results2) 
+                    col_general=np.hstack((col_general,col_general2))
+                    temp_general=np.hstack((temp_general,temp_general2))
+                    del results2, col_general2, temp_general2   
                 
             # print("Punto de control1")    
             W,T_desgaste=Aproximacion2(tasaDesgaste_M,col_general,temp_general,temp_obj)
@@ -235,7 +382,42 @@ def EF_inf(coladas_DADA_DIEGO, temp_medidas, pregunta2:bool, path, t, pregunta1,
             elif seccion=="T":
                 Historia=np.copy(Seccion_Frontal_datos_orig)
                 # GUARDADO EN EXCEL; LO DEBE HACER DIEGO______________________________________________________________________________________________________________________________                
-                    
+            elif pregunta2==1 and seccion =="A":
+                Historia=np.zeros((coladas,1))
+                for c in range (len(tasaDesgaste_M)):
+                    Historia=np.hstack((Historia,(np.array(results[c][Historia_results]))))
+                Historia=np.delete(Historia,0,1)
+                
+            elif pregunta2==2 and seccion=="A":
+                Historia2=np.zeros((coladas-len(Historia),1))
+                for c in range (len(tasaDesgaste_M)):
+                    Historia2=np.hstack((Historia2,(np.array(results[c][Historia2_results]))))
+                Historia2=np.delete(Historia2,0,1)
+                # for tD in range (int(np.shape(Historia2)[1]/19)):
+                #     plt.plot(([Historia_orig[-1,0]+1],[Historia2[0,0]+1]),([Historia_orig[-1,tD*19+17]],[Historia2[0,tD*19+17]]),color=colors[tD % len(colors)],linewidth=0.5)
+
+                if np.shape(Historia_orig)[1]!=np.shape(Historia2)[1]:
+                    Fill=np.zeros((len(Historia2),(np.shape(Historia_orig)[1]-np.shape(Historia2)[1])))
+                    Historia2=np.hstack((Historia2,Fill))
+                Historia=np.vstack((Historia_orig,Historia2))
+            if pregunta2==1 and seccion =="C":
+                Historia=np.zeros((coladas,1))
+                for c in range (len(tasaDesgaste_M)):
+                    Historia=np.hstack((Historia,(np.array(results[c][Historia_results]))))
+                Historia=np.delete(Historia,0,1)
+                
+            elif pregunta2==2 and seccion=="C":
+                Historia2=np.zeros((coladas-len(Historia),1))
+                for c in range (len(tasaDesgaste_M)):
+                    Historia2=np.hstack((Historia2,(np.array(results[c][Historia2_results]))))
+                Historia2=np.delete(Historia2,0,1)
+                # for tD in range (int(np.shape(Historia2)[1]/19)):
+                #     plt.plot(([Historia_orig[-1,0]+1],[Historia2[0,0]+1]),([Historia_orig[-1,tD*19+17]],[Historia2[0,tD*19+17]]),color=colors[tD % len(colors)],linewidth=0.5)
+
+                if np.shape(Historia_orig)[1]!=np.shape(Historia2)[1]:
+                    Fill=np.zeros((len(Historia2),(np.shape(Historia_orig)[1]-np.shape(Historia2)[1])))
+                    Historia2=np.hstack((Historia2,Fill))
+                Historia=np.vstack((Historia_orig,Historia2))
             Historia_Excel=pd.DataFrame(Historia)
             Historia_Excel.to_excel(path,index=False,header=False)   
             # print("Punto de Control 3")

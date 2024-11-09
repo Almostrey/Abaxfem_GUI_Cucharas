@@ -9,7 +9,7 @@ from os import getcwd
 from grafico_espesores import grafico_espesores
 
 def getMaxInformation(nameCuchara:str, nameCampana:str):
-    [col, maxF, maxT, escoria] = dataManager.getMaxHistory(nameCuchara, nameCampana)
+    [col, maxF, maxT, maxA, maxC, escoria] = dataManager.getMaxHistory(nameCuchara, nameCampana)
     #Frontal
     HTmaxCucharaF = str(max(maxF))
     colMaxTempF = str(col[maxF.index(max(maxF))])
@@ -46,7 +46,7 @@ def createPDF(nameCuchara:str, nameCampana:str, tipoGeneracion:str):
     GetReporteObservaciones = dataManager.GetReporteObservaciones(nameCuchara, nameCampana)
     grafico_espesores(dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/")
     pathImgRiesgos = dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/Historial_Espesores"+".png"
-
+    
     loader = jinja2.FileSystemLoader("./")
     env = jinja2.Environment(loader = loader)
     htmlTemplate = "Template"

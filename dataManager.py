@@ -448,8 +448,8 @@ def getZonas(nameCuchara:str, nameCampana:str)->float:
         cursor.execute(instruccion)
         data = cursor.fetchall()
         conn.commit()
-        maxZonasF = fixList(data[-1][-4])
-        maxZonasT = fixList(data[-1][-3])
+        maxZonasF = fixList(data[-1][10])
+        maxZonasT = fixList(data[-1][11])
         return [maxZonasF, maxZonasT]
     except:
         return False
@@ -471,8 +471,8 @@ def getMaxHistory(nameCuchara:str, nameCampana:str):
         for i in range(len(data)):
             maxF.append(data[i][2])
             maxT.append(data[i][3])
-            maxA.append(data[i][14])
-            maxC.append(data[i][15])
+            maxA.append(float(data[i][14]))
+            maxC.append(float(data[i][15]))
             Col.append(data[i][0])
         nameTable = "CUCHARA_"+nameCuchara
         conn = sql.connect(nameDB)
@@ -522,12 +522,12 @@ def getRiesgoEF(nameCuchara:str, nameCampana:str):
         zonasF = []
         zonasT = []
         for i in range(len(data)):
-            zonasF.append(data[i][-4])
-            zonasT.append(data[i][-3])
+            zonasF.append(data[i][10])
+            zonasT.append(data[i][11])
         for i in range(len(zonasF)):
             zonasF[i] = fixList(zonasF[i])
             zonasT[i] = fixList(zonasT[i])
-        return [zonasF[-1], zonasT[-1]]
+        return [zonasF[-1], zonasT[-1], data[i][16], data[i][17]]
     except:
         return False
 
@@ -629,14 +629,13 @@ def updatePlot(nameCuchara:str, nameCampana:str):
     figure(3)
     figure(3).clear()
     grid()
-    ylim (250 , 400)
+    ylim (250 , 550)
     plot(Col, maxA)
-    plot(ColZona, zonasA)
-    legend(["Máximas Temperaturas", "Zona Cara A"])
+    legend(["Zona Cara A"])
     if int(escoria)==0:
         pass
     else:
-        vlines(int(escoria), 100, 500, colors='b', linestyles='dashed', label='')
+        vlines(int(escoria), 100, 600, colors='b', linestyles='dashed', label='')
     title("Análisis Cara A / Cuchara "+nameCuchara+" - Campaña "+str(nameCampana))
     xlabel("Número de Colada")
     ylabel("Temperatura máxima alcanzada[ºC]")
@@ -645,14 +644,13 @@ def updatePlot(nameCuchara:str, nameCampana:str):
     figure(4)
     figure(4).clear()
     grid()
-    ylim (250 , 400)
+    ylim (250 , 550)
     plot(Col, maxC)
-    plot(ColZona, zonasC)
-    legend(["Máximas Temperaturas", "Zona Cara C"])
+    legend(["Zona Cara C"])
     if int(escoria)==0:
         pass
     else:
-        vlines(int(escoria), 100, 500, colors='b', linestyles='dashed', label='')
+        vlines(int(escoria), 100, 600, colors='b', linestyles='dashed', label='')
     title("Análisis Cara C / Cuchara "+nameCuchara+" - Campaña "+str(nameCampana))
     xlabel("Número de Colada")
     ylabel("Temperatura máxima alcanzada[ºC]")
@@ -855,8 +853,8 @@ def getColadasRiesgos(nameCuchara:str, nameCampana:str):
         zonasT = []
         for i in range(len(data)):
             coladas.append(data[i][0])
-            zonasF.append(data[i][-4])
-            zonasT.append(data[i][-3])
+            zonasF.append(data[i][10])
+            zonasT.append(data[i][11])
         for i in range(len(zonasF)):
             zonasF[i] = fixList(zonasF[i])
             zonasT[i] = fixList(zonasT[i])
@@ -914,7 +912,8 @@ if __name__ == "__main__":
     #print(countCampanas("2"))
     #print(type(getNameCampanas(getNameCucharas()[0])[2]))
     #print(getEscoria('1'))
-    #print(add_Colada("1", 1, 1, [356.086], [300.227], [330.503, 356.086, 355.247],[287.276, 300.227, 300.169], [322.488, 332.979, 340.779, 345.269, 347.476, 347.21, 344.496, 340.94, 336.027, 329.821, 326.385, 322.736, 320.924, 316.446, 313.703, 305.862, 296.521, 289.512, 311.721, 325.74, 337.013, 344.216, 349.966, 351.656, 355.247, 354.63, 348.47, 345.841, 341.114, 334.877, 330.503, 323.288, 317.59, 310.298, 303.924, 302.065, 300.616, 312.762, 329.015, 338.831, 347.542, 351.88, 353.776, 356.086, 353.421, 348.735, 344.363, 334.471, 328.742, 322.004, 316.041, 311.214, 309.507, 305.777, 289.585, 306.403, 317.199, 326.687, 332.64, 333.712, 332.898, 332.327, 330.271, 327.921, 329.985, 325.588, 320.758, 314.614, 311.116, 304.31, 297.447, 290.01], [274.001, 282.185, 285.841, 287.837, 289.354, 290.544, 291.057, 290.25, 289.589, 288.677, 286.773, 285.204, 284.907, 283.585, 282.692, 279.957, 255.507, 287.276, 265.751, 278.32, 284.848, 290.25, 293.762, 296.366, 298.539, 299.275, 299.275, 296.308, 292.711, 288.692, 284.477, 282.199, 278.501, 278.666, 255.191, 280.675, 255.491, 271.506, 284.358, 292.346, 296.628, 299.275, 300.169, 300.227, 299.376, 294.141, 288.986, 284.239, 280.69, 278.05, 278.951, 279.567, 259.783, 283.168, 259.438, 267.262, 275.863, 279.327, 284.625, 286.522, 286.566, 284.477, 285.841, 284.328, 275.47, 274.44, 272.481, 270.009, 265.566, 258.404, 259.047, 284.254], "1", "2", "3", "4", "5", "[[Hola], [Bebe], [Bebe]]"))
+    #print(add_Colada("1", 1, 1, [356.086], [300.227], [330.503, 356.086, 355.247],[287.276, 300.227, 300.169], [322.488, 342], [274.001, 282.185], "1", "2", "3", "4", "5", "[[Hola], [Bebe], [Bebe]]", 123.45, 456.78, "97.8", "87.5", "Malo", "Malisimo"))
+    #add_Colada(1, 1, 1, 356.086, 3000000000000000000, [1 2 3],                    [1, 2, 3],                   [refracft   ], [Refactttttttttttt], 1, 2   , 3   , 4 , 5 ,    [                     ], maxA:float, maxC:float, RiesgoA:str, RiesgoC:str, observacionA:str, observacionC:str):
     #print(getHistoricosCampanaFT("2", 1))
     #print(fixList("[12.12, 24.24, 26.26]"))
     #print(modifyEscoria("2", "22", 50))
@@ -931,14 +930,15 @@ if __name__ == "__main__":
     #print(getZonasHistory("1", "1"))
     #print(getZonas("Cucha45", "100"))
     #print(int(getNameColadas("1", "3")[-1]))
-    #print(deleteColada("Cucha45", "101", 200))
+    #print(deleteColada("1", "1", 1))
     #print(getZonasEF('1', '9'))
     #print(getRiesgoEF('1', '9'))
     #print(getColadasRiesgos('3', '1'))
     #sendEmail("Prueba 1", "Fin de Cuchara", "test2.pdf", "test2.pdf")
     #print(GetReporteObservaciones("21", "1"))
     #print(modifyEscoria(nameCampana="11", nameCuchara="1", numEscoria=22))
-    resetDatabase()
+    #resetDatabase()
+    updatePlot("1", "1")
     pass
     '''conn = sql.connect(nameDB)
     cursor = conn.cursor()

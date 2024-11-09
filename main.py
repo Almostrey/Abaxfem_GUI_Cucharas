@@ -48,16 +48,18 @@ from Observacion_Colada import  Observacion_Colada
 from grafico_espesores import grafico_espesores
 from grafico_espesores import grafico_espesores
 import openpyxl
-
+import numpy as np
 
 umbralMinimo = 0
-umbralMaximo = 500
+umbralMaximo = 1000
 ApiKey = "AbaxfemGuiCucharas2023"
 D_Anillo= 0.1464
 D_Inf= 0.1464
 Middle = 1/2
-num_process=3
-os.environ["OMP_NUM_THREADS"]="1"
+num_process=4
+#os.environ["OMP_NUM_THREADS"]="4"
+num_process=os.cpu_count()
+os.environ["OMP_NUM_THREADS"]=f"{num_process}"
 global Position_MatrixT, Position_MatrixF
 
 class Limit(qtw.QPushButton):
@@ -168,7 +170,7 @@ class cropWindow(qtw.QMainWindow, Ui_cropWindow):
                        [int((self.pbBottomMiddle.pos().x() + int(self.pbBottomMiddle.width()/2))/2) , int((self.pbBottomMiddle.pos().y() + int(self.pbBottomMiddle.height()/2))/2)], 
                        [int((self.pbBottomLeftMiddle.pos().x() + int(self.pbBottomLeftMiddle.width()/2))/2) , int((self.pbBottomLeftMiddle.pos().y() + int(self.pbBottomLeftMiddle.height()/2))/2)], 
                        [int((self.pbBottomLeft.pos().x() + int(self.pbBottomLeft.width()/2))/2) , int((self.pbBottomLeft.pos().y() + int(self.pbBottomLeft.height()/2))/2)]]
-        print(coordenadas)
+        #print(coordenadas)
         #print(self.pathImage)
         if self.pathImage[-5] == "F":
             PositionMatrixF = coordenadas
@@ -1676,8 +1678,8 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
                 nameCuchara = self.treeMenu.currentItem().parent().text(0)
                 self.frame_12.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasFrontal.png');")
                 self.frame_19.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasTrasero.png');")
-                self.frame_129.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasFrontal.png');")
-                self.frame_130.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasTrasero.png');")
+                self.frame_129.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasCaraA.png');")
+                self.frame_130.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasCaraC.png');")
             except:
                 self.frame_12.setStyleSheet("border-image: url('');")
                 self.frame_19.setStyleSheet("border-image: url('');")
@@ -1703,8 +1705,8 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
                 nameCuchara = self.treeMenu.currentItem().parent().text(0)
                 self.frame_12.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasFrontal.png');")
                 self.frame_19.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasTrasero.png');")
-                self.frame_129.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasFrontal.png');")
-                self.frame_130.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasTrasero.png');")
+                self.frame_129.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasCaraA.png');")
+                self.frame_130.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasCaraC.png');")
             except:
                 self.frame_12.setStyleSheet("border-image: url('');")
                 self.frame_19.setStyleSheet("border-image: url('');")
@@ -1831,21 +1833,25 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
             self.txtZona1T.setText("")
             self.txtZona2T.setText("")
             self.txtZona3T.setText("")
-            self.setZonesColor(0, 0, 0)
+            self.txtZona1A.setText("")
+            self.txtZona1C.setText("")
+            self.setZonesColor(0, 0, 0, 0, 0)
     def loadZonas(self):
         nameCampana = self.treeMenu.currentItem().text(0)
         nameCuchara = self.treeMenu.currentItem().parent().text(0)
         [maxZonasF, maxZonasT] = dataManager.getZonas(nameCuchara[8:], nameCampana[8:])
         #[percentageZonasF, percentageZonasT] = self.getPercentage(maxZonasF, maxZonasT, umbralMinimo, umbralMaximo)
-        [RiesgoF, RiesgoT] = dataManager.getRiesgoEF(str(nameCuchara[8:]), str(nameCampana[8:]))
+        [RiesgoF, RiesgoT, RiesgoA, RiesgoC] = dataManager.getRiesgoEF(str(nameCuchara[8:]), str(nameCampana[8:]))
         self.txtZona1F.setText(str(RiesgoF[0])[0:5]+" %")
         self.txtZona2F.setText(str(RiesgoF[1])[0:5]+" %")
         self.txtZona3F.setText(str(RiesgoF[2])[0:5]+" %")
         self.txtZona1T.setText(str(RiesgoT[0])[0:5]+" %")
         self.txtZona2T.setText(str(RiesgoT[1])[0:5]+" %")
         self.txtZona3T.setText(str(RiesgoT[2])[0:5]+" %")
-        self.setZonesColor(RiesgoF, RiesgoT, umbralMinimo)
-    def setZonesColor(self, percentageZonasF, percentageZonasT, umbral):
+        self.txtZona1A.setText(str(RiesgoA[1:-1])[0:5]+" %")
+        self.txtZona1C.setText(str(RiesgoC[1:-1])[0:5]+" %")
+        self.setZonesColor(RiesgoF, RiesgoT, float(RiesgoA[1:-1]), float(RiesgoC[1:-1]), umbralMinimo)
+    def setZonesColor(self, percentageZonasF, percentageZonasT, percentageZonasA, percentageZonasC, umbral):
         # Siendo 0% Riesgo : rgb(154, 171, 188)
         # Siendo 100% Riesgo : rgb(255, 0, 0)
         if percentageZonasF==0:
@@ -1856,6 +1862,8 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
             self.colorZone1T.setStyleSheet(u"background: qlineargradient(spread:pad,x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 "+rgbTxt+", stop: 0.48 rgb(198, 197, 195), stop: 0.52 rgb(198, 197, 195), stop: 1.0  "+rgbTxt+");\n border-radius:0px;\nborder:1px solid rgb(167, 167, 164);")
             self.colorZone2T.setStyleSheet(u"background: qlineargradient(spread:pad,x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 "+rgbTxt+", stop: 0.48 rgb(198, 197, 195), stop: 0.52 rgb(198, 197, 195), stop: 1.0  "+rgbTxt+");\n border-radius:0px;\nborder:1px solid rgb(167, 167, 164);")
             self.colorZone3T.setStyleSheet(u"background: qlineargradient(spread:pad,x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 "+rgbTxt+", stop: 0.48 rgb(198, 197, 195), stop: 0.52 rgb(198, 197, 195), stop: 1.0  "+rgbTxt+");\n border-radius:0px;\nborder:1px solid rgb(167, 167, 164);")
+            self.colorZone2A.setStyleSheet(u"background: qlineargradient(spread:pad,x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 "+rgbTxt+", stop: 0.48 rgb(198, 197, 195), stop: 0.52 rgb(198, 197, 195), stop: 1.0  "+rgbTxt+");\n border-radius:0px;\nborder:1px solid rgb(167, 167, 164);")
+            self.colorZone2C.setStyleSheet(u"background: qlineargradient(spread:pad,x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 "+rgbTxt+", stop: 0.48 rgb(198, 197, 195), stop: 0.52 rgb(198, 197, 195), stop: 1.0  "+rgbTxt+");\n border-radius:0px;\nborder:1px solid rgb(167, 167, 164);")
         else:
             minRed = 0
             minGreen = 255
@@ -1877,6 +1885,11 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
             self.colorZone2T.setStyleSheet(u"background: qlineargradient(spread:pad,x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 "+rgbTxt+", stop: 0.48 rgb(198, 197, 195), stop: 0.52 rgb(198, 197, 195), stop: 1.0  "+rgbTxt+");\n border-radius:0px;\nborder:1px solid rgb(167, 167, 164);")
             rgbTxt = f"rgba({int(self.map_range(percentageZonasT[2], 0, 100, minRed, maxRed))}, {int(self.map_range(percentageZonasT[2], 0, 100, minGreen, maxGreen))}, {int(self.map_range(percentageZonasT[2], 0, 100, minBlue, maxBlue))}, {int(self.map_range(percentageZonasT[2], 0, 100, minA, maxA))})"
             self.colorZone3T.setStyleSheet(u"background: qlineargradient(spread:pad,x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 "+rgbTxt+", stop: 0.48 rgb(198, 197, 195), stop: 0.52 rgb(198, 197, 195), stop: 1.0  "+rgbTxt+");\n border-radius:0px;\nborder:1px solid rgb(167, 167, 164);")
+            
+            rgbTxt = f"rgba({int(self.map_range(percentageZonasA, 0, 100, minRed, maxRed))}, {int(self.map_range(percentageZonasA, 0, 100, minGreen, maxGreen))}, {int(self.map_range(percentageZonasA, 0, 100, minBlue, maxBlue))}, {int(self.map_range(percentageZonasA, 0, 100, minA, maxA))})"
+            self.colorZone2A.setStyleSheet(u"background: qlineargradient(spread:pad,x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 "+rgbTxt+", stop: 0.48 rgb(198, 197, 195), stop: 0.52 rgb(198, 197, 195), stop: 1.0  "+rgbTxt+");\n border-radius:0px;\nborder:1px solid rgb(167, 167, 164);")
+            rgbTxt = f"rgba({int(self.map_range(percentageZonasC, 0, 100, minRed, maxRed))}, {int(self.map_range(percentageZonasC, 0, 100, minGreen, maxGreen))}, {int(self.map_range(percentageZonasC, 0, 100, minBlue, maxBlue))}, {int(self.map_range(percentageZonasC, 0, 100, minA, maxA))})"
+            self.colorZone2C.setStyleSheet(u"background: qlineargradient(spread:pad,x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 "+rgbTxt+", stop: 0.48 rgb(198, 197, 195), stop: 0.52 rgb(198, 197, 195), stop: 1.0  "+rgbTxt+");\n border-radius:0px;\nborder:1px solid rgb(167, 167, 164);")
     def map_range(self, x, in_min, in_max, out_min, out_max):
         return (x - in_min) * (out_max - out_min) // (in_max - in_min) + out_min
     def getPercentage(self, maxZonasF:float, maxZonasT:float, umbralMinimo:float, umbralMaximo:float):
@@ -1971,9 +1984,8 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
                     HistoriaT = 0
                     pathDirectory = dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/"
                     qtw.QApplication.processEvents()
-                    print(MaxCaraA)
                     [RiesgoF, RiesgoT, RiesgoA, RiesgoC, observacionF, observacionT, observacionA, observacionC] = main_MP_sup.getRiesgo(numColada, numColada, self.numpy2float(reshape(infoF[9], 3)), self.numpy2float(reshape(infoT[9], 3)), Nuevo1Viejo2, pathDirectory, int(self.sbEscoria.text()), MaxCaraA, MaxCaraC)
-                    print("2")
+                    #print("Si Saliooooo")
                 else:
                     # Viejo
                     #[HistoriaPreviaF, HistoriaPreviaT] = dataManager.getHistoriaEF(nameCuchara, nameCampana)
@@ -1999,10 +2011,13 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
                 self.progressBar.setValue(85)
                 
                 txtObservaciones = str(self.txtObservaciones.text())
+                #print("MaxA", MaxCaraA)
+                #print("RiesgoA", RiesgoA)
+                #print("ObservacionA", observacionA)
                 dataManager.add_Colada(nameCuchara, nameCampana, numColada, float(infoF[8]), float(infoT[8]), self.numpy2float(reshape(infoF[9], 3)), 
                                        self.numpy2float(reshape(infoT[9], 3)), self.numpy2float(reshape(infoF[5], 72)), self.numpy2float(reshape(infoT[5], 72)), 
                                        str(HistoriaF), str(HistoriaT), str(RiesgoF), str(RiesgoT), 
-                                       str(observacionF), txtObservaciones, maxA, maxC, str(RiesgoA), str(RiesgoC), str(observacionA), str(observacionC))
+                                       str(observacionF), txtObservaciones, MaxCaraA, MaxCaraC, str(RiesgoA), str(RiesgoC), str(observacionA), str(observacionC))
                 sleep(0.2)
                 self.progressBar.setValue(100)
                 sleep(1)
