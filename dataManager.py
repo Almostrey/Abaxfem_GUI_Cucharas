@@ -2,14 +2,16 @@ import sqlite3 as sql
 from datetime import datetime
 from os import mkdir, path, remove, getcwd, linesep
 from shutil import rmtree, copyfile
-from matplotlib.pyplot import show, plot, savefig, title, xlabel, ylabel, figure, vlines, grid, ylim, legend
+from matplotlib.pyplot import show, plot, savefig, title, xlabel, ylabel, figure, vlines, grid, ylim, legend, xlim, xticks
 #import read_historia
-import pandas as pd
+
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
+from openpyxl import load_workbook
+from pandas import DataFrame
 
 nameDB = "data.db"
 
@@ -212,6 +214,8 @@ def deleteColada(nameCuchara:str, nameCampana:int, nameColada:int):
                     modifyEscoria(nameCuchara, nameCampana, 0)
                 remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/"+str(nameColada)+"F.jpg")
                 remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/"+str(nameColada)+"T.jpg")
+                remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/"+str(nameColada)+"A.jpg")
+                remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/"+str(nameColada)+"C.jpg")
                 if getNameColadas(nameCuchara, nameCampana)[-1] == 0:
                     remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaSupF.xlsx")
                     remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaMedF.xlsx")
@@ -219,6 +223,8 @@ def deleteColada(nameCuchara:str, nameCampana:int, nameColada:int):
                     remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaSupT.xlsx")
                     remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaMedT.xlsx")
                     remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaInfT.xlsx")
+                    remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaCaraA.xlsx")
+                    remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaCaraC.xlsx")
                 else:
                     colada = getNameColadas(nameCuchara, nameCampana)[-1]
                     deleteExcelStillColada(colada, "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaSupF.xlsx")
@@ -227,6 +233,9 @@ def deleteColada(nameCuchara:str, nameCampana:int, nameColada:int):
                     deleteExcelStillColada(colada, "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaSupT.xlsx")
                     deleteExcelStillColada(colada, "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaMedT.xlsx")
                     deleteExcelStillColada(colada, "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaInfT.xlsx")
+                    deleteExcelStillColada(colada, "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaMedT.xlsx")
+                    deleteExcelStillColada(colada, "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaCaraA.xlsx")
+                    deleteExcelStillColada(colada, "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaCaraC.xlsx")
                 updatePlot(nameCuchara, str(nameCampana))
                 return True
             else:
@@ -237,14 +246,19 @@ def deleteColada(nameCuchara:str, nameCampana:int, nameColada:int):
         return False
 
 def deleteExcelStillColada(colada:int, path:str):
-    historia = read_historia.read_historia(path)
-    remainingHistoria = []
-    for i in range (len(historia)):
-        remainingHistoria.append(historia[i])
-        if historia[i][0]+1 == colada:
-            break
-    Historia_Excel=pd.DataFrame(remainingHistoria)
-    Historia_Excel.to_excel(path,index=False,header=False)
+    workbook = load_workbook(path)
+    workbook = workbook.active
+    counteri = 0
+    newXLSX = []
+    for i in workbook.iter_rows(values_only=True):
+        if counteri < colada:
+            newXLSX.append(i)
+        else: pass
+        counteri += 1
+    df = DataFrame(newXLSX, index=None)
+    remove(path)
+    df.to_excel(path, index=None, header=None)
+    return True
 
 def deleteCampana(nameCuchara:str, nameCampana:int):
     if isDuplicated("CUCHARAS", "Name", nameCuchara):
@@ -593,7 +607,19 @@ def updatePlot(nameCuchara:str, nameCampana:str):
     figure(1)
     figure(1).clear()
     grid()
-    ylim (250 , 400)
+    if max(maxF)<500:
+        if min(maxF)>250:
+            ylim (250 , 500)
+        else:
+            ylim (min(maxF)-50 , 500)
+    else:
+        if min(maxF)>250:
+            ylim (250 , max(maxF)+50)
+        else:
+            ylim (min(maxF)-50 , max(maxF)+50)
+        
+    xlim(0, max(Col)+10)
+    xticks(range(0, max(Col)+10, 10))
     plot(Col, maxF)
     plot(ColZona, HTZonaF1)
     plot(ColZona, HTZonaF2)
@@ -607,11 +633,23 @@ def updatePlot(nameCuchara:str, nameCampana:str):
     xlabel("Número de Colada")
     ylabel("Temperatura máxima alcanzada[ºC]")
     savefig("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisTemperaturasFrontal"+".png")
+    
     # Trasera
     figure(2)
     figure(2).clear()
     grid()
-    ylim (250 , 400)
+    if max(maxT)<500:
+        if min(maxT)>250:
+            ylim (250 , 500)
+        else:
+            ylim (min(maxT)-50 , 500)
+    else:
+        if min(maxT)>250:
+            ylim (250 , max(maxT)+50)
+        else:
+            ylim (min(maxT)-50 , max(maxT)+50)
+    xlim(0, max(Col)+10)
+    xticks(range(0, max(Col)+10, 10))
     plot(Col, maxT)
     plot(ColZona, HTZonaT1)
     plot(ColZona, HTZonaT2)
@@ -629,7 +667,18 @@ def updatePlot(nameCuchara:str, nameCampana:str):
     figure(3)
     figure(3).clear()
     grid()
-    ylim (250 , 550)
+    if max(maxA)<500:
+        if min(maxA)>250:
+            ylim (250 , 500)
+        else:
+            ylim (min(maxA)-50 , 500)
+    else:
+        if min(maxA)>250:
+            ylim (250 , max(maxA)+50)
+        else:
+            ylim (min(maxA)-50 , max(maxA)+50)
+    xlim(0, max(Col)+10)
+    xticks(range(0, max(Col)+10, 10))
     plot(Col, maxA)
     legend(["Zona Cara A"])
     if int(escoria)==0:
@@ -644,7 +693,18 @@ def updatePlot(nameCuchara:str, nameCampana:str):
     figure(4)
     figure(4).clear()
     grid()
-    ylim (250 , 550)
+    if max(maxC)<500:
+        if min(maxC)>250:
+            ylim (250 , 500)
+        else:
+            ylim (min(maxC)-50 , 500)
+    else:
+        if min(maxC)>250:
+            ylim (250 , max(maxC)+50)
+        else:
+            ylim (min(maxC)-50 , max(maxC)+50)
+    xlim(0, max(Col)+10)
+    xticks(range(0, max(Col)+10, 10))
     plot(Col, maxC)
     legend(["Zona Cara C"])
     if int(escoria)==0:
@@ -704,7 +764,7 @@ def dataIsCorrupted():
                             iteration += 1
                             observations += str(iteration) + ". - \'Excel HistoriaSupF.xlsx\', \'HistoriaSupT.xlsx\', \'HistoriaMedF.xlsx\', \'HistoriaMedT.xlsx\', \'HistoriaInfF.xlsx\' y/o \'HistoriaInfT.xlsx\' de esta ubicación: "+getWorkingDirectory()+"/"+"Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/ eliminados recientemente (El programa puede que no funcione correctamente, contactar a Abaxfem.com)\n"
                             texto = {"Observacion": ["Este archivo fue eliminado, contactar con Abaxfem"]}
-                            dataframe = pd.DataFrame(texto)
+                            dataframe = DataFrame(texto)
                             if path.isfile("Historial/CUCHARA_"+i+"/CUCHARA_"+i+"_CAMPANA_"+str(j)+"/HistoriaInfF.xlsx"):
                                 pass
                             else:
@@ -855,6 +915,7 @@ def getColadasRiesgos(nameCuchara:str, nameCampana:str):
             coladas.append(data[i][0])
             zonasF.append(data[i][10])
             zonasT.append(data[i][11])
+        #print(zonasF)
         for i in range(len(zonasF)):
             zonasF[i] = fixList(zonasF[i])
             zonasT[i] = fixList(zonasT[i])
@@ -872,6 +933,34 @@ def getColadasRiesgos(nameCuchara:str, nameCampana:str):
             TMed.append(zonasT[i][1])
             TInf.append(zonasT[i][2])
         return [coladas, FSup, FMed, FInf, TSup, TMed, TInf]
+    except Exception as e:
+        return print(e)
+
+def getColadasRiesgosAC(nameCuchara:str, nameCampana:str):
+    try:
+        nameTable = "CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)
+        conn = sql.connect(nameDB)
+        cursor = conn.cursor()
+        instruccion = f"SELECT * FROM {nameTable} ORDER BY Colada"
+        cursor.execute(instruccion)
+        data = cursor.fetchall()
+        conn.commit()
+        coladas = []
+        CaraA = []
+        CaraC = []
+        for i in range(len(data)):
+            CaraA.append(data[i][17])
+            CaraC.append(data[i][18])
+        for i in range(len(CaraA)):
+            CaraA[i] = fixList(CaraA[i])
+            CaraC[i] = fixList(CaraC[i])
+        RiesgosCaraA = []
+        RiesgosCaraC = []
+        for i in CaraA:
+            RiesgosCaraA.append(i[0])
+        for i in CaraC:    
+            RiesgosCaraC.append(i[0])
+        return [RiesgosCaraA, RiesgosCaraC]
     except:
         return False
 
@@ -938,7 +1027,9 @@ if __name__ == "__main__":
     #print(GetReporteObservaciones("21", "1"))
     #print(modifyEscoria(nameCampana="11", nameCuchara="1", numEscoria=22))
     #resetDatabase()
-    updatePlot("1", "1")
+    #updatePlot("3", "1")
+    #print(getColadasRiesgosAC("1", "1"))
+    print(getColadasRiesgos("6", "1"))
     pass
     '''conn = sql.connect(nameDB)
     cursor = conn.cursor()

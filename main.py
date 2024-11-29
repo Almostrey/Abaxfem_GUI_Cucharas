@@ -51,15 +51,16 @@ import openpyxl
 import numpy as np
 
 umbralMinimo = 0
-umbralMaximo = 1000
+umbralMaximo = 500
 ApiKey = "AbaxfemGuiCucharas2023"
 D_Anillo= 0.1464
 D_Inf= 0.1464
 Middle = 1/2
 num_process=4
 #os.environ["OMP_NUM_THREADS"]="4"
-num_process=os.cpu_count()
-os.environ["OMP_NUM_THREADS"]=f"{num_process}"
+#num_process=os.cpu_count()//2
+num_process=8
+os.environ["OMP_NUM_THREADS"]="8"
 global Position_MatrixT, Position_MatrixF
 
 class Limit(qtw.QPushButton):
@@ -127,16 +128,16 @@ class cropWindow(qtw.QMainWindow, Ui_cropWindow):
         self.pushButton.clicked.connect(self.cropImage)
     def puntosFT(self):
         self.label.setStyleSheet("border-image: url(:/Images/ResourcesFolder/Imagenes/Cuchara_Ejemplo_Recorte.JPG);")
-        self.pbTopLeft = Limit(100, 50, self.frameCropImage)
-        self.pbTopLeftMiddle = Limit(215, 10, self.frameCropImage)
-        self.pbTopMiddle = Limit(450, 10, self.frameCropImage)
-        self.pbTopRightMiddle = Limit(685, 10, self.frameCropImage)
-        self.pbTopRight = Limit(800, 50, self.frameCropImage)
-        self.pbBottomLeft = Limit(100, 650, self.frameCropImage)
-        self.pbBottomLeftMiddle = Limit(215, 680, self.frameCropImage)
-        self.pbBottomMiddle = Limit(450, 680, self.frameCropImage)
-        self.pbBottomRightMiddle = Limit(685, 680, self.frameCropImage)
-        self.pbBottomRight = Limit(800, 650, self.frameCropImage)
+        self.pbTopLeft = Limit(160, 110, self.frameCropImage)
+        self.pbTopLeftMiddle = Limit(242, 92, self.frameCropImage)
+        self.pbTopMiddle = Limit(448, 82, self.frameCropImage)
+        self.pbTopRightMiddle = Limit(654, 92, self.frameCropImage)
+        self.pbTopRight = Limit(740, 110, self.frameCropImage)
+        self.pbBottomRight = Limit(734, 598, self.frameCropImage)
+        self.pbBottomRightMiddle = Limit(650, 612, self.frameCropImage)
+        self.pbBottomMiddle = Limit(450, 612, self.frameCropImage)
+        self.pbBottomLeftMiddle = Limit(250, 612, self.frameCropImage)
+        self.pbBottomLeft = Limit(168, 598, self.frameCropImage)
     def puntosAC(self):
         self.label.setStyleSheet("border-image: url(:/Images/ResourcesFolder/Imagenes/Cuchara_Ejemplo_Recorte_Lado.jpg);")
         self.pbTopLeft = Limit(56, 260, self.frameCropImage)
@@ -1193,6 +1194,7 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
             self.pb_recortar.setEnabled(1)
             self.pb_recortar.setText("Recortar Imagen")
     def addColada(self):
+        print("HOLA 0")
         global PositionMatrixF, PositionMatrixT, PositionMatrixA, PositionMatrixC
         try:
             self.pb_aceptar.hide()
@@ -1235,8 +1237,8 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
                 infoT = V1.V1(self.txtPathTermografiaT.text(), self.txtPathExcelT.text(), PositionMatrixT)
                 sleep(0.2)
                 self.progressBar.setValue(75)
-                if int(dataManager.getNameColadas(nameCuchara, str(nameCampana))[-1]) == 0:
-                # if True:
+                #if int(dataManager.getNameColadas(nameCuchara, str(nameCampana))[-1]) == 0:
+                if True:
                     # Nuevo
                     Historia = 0
                     Nuevo1Viejo2 = 1
@@ -1244,8 +1246,9 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
                     HistoriaT = 0
                     pathDirectory = dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/"
                     qtw.QApplication.processEvents()
+                    print("Hola 1")
                     [RiesgoF, RiesgoT, observacionF, observacionT] = main_MP_sup.getRiesgo(numColada, numColada, self.numpy2float(reshape(infoF[9], 3)), self.numpy2float(reshape(infoT[9], 3)), Nuevo1Viejo2, pathDirectory, int(self.sbEscoria.text()))
-                    
+                    print("Hola 2")
                 else:
                     # Viejo
                     #[HistoriaPreviaF, HistoriaPreviaT] = dataManager.getHistoriaEF(nameCuchara, nameCampana)
@@ -1348,12 +1351,14 @@ class PopUpDeleteColada(qtw.QMainWindow, Ui_PopUpDeleteColada):
         self.pb_aceptar.clicked.connect(self.deleteColada)
     def deleteColada(self):
         try:
+            self.pb_aceptar.setText("Eliminando Colada...")
             nameCampana = self.txtCampana.text()
             nameCuchara = self.cbCuchara.currentText()
             nameColada = self.cbColada.currentText()
             dataManager.deleteColada(nameCuchara[8:len(nameCuchara)], str(nameCampana), int(nameColada))
             self.exitPopUp()
-        except:
+        except Exception as e:
+            print(e)
             pass
     def loadCampanaColadas(self):
         try:
@@ -1705,8 +1710,8 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
                 nameCuchara = self.treeMenu.currentItem().parent().text(0)
                 self.frame_12.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasFrontal.png');")
                 self.frame_19.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasTrasero.png');")
-                self.frame_129.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasCaraA.png');")
-                self.frame_130.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasCaraC.png');")
+                self.frame_129.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasFrontal.png');")
+                self.frame_130.setStyleSheet("border-image: url('Historial/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"/CUCHARA_"+nameCuchara[8:len(nameCuchara)]+"_CAMPANA_"+nameCampana[8:len(nameCampana)]+"/AnalisisTemperaturasTrasero.png');")
             except:
                 self.frame_12.setStyleSheet("border-image: url('');")
                 self.frame_19.setStyleSheet("border-image: url('');")
@@ -1801,8 +1806,12 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
             self.txtUltimaColada.setText("")
             self.txtPathTermografiaF.setText("C: ... /Docs/")
             self.txtPathTermografiaT.setText("C: ... /Docs/")
+            self.txtPathTermografiaD.setText("C: ... /Docs/")
+            self.txtPathTermografiaI.setText("C: ... /Docs/")
             self.txtPathExcelT.setText("C: ... /Docs/")
             self.txtPathExcelF.setText("C: ... /Docs/")
+            self.txtPathExcelD.setText("C: ... /Docs/")
+            self.txtPathExcelI.setText("C: ... /Docs/")
             self.txtNewColada.setText("")
             campana = self.treeMenu.currentItem().text(0)
             cuchara = self.treeMenu.currentItem().parent().text(0)
@@ -1975,8 +1984,8 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
                 MaxCaraC = getMaxAC(self.txtPathExcelI.text(), PositionMatrixC)
                 sleep(0.2)
                 self.progressBar.setValue(75)
-                #if int(dataManager.getNameColadas(nameCuchara, str(nameCampana))[-1]) == 0:
-                if True:
+                if int(dataManager.getNameColadas(nameCuchara, str(nameCampana))[-1]) == 0:
+                #if True:
                     # Nuevo
                     Historia = 0
                     Nuevo1Viejo2 = 1
@@ -1998,13 +2007,17 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
                     zonasSup.append(self.numpy2float(reshape(infoF[9], 3)))
                     zonasInf = dataManager.getZonasEF(str(nameCuchara), str(nameCampana))[1]
                     zonasInf.append(self.numpy2float(reshape(infoT[9], 3)))
+                    MaximosAC= dataManager.getMaxHistory(nameCuchara, nameCampana)
+                    MaximosAC[3].append(MaxCaraA)
+                    MaximosAC[4].append(MaxCaraC)
                     #print(zonasSup)
                     #print(zonasInf)
                     coladasHistoria = dataManager.getNameColadas(str(nameCuchara), str(nameCampana))
                     coladasHistoria.append(numColada)
                     #print(coladasHistoria)
                     #print("paso1")
-                    [RiesgoF, RiesgoT, observacionF, observacionT] = main_MP_sup.getRiesgo(numColada, coladasHistoria, zonasSup, zonasInf, Nuevo1Viejo2, pathDirectory, int(self.sbEscoria.text()))
+                    qtw.QApplication.processEvents()
+                    [RiesgoF, RiesgoT, RiesgoA, RiesgoC, observacionF, observacionT, observacionA, observacionC] = main_MP_sup.getRiesgo(numColada, coladasHistoria, zonasSup, zonasInf, Nuevo1Viejo2, pathDirectory, int(self.sbEscoria.text()), MaximosAC[3], MaximosAC[4])
                 # print(pathDirectory)
                 # grafico_espesores(pathDirectory)    
                 sleep(0.2)
@@ -2026,6 +2039,7 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
                 else:
                     pass
                 dataManager.updatePlot(str(nameCuchara), str(nameCampana))
+                #self.savePhotosWithCrop(commonPath+"F.jpg", "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/")
                 copy2(commonPath+"F.jpg", "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/")
                 copy2(commonPath+"T.jpg", "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/")
                 copy2(commonPath+"A.jpg", "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/")
@@ -2056,7 +2070,8 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
                         Timer(5, self.setPbAceptarName).start()
                     else:
                         pass
-        except:
+        except Exception as e:
+            print(e)
             if self.progressBar.value() == 50:
                 self.pb_aceptar.setText("Imágenes ingresadas incorrectas!")
             else:
@@ -2071,6 +2086,9 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
             self.frame_21.setEnabled(1)
             self.frame_16.setEnabled(1)
             self.frameTop.setEnabled(1)
+    def savePhotosWithCrop(fromPath:str, toPath:str):
+        
+        pass
     def exitPopUp(self):
         self.close()
         self.w = AdministratorWindow()
@@ -2303,9 +2321,12 @@ def getMaxAC(PathExcel: str, PositionMatrix):
         counterj = 0
         for i in workbook.iter_rows(values_only=True):
             if counteri>=rows[0]+10 and counteri<=rows[1]+10:
+                #print("i", counteri, end=", ")
                 counterj = 0
                 for j in i:
-                    if counterj>=columns[0]+1 and counterj<=columns[1]+1: temperatures.append(float(j))
+                    if counterj>=columns[0]+1 and counterj<=columns[1]+1: 
+                        #print("j", counterj, end=", ")
+                        temperatures.append(float(j))
                     else: pass
                     counterj += 1
             else: pass
@@ -2326,15 +2347,9 @@ def maxMinRowsColumns(PositionMatrix):
         else: pass
     return [Rows, Columns]
 
-'''if __name__ == "__main__":
-    PosotionMatrix = [[34, 136], [91, 134], [229, 134], [370, 134], [424, 134], [424, 291], [367, 307], [229, 311], [91, 311], [34, 307]]
-    print(getMaxAC("C:/Users/Diego/Downloads/Colada_17/Colada_17/17F.xlsx", PosotionMatrix))
-    pass'''
-
-if __name__ == "__main__":
+def main():
     freeze_support()
     app = qtw.QApplication(argv)
-
     if dataManager.getWorkingDirectory() == getcwd():
         if isfile("dataL.db"):
             pass
@@ -2348,7 +2363,8 @@ if __name__ == "__main__":
         else:
             pass
         if isfile("ResourcesFolder/Start_Video/LogoVideo.mp4"):
-            window = Video_Logo_Window()
+            window = AdministratorWindow()
+            #window = Video_Logo_Window()
             #window = LoginWindow()
         else:
             #window = LoginWindow()
@@ -2356,6 +2372,8 @@ if __name__ == "__main__":
     else:
         dataManager.dataIsCorrupted()
         window = PopUpApiKey()
-    
     window.show()
     exit(app.exec())
+
+if __name__ == "__main__":
+    main()

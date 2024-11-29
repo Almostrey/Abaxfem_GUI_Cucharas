@@ -16,9 +16,9 @@ import time
 import os
 import math
 #num_process=int(os.environ["OMP_NUM_THREADS"])
-num_process=os.cpu_count()
+num_process=2
 #num_process=6
-os.environ["OMP_NUM_THREADS"]="1"
+os.environ["OMP_NUM_THREADS"]="8"
 
 
 def main (args):
@@ -34,7 +34,25 @@ def main (args):
     
     
     
-    
+def decorator(func):
+    def inner1(*args, **kwargs):
+        print("********************************************")
+        print("Antes de entrar a la funcion:", func.__name__)
+        print("Colada Actual:", args[0])
+        print("Coladas Anteriores:", args[1])
+        print("Nuevo1Viejo2:", args[2])
+        print("Path:", args[3])
+        #print("t:", args[4])
+        print("Tiene CLE? (1 Si, 2 NO):", args[5])
+        print("Numero CLE:", args[6])
+        returned_value = func(*args, **kwargs)
+        print("Despues de entrar a la funcion:", func.__name__)
+        print("Riesgo:", returned_value[0])
+        print("NumObs:", returned_value[1])
+        print("Fin funcion:", func.__name__)
+        print("********************************************")
+        return returned_value
+    return inner1
     
     
 #__________________________________________________________________________________________________________________________________________________________       
@@ -53,8 +71,8 @@ def EF_med(coladas_DADA_DIEGO, temp_medidas, pregunta2:bool, path, t, pregunta1,
         if not(511.632<int (t[0,0]+t[0,1])<928.37) or not(any(73.05<int (t[:,2]+t[:,3]+t[:,4])<130.95)) or not(any(10.74<int (t[:,5])<19.26)) or not(any(170.544<int (t[:,6])<309.456)) :
             print("Tiempos no son los estandar, ERROR en la aproximación del riesgo")
             observacion = 1
-        
-        if all(t[-4:,6]<=999999999):
+        #print("MED", temp_medidas)
+        if all(t[-4:,6]<=999999999):            #comprobación de tiempo de parada en horas, comprueba los 4 últimos reportes.
             temp_obj=temp_medidas[-1,1]
             start_time = time.time()                                                                           #Inicio de cronometro para saber tiempo de procesamiento
             colors = ['tab:red', 'tab:blue', 'tab:green', 'tab:orange', 'tab:purple', 
@@ -109,13 +127,13 @@ def EF_med(coladas_DADA_DIEGO, temp_medidas, pregunta2:bool, path, t, pregunta1,
                         results = pool.map(main, [(coladas, pregunta1, CLE,tasaDesgaste_M[:nlineas][i], t,pregunta2,Historia) for i in range(nlineas)])       
                     with multiprocessing.Pool (processes=nlineas_2) as pool:
                         results2 = pool.map(main, [(coladas, pregunta1, CLE,tasaDesgaste_M[nlineas:][i], t,pregunta2,Historia) for i in range(nlineas_2)])        
-                    
+                plt.figure()
                 for tD in range(nlineas):                                                                                                                  #Para i en el rango nlineas     
                     col=np.array(results[tD][col_results])
                     temp=np.array(results[tD][temp_results])                                                                                                                 
                     col_general=np.column_stack((col_general,col))                                                                                             #se guardan las variables col de cada proceso en una matriz general de col_general                          
                     temp_general=np.column_stack((temp_general,temp))                                                                                      #se guardan las variables temp de cada proceso en una matriz general temp_general              
-                    # plt.plot(col, temp, color=colors[tD % len(colors)],linewidth=0.5)                                                                       #se grafica la temperatura del nodo externo en funcion de del numero de coladas para cada proceso i                                              
+                    plt.plot(col, temp, color=colors[tD % len(colors)],linewidth=0.5)                                                                       #se grafica la temperatura del nodo externo en funcion de del numero de coladas para cada proceso i                                              
                 col_general=np.delete(col_general,0,1)                                                                                                     #Se elimina la primera columna de col_general ya que esta se uso solo como referencia para poder hacer un stack              
                 temp_general=np.delete(temp_general,0,1)
                 
@@ -125,26 +143,27 @@ def EF_med(coladas_DADA_DIEGO, temp_medidas, pregunta2:bool, path, t, pregunta1,
                         temp2=np.array(results2[tD][temp_results])                                                                                                                 
                         col_general2=np.column_stack((col_general2,col2))                                                                                             #se guardan las variables col de cada proceso en una matriz general de col_general                          
                         temp_general2=np.column_stack((temp_general2,temp2))                                                                                      #se guardan las variables temp de cada proceso en una matriz general temp_general              
-                        # plt.plot(col2, temp2, color=colors[tD % len(colors)],linewidth=0.5)                                                                       #se grafica la temperatura del nodo externo en funcion de del numero de coladas para cada proceso i                                              
+                        plt.plot(col2, temp2, color=colors[tD % len(colors)],linewidth=0.5)                                                                       #se grafica la temperatura del nodo externo en funcion de del numero de coladas para cada proceso i                                              
                     col_general2=np.delete(col_general2,0,1)                                                                                                     #Se elimina la primera columna de col_general ya que esta se uso solo como referencia para poder hacer un stack              
                     temp_general2=np.delete(temp_general2,0,1)
                 if pregunta2==2:
                     for tD in range(int(np.shape(Historia_orig)[1]/19)):
                         colH=Historia_orig[:,0]+1
                         tempH=Historia_orig[:,tD*19+17]                                                                                                               
-                        # plt.plot(colH, tempH, color=colors[tD % len(colors)],linewidth=0.5)                                                                       #se grafica la temperatura del nodo externo en funcion de del numero de coladas para cada proceso i                                              
+                        plt.plot(colH, tempH, color=colors[tD % len(colors)],linewidth=0.5)                                                                       #se grafica la temperatura del nodo externo en funcion de del numero de coladas para cada proceso i                                              
                    
                     
-                # plt.xlabel('# de Colada')                                                                                                                  #Leyenda Eje x 
-                # plt.ylabel('Temperatura [ºC]')                                                                                                             #Leyenda eje Y      
-                # plt.title('Curvas desgaste (Aproximación 1)')
+                plt.xlabel('# de Colada')                                                                                                                  #Leyenda Eje x 
+                plt.ylabel('Temperatura [ºC]')                                                                                                             #Leyenda eje Y      
+                #plt.title('Curvas desgaste (Aproximación 1)')
                
+                plt.title("MediaF (Aprox 1)")
+                plt.plot(temp_medidas[:,0], temp_medidas[:,1],  color='black',linewidth=0.5)                                                             #Se grafica recta horizontal de la temperatura objetivo en la colada evaluada                                                  
                 
-                # plt.plot(temp_medidas[:,0], temp_medidas[:,1],  color='black',linewidth=0.5)                                                             #Se grafica recta horizontal de la temperatura objetivo en la colada evaluada                                                  
-                
-                # plt.xticks(np.arange(1,int(math.ceil(coladas/10.)*10.+10),step=10))
-                # plt.yticks(np.arange(int(np.min(temp_general))-5,int(np.max(temp_general))+25,step=25))
-                # plt.grid()
+                plt.xticks(np.arange(1,int(math.ceil(coladas/10.)*10.+10),step=10))
+                #plt.yticks(np.arange(int(np.min(temp_general))-5,int(np.max(temp_general))+25,step=25))
+                plt.grid()
+                plt.show()
                                                                                                                    
                 
                 # print (" %s seconds" % (time.time() - start_time))                                                                                         #Se imprime el tiempo de procesamiento     
@@ -195,11 +214,13 @@ def EF_med(coladas_DADA_DIEGO, temp_medidas, pregunta2:bool, path, t, pregunta1,
                 
             # print("Punto de control 1")    
             W,T_desgaste=Aproximacion2(tasaDesgaste_M,col_general,temp_general,temp_obj)
+            print("T_desgaste Superior FT:", T_desgaste)
             # print ("Punto de Control 2")
             if W==0:
                 if T_desgaste*coladas>=102:
                     print("Error: Espesor crítico")
-                    Riesgo=100
+                    Riesgo=(T_desgaste*coladas)*100/102
+                    #Riesgo=100
                 else:
                     Riesgo=(T_desgaste*coladas)*100/102
                     
@@ -248,7 +269,7 @@ def EF_med(coladas_DADA_DIEGO, temp_medidas, pregunta2:bool, path, t, pregunta1,
         #print("Error: Matriz de temperaturas y tiempos inconsistente")  
         observacion = 4      
         return [Riesgo, observacion]
-os.environ["OMP_NUM_THREADS"]=f"{num_process}"
+os.environ["OMP_NUM_THREADS"]="8"
 
 
 

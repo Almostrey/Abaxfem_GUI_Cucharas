@@ -7,7 +7,7 @@ from read_times_estudi_de_vida import read_times_estudi_de_vida
 from Matriz_tasaDesgaste import Matriz_tasaDesgaste
 from Aproximacion2 import Aproximacion2
 from determinacion_tasa_desgaste import determinacion_tasa_desgaste
-from read_temps_medidas import read_temps_medidas
+#from read_temps_medidas import read_temps_medidas
 from processEF_if_first_time_Sup import processEF_if_first_time
 from processEF_if_not_first_time_Sup import processEF_if_not_first_time
 from read_historia import read_historia
@@ -19,10 +19,10 @@ import math
 import main_MP_Inf
 import main_MP_Med
 #num_process=int(os.environ["OMP_NUM_THREADS"])
-num_process=os.cpu_count()
-#num_process=6
+#num_process=os.cpu_count()
+num_process=2
 #print(num_process)
-os.environ["OMP_NUM_THREADS"]=f"{num_process}"
+os.environ["OMP_NUM_THREADS"]="8"
 
 def main (args):
     coladas, pregunta1, CLE,tasaDesgaste, t,pregunta2,Historia=args                                                                             
@@ -34,10 +34,33 @@ def main (args):
     
     return col, temp, tasaDesgaste,Historia,Historia2
         
+def decorator(func):
+    def inner1(*args, **kwargs):
+        print("********************************************")
+        print("Antes de entrar a la funcion:", func.__name__)
+        print("Colada Actual:", args[0])
+        print("Coladas Anteriores:", args[1])
+        print("Nuevo1Viejo2:", args[2])
+        print("Path:", args[3])
+        print("t:", args[4])
+        print("Tiene CLE? (1 Si, 2 NO):", args[5])
+        print("Numero CLE:", args[6])
+        returned_value = func(*args, **kwargs)
+        print("Despues de entrar a la funcion:", func.__name__)
+        print("Riesgo:", returned_value[0])
+        print("NumObs:", returned_value[1])
+        print("Fin funcion:", func.__name__)
+        print("********************************************")
+        return returned_value
+    return inner1
+
+        
+        
 #__________________________________________________________________________________________________________________________________________________________       
 def EF_sup(coladas_DADA_DIEGO, temp_medidas, pregunta2:bool, path, t,pregunta1,CLE):
 													   		  
 #_Informacion inicial--------------------------------------------------------------------------------------------------------------------------------------------------------------------------    
+    
     Riesgo = 0
     observacion = 0
     coladas_T=np.shape(t)[0]                                                                                 #Esta variable se sebe confirmar con la dada por diego en su código                    
@@ -53,7 +76,8 @@ def EF_sup(coladas_DADA_DIEGO, temp_medidas, pregunta2:bool, path, t,pregunta1,C
             observacion = 1
         
         #print("sup3.2")
-        if all(t[-4:,6]<=999999999):
+        #print("SUP", temp_medidas)
+        if all(t[-4:,6]<=999999999):            #comprobación de tiempo de parada en horas, comprueba los 4 últimos reportes.
             temp_obj=temp_medidas[-1,1]
             start_time = time.time()                                                                           #Inicio de cronometro para saber tiempo de procesamiento
             colors = ['tab:red', 'tab:blue', 'tab:green', 'tab:orange', 'tab:purple', 
@@ -94,11 +118,13 @@ def EF_sup(coladas_DADA_DIEGO, temp_medidas, pregunta2:bool, path, t,pregunta1,C
                     Historia=Historia[:,:(len(tasaDesgaste_M)*19)]                    #19=NNod+3    
         #Aproximacion1---------------------------------------------------------------------------------------------------------------------------------------------------------
         #Orden de las variables de los resultados de main
+                
                 col_results=0
                 temp_results=1
                 tasaDesgaste_results=2
                 Historia_results=3  
                 Historia2_results=4
+                #print("Lim Sup:", limite_sup, "Lim inf:", limite_inf)
                 if nlineas_2==None:
                     with multiprocessing.Pool (processes=nlineas) as pool:
                         results = pool.map(main, [(coladas, pregunta1, CLE,tasaDesgaste_M[i], t,pregunta2,Historia) for i in range(nlineas)])     
@@ -108,42 +134,50 @@ def EF_sup(coladas_DADA_DIEGO, temp_medidas, pregunta2:bool, path, t,pregunta1,C
                         results = pool.map(main, [(coladas, pregunta1, CLE,tasaDesgaste_M[:nlineas][i], t,pregunta2,Historia) for i in range(nlineas)])       
                     with multiprocessing.Pool (processes=nlineas_2) as pool:
                         results2 = pool.map(main, [(coladas, pregunta1, CLE,tasaDesgaste_M[nlineas:][i], t,pregunta2,Historia) for i in range(nlineas_2)])        
-                    
+                #print("Lim Sup:", limite_sup, "Lim inf:", limite_inf)
+                plt.figure(10)
+                plt.title("SuperiorF (Aprox 1)")
+                #print("nlineas1:", nlineas, ", nllineas2:", nlineas_2)
                 for tD in range(nlineas):                                                                                                                  #Para i en el rango nlineas     
                     col=np.array(results[tD][col_results])
                     temp=np.array(results[tD][temp_results])                                                                                                                 
                     col_general=np.column_stack((col_general,col))                                                                                             #se guardan las variables col de cada proceso en una matriz general de col_general                          
-                    temp_general=np.column_stack((temp_general,temp))                                                                                      #se guardan las variables temp de cada proceso en una matriz general temp_general              
-                    # plt.plot(col, temp, color=colors[tD % len(colors)],linewidth=0.5)                                                                       #se grafica la temperatura del nodo externo en funcion de del numero de coladas para cada proceso i                                              
+                    temp_general=np.column_stack((temp_general, temp))                                                                                      #se guardan las variables temp de cada proceso en una matriz general temp_general              
+                    #print("Colada:", col_general2, ", Temperatura:", temp_general2)
+                    plt.plot(col, temp, color=colors[tD % len(colors)],linewidth=0.5)                                                                       #se grafica la temperatura del nodo externo en funcion de del numero de coladas para cada proceso i                                              
+                #print("*-*************************")
+                #plt.show()
                 col_general=np.delete(col_general,0,1)                                                                                                     #Se elimina la primera columna de col_general ya que esta se uso solo como referencia para poder hacer un stack              
                 temp_general=np.delete(temp_general,0,1)
-                
                 if nlineas_2!=None:    
                     for tD in range(nlineas_2):                                                                                                                  #Para i en el rango nlineas     
                         col2=np.array(results2[tD][col_results])
                         temp2=np.array(results2[tD][temp_results])                                                                                                                 
                         col_general2=np.column_stack((col_general2,col2))                                                                                             #se guardan las variables col de cada proceso en una matriz general de col_general                          
                         temp_general2=np.column_stack((temp_general2,temp2))                                                                                      #se guardan las variables temp de cada proceso en una matriz general temp_general              
-                        # plt.plot(col2, temp2, color=colors[tD % len(colors)],linewidth=0.5)                                                                       #se grafica la temperatura del nodo externo en funcion de del numero de coladas para cada proceso i                                              
+                        #print("Colada:", col_general2, ", Temperatura:", temp_general2)
+                        plt.plot(col2, temp2, color=colors[tD % len(colors)],linewidth=0.5)                                                                       #se grafica la temperatura del nodo externo en funcion de del numero de coladas para cada proceso i                                              
+                    #plt.show()
                     col_general2=np.delete(col_general2,0,1)                                                                                                     #Se elimina la primera columna de col_general ya que esta se uso solo como referencia para poder hacer un stack              
                     temp_general2=np.delete(temp_general2,0,1)
                 if pregunta2==2:
                     for tD in range(int(np.shape(Historia_orig)[1]/19)):
                         colH=Historia_orig[:,0]+1
                         tempH=Historia_orig[:,tD*19+17]                                                                                                               
-                        # plt.plot(colH, tempH, color=colors[tD % len(colors)],linewidth=0.5)                                                                       #se grafica la temperatura del nodo externo en funcion de del numero de coladas para cada proceso i                                              
-                   
-                    
-                # plt.xlabel('# de Colada')                                                                                                                  #Leyenda Eje x 
-                # plt.ylabel('Temperatura [ºC]')                                                                                                             #Leyenda eje Y      
-                # plt.title('Curvas desgaste (Aproximación 1)')
+                        plt.plot(colH, tempH, color=colors[tD % len(colors)],linewidth=0.5)                                                                       #se grafica la temperatura del nodo externo en funcion de del numero de coladas para cada proceso i                                              
+                        #plt.show()
+                    #plt.show()
+                plt.xlabel('# de Colada')                                                                                                                  #Leyenda Eje x 
+                plt.ylabel('Temperatura [ºC]')                                                                                                             #Leyenda eje Y      
+                #plt.title('Curvas desgaste (Aproximación 1)')
                
                 
-                # plt.plot(temp_medidas[:,0], temp_medidas[:,1],  color='black',linewidth=0.5)                                                             #Se grafica recta horizontal de la temperatura objetivo en la colada evaluada                                                  
+                plt.plot(temp_medidas[:,0], temp_medidas[:,1],  color='black',linewidth=0.5)                                                             #Se grafica recta horizontal de la temperatura objetivo en la colada evaluada                                                  
                 
-                # plt.xticks(np.arange(1,int(math.ceil(coladas/10.)*10.+10),step=10))
-                # plt.yticks(np.arange(int(np.min(temp_general))-5,int(np.max(temp_general))+25,step=25))
-                # plt.grid()
+                plt.xticks(np.arange(1,int(math.ceil(coladas/10.)*10.+10),step=10))
+                #plt.yticks(np.arange(int(np.min(temp_general))-5,int(np.max(temp_general))+25,step=25))
+                plt.grid()
+                plt.show()
                                                                                                                    
                 
                 # print (" %s seconds" % (time.time() - start_time))                                                                                         #Se imprime el tiempo de procesamiento     
@@ -156,7 +190,6 @@ def EF_sup(coladas_DADA_DIEGO, temp_medidas, pregunta2:bool, path, t,pregunta1,C
             
 #--------------------------------------------Seccion T--------------------------------------            
             elif seccion=="T":
-
 
                 path_seccion_frontal=path[:-6]+"F.xlsx"
                 Seccion_Frontal_datos=read_historia(path_seccion_frontal)
@@ -191,25 +224,32 @@ def EF_sup(coladas_DADA_DIEGO, temp_medidas, pregunta2:bool, path, t,pregunta1,C
                     temp_general=Seccion_Frontal_datos[:,indexs_temp]
                     
                 
+                    
+                
             # print("Punto de control 1")    
             W,T_desgaste=Aproximacion2(tasaDesgaste_M,col_general,temp_general,temp_obj)
+            print("T_desgaste Superior FT:", T_desgaste)
+            #print("W:", W, "T_desgaste:", T_desgaste)
             # print ("Punto de Control 2")
-            if W==0 and pregunta1==2:
+            if W==0 and pregunta1==2: # Pregunta1: Hubo cambio de linea de escoria? (1 si, 2 no)
                 if T_desgaste*coladas>=102:
-                    # print("Error: Espesor crítico")
-                    Riesgo=100
+                    print("Error: Espesor crítico")
+                    # Riesgo=100
+                    Riesgo=(T_desgaste*coladas)*100/102
                 else:
                     Riesgo=(T_desgaste*coladas)*100/102
         #AGREGADO ESTO-----------------------------------------------
-            elif  W==0 and pregunta1==1:
+            elif  W==0 and pregunta1==1: # Pregunta1: Hubo cambio de linea de escoria? (1 si, 2 no)
                 if T_desgaste*(coladas-CLE)>=102:
-                    # print("Error: Espesor crítico")
-                    Riesgo=100
+                    print("Error: Espesor crítico")
+                    #Riesgo=100
+                    Riesgo=(T_desgaste*(coladas-CLE))*100/102
                 else:
                     Riesgo=(T_desgaste*(coladas-CLE))*100/102
-        #---------------------------------------------------------
+            elif W==1:
                     
-            elif W==1:                                                                                                                                #Si la variable de apoyo W es 1 se determina e imprime que la tasa de desgaste es negativa (Error)
+            #elif W==1:                                                                                                                                #Si la variable de apoyo W es 1 se determina e imprime que la tasa de desgaste es negativa (Error)
+            
                 #print ('Error: Tasa de Desgaste Negativa')
                 # print (" %s seconds" % (time.time() - start_time))                                                                                        #Se imprime el tiempo que tomo todo el proceso desde la aproximacion 1  
                 observacion = 2
@@ -227,8 +267,8 @@ def EF_sup(coladas_DADA_DIEGO, temp_medidas, pregunta2:bool, path, t,pregunta1,C
                 for c in range (len(tasaDesgaste_M)):
                     Historia2=np.hstack((Historia2,(np.array(results[c][Historia2_results]))))
                 Historia2=np.delete(Historia2,0,1)
-                # for tD in range (int(np.shape(Historia2)[1]/19)):
-                #     plt.plot(([Historia_orig[-1,0]+1],[Historia2[0,0]+1]),([Historia_orig[-1,tD*19+17]],[Historia2[0,tD*19+17]]),color=colors[tD % len(colors)],linewidth=0.5)
+                for tD in range (int(np.shape(Historia2)[1]/19)):
+                    plt.plot(([Historia_orig[-1,0]+1],[Historia2[0,0]+1]),([Historia_orig[-1,tD*19+17]],[Historia2[0,tD*19+17]]),color=colors[tD % len(colors)],linewidth=0.5)
 
                 if np.shape(Historia_orig)[1]!=np.shape(Historia2)[1]:
                     Fill=np.zeros((len(Historia2),(np.shape(Historia_orig)[1]-np.shape(Historia2)[1])))
@@ -254,7 +294,8 @@ def EF_sup(coladas_DADA_DIEGO, temp_medidas, pregunta2:bool, path, t,pregunta1,C
         #print("Error: Matriz de temperaturas y tiempos inconsistente o estimación de riesgo temprana")  
         observacion = 4      
         return [Riesgo, observacion]
-os.environ["OMP_NUM_THREADS"]=f"{num_process}"
+
+os.environ["OMP_NUM_THREADS"]="8"
 
 
 
@@ -297,25 +338,25 @@ def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viej
     if Nuevo1Viejo2 == 1:
         #print("Entrando Frontal")
         # Frontal
+        #print("tempZonasTodasF:", tempZonasTodasF)
         [Riesgo, numObs] = EF_sup(cantColadas, np.column_stack((coladas,tempZonasTodasF[0])), haveHistory(cantColadas, path+"HistoriaSupF.xlsx"), path+f"HistoriaSupF.xlsx", t,pregunta1,CLE)
-        if Riesgo>100:
-            Riesgo=100
+        #if Riesgo>100:
+        #    Riesgo=100
         #print("Frontal Medio entrando")
         RiesgoF.append(Riesgo)
         numObservacionesF.append(numObs)
         observacionF.append(returnObs(numObs))
-        print(np.column_stack((coladas,tempZonasTodasF[1])))
         [Riesgo, numObs] = main_MP_Med.EF_med(cantColadas, np.column_stack((coladas,tempZonasTodasF[1])), haveHistory(cantColadas, path+"HistoriaMedF.xlsx"), path+f"HistoriaMedF.xlsx", t, pregunta1, CLE)
-        if Riesgo>100:
-            Riesgo=100
+        #if Riesgo>100:
+        #    Riesgo=100
          
         #print("Frontal Inferior entrando")
         RiesgoF.append(Riesgo)
         numObservacionesF.append(numObs)
         observacionF.append(returnObs(numObs))
         [Riesgo, numObs] = main_MP_Inf.EF_inf(cantColadas, np.column_stack((coladas,tempZonasTodasF[2])), haveHistory(cantColadas, path+"HistoriaInfF.xlsx"), path+f"HistoriaInfF.xlsx", t, pregunta1, CLE)
-        if Riesgo>100:
-            Riesgo=100
+        #if Riesgo>100:
+        #    Riesgo=100
          
         RiesgoF.append(Riesgo)
         numObservacionesF.append(numObs)
@@ -323,22 +364,22 @@ def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viej
         #print("Entrando trasera")
         #### Trasera
         [Riesgo, numObs] = EF_sup(cantColadas, np.column_stack((coladas,tempZonasTodasT[0])), haveHistory(cantColadas, path+"HistoriaSupT.xlsx"), path+f"HistoriaSupT.xlsx", t,pregunta1, CLE)
-        if Riesgo>100:
-            Riesgo=100
+        #if Riesgo>100:
+        #    Riesgo=100
          
         RiesgoT.append(Riesgo)
         numObservacionesT.append(numObs)
         observacionT.append(returnObs(numObs))
         [Riesgo, numObs] = main_MP_Med.EF_med(cantColadas, np.column_stack((coladas,tempZonasTodasT[1])), haveHistory(cantColadas, path+"HistoriaMedT.xlsx"), path+f"HistoriaMedT.xlsx", t, pregunta1, CLE)
-        if Riesgo>100:
-            Riesgo=100
+        #if Riesgo>100:
+        #    Riesgo=100
          
         RiesgoT.append(Riesgo)
         numObservacionesT.append(numObs)
         observacionT.append(returnObs(numObs))
         [Riesgo, numObs] = main_MP_Inf.EF_inf(cantColadas, np.column_stack((coladas,tempZonasTodasT[2])), haveHistory(cantColadas, path+"HistoriaInfT.xlsx"), path+f"HistoriaInfT.xlsx", t, pregunta1, CLE)
-        if Riesgo>100:
-            Riesgo=100
+        #if Riesgo>100:
+        #    Riesgo=100
          
         RiesgoT.append(Riesgo)
         numObservacionesT.append(numObs)
@@ -347,8 +388,8 @@ def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viej
         #print("Hecha Frontal y trasera")
         # Cara A
         [Riesgo, numObs] = main_MP_Inf.EF_inf(cantColadas, np.column_stack((coladas,MaxCaraA)), haveHistory(cantColadas, path+"HistoriaCaraA.xlsx"), path+f"HistoriaCaraA.xlsx", t, pregunta1, CLE)
-        if Riesgo>100:
-            Riesgo=100
+        #if Riesgo>100:
+        #    Riesgo=100
          
         RiesgoA.append(Riesgo)
         numObservacionesA.append(numObs)
@@ -356,8 +397,8 @@ def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viej
         #print("Hecho CaraA")
         # Cara C
         [Riesgo, numObs] = main_MP_Inf.EF_inf(cantColadas, np.column_stack((coladas,MaxCaraC)), haveHistory(cantColadas, path+"HistoriaCaraC.xlsx"), path+f"HistoriaCaraC.xlsx", t, pregunta1, CLE)
-        if Riesgo>100:
-            Riesgo=100
+        #if Riesgo>100:
+        #    Riesgo=100
          
         RiesgoC.append(Riesgo)
         numObservacionesC.append(numObs)
@@ -382,18 +423,19 @@ def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viej
         coladasVerdaderas = HistoriaPrevia(coladas, path+"HistoriaSupF.xlsx")
         tempZonaSupF = fixTempZonas(coladasVerdaderas, tempZonaSupF)
         [Riesgo, numObs] = EF_sup(cantColadas, np.column_stack((coladasVerdaderas,tempZonaSupF)), haveHistory(coladasVerdaderas[-2], path+"HistoriaSupF.xlsx"), path+"HistoriaSupF.xlsx", t,pregunta1,CLE)
+        print("1")
         Riesgo=NO_VALOR("HistoriaSupF",path,coladas,Riesgo,pregunta1,CLE)
+        print("2")
         RiesgoF.append(Riesgo)
         numObservacionesF.append(numObs)
         observacionF.append(returnObs(numObs))
-        
         
         coladasVerdaderas = HistoriaPrevia(coladas, path+"HistoriaMedF.xlsx")
         tempZonaMedF = fixTempZonas(coladasVerdaderas, tempZonaMedF)
         [Riesgo, numObs] = main_MP_Med.EF_med(cantColadas, np.column_stack((coladasVerdaderas,tempZonaMedF)), haveHistory(coladasVerdaderas[-2], path+"HistoriaMedF.xlsx"), path+"HistoriaMedF.xlsx", t,pregunta1,CLE)
         Riesgo=NO_VALOR("HistoriaMedF",path,coladas,Riesgo,pregunta1,CLE)
-        if Riesgo>100:
-            Riesgo=100
+        #if Riesgo>100:
+        #    Riesgo=100
         RiesgoF.append(Riesgo)
         numObservacionesF.append(numObs)
         observacionF.append(returnObs(numObs))
@@ -403,8 +445,8 @@ def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viej
         tempZonaInfF = fixTempZonas(coladasVerdaderas, tempZonaInfF)
         [Riesgo, numObs] = main_MP_Inf.EF_inf(cantColadas, np.column_stack((coladasVerdaderas,tempZonaInfF)), haveHistory(coladasVerdaderas[-2], path+"HistoriaInfF.xlsx"), path+"HistoriaInfF.xlsx", t,pregunta1,CLE)
         Riesgo=NO_VALOR("HistoriaInfF",path,coladas,Riesgo,pregunta1,CLE)
-        if Riesgo>100:
-            Riesgo=100
+        #if Riesgo>100:
+        #    Riesgo=100
         RiesgoF.append(Riesgo)
         numObservacionesF.append(numObs)
         observacionF.append(returnObs(numObs))
@@ -413,8 +455,8 @@ def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viej
         tempZonaSupT = fixTempZonas(coladasVerdaderas, tempZonaSupT)
         [Riesgo, numObs] = EF_sup(cantColadas, np.column_stack((coladasVerdaderas,tempZonaSupT)), haveHistory(coladasVerdaderas[-2], path+"HistoriaSupT.xlsx"), path+"HistoriaSupT.xlsx", t,pregunta1,CLE)
         Riesgo=NO_VALOR("HistoriaSupT",path,coladas,Riesgo,pregunta1,CLE)
-        if Riesgo>100:
-            Riesgo=100
+        #if Riesgo>100:
+        #    Riesgo=100
         RiesgoT.append(Riesgo)
         numObservacionesT.append(numObs)
         observacionT.append(returnObs(numObs))
@@ -424,8 +466,8 @@ def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viej
         tempZonaMedT = fixTempZonas(coladasVerdaderas, tempZonaMedT)
         [Riesgo, numObs] = main_MP_Med.EF_med(cantColadas, np.column_stack((coladasVerdaderas,tempZonaMedT)), haveHistory(coladasVerdaderas[-2], path+"HistoriaMedT.xlsx"), path+"HistoriaMedT.xlsx", t,pregunta1,CLE)
         Riesgo=NO_VALOR("HistoriaMedT",path,coladas,Riesgo,pregunta1,CLE)
-        if Riesgo>100:
-            Riesgo=100
+        #if Riesgo>100:
+        #    Riesgo=100
         RiesgoT.append(Riesgo)
         numObservacionesT.append(numObs)
         observacionT.append(returnObs(numObs))
@@ -435,11 +477,34 @@ def getRiesgo(cantColadas, coladas, tempZonasTodasF, tempZonasTodasT, Nuevo1Viej
         tempZonaInfT = fixTempZonas(coladasVerdaderas, tempZonaInfT)
         [Riesgo, numObs] = main_MP_Inf.EF_inf(cantColadas, np.column_stack((coladasVerdaderas,tempZonaInfT)), haveHistory(coladasVerdaderas[-2], path+"HistoriaInfT.xlsx"), path+"HistoriaInfT.xlsx", t,pregunta1,CLE)
         Riesgo=NO_VALOR("HistoriaInfT",path,coladas,Riesgo,pregunta1,CLE)
-        if Riesgo>100:
-            Riesgo=100
+        #if Riesgo>100:
+        #    Riesgo=100
         RiesgoT.append(Riesgo)
         numObservacionesT.append(numObs)
         observacionT.append(returnObs(numObs))
+        
+        coladasVerdaderas = HistoriaPrevia(coladas, path+"HistoriaCaraA.xlsx")
+        MaxCaraA = fixTempZonas(coladasVerdaderas, MaxCaraA)
+        [Riesgo, numObs] = main_MP_Inf.EF_inf(cantColadas, np.column_stack((coladasVerdaderas,MaxCaraA)), haveHistory(coladasVerdaderas[-2], path+"HistoriaCaraA.xlsx"), path+"HistoriaCaraA.xlsx", t,pregunta1,CLE)
+        #[Riesgo, numObs] = main_MP_Inf.EF_inf(cantColadas, np.column_stack((coladas,MaxCaraA)), haveHistory(cantColadas, path+"HistoriaCaraA.xlsx"), path+f"HistoriaCaraA.xlsx", t, pregunta1, CLE)
+        Riesgo=NO_VALOR("HistoriaCaraA",path,coladas,Riesgo,pregunta1,CLE)
+        #if Riesgo>100:
+        #    Riesgo=100
+        RiesgoA.append(Riesgo)
+        numObservacionesA.append(numObs)
+        observacionA.append(returnObs(numObs))
+        
+        coladasVerdaderas = HistoriaPrevia(coladas, path+"HistoriaCaraC.xlsx")
+        MaxCaraC = fixTempZonas(coladasVerdaderas, MaxCaraC)
+        [Riesgo, numObs] = main_MP_Inf.EF_inf(cantColadas, np.column_stack((coladasVerdaderas,MaxCaraC)), haveHistory(coladasVerdaderas[-2], path+"HistoriaCaraC.xlsx"), path+"HistoriaCaraC.xlsx", t,pregunta1,CLE)
+        #[Riesgo, numObs] = main_MP_Inf.EF_inf(cantColadas, np.column_stack((coladas,MaxCaraC)), haveHistory(cantColadas, path+"HistoriaCaraC.xlsx"), path+f"HistoriaCaraC.xlsx", t, pregunta1, CLE)
+        Riesgo=NO_VALOR("HistoriaCaraC",path,coladas,Riesgo,pregunta1,CLE)
+        #if Riesgo>100:
+        #    Riesgo=100
+        RiesgoC.append(Riesgo)
+        numObservacionesC.append(numObs)
+        observacionC.append(returnObs(numObs))
+        
     return [RiesgoF, RiesgoT, RiesgoA, RiesgoC, numObservacionesF, numObservacionesT, numObservacionesA, numObservacionesC]
     
 def fixTempZonas(coladasVerdaderas:list, tempZona:list):
