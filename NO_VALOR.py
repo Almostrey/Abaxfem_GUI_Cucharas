@@ -2,10 +2,10 @@ import os
 import pandas as pd
 import re
 import numpy as np
-from dataManager import getColadasRiesgos
+from dataManager import getColadasRiesgos, getColadasRiesgosAC
 
 def NO_VALOR(Zona,path,coladas,Riesgo,pregunta1,CLE):
-    print(f"Riesgo{Riesgo}")
+    #print(f"Riesgo{Riesgo}")
     start = path.find(r"Historial/CUCHARA_") + len(r'Historial/CUCHARA_')
     end = len(path)
     path_aux=path[start:end]
@@ -25,7 +25,12 @@ def NO_VALOR(Zona,path,coladas,Riesgo,pregunta1,CLE):
     
     
     # print(coladas)
+    print("1")
     [coladas, FSup, FMed, FInf, TSup, TMed, TInf] = getColadasRiesgos(f"{nameCuchara}", f"{nameCampana}")
+    print("1.5")
+    [RiesgoCaraA, RiesgoCaraC] = getColadasRiesgosAC(nameCuchara, nameCampana)
+    print("2")
+    print(RiesgoCaraA)
     RiesgoPond=0.0
     Sumcoladas=0.0
     
@@ -44,6 +49,12 @@ def NO_VALOR(Zona,path,coladas,Riesgo,pregunta1,CLE):
         RiesgosPasados=TSup
     elif Zona=="HistoriaMedT":
         RiesgosPasados=TMed
+        pregunta1=2
+    elif Zona=="HistoriaCaraA":
+        RiesgosPasados=RiesgoCaraA
+        pregunta1=2
+    elif Zona=="HistoriaCaraC":
+        RiesgosPasados=RiesgoCaraC
         pregunta1=2
     
     index_del=[]

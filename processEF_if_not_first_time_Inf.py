@@ -11,7 +11,7 @@ def processEF_if_not_first_time(coladas, pregunta1, CLE,tasaDesgaste, t,Historia
     for TDI in range (int(np.shape(Historia)[1]/(NNod+3))):
         TasasDesgaste[TDI]=Historia[0,((TDI+1)*(NNod+3))-1]
     
-    index_temp=np.where(np.round_(TasasDesgaste,5)==np.round_(tasaDesgaste,5))[0][0]
+    index_temp=np.where(np.round(TasasDesgaste,5)==np.round(tasaDesgaste,5))[0][0]
     
     TInicial=np.zeros((NNod,1))
     TInicial[:,0]=Historia[-1,(index_temp)*(NNod+3)+2:(index_temp)*(NNod+3)+(NNod+3)-1]                                                                                        
