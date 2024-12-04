@@ -3,6 +3,13 @@ from elementosFinitos import elementosFinitos
 from temperaturas import temperaturas
 from Creador_Historia import Creador_Historia
 from Proceso_Elementos_Finitos_Sup import Proceso_Elementos_Finitos
+
+def fixCell(n):
+    try:
+        return float(n)
+    except:
+        return 0
+
 def processEF_if_not_first_time(coladas, pregunta1, CLE,tasaDesgaste, t,Historia):
     NElemTotal, NMateriales, NElemMaterial, NNod, N1, N2, N3, N4, N5, Conec = elementosFinitos ()                                      # Definicion de parámetros del modelo de elementos finitos
     Tamb, Tacero, Tinterna, TinternaCarga=temperaturas ()                                                                              # Definición global de valores de temperatura del modelo
@@ -24,7 +31,7 @@ def processEF_if_not_first_time(coladas, pregunta1, CLE,tasaDesgaste, t,Historia
                                                                                                  # Bucle para iterar las coladas        
         if colada == coladas_en_historia:
             Long1 = [Historia[-1,(index_temp*(NNod+3))+1] , 15. , 108. , 10. , 40.] 
-            tiempo = int (t[colada-1,5]+t[colada-1,6])*60                                                                                     # Tiempo de descarga estandar de acero líquido, 15 minutos - 900 segundos
+            tiempo = int (fixCell(t[colada-1,5])+fixCell(t[colada-1,6]))*60                                                                                     # Tiempo de descarga estandar de acero líquido, 15 minutos - 900 segundos
         #CORRIDA DE LA ULTIMA DESCARGA:
             dt=0.1
             time_count=0
@@ -81,7 +88,7 @@ def processEF_if_not_first_time(coladas, pregunta1, CLE,tasaDesgaste, t,Historia
 
 #Calentado--------------------------------------------------------------------------------------------------------------------        
         dt = 0.1         
-        tiempo = int (t[colada,0]+t[colada,1])*60         
+        tiempo = int (fixCell(t[colada,0])+fixCell(t[colada,1]))*60         
  
         
         time_count=0    
@@ -103,7 +110,7 @@ def processEF_if_not_first_time(coladas, pregunta1, CLE,tasaDesgaste, t,Historia
             
 
 #Carga----------------------------------------------------------------------------------------------------------------------------------------------   
-        tiempo = int (t[colada,2]+t[colada,3]+t[colada,4])*60                                                                          # Tiempo de carga estandar de acero líquido, 107 minutos - 6420 segundos
+        tiempo = int (fixCell(t[colada,2])+fixCell(t[colada,3])+fixCell(t[colada,4]))*60                                                                          # Tiempo de carga estandar de acero líquido, 107 minutos - 6420 segundos
         dt=0.1
         time_count=0    
         while time_count+dt<=tiempo:
@@ -127,7 +134,7 @@ def processEF_if_not_first_time(coladas, pregunta1, CLE,tasaDesgaste, t,Historia
 
 #Descarga----------------------------------------------------------------------------------------------------------------------------------------------
         if colada<coladas-1:        
-            tiempo = int (t[colada,5]+t[colada,6])*60                                                                                     # Tiempo de descarga estandar de acero líquido, 15 minutos - 900 segundos
+            tiempo = int (fixCell(t[colada,5])+fixCell(t[colada,6]))*60                                                                                     # Tiempo de descarga estandar de acero líquido, 15 minutos - 900 segundos
             
             dt=0.1
             time_count=0  

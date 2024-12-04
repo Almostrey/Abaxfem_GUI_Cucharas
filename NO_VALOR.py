@@ -25,12 +25,8 @@ def NO_VALOR(Zona,path,coladas,Riesgo,pregunta1,CLE):
     
     
     # print(coladas)
-    print("1")
     [coladas, FSup, FMed, FInf, TSup, TMed, TInf] = getColadasRiesgos(f"{nameCuchara}", f"{nameCampana}")
-    print("1.5")
     [RiesgoCaraA, RiesgoCaraC] = getColadasRiesgosAC(nameCuchara, nameCampana)
-    print("2")
-    print(RiesgoCaraA)
     RiesgoPond=0.0
     Sumcoladas=0.0
     

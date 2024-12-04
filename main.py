@@ -37,19 +37,14 @@ from PySide6 import QtSvg
 import pandas as pd
 import V1
 import main_MP_sup
-import main_MP_Inf
-import main_MP_Med
 from numpy import array, reshape
 import PySide6.QtConcurrent
 from PySide6.QtCore import QRunnable
 from multiprocessing import freeze_support
-from read_historia import read_historia
-from Observacion_Colada import  Observacion_Colada
-from grafico_espesores import grafico_espesores
-from grafico_espesores import grafico_espesores
 import openpyxl
-import numpy as np
+from cv2 import line, imread, imwrite
 
+MINCOLADA = 10
 umbralMinimo = 0
 umbralMaximo = 500
 ApiKey = "AbaxfemGuiCucharas2023"
@@ -1068,7 +1063,7 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
         self.progressBar.hide()
         self.pb_aceptar.setEnabled(0)
         self.pb_recortar.setEnabled(1)
-        regex = qtc.QRegularExpression("[0-9-a-z-A-Z_ .,/\!@$%^&*()=+:;?+-ñáéíóú]+")
+        regex = qtc.QRegularExpression("[0-9-a-z-A-Z_ .,/@$%^&*()=+:;?+-ñáéíóú]+\"")
         validator = qtg.QRegularExpressionValidator(regex)
         self.txtObservaciones.setValidator(validator)
     def recortarImg(self):
@@ -1227,14 +1222,14 @@ class PopUpAddColada(qtw.QMainWindow, Ui_PopUpAddColada, QRunnable):
                 [colF, colT, HTmaxCucharaF, HTmaxCucharaT, HTmaxZonasF, HTmaxZonasT, HTmaxRefF, HTmaxRefT] = dataManager.getHistoricosCampanaFT(nameCuchara, nameCampana)
                 sleep(0.1)
                 self.progressBar.setValue(50)
-                PositionMatrixF = pd.DataFrame(PositionMatrixF)
-                PositionMatrixT = pd.DataFrame(PositionMatrixT)
+                PositionMatrixFDataFrame = pd.DataFrame(PositionMatrixF)
+                PositionMatrixTDataFrame = pd.DataFrame(PositionMatrixT)
                 #-------------------------BOTON PARA TEXTO DE OBSERVACIONES-------------------------------------------
                 # texto_Observacion=Observacion_Colada()
                 # print(texto_Observacion)
                 #-------------------------BOTON PARA TEXTO DE OBSERVACIONES-------------------------------------------
-                infoF = V1.V1(self.txtPathTermografiaF.text(), self.txtPathExcelF.text(), PositionMatrixF)
-                infoT = V1.V1(self.txtPathTermografiaT.text(), self.txtPathExcelT.text(), PositionMatrixT)
+                infoF = V1.V1(self.txtPathTermografiaF.text(), self.txtPathExcelF.text(), PositionMatrixFDataFrame)
+                infoT = V1.V1(self.txtPathTermografiaT.text(), self.txtPathExcelT.text(), PositionMatrixTDataFrame)
                 sleep(0.2)
                 self.progressBar.setValue(75)
                 #if int(dataManager.getNameColadas(nameCuchara, str(nameCampana))[-1]) == 0:
@@ -1349,14 +1344,21 @@ class PopUpDeleteColada(qtw.QMainWindow, Ui_PopUpDeleteColada):
         self.loadCampanaColadas()
         self.cbCuchara.currentIndexChanged.connect(self.loadCampanaColadas)
         self.pb_aceptar.clicked.connect(self.deleteColada)
+        self.cbColada.setEnabled(False)
     def deleteColada(self):
+        
+        self.pb_aceptar.setEnabled(False)
         try:
-            self.pb_aceptar.setText("Eliminando Colada...")
-            nameCampana = self.txtCampana.text()
-            nameCuchara = self.cbCuchara.currentText()
-            nameColada = self.cbColada.currentText()
-            dataManager.deleteColada(nameCuchara[8:len(nameCuchara)], str(nameCampana), int(nameColada))
-            self.exitPopUp()
+            if self.cbColada.currentText() == "":
+                pass
+            else:
+                self.pb_aceptar.setText("Eliminando Colada...")
+                nameCampana = self.txtCampana.text()
+                nameCuchara = self.cbCuchara.currentText()
+                nameColada = self.cbColada.currentText()
+                dataManager.deleteColada(nameCuchara[8:len(nameCuchara)], str(nameCampana), int(nameColada))
+                self.pb_aceptar.setEnabled(True)
+                self.exitPopUp()
         except Exception as e:
             print(e)
             pass
@@ -1370,8 +1372,9 @@ class PopUpDeleteColada(qtw.QMainWindow, Ui_PopUpDeleteColada):
             if colada == [0, 0]:
                 pass
             else:
-                for i in range(len(colada)):
-                    self.cbColada.addItem(qtg.QIcon("ResourcesFolder/featherIcons/file.svg"), str(colada[i]))
+                self.cbColada.addItem(qtg.QIcon("ResourcesFolder/featherIcons/file.svg"), str(colada[-1]))
+                #for i in range(len(colada)):
+                #    self.cbColada.addItem(qtg.QIcon("ResourcesFolder/featherIcons/file.svg"), str(colada[i]))
         except:
             self.cbColada.clear()
     def loadCucharas(self):
@@ -1429,7 +1432,7 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
         self.pbFileDialog8.clicked.connect(self.fileDialogWindow)
         self.pbSiEscoria.clicked.connect(self.siNoEscoria)
         self.pbNoEscoria.clicked.connect(self.siNoEscoria)
-        regex = qtc.QRegularExpression("[0-9-a-z-A-Z_ .,/\!@$%^&*()=+:;?+-ñáéíóú]+")
+        regex = qtc.QRegularExpression("[0-9-a-z-A-Z_ .,/@$%^&*()=+:;?+-ñáéíóú]+\"")
         validator = qtg.QRegularExpressionValidator(regex)
         self.txtObservaciones.setValidator(validator)
     def numpy2float(self, numnumpy):
@@ -1572,13 +1575,13 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
             nameCuchara = self.treeMenu.currentItem().parent().text(0)
             nameCuchara = nameCuchara[8:len(nameCuchara)]
             nameCampana = nameCampana[8:len(nameCampana)]
-            pathDir = "Historial\CUCHARA_"+nameCuchara+"\CUCHARA_"+nameCuchara+"_CAMPANA_"+nameCampana
+            pathDir = "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+nameCampana
             Popen(f"explorer \"{pathDir}\"")
         except:
             try:
                 nameCuchara = self.treeMenu.currentItem().text(0)
                 nameCuchara = nameCuchara[8:len(nameCuchara)]
-                pathDir = "Historial\CUCHARA_"+nameCuchara
+                pathDir = "Historial/CUCHARA_"+nameCuchara
                 Popen(f"explorer \"{pathDir}\"")
             except:
                 pathDir = "Historial"
@@ -1851,6 +1854,15 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
         [maxZonasF, maxZonasT] = dataManager.getZonas(nameCuchara[8:], nameCampana[8:])
         #[percentageZonasF, percentageZonasT] = self.getPercentage(maxZonasF, maxZonasT, umbralMinimo, umbralMaximo)
         [RiesgoF, RiesgoT, RiesgoA, RiesgoC] = dataManager.getRiesgoEF(str(nameCuchara[8:]), str(nameCampana[8:]))
+        for i in range(len(RiesgoF)):
+            if RiesgoF[i] > 100:
+                RiesgoF[i] = 100.00
+            if RiesgoT[i] > 100:
+                RiesgoT[i] = 100.00
+        if float(RiesgoA[1:-1]) > 100:
+            RiesgoA = "[100.00]"
+        if float(RiesgoC[1:-1]) > 100:
+            RiesgoC = "[100.00]"
         self.txtZona1F.setText(str(RiesgoF[0])[0:5]+" %")
         self.txtZona2F.setText(str(RiesgoF[1])[0:5]+" %")
         self.txtZona3F.setText(str(RiesgoF[2])[0:5]+" %")
@@ -1948,6 +1960,8 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
             numEscoria = 0
             numUltimaColada = int(self.txtUltimaColada.text())
             numColada = int(self.txtNewColada.text())
+            if numColada < MINCOLADA:
+                raise(ValueError)
             if not self.pbSiEscoria.isEnabled(): 
                 if int(self.sbEscoria.text()) == 0:
                     pass
@@ -1970,31 +1984,33 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
                 [colF, colT, HTmaxCucharaF, HTmaxCucharaT, HTmaxZonasF, HTmaxZonasT, HTmaxRefF, HTmaxRefT] = dataManager.getHistoricosCampanaFT(nameCuchara, nameCampana)
                 sleep(0.1)
                 self.progressBar.setValue(50)
-                PositionMatrixF = pd.DataFrame(PositionMatrixF)
-                PositionMatrixT = pd.DataFrame(PositionMatrixT)
+                PositionMatrixFDataFrame = pd.DataFrame(PositionMatrixF)
+                PositionMatrixTDataFrame = pd.DataFrame(PositionMatrixT)
                 #PositionMatrixA = pd.DataFrame(PositionMatrixA)
                 #PositionMatrixC = pd.DataFrame(PositionMatrixC)
                 #-------------------------BOTON PARA TEXTO DE OBSERVACIONES-------------------------------------------
                 # texto_Observacion=Observacion_Colada()
                 # print(texto_Observacion)
                 #-------------------------BOTON PARA TEXTO DE OBSERVACIONES-------------------------------------------
-                infoF = V1.V1(self.txtPathTermografiaF.text(), self.txtPathExcelF.text(), PositionMatrixF)
-                infoT = V1.V1(self.txtPathTermografiaT.text(), self.txtPathExcelT.text(), PositionMatrixT)
-                MaxCaraA = getMaxAC(self.txtPathExcelD.text(), PositionMatrixA)
-                MaxCaraC = getMaxAC(self.txtPathExcelI.text(), PositionMatrixC)
+                infoF = V1.V1(self.txtPathTermografiaF.text(), self.txtPathExcelF.text(), PositionMatrixFDataFrame)
+                infoT = V1.V1(self.txtPathTermografiaT.text(), self.txtPathExcelT.text(), PositionMatrixTDataFrame)
+                MaxCaraA = max([getMaxAC(self.txtPathExcelD.text(), [PositionMatrixA[0], PositionMatrixA[4], PositionMatrixA[5], PositionMatrixA[9]]), getMaxAC(self.txtPathExcelD.text(), [PositionMatrixA[1], PositionMatrixA[3], PositionMatrixA[6], PositionMatrixA[8]])])
+                MaxCaraC = max([getMaxAC(self.txtPathExcelI.text(), [PositionMatrixC[0], PositionMatrixC[4], PositionMatrixC[5], PositionMatrixC[9]]), getMaxAC(self.txtPathExcelI.text(), [PositionMatrixC[1], PositionMatrixC[3], PositionMatrixC[6], PositionMatrixC[8]])])
+                #MaxCaraC = getMaxAC(self.txtPathExcelI.text(), PositionMatrixC)
                 sleep(0.2)
                 self.progressBar.setValue(75)
                 if int(dataManager.getNameColadas(nameCuchara, str(nameCampana))[-1]) == 0:
                 #if True:
                     # Nuevo
-                    Historia = 0
-                    Nuevo1Viejo2 = 1
-                    HistoriaF = 0
-                    HistoriaT = 0
-                    pathDirectory = dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/"
-                    qtw.QApplication.processEvents()
-                    [RiesgoF, RiesgoT, RiesgoA, RiesgoC, observacionF, observacionT, observacionA, observacionC] = main_MP_sup.getRiesgo(numColada, numColada, self.numpy2float(reshape(infoF[9], 3)), self.numpy2float(reshape(infoT[9], 3)), Nuevo1Viejo2, pathDirectory, int(self.sbEscoria.text()), MaxCaraA, MaxCaraC)
-                    #print("Si Saliooooo")
+                    
+                        Historia = 0
+                        Nuevo1Viejo2 = 1
+                        HistoriaF = 0
+                        HistoriaT = 0
+                        pathDirectory = dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/"
+                        qtw.QApplication.processEvents()
+                        [RiesgoF, RiesgoT, RiesgoA, RiesgoC, observacionF, observacionT, observacionA, observacionC] = main_MP_sup.getRiesgo(numColada, numColada, self.numpy2float(reshape(infoF[9], 3)), self.numpy2float(reshape(infoT[9], 3)), Nuevo1Viejo2, pathDirectory, int(self.sbEscoria.text()), MaxCaraA, MaxCaraC)
+                        #print("Si Saliooooo")
                 else:
                     # Viejo
                     #[HistoriaPreviaF, HistoriaPreviaT] = dataManager.getHistoriaEF(nameCuchara, nameCampana)
@@ -2044,6 +2060,7 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
                 copy2(commonPath+"T.jpg", "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/")
                 copy2(commonPath+"A.jpg", "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/")
                 copy2(commonPath+"C.jpg", "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/")
+                self.underlinedPhoto("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/"+str(numColada))
                 [col, maxF, maxT, maxA, maxC, escoria] = dataManager.getMaxHistory(nameCuchara, nameCampana)
                 try:
                     if max(maxF) >= umbralMaximo*0.9 or max(maxT) >= umbralMaximo*0.9 or max(maxA) >= umbralMaximo*0.9 or max(maxC) >= umbralMaximo*0.9:
@@ -2070,6 +2087,11 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
                         Timer(5, self.setPbAceptarName).start()
                     else:
                         pass
+        except ValueError as e:
+            self.pb_aceptar.setText("La colada debe ser mayor a "+str(MINCOLADA))
+            Timer(5, self.setPbAceptarName).start()
+            self.pb_aceptar.show()
+            self.progressBar.hide()
         except Exception as e:
             print(e)
             if self.progressBar.value() == 50:
@@ -2086,8 +2108,26 @@ class AdministratorWindow(qtw.QMainWindow, Ui_AdministratorWindow):
             self.frame_21.setEnabled(1)
             self.frame_16.setEnabled(1)
             self.frameTop.setEnabled(1)
-    def savePhotosWithCrop(fromPath:str, toPath:str):
-        
+    def underlinedPhoto(self, commonPath:str):
+        global PositionMatrixA, PositionMatrixC, PositionMatrixF, PositionMatrixT
+        try:
+            coordenates = [PositionMatrixF, PositionMatrixT, PositionMatrixA, PositionMatrixC]
+            images = ["F.jpg", "T.jpg", "A.jpg", "C.jpg"]
+            color = (179, 179, 0)
+            thickness = 3
+            for i in range(len(images)):
+                image = imread(commonPath + images[i])
+                for j in range(len(coordenates[i])):
+                    if j < 9:
+                        start_point = (int(coordenates[i][j][0]), int(coordenates[i][j][1]))
+                        end_point = (int(coordenates[i][j+1][0]), int(coordenates[i][j+1][1]))
+                    else:
+                        start_point = (int(coordenates[i][j][0]), int(coordenates[i][j][1]))
+                        start_point = (int(coordenates[i][0][0]), int(coordenates[i][0][1]))
+                    image = line(image, start_point, end_point, color, thickness)
+                imwrite(commonPath + images[i], image)
+        except Exception as e:
+            print("Excepcion:", e)
         pass
     def exitPopUp(self):
         self.close()
@@ -2312,40 +2352,24 @@ class saveUserWindow(qtw.QMainWindow, Ui_saveUserWindow):
         self.w = AdministratorWindow()
         self.w.show()
 
-def getMaxAC(PathExcel: str, PositionMatrix):
-        rows, columns = maxMinRowsColumns(PositionMatrix)
-        temperatures = []
+def getMaxAC(PathExcel: str, PositionMatrix) -> int:
+        columns, rows = maxMinRowsColumns(PositionMatrix)
+        #print("Rows", rows,"Columns", columns)
+        temperatures = 0
         workbook = openpyxl.load_workbook(PathExcel)
         workbook = workbook.active
-        counteri = 0
-        counterj = 0
-        for i in workbook.iter_rows(values_only=True):
-            if counteri>=rows[0]+10 and counteri<=rows[1]+10:
-                #print("i", counteri, end=", ")
-                counterj = 0
-                for j in i:
-                    if counterj>=columns[0]+1 and counterj<=columns[1]+1: 
-                        #print("j", counterj, end=", ")
-                        temperatures.append(float(j))
-                    else: pass
-                    counterj += 1
-            else: pass
-            counteri += 1
-        return max(temperatures)
+        for i in workbook.iter_rows(min_row=rows[0]+10, max_row=rows[1]+10, min_col=columns[0]+1, max_col=columns[1]+1, values_only=True):
+            if max(i) > temperatures:
+                temperatures = max(i)
+        return temperatures
 
 def maxMinRowsColumns(PositionMatrix):
-    Rows = [1000, 0]
-    Columns = [1000, 0]
+    Rows = []
+    Columns = []
     for i, j in PositionMatrix:
-        if i<Rows[0]: Rows[0] = i
-        else: pass
-        if i>Rows[1]: Rows[1] = i
-        else: pass
-        if j<Columns[0]: Columns[0] = j
-        else: pass
-        if j>Columns[1]: Columns[1] = j
-        else: pass
-    return [Rows, Columns]
+        Rows.append(i)
+        Columns.append(j)
+    return [[min(Rows), max(Rows)], [min(Columns), max(Columns)]]
 
 def main():
     freeze_support()
@@ -2374,6 +2398,9 @@ def main():
         window = PopUpApiKey()
     window.show()
     exit(app.exec())
+
+def pruebas():
+    pass
 
 if __name__ == "__main__":
     main()

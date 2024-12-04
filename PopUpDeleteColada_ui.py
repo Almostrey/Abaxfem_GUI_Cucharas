@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'PopUpDeleteColada.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.8.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -24,9 +24,9 @@ class Ui_PopUpDeleteColada(object):
         if not PopUpDeleteColada.objectName():
             PopUpDeleteColada.setObjectName(u"PopUpDeleteColada")
         PopUpDeleteColada.resize(515, 289)
-        PopUpDeleteColada.setFocusPolicy(Qt.NoFocus)
+        PopUpDeleteColada.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         icon = QIcon()
-        icon.addFile(u":/Images/ResourcesFolder/Imagenes/Logo_Lineas.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u":/Images/ResourcesFolder/Imagenes/Logo_Lineas.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         PopUpDeleteColada.setWindowIcon(icon)
         self.centralwidget = QWidget(PopUpDeleteColada)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -49,7 +49,7 @@ class Ui_PopUpDeleteColada(object):
 "background-color: rgba(255, 255, 255, 0);\n"
 "border:0px;\n"
 "}")
-        self.label.setAlignment(Qt.AlignCenter)
+        self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_4 = QLabel(self.centralwidget)
         self.label_4.setObjectName(u"label_4")
         self.label_4.setGeometry(QRect(50, 70, 260, 20))
@@ -59,7 +59,7 @@ class Ui_PopUpDeleteColada(object):
         self.label_4.setFont(font1)
         self.label_4.setStyleSheet(u"border:0px;\n"
 "background-color: rgba(0, 0, 0, 0);")
-        self.label_4.setAlignment(Qt.AlignCenter)
+        self.label_4.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.pb_exit = QPushButton(self.centralwidget)
         self.pb_exit.setObjectName(u"pb_exit")
         self.pb_exit.setGeometry(QRect(470, 10, 21, 21))
@@ -79,6 +79,7 @@ class Ui_PopUpDeleteColada(object):
 "}")
         self.pb_aceptar = QPushButton(self.centralwidget)
         self.pb_aceptar.setObjectName(u"pb_aceptar")
+        self.pb_aceptar.setEnabled(True)
         self.pb_aceptar.setGeometry(QRect(157, 220, 200, 41))
         font2 = QFont()
         font2.setFamilies([u"Arial"])
@@ -99,6 +100,9 @@ class Ui_PopUpDeleteColada(object):
 "}\n"
 "QPushButton:pressed{\n"
 "	background-color: rgba(255, 135, 29, 255);\n"
+"}\n"
+"QPushButton:disabled{\n"
+"	background-color: rgb(150, 150, 150);\n"
 "}")
         self.cbCuchara = QComboBox(self.centralwidget)
         self.cbCuchara.setObjectName(u"cbCuchara")
@@ -164,14 +168,14 @@ class Ui_PopUpDeleteColada(object):
         self.label_5.setFont(font1)
         self.label_5.setStyleSheet(u"border:0px;\n"
 "background-color: rgba(0, 0, 0, 0);")
-        self.label_5.setAlignment(Qt.AlignCenter)
+        self.label_5.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_6 = QLabel(self.centralwidget)
         self.label_6.setObjectName(u"label_6")
         self.label_6.setGeometry(QRect(363, 70, 101, 20))
         self.label_6.setFont(font1)
         self.label_6.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
 "border:0px;")
-        self.label_6.setAlignment(Qt.AlignCenter)
+        self.label_6.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.txtCampana = QLineEdit(self.centralwidget)
         self.txtCampana.setObjectName(u"txtCampana")
         self.txtCampana.setEnabled(False)
@@ -190,7 +194,7 @@ class Ui_PopUpDeleteColada(object):
 "     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
 "                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\n"
 "                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);")
-        self.txtCampana.setAlignment(Qt.AlignCenter)
+        self.txtCampana.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.cbColada = QComboBox(self.centralwidget)
         self.cbColada.setObjectName(u"cbColada")
         self.cbColada.setGeometry(QRect(147, 170, 220, 31))

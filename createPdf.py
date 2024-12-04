@@ -44,7 +44,7 @@ def createPDF(nameCuchara:str, nameCampana:str, tipoGeneracion:str):
     [HTmaxCucharaF, colMaxTempF, HTminCucharaF, colMinTempF, HTmeanCucharaF, pathImgFrontal,
      HTmaxCucharaT, colMaxTempT, HTminCucharaT, colMinTempT, HTmeanCucharaT, pathImgTrasera] = getMaxInformation(nameCuchara, nameCampana)
     GetReporteObservaciones = dataManager.GetReporteObservaciones(nameCuchara, nameCampana)
-    grafico_espesores(dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/")
+    #grafico_espesores(dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/")
     pathImgRiesgos = dataManager.getWorkingDirectory()+"/Historial/CUCHARA_"+str(nameCuchara)+"/CUCHARA_"+str(nameCuchara)+"_CAMPANA_"+str(nameCampana)+"/Historial_Espesores"+".png"
     
     loader = jinja2.FileSystemLoader("./")

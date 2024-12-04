@@ -32,7 +32,7 @@ def processEF_if_first_time(coladas, pregunta1, CLE,tasaDesgaste, t,Historia):
        
 #Calentado--------------------------------------------------------------------------------------------------------------------        
         dt = 0.1         
-        tiempo = int (t[colada,0]+t[colada,1])*60            
+        tiempo = int (fixCell(t[colada,0])+fixCell(t[colada,1]))*60            
         
         time_count=0
         while time_count+dt<=tiempo:
@@ -53,7 +53,7 @@ def processEF_if_first_time(coladas, pregunta1, CLE,tasaDesgaste, t,Historia):
             
         
 #Carga----------------------------------------------------------------------------------------------------------------------------------------------   
-        tiempo = int (t[colada,2]+t[colada,3]+t[colada,4])*60                                                                          # Tiempo de carga estandar de acero líquido, 107 minutos - 6420 segundos
+        tiempo = int (fixCell(t[colada,2])+fixCell(t[colada,3])+fixCell(t[colada,4]))*60                                                                          # Tiempo de carga estandar de acero líquido, 107 minutos - 6420 segundos
         dt=0.1
         time_count=0
         while time_count+dt<=tiempo:
@@ -63,7 +63,6 @@ def processEF_if_first_time(coladas, pregunta1, CLE,tasaDesgaste, t,Historia):
             time_count=time_count+dt
             if check:
                 dt=min(dt+dt, 100)
-            
             
         if  time_count<tiempo:
             dt=tiempo-time_count
@@ -77,7 +76,7 @@ def processEF_if_first_time(coladas, pregunta1, CLE,tasaDesgaste, t,Historia):
 
 #Descarga----------------------------------------------------------------------------------------------------------------------------------------------
         if colada<coladas-1:
-            tiempo = int (t[colada,5]+t[colada,6])*60                                                                                     # Tiempo de descarga estandar de acero líquido, 15 minutos - 900 segundos
+            tiempo = int (fixCell(t[colada,5])+fixCell(t[colada,6]))*60                                                                                     # Tiempo de descarga estandar de acero líquido, 15 minutos - 900 segundos
             
             dt=0.1
             time_count=0
@@ -130,9 +129,14 @@ def processEF_if_first_time(coladas, pregunta1, CLE,tasaDesgaste, t,Historia):
             Long1 [0] = Long1 [0] - tasaDesgaste
                                                                                                                                                     # Actualizacion del espesor del primer refractario a cada colada
         col.append (int(colada+1))                                                                                                                                                              # Guardado de coladas        
-    
     Historia2=None    
     Historia=np.delete(Historia, (0), axis=0)
     Historia=Historia.tolist()
  
     return col, temp, tasaDesgaste,Historia,Historia2
+
+def fixCell(n):
+    try:
+        return float(n)
+    except:
+        return 0

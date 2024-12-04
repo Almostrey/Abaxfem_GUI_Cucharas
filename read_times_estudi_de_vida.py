@@ -2,17 +2,15 @@ import pandas as pd
 import numpy as np    
 import tkinter as tk
 from tkinter import filedialog
-from sys import argv, exit
-from PySide6.QtWidgets import QApplication, QPushButton, QFileDialog
 
 def read_times_estudi_de_vida():
-    root=tk.Tk()                                                                                                                #se crea una interfaz para que el usuraio pueda seleccionar un archivo 
+    root=tk.Tk()
     root.withdraw()
     root.lift()
     root.attributes("-topmost", True)
     root.focus_force()
     Estudio_de_Vida_Path=filedialog.askopenfilename(title="Estudio_de_Vida.xlsx",initialfile="Estudio de Vida")             
-    validarVariablesExcel(Estudio_de_Vida_Path)
+    #validarVariablesExcel(Estudio_de_Vida_Path)
     Estudio_de_Vida=pd.read_excel(Estudio_de_Vida_Path,sheet_name="BASE DE DATOS")
     Estudio_de_Vida=Estudio_de_Vida.fillna(0)                                                                                   #todos las celdas que sean NAN se las remplaza por 0 
     tPrecalentamiento_diesel=Estudio_de_Vida.iloc[12:,8].to_numpy()                                                             #tPrecalentamiento_diesel se encuentra en la posicion [12:,8] del arvhico Estudio de vida
@@ -33,3 +31,5 @@ def validarVariablesExcel(Path: str):
     
     pass
 # t=read_times_estudi_de_vida()
+if __name__ == "__main__":
+    read_times_estudi_de_vida()

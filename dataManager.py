@@ -225,8 +225,13 @@ def deleteColada(nameCuchara:str, nameCampana:int, nameColada:int):
                     remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaInfT.xlsx")
                     remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaCaraA.xlsx")
                     remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaCaraC.xlsx")
+                    remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisTemperaturasFrontal.png")
+                    remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisTemperaturasTrasero.png")
+                    remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisTemperaturasCaraA.png")
+                    remove("Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/AnalisisTemperaturasCaraC.png")
                 else:
                     colada = getNameColadas(nameCuchara, nameCampana)[-1]
+                    updatePlot(nameCuchara, str(nameCampana))
                     deleteExcelStillColada(colada, "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaSupF.xlsx")
                     deleteExcelStillColada(colada, "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaMedF.xlsx")
                     deleteExcelStillColada(colada, "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaInfF.xlsx")
@@ -236,7 +241,6 @@ def deleteColada(nameCuchara:str, nameCampana:int, nameColada:int):
                     deleteExcelStillColada(colada, "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaMedT.xlsx")
                     deleteExcelStillColada(colada, "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaCaraA.xlsx")
                     deleteExcelStillColada(colada, "Historial/CUCHARA_"+nameCuchara+"/CUCHARA_"+nameCuchara+"_CAMPANA_"+str(nameCampana)+"/HistoriaCaraC.xlsx")
-                updatePlot(nameCuchara, str(nameCampana))
                 return True
             else:
                 return False
@@ -607,19 +611,26 @@ def updatePlot(nameCuchara:str, nameCampana:str):
     figure(1)
     figure(1).clear()
     grid()
-    if max(maxF)<500:
-        if min(maxF)>250:
-            ylim (250 , 500)
+    if len(maxF) != 0:
+        if max(maxF)<500:
+            if min(maxF)>250:
+                ylim (250 , 500)
+            else:
+                ylim (min(maxF)-50 , 500)
         else:
-            ylim (min(maxF)-50 , 500)
+            if min(maxF)>250:
+                ylim (250 , max(maxF)+50)
+            else:
+                ylim (min(maxF)-50 , max(maxF)+50)
     else:
-        if min(maxF)>250:
-            ylim (250 , max(maxF)+50)
-        else:
-            ylim (min(maxF)-50 , max(maxF)+50)
-        
-    xlim(0, max(Col)+10)
-    xticks(range(0, max(Col)+10, 10))
+        ylim(250, 500)
+    if len(Col) != 0:
+        xlim(0, max(Col)+10)
+        xticks(range(0, max(Col)+10, 10))
+    else:
+        xlim(0, Col+10)
+        xticks(range(0, Col+10, 10))
+    #xticks(range(0, max(Col)+10, 10))
     plot(Col, maxF)
     plot(ColZona, HTZonaF1)
     plot(ColZona, HTZonaF2)
@@ -638,18 +649,25 @@ def updatePlot(nameCuchara:str, nameCampana:str):
     figure(2)
     figure(2).clear()
     grid()
-    if max(maxT)<500:
-        if min(maxT)>250:
-            ylim (250 , 500)
+    if len(maxT) != 0:
+        if max(maxT)<500:
+            if min(maxT)>250:
+                ylim (250 , 500)
+            else:
+                ylim (min(maxT)-50 , 500)
         else:
-            ylim (min(maxT)-50 , 500)
+            if min(maxT)>250:
+                ylim (250 , max(maxT)+50)
+            else:
+                ylim (min(maxT)-50 , max(maxT)+50)
     else:
-        if min(maxT)>250:
-            ylim (250 , max(maxT)+50)
-        else:
-            ylim (min(maxT)-50 , max(maxT)+50)
-    xlim(0, max(Col)+10)
-    xticks(range(0, max(Col)+10, 10))
+        ylim(250, 500)
+    if len(Col) != 0:
+        xlim(0, max(Col)+10)
+        xticks(range(0, max(Col)+10, 10))
+    else:
+        xlim(0, Col+10)
+        xticks(range(0, Col+10, 10))
     plot(Col, maxT)
     plot(ColZona, HTZonaT1)
     plot(ColZona, HTZonaT2)
@@ -667,18 +685,25 @@ def updatePlot(nameCuchara:str, nameCampana:str):
     figure(3)
     figure(3).clear()
     grid()
-    if max(maxA)<500:
-        if min(maxA)>250:
-            ylim (250 , 500)
+    if len(maxA) != 0:
+        if max(maxA)<500:
+            if min(maxA)>250:
+                ylim (250 , 500)
+            else:
+                ylim (min(maxA)-50 , 500)
         else:
-            ylim (min(maxA)-50 , 500)
+            if min(maxA)>250:
+                ylim (250 , max(maxA)+50)
+            else:
+                ylim (min(maxA)-50 , max(maxA)+50)
     else:
-        if min(maxA)>250:
-            ylim (250 , max(maxA)+50)
-        else:
-            ylim (min(maxA)-50 , max(maxA)+50)
-    xlim(0, max(Col)+10)
-    xticks(range(0, max(Col)+10, 10))
+        ylim(250, 500)
+    if len(Col) != 0:
+        xlim(0, max(Col)+10)
+        xticks(range(0, max(Col)+10, 10))
+    else:
+        xlim(0, Col+10)
+        xticks(range(0, Col+10, 10))
     plot(Col, maxA)
     legend(["Zona Cara A"])
     if int(escoria)==0:
@@ -693,18 +718,25 @@ def updatePlot(nameCuchara:str, nameCampana:str):
     figure(4)
     figure(4).clear()
     grid()
-    if max(maxC)<500:
-        if min(maxC)>250:
-            ylim (250 , 500)
+    if len(maxC) != 0:
+        if max(maxC)<500:
+            if min(maxC)>250:
+                ylim (250 , 500)
+            else:
+                ylim (min(maxC)-50 , 500)
         else:
-            ylim (min(maxC)-50 , 500)
+            if min(maxC)>250:
+                ylim (250 , max(maxC)+50)
+            else:
+                ylim (min(maxC)-50 , max(maxC)+50)
     else:
-        if min(maxC)>250:
-            ylim (250 , max(maxC)+50)
-        else:
-            ylim (min(maxC)-50 , max(maxC)+50)
-    xlim(0, max(Col)+10)
-    xticks(range(0, max(Col)+10, 10))
+        ylim(250, 500)
+    if len(Col) != 0:
+        xlim(0, max(Col)+10)
+        xticks(range(0, max(Col)+10, 10))
+    else:
+        xlim(0, Col+10)
+        xticks(range(0, Col+10, 10))
     plot(Col, maxC)
     legend(["Zona Cara C"])
     if int(escoria)==0:
@@ -1029,7 +1061,7 @@ if __name__ == "__main__":
     #resetDatabase()
     #updatePlot("3", "1")
     #print(getColadasRiesgosAC("1", "1"))
-    print(getColadasRiesgos("6", "1"))
+    print(getColadasRiesgos("1", "1"))
     pass
     '''conn = sql.connect(nameDB)
     cursor = conn.cursor()
